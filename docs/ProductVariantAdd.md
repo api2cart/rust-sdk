@@ -1,0 +1,62 @@
+# ProductVariantAdd
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**product_id** | Option<**String**> | Defines product's id where the variant has to be added | [optional]
+**name** | Option<**String**> | Defines variant's name that has to be added | [optional]
+**model** | **String** | Specifies variant's model that has to be added | 
+**sku** | Option<**String**> | Defines variant's sku that has to be added | [optional]
+**barcode** | Option<**String**> | A barcode is a unique code composed of numbers used as a product identifier. | [optional]
+**gtin** | Option<**String**> | Global Trade Item Number. An GTIN is an identifier for trade items. | [optional]
+**price** | Option<**f64**> | Defines new product's variant price | [optional]
+**old_price** | Option<**f64**> | Defines product's old price | [optional]
+**cost_price** | Option<**f64**> | Defines new product's cost price | [optional]
+**fixed_cost_shipping_price** | Option<**f64**> | Specifies fixed cost shipping price | [optional]
+**attributes** | Option<[**Vec<models::ProductVariantAddAttributesInner>**](ProductVariantAdd_attributes_inner.md)> | Defines variant's attributes list | [optional]
+**description** | Option<**String**> | Specifies variant's description | [optional]
+**special_price** | Option<**f64**> | Specifies variant's model that has to be added | [optional]
+**sprice_create** | Option<**String**> | Defines the date of special price creation | [optional]
+**sprice_modified** | Option<**String**> | Defines the date of special price modification | [optional]
+**sprice_expire** | Option<**String**> | Defines the term of special price offer duration | [optional]
+**available_for_view** | Option<**bool**> | Specifies the set of visible/invisible product's variants for users | [optional][default to true]
+**available_for_sale** | Option<**bool**> | Specifies the set of visible/invisible product's variants for sale | [optional][default to true]
+**weight** | Option<**f64**> | Weight | [optional][default to 0]
+**width** | Option<**f64**> | Defines product's width | [optional]
+**height** | Option<**f64**> | Defines product's height | [optional]
+**length** | Option<**f64**> | Defines product's length | [optional]
+**weight_unit** | Option<**String**> | Weight Unit | [optional]
+**short_description** | Option<**String**> | Defines short description | [optional]
+**warehouse_id** | Option<**String**> | This parameter is used for selecting a warehouse where you need to set/modify a product quantity. | [optional]
+**quantity** | Option<**f64**> | Defines product variant's quantity that has to be added | [optional][default to 0]
+**created_at** | Option<**String**> | Defines the date of entity creation | [optional]
+**manufacturer** | Option<**String**> | Specifies the product variant's manufacturer | [optional]
+**tax_class_id** | Option<**String**> | Defines tax classes where entity has to be added | [optional]
+**meta_title** | Option<**String**> | Defines unique meta title for each entity | [optional]
+**meta_keywords** | Option<**String**> | Defines unique meta keywords for each entity | [optional]
+**meta_description** | Option<**String**> | Defines unique meta description of a entity | [optional]
+**url** | Option<**String**> | Defines unique product variant's URL | [optional]
+**store_id** | Option<**String**> | Add variants specified by store id | [optional]
+**lang_id** | Option<**String**> | Language id | [optional]
+**clear_cache** | Option<**bool**> | Is cache clear required | [optional][default to true]
+**taxable** | Option<**bool**> | Specifies whether a tax is charged | [optional][default to true]
+**harmonized_system_code** | Option<**String**> | Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes | [optional]
+**country_of_origin** | Option<**String**> | The country where the inventory item was made | [optional]
+**manage_stock** | Option<**bool**> | Defines inventory tracking for product variant | [optional]
+**upc** | Option<**String**> | Universal Product Code. A UPC (UPC-A) is a commonly used identifer for many different products. | [optional]
+**mpn** | Option<**String**> | Manufacturer Part Number. A MPN is an identifier of a particular part design or material used. | [optional]
+**ean** | Option<**String**> | European Article Number. An EAN is a unique 8 or 13-digit identifier that many industries (such as book publishers) use to identify products. | [optional]
+**isbn** | Option<**String**> | International Standard Book Number. An ISBN is a unique identifier for books. | [optional]
+**stores_ids** | Option<**String**> | Assign variant to the stores that is specified by comma-separated stores' id | [optional]
+**is_default** | Option<**bool**> | Defines as a default variant | [optional]
+**is_free_shipping** | Option<**bool**> | Specifies variant's free shipping flag that has to be added | [optional]
+**marketplace_item_properties** | Option<**String**> | String containing the JSON representation of the supplied data | [optional]
+**in_stock** | Option<**bool**> | Set stock status | [optional]
+**backorder_status** | Option<**String**> | Set backorder status | [optional]
+**tier_prices** | Option<[**Vec<models::ProductAddTierPricesInner>**](ProductAdd_tier_prices_inner.md)> | Defines product's tier prices | [optional]
+**is_virtual** | Option<**bool**> | Defines whether the product is virtual | [optional][default to false]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

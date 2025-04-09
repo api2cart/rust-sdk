@@ -1,0 +1,56 @@
+# Child
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | Option<**String**> |  | [optional]
+**parent_id** | Option<**String**> |  | [optional]
+**sku** | Option<**String**> |  | [optional]
+**upc** | Option<**String**> |  | [optional]
+**ean** | Option<**String**> |  | [optional]
+**mpn** | Option<**String**> |  | [optional]
+**gtin** | Option<**String**> |  | [optional]
+**isbn** | Option<**String**> |  | [optional]
+**url** | Option<**String**> |  | [optional]
+**seo_url** | Option<**String**> |  | [optional]
+**sort_order** | Option<**i32**> |  | [optional]
+**created_time** | Option<[**models::A2CDateTime**](A2CDateTime.md)> |  | [optional]
+**modified_time** | Option<[**models::A2CDateTime**](A2CDateTime.md)> |  | [optional]
+**name** | Option<**String**> |  | [optional]
+**short_description** | Option<**String**> |  | [optional]
+**full_description** | Option<**String**> |  | [optional]
+**images** | Option<[**Vec<models::Image>**](Image.md)> |  | [optional]
+**combination** | Option<[**Vec<models::ProductChildItemCombination>**](Product_ChildItem_Combination.md)> |  | [optional]
+**default_price** | Option<**f64**> |  | [optional]
+**cost_price** | Option<**f64**> |  | [optional]
+**list_price** | Option<**f64**> |  | [optional]
+**wholesale_price** | Option<**f64**> |  | [optional]
+**advanced_price** | Option<[**Vec<models::ProductAdvancedPrice>**](Product_AdvancedPrice.md)> |  | [optional]
+**tax_class_id** | Option<**String**> |  | [optional]
+**avail_for_sale** | Option<**bool**> |  | [optional]
+**allow_backorders** | Option<**bool**> |  | [optional]
+**in_stock** | Option<**bool**> |  | [optional]
+**manage_stock** | Option<**bool**> |  | [optional]
+**inventory_level** | Option<**f64**> |  | [optional]
+**inventory** | Option<[**Vec<models::ProductInventory>**](Product_Inventory.md)> |  | [optional]
+**min_quantity** | Option<**f64**> |  | [optional]
+**default_qty_in_pack** | Option<**f64**> |  | [optional]
+**is_qty_in_pack_fixed** | Option<**bool**> |  | [optional]
+**weight_unit** | Option<**String**> |  | [optional]
+**weight** | Option<**f64**> |  | [optional]
+**dimensions_unit** | Option<**String**> |  | [optional]
+**width** | Option<**f64**> |  | [optional]
+**height** | Option<**f64**> |  | [optional]
+**length** | Option<**f64**> |  | [optional]
+**meta_title** | Option<**String**> |  | [optional]
+**meta_description** | Option<**String**> |  | [optional]
+**meta_keywords** | Option<**String**> |  | [optional]
+**discounts** | Option<[**Vec<models::Discount>**](Discount.md)> |  | [optional]
+**is_virtual** | Option<**bool**> |  | [optional]
+**additional_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]
+**custom_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
