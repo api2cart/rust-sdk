@@ -248,6 +248,9 @@ pub struct ProductUpdate {
     /// When true, automatically renews a listing upon its expiration.
     #[serde(rename = "auto_renew", skip_serializing_if = "Option::is_none")]
     pub auto_renew: Option<bool>,
+    /// Set whether the product on sale
+    #[serde(rename = "on_sale", skip_serializing_if = "Option::is_none")]
+    pub on_sale: Option<bool>,
 }
 
 impl ProductUpdate {
@@ -332,6 +335,7 @@ impl ProductUpdate {
             downloadable: None,
             materials: None,
             auto_renew: None,
+            on_sale: None,
         }
     }
 }

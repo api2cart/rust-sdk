@@ -34,6 +34,7 @@ Name | Type | Description | Notes
 **weight_unit** | Option<**String**> |  | [optional]
 **sort_order** | Option<**i32**> |  | [optional]
 **in_stock** | Option<**bool**> |  | [optional]
+**on_sale** | Option<**bool**> |  | [optional]
 **backorders** | Option<**String**> |  | [optional]
 **manage_stock** | Option<**String**> |  | [optional]
 **is_stock_managed** | Option<**bool**> |  | [optional]

@@ -83,6 +83,7 @@ Name | Type | Description | Notes
 **downloadable** | Option<**bool**> | Defines whether the product is downloadable | [optional][default to false]
 **materials** | Option<**Vec<String>**> | A list of material strings for materials used in the product. | [optional]
 **auto_renew** | Option<**bool**> | When true, automatically renews a listing upon its expiration. | [optional][default to false]
+**on_sale** | Option<**bool**> | Set whether the product on sale | [optional][default to false]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

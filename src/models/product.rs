@@ -73,6 +73,8 @@ pub struct Product {
     pub sort_order: Option<i32>,
     #[serde(rename = "in_stock", skip_serializing_if = "Option::is_none")]
     pub in_stock: Option<bool>,
+    #[serde(rename = "on_sale", skip_serializing_if = "Option::is_none")]
+    pub on_sale: Option<bool>,
     #[serde(rename = "backorders", skip_serializing_if = "Option::is_none")]
     pub backorders: Option<String>,
     #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
@@ -160,6 +162,7 @@ impl Product {
             weight_unit: None,
             sort_order: None,
             in_stock: None,
+            on_sale: None,
             backorders: None,
             manage_stock: None,
             is_stock_managed: None,
