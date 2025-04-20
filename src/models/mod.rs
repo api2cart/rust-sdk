@@ -538,6 +538,8 @@ pub mod product_add_files_inner;
 pub use self::product_add_files_inner::ProductAddFilesInner;
 pub mod product_add_group_prices_inner;
 pub use self::product_add_group_prices_inner::ProductAddGroupPricesInner;
+pub mod product_add_logistic_info_inner;
+pub use self::product_add_logistic_info_inner::ProductAddLogisticInfoInner;
 pub mod product_add_manufacturer_info;
 pub use self::product_add_manufacturer_info::ProductAddManufacturerInfo;
 pub mod product_add_package_details;

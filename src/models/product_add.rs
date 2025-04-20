@@ -213,6 +213,9 @@ pub struct ProductAdd {
     /// Defines image's name
     #[serde(rename = "image_name", skip_serializing_if = "Option::is_none")]
     pub image_name: Option<String>,
+    /// Image Url
+    #[serde(rename = "additional_image_urls", skip_serializing_if = "Option::is_none")]
+    pub additional_image_urls: Option<Vec<String>>,
     /// Defines reserve price value
     #[serde(rename = "reserve_price", skip_serializing_if = "Option::is_none")]
     pub reserve_price: Option<f64>,
@@ -225,6 +228,9 @@ pub struct ProductAdd {
     /// This allows buyers to remain anonymous when the bid or buy an item.
     #[serde(rename = "auction_confidentiality_level", skip_serializing_if = "Option::is_none")]
     pub auction_confidentiality_level: Option<String>,
+    /// Defines product's logistic channel settings
+    #[serde(rename = "logistic_info", skip_serializing_if = "Option::is_none")]
+    pub logistic_info: Option<Vec<models::ProductAddLogisticInfoInner>>,
     /// Allows to schedule a time in the future that the item becomes available. The value should be greater than the current date and time.
     #[serde(rename = "avail_from", skip_serializing_if = "Option::is_none")]
     pub avail_from: Option<String>,
@@ -410,10 +416,12 @@ impl ProductAdd {
             specifics: None,
             image_url: None,
             image_name: None,
+            additional_image_urls: None,
             reserve_price: None,
             buyitnow_price: None,
             condition_description: None,
             auction_confidentiality_level: None,
+            logistic_info: None,
             avail_from: None,
             tags: None,
             clear_cache: None,

@@ -703,7 +703,7 @@ pub async fn product_attribute_value_unset(configuration: &configuration::Config
 }
 
 /// Get list of brands from your store.
-pub async fn product_brand_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, params: Option<&str>, brand_ids: Option<&str>, exclude: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, parent_id: Option<&str>, response_fields: Option<&str>, find_where: Option<&str>, find_value: Option<&str>) -> Result<models::ModelResponseProductBrandList, Error<ProductBrandListError>> {
+pub async fn product_brand_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, params: Option<&str>, brand_ids: Option<&str>, exclude: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, parent_id: Option<&str>, response_fields: Option<&str>, find_where: Option<&str>, find_value: Option<&str>) -> Result<models::ModelResponseProductBrandList, Error<ProductBrandListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -711,6 +711,7 @@ pub async fn product_brand_list(configuration: &configuration::Configuration, st
     let p_params = params;
     let p_brand_ids = brand_ids;
     let p_exclude = exclude;
+    let p_category_id = category_id;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
     let p_created_from = created_from;
@@ -742,6 +743,9 @@ pub async fn product_brand_list(configuration: &configuration::Configuration, st
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_category_id {
+        req_builder = req_builder.query(&[("category_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);

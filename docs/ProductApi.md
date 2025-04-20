@@ -237,7 +237,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_brand_list
 
-> models::ModelResponseProductBrandList product_brand_list(start, count, page_cursor, params, brand_ids, exclude, store_id, lang_id, created_from, created_to, modified_from, modified_to, parent_id, response_fields, find_where, find_value)
+> models::ModelResponseProductBrandList product_brand_list(start, count, page_cursor, params, brand_ids, exclude, category_id, store_id, lang_id, created_from, created_to, modified_from, modified_to, parent_id, response_fields, find_where, find_value)
 product.brand.list
 
 Get list of brands from your store.
@@ -253,6 +253,7 @@ Name | Type | Description  | Required | Notes
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,short_description,active,url]
 **brand_ids** | Option<**String**> | Retrieves brands specified by brand ids |  |
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
+**category_id** | Option<**String**> | Retrieves product brands specified by category id |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
