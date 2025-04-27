@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**store_id** | Option<**String**> | Store Id | [optional]
 **warehouse_id** | Option<**String**> | This parameter is used for selecting a warehouse where you need to set/modify a product quantity. | [optional]
-**customer_email** | Option<**String**> | Retrieves orders specified by customer email | [optional]
 **customer_id** | Option<**String**> | Retrieves orders specified by customer id | [optional]
+**customer_email** | Option<**String**> | Retrieves orders specified by customer email | [optional]
+**store_id** | Option<**String**> | Store Id | [optional]
 **shipp_address_1** | Option<**String**> | Specifies first shipping address | [optional]
 **shipp_city** | Option<**String**> | Specifies shipping city | [optional]
 **shipp_postcode** | Option<**String**> | Specifies shipping postcode | [optional]

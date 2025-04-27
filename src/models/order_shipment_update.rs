@@ -13,47 +13,47 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OrderShipmentUpdate {
-    /// Store Id
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
     /// Shipment id indicates the number of delivery
     #[serde(rename = "shipment_id")]
     pub shipment_id: String,
     /// Defines the order that will be updated
     #[serde(rename = "order_id", skip_serializing_if = "Option::is_none")]
     pub order_id: Option<String>,
-    /// Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = \"https://api2cart.com/docs/#/cart/CartInfo\">cart.info</a > method
-    #[serde(rename = "tracking_numbers", skip_serializing_if = "Option::is_none")]
-    pub tracking_numbers: Option<Vec<models::OrderShipmentAddTrackingNumbersInner>>,
-    /// Allows rewrite tracking numbers
-    #[serde(rename = "replace", skip_serializing_if = "Option::is_none")]
-    pub replace: Option<bool>,
-    /// Defines shipment's status
-    #[serde(rename = "is_shipped", skip_serializing_if = "Option::is_none")]
-    pub is_shipped: Option<bool>,
-    /// Defines custom tracking link
-    #[serde(rename = "tracking_link", skip_serializing_if = "Option::is_none")]
-    pub tracking_link: Option<String>,
-    /// Defines the date of delivery
-    #[serde(rename = "delivered_at", skip_serializing_if = "Option::is_none")]
-    pub delivered_at: Option<String>,
+    /// Store Id
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
     /// Defines company name that provide tracking of shipment
     #[serde(rename = "shipment_provider", skip_serializing_if = "Option::is_none")]
     pub shipment_provider: Option<String>,
+    /// Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = \"https://api2cart.com/docs/#/cart/CartInfo\">cart.info</a > method
+    #[serde(rename = "tracking_numbers", skip_serializing_if = "Option::is_none")]
+    pub tracking_numbers: Option<Vec<models::OrderShipmentAddTrackingNumbersInner>>,
+    /// Defines custom tracking link
+    #[serde(rename = "tracking_link", skip_serializing_if = "Option::is_none")]
+    pub tracking_link: Option<String>,
+    /// Defines shipment's status
+    #[serde(rename = "is_shipped", skip_serializing_if = "Option::is_none")]
+    pub is_shipped: Option<bool>,
+    /// Defines the date of delivery
+    #[serde(rename = "delivered_at", skip_serializing_if = "Option::is_none")]
+    pub delivered_at: Option<String>,
+    /// Allows rewrite tracking numbers
+    #[serde(rename = "replace", skip_serializing_if = "Option::is_none")]
+    pub replace: Option<bool>,
 }
 
 impl OrderShipmentUpdate {
     pub fn new(shipment_id: String) -> OrderShipmentUpdate {
         OrderShipmentUpdate {
-            store_id: None,
             shipment_id,
             order_id: None,
-            tracking_numbers: None,
-            replace: None,
-            is_shipped: None,
-            tracking_link: None,
-            delivered_at: None,
+            store_id: None,
             shipment_provider: None,
+            tracking_numbers: None,
+            tracking_link: None,
+            is_shipped: None,
+            delivered_at: None,
+            replace: None,
         }
     }
 }

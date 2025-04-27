@@ -13,18 +13,18 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OrderPreestimateShippingList {
-    /// Store Id
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
     /// This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
     #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
     pub warehouse_id: Option<String>,
-    /// Retrieves orders specified by customer email
-    #[serde(rename = "customer_email", skip_serializing_if = "Option::is_none")]
-    pub customer_email: Option<String>,
     /// Retrieves orders specified by customer id
     #[serde(rename = "customer_id", skip_serializing_if = "Option::is_none")]
     pub customer_id: Option<String>,
+    /// Retrieves orders specified by customer email
+    #[serde(rename = "customer_email", skip_serializing_if = "Option::is_none")]
+    pub customer_email: Option<String>,
+    /// Store Id
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
     /// Specifies first shipping address
     #[serde(rename = "shipp_address_1", skip_serializing_if = "Option::is_none")]
     pub shipp_address_1: Option<String>,
@@ -53,10 +53,10 @@ pub struct OrderPreestimateShippingList {
 impl OrderPreestimateShippingList {
     pub fn new(shipp_country: String, order_item: Vec<models::OrderPreestimateShippingListOrderItemInner>) -> OrderPreestimateShippingList {
         OrderPreestimateShippingList {
-            store_id: None,
             warehouse_id: None,
-            customer_email: None,
             customer_id: None,
+            customer_email: None,
+            store_id: None,
             shipp_address_1: None,
             shipp_city: None,
             shipp_postcode: None,

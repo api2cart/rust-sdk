@@ -82,7 +82,7 @@ Name | Type | Description  | Required | Notes
 
 ## return_info
 
-> models::ReturnInfo200Response return_info(id, order_id, store_id, params, exclude, response_fields)
+> models::ReturnInfo200Response return_info(id, order_id, store_id, response_fields, params, exclude)
 return.info
 
 Retrieve return information.
@@ -95,9 +95,9 @@ Name | Type | Description  | Required | Notes
 **id** | **String** | Entity id | [required] |
 **order_id** | Option<**String**> | Defines the order id |  |
 **store_id** | Option<**String**> | Store Id |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,order_products]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 
 ### Return type
 
@@ -117,7 +117,7 @@ Name | Type | Description  | Required | Notes
 
 ## return_list
 
-> models::ModelResponseReturnList return_list(start, count, page_cursor, params, exclude, response_fields, order_id, order_ids, customer_id, store_id, status, return_type, created_from, created_to, modified_from, modified_to, report_request_id, disable_report_cache)
+> models::ModelResponseReturnList return_list(start, count, page_cursor, order_id, order_ids, customer_id, store_id, status, return_type, created_from, created_to, modified_from, modified_to, response_fields, params, exclude, report_request_id, disable_report_cache)
 return.list
 
 Get list of return requests from store.
@@ -130,9 +130,6 @@ Name | Type | Description  | Required | Notes
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,order_products]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **order_id** | Option<**String**> | Defines the order id |  |
 **order_ids** | Option<**String**> | Retrieves return requests specified by order ids |  |
 **customer_id** | Option<**String**> | Retrieves return requests specified by customer id |  |
@@ -143,6 +140,9 @@ Name | Type | Description  | Required | Notes
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,order_products]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **report_request_id** | Option<**String**> | Report request id |  |
 **disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
 

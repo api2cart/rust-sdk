@@ -52,15 +52,15 @@ pub struct CustomerUpdate {
     /// Defines customer's gender
     #[serde(rename = "gender", skip_serializing_if = "Option::is_none")]
     pub gender: Option<String>,
-    /// Store Id
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
     /// The customer note.
     #[serde(rename = "note", skip_serializing_if = "Option::is_none")]
     pub note: Option<String>,
     /// Defines customer's status
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
+    /// Store Id
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
     #[serde(rename = "address", skip_serializing_if = "Option::is_none")]
     pub address: Option<Vec<models::CustomerUpdateAddressInner>>,
 }
@@ -81,9 +81,9 @@ impl CustomerUpdate {
             consents: None,
             tags: None,
             gender: None,
-            store_id: None,
             note: None,
             status: None,
+            store_id: None,
             address: None,
         }
     }

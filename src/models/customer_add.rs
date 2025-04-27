@@ -17,11 +17,11 @@ pub struct CustomerAdd {
     #[serde(rename = "email")]
     pub email: String,
     /// Defines customer's first name
-    #[serde(rename = "first_name")]
-    pub first_name: String,
+    #[serde(rename = "first_name", skip_serializing_if = "Option::is_none")]
+    pub first_name: Option<String>,
     /// Defines customer's last name
-    #[serde(rename = "last_name")]
-    pub last_name: String,
+    #[serde(rename = "last_name", skip_serializing_if = "Option::is_none")]
+    pub last_name: Option<String>,
     /// Defines customer's unique password
     #[serde(rename = "password", skip_serializing_if = "Option::is_none")]
     pub password: Option<String>,
@@ -31,6 +31,9 @@ pub struct CustomerAdd {
     /// Groups that will be assigned to a customer
     #[serde(rename = "group_ids", skip_serializing_if = "Option::is_none")]
     pub group_ids: Option<String>,
+    /// Defines customer's status
+    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
+    pub status: Option<String>,
     /// Entity's date creation
     #[serde(rename = "created_time", skip_serializing_if = "Option::is_none")]
     pub created_time: Option<String>,
@@ -46,9 +49,6 @@ pub struct CustomerAdd {
     /// Defines customer's birthday
     #[serde(rename = "birth_day", skip_serializing_if = "Option::is_none")]
     pub birth_day: Option<String>,
-    /// Defines customer's status
-    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
-    pub status: Option<String>,
     /// Defines whether the newsletter subscription is available for the user
     #[serde(rename = "news_letter_subscription", skip_serializing_if = "Option::is_none")]
     pub news_letter_subscription: Option<bool>,
@@ -61,9 +61,6 @@ pub struct CustomerAdd {
     /// Link to customer website
     #[serde(rename = "website", skip_serializing_if = "Option::is_none")]
     pub website: Option<String>,
-    /// Store Id
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
     /// Defines customer's fax
     #[serde(rename = "fax", skip_serializing_if = "Option::is_none")]
     pub fax: Option<String>,
@@ -79,35 +76,38 @@ pub struct CustomerAdd {
     /// Specifies ISO code or name of country
     #[serde(rename = "country", skip_serializing_if = "Option::is_none")]
     pub country: Option<String>,
+    /// Store Id
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
     #[serde(rename = "address", skip_serializing_if = "Option::is_none")]
     pub address: Option<Vec<models::CustomerAddAddressInner>>,
 }
 
 impl CustomerAdd {
-    pub fn new(email: String, first_name: String, last_name: String) -> CustomerAdd {
+    pub fn new(email: String) -> CustomerAdd {
         CustomerAdd {
             email,
-            first_name,
-            last_name,
+            first_name: None,
+            last_name: None,
             password: None,
             group: None,
             group_ids: None,
+            status: None,
             created_time: None,
             modified_time: None,
             login: None,
             last_login: None,
             birth_day: None,
-            status: None,
             news_letter_subscription: None,
             consents: None,
             gender: None,
             website: None,
-            store_id: None,
             fax: None,
             company: None,
             phone: None,
             note: None,
             country: None,
+            store_id: None,
             address: None,
         }
     }

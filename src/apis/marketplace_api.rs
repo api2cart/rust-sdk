@@ -24,40 +24,40 @@ pub enum MarketplaceProductFindError {
 
 
 /// Search product in global catalog.
-pub async fn marketplace_product_find(configuration: &configuration::Configuration, store_id: Option<&str>, count: Option<i32>, page_cursor: Option<&str>, categories_ids: Option<&str>, keyword: Option<&str>, asin: Option<&str>, ean: Option<&str>, gtin: Option<&str>, upc: Option<&str>, mpn: Option<&str>, isbn: Option<&str>, params: Option<&str>, exclude: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseMarketplaceProductFind, Error<MarketplaceProductFindError>> {
+pub async fn marketplace_product_find(configuration: &configuration::Configuration, count: Option<i32>, page_cursor: Option<&str>, keyword: Option<&str>, categories_ids: Option<&str>, store_id: Option<&str>, asin: Option<&str>, ean: Option<&str>, gtin: Option<&str>, upc: Option<&str>, mpn: Option<&str>, isbn: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseMarketplaceProductFind, Error<MarketplaceProductFindError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_store_id = store_id;
     let p_count = count;
     let p_page_cursor = page_cursor;
-    let p_categories_ids = categories_ids;
     let p_keyword = keyword;
+    let p_categories_ids = categories_ids;
+    let p_store_id = store_id;
     let p_asin = asin;
     let p_ean = ean;
     let p_gtin = gtin;
     let p_upc = upc;
     let p_mpn = mpn;
     let p_isbn = isbn;
+    let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
-    let p_response_fields = response_fields;
 
     let uri_str = format!("{}/marketplace.product.find.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_page_cursor {
         req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_keyword {
+        req_builder = req_builder.query(&[("keyword", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_categories_ids {
         req_builder = req_builder.query(&[("categories_ids", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_keyword {
-        req_builder = req_builder.query(&[("keyword", &param_value.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_asin {
         req_builder = req_builder.query(&[("asin", &param_value.to_string())]);
@@ -77,14 +77,14 @@ pub async fn marketplace_product_find(configuration: &configuration::Configurati
     if let Some(ref param_value) = p_isbn {
         req_builder = req_builder.query(&[("isbn", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

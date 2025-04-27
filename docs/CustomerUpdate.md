@@ -17,9 +17,9 @@ Name | Type | Description | Notes
 **consents** | Option<[**Vec<models::CustomerAddConsentsInner>**](CustomerAdd_consents_inner.md)> | Defines consents to notifications | [optional]
 **tags** | Option<**String**> | Customer tags | [optional]
 **gender** | Option<**String**> | Defines customer's gender | [optional]
-**store_id** | Option<**String**> | Store Id | [optional]
 **note** | Option<**String**> | The customer note. | [optional]
 **status** | Option<**String**> | Defines customer's status | [optional]
+**store_id** | Option<**String**> | Store Id | [optional]
 **address** | Option<[**Vec<models::CustomerUpdateAddressInner>**](CustomerUpdate_address_inner.md)> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

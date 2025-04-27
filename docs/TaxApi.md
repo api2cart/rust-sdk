@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## tax_class_info
 
-> models::ModelResponseTaxClassInfo tax_class_info(tax_class_id, store_id, lang_id, params, response_fields, exclude)
+> models::ModelResponseTaxClassInfo tax_class_info(tax_class_id, store_id, lang_id, response_fields, params, exclude)
 tax.class.info
 
 Use this method to get information about a tax class and its rates. It allows you to calculate the tax percentage for a specific customer's address. This information contains relatively static data that rarely changes, so API2Cart may cache certain data to reduce the load on the store and speed up request execution. We also recommend that you cache the response of this method on your side to save requests. If you need to clear the cache for a specific store, use the cart.validate method.
@@ -24,8 +24,8 @@ Name | Type | Description  | Required | Notes
 **tax_class_id** | **String** | Retrieves taxes specified by class id | [required] |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to tax_class_id,name,avail]
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to tax_class_id,name,avail]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
@@ -46,7 +46,7 @@ Name | Type | Description  | Required | Notes
 
 ## tax_class_list
 
-> models::ModelResponseTaxClassList tax_class_list(created_to, created_from, modified_to, modified_from, find_value, find_where, store_id, count, page_cursor, response_fields)
+> models::ModelResponseTaxClassList tax_class_list(count, page_cursor, store_id, find_value, find_where, created_to, created_from, modified_to, modified_from, response_fields)
 tax.class.list
 
 Get list of tax classes from your store.
@@ -56,15 +56,15 @@ Get list of tax classes from your store.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
+**count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
+**store_id** | Option<**String**> | Store Id |  |
+**find_value** | Option<**String**> | Entity search that is specified by some value |  |
+**find_where** | Option<**String**> | Tax class search that is specified by field |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
-**find_value** | Option<**String**> | Entity search that is specified by some value |  |
-**find_where** | Option<**String**> | Tax class search that is specified by field |  |
-**store_id** | Option<**String**> | Store Id |  |
-**count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
-**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to {return_code,return_message,pagination,result}]
 
 ### Return type

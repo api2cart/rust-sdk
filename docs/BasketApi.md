@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## basket_info
 
-> models::BasketInfo200Response basket_info(id, store_id, params, exclude, response_fields)
+> models::BasketInfo200Response basket_info(id, store_id, response_fields, params, exclude)
 basket.info
 
 Retrieve basket information.
@@ -26,9 +26,9 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Entity id | [required] |
 **store_id** | Option<**String**> | Store Id |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 
 ### Return type
 
@@ -144,7 +144,7 @@ Name | Type | Description  | Required | Notes
 
 ## basket_live_shipping_service_list
 
-> models::BasketLiveShippingServiceList200Response basket_live_shipping_service_list(store_id, start, count)
+> models::BasketLiveShippingServiceList200Response basket_live_shipping_service_list(start, count, store_id)
 basket.live_shipping_service.list
 
 Retrieve a list of live shipping rate services.
@@ -154,9 +154,9 @@ Retrieve a list of live shipping rate services.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**store_id** | Option<**String**> | Store Id |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**store_id** | Option<**String**> | Store Id |  |
 
 ### Return type
 

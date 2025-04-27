@@ -140,7 +140,7 @@ This endpoint does not need any parameter.
 
 ## webhook_list
 
-> models::WebhookList200Response webhook_list(params, start, count, entity, action, active, ids)
+> models::WebhookList200Response webhook_list(start, count, entity, action, active, ids, params)
 webhook.list
 
 List registered webhook on the store.
@@ -150,13 +150,13 @@ List registered webhook on the store.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,entity,action,callback]
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **entity** | Option<**String**> | The entity you want to filter webhooks by (e.g. order or product) |  |
 **action** | Option<**String**> | The action you want to filter webhooks by (e.g. add, update, or delete) |  |
 **active** | Option<**bool**> | The webhook status you want to filter webhooks by |  |
 **ids** | Option<**String**> | List of сomma-separated webhook ids |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,entity,action,callback]
 
 ### Return type
 

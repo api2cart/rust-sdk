@@ -52,13 +52,13 @@ pub enum BasketLiveShippingServiceListError {
 
 
 /// Retrieve basket information.
-pub async fn basket_info(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>, params: Option<&str>, exclude: Option<&str>, response_fields: Option<&str>) -> Result<models::BasketInfo200Response, Error<BasketInfoError>> {
+pub async fn basket_info(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::BasketInfo200Response, Error<BasketInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_store_id = store_id;
+    let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
-    let p_response_fields = response_fields;
 
     let uri_str = format!("{}/basket.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -67,14 +67,14 @@ pub async fn basket_info(configuration: &configuration::Configuration, id: &str,
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -179,11 +179,11 @@ pub async fn basket_live_shipping_service_create(configuration: &configuration::
     let uri_str = format!("{}/basket.live_shipping_service.create.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
+    req_builder = req_builder.query(&[("name", &p_name.to_string())]);
+    req_builder = req_builder.query(&[("callback", &p_callback.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
-    req_builder = req_builder.query(&[("name", &p_name.to_string())]);
-    req_builder = req_builder.query(&[("callback", &p_callback.to_string())]);
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -264,23 +264,23 @@ pub async fn basket_live_shipping_service_delete(configuration: &configuration::
 }
 
 /// Retrieve a list of live shipping rate services.
-pub async fn basket_live_shipping_service_list(configuration: &configuration::Configuration, store_id: Option<&str>, start: Option<i32>, count: Option<i32>) -> Result<models::BasketLiveShippingServiceList200Response, Error<BasketLiveShippingServiceListError>> {
+pub async fn basket_live_shipping_service_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, store_id: Option<&str>) -> Result<models::BasketLiveShippingServiceList200Response, Error<BasketLiveShippingServiceListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_store_id = store_id;
     let p_start = start;
     let p_count = count;
+    let p_store_id = store_id;
 
     let uri_str = format!("{}/basket.live_shipping_service.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

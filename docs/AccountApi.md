@@ -44,7 +44,7 @@ Name | Type | Description  | Required | Notes
 
 ## account_cart_list
 
-> models::AccountCartList200Response account_cart_list(params, exclude, request_from_date, request_to_date, store_url, store_key)
+> models::AccountCartList200Response account_cart_list(store_url, store_key, request_from_date, request_to_date, params, exclude)
 account.cart.list
 
 This method lets you get a list of online stores connected to your API2Cart account. You can get the number of API requests to each store if you specify a period using parameters (request_from_date, request_to_date). The total_calls field is displayed only if there are parameters (request_from_date, request_to_date).
@@ -54,12 +54,12 @@ This method lets you get a list of online stores connected to your API2Cart acco
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**request_from_date** | Option<**String**> | Retrieve entities from their creation date |  |
-**request_to_date** | Option<**String**> | Retrieve entities to their creation date |  |
 **store_url** | Option<**String**> | A web address of a store |  |
 **store_key** | Option<**String**> | Find store by store key |  |
+**request_from_date** | Option<**String**> | Retrieve entities from their creation date |  |
+**request_to_date** | Option<**String**> | Retrieve entities to their creation date |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -79,7 +79,7 @@ Name | Type | Description  | Required | Notes
 
 ## account_config_update
 
-> models::AccountConfigUpdate200Response account_config_update(replace_parameters, new_store_url, new_store_key, bridge_url, store_root, db_tables_prefix, user_agent, param_3dcart_private_key, param_3dcart_access_token, param_3dcartapi_api_key, amazon_sp_client_id, amazon_sp_client_secret, amazon_sp_refresh_token, amazon_sp_aws_region, amazon_sp_api_environment, amazon_seller_id, aspdotnetstorefront_api_user, aspdotnetstorefront_api_pass, bigcommerceapi_admin_account, bigcommerceapi_api_path, bigcommerceapi_api_key, bigcommerceapi_client_id, bigcommerceapi_access_token, bigcommerceapi_context, bol_api_key, bol_api_secret, bol_retailer_id, demandware_client_id, demandware_api_password, demandware_user_name, demandware_user_password, ebay_client_id, ebay_client_secret, ebay_runame, ebay_access_token, ebay_refresh_token, ebay_environment, ebay_site_id, ecwid_acess_token, ecwid_store_id, lazada_app_id, lazada_app_secret, lazada_refresh_token, lazada_region, etsy_keystring, etsy_shared_secret, etsy_access_token, etsy_token_secret, etsy_client_id, etsy_refresh_token, facebook_app_id, facebook_app_secret, facebook_access_token, facebook_business_id, neto_api_key, neto_api_username, shopline_access_token, shopline_app_key, shopline_app_secret, shopify_access_token, shopify_api_key, shopify_api_password, shopify_shared_secret, shoplazza_access_token, shoplazza_shared_secret, miva_access_token, miva_signature, shopware_access_key, shopware_api_key, shopware_api_secret, volusion_login, volusion_password, walmart_client_id, walmart_client_secret, walmart_environment, walmart_channel_type, walmart_region, square_client_id, square_client_secret, square_refresh_token, squarespace_api_key, squarespace_client_id, squarespace_client_secret, squarespace_access_token, squarespace_refresh_token, hybris_client_id, hybris_client_secret, hybris_username, hybris_password, hybris_websites, lightspeed_api_key, lightspeed_api_secret, commercehq_api_key, commercehq_api_password, wc_consumer_key, wc_consumer_secret, magento_consumer_key, magento_consumer_secret, magento_access_token, magento_token_secret, prestashop_webservice_key, wix_app_id, wix_app_secret_key, wix_instance_id, wix_refresh_token, mercado_libre_app_id, mercado_libre_app_secret_key, mercado_libre_refresh_token, zid_client_id, zid_client_secret, zid_access_token, zid_authorization, zid_refresh_token, flipkart_client_id, flipkart_client_secret, allegro_client_id, allegro_client_secret, allegro_access_token, allegro_refresh_token, allegro_environment, zoho_client_id, zoho_client_secret, zoho_refresh_token, zoho_region, tiendanube_user_id, tiendanube_access_token, tiendanube_client_secret, otto_client_id, otto_client_secret, otto_app_id, otto_refresh_token, otto_environment, otto_access_token, tiktokshop_app_key, tiktokshop_app_secret, tiktokshop_refresh_token, tiktokshop_access_token, salla_client_id, salla_client_secret, salla_refresh_token, salla_access_token)
+> models::AccountConfigUpdate200Response account_config_update(replace_parameters, new_store_url, new_store_key, bridge_url, store_root, db_tables_prefix, user_agent, param_3dcart_private_key, param_3dcart_access_token, param_3dcartapi_api_key, amazon_sp_client_id, amazon_sp_client_secret, amazon_sp_refresh_token, amazon_sp_aws_region, amazon_sp_api_environment, amazon_seller_id, aspdotnetstorefront_api_user, aspdotnetstorefront_api_pass, bigcommerceapi_admin_account, bigcommerceapi_api_path, bigcommerceapi_api_key, bigcommerceapi_client_id, bigcommerceapi_access_token, bigcommerceapi_context, bol_api_key, bol_api_secret, bol_retailer_id, demandware_client_id, demandware_api_password, demandware_user_name, demandware_user_password, ebay_client_id, ebay_client_secret, ebay_runame, ebay_access_token, ebay_refresh_token, ebay_environment, ebay_site_id, ecwid_acess_token, ecwid_store_id, lazada_app_id, lazada_app_secret, lazada_refresh_token, lazada_region, etsy_keystring, etsy_shared_secret, etsy_access_token, etsy_token_secret, etsy_client_id, etsy_refresh_token, facebook_app_id, facebook_app_secret, facebook_access_token, facebook_business_id, neto_api_key, neto_api_username, shopline_access_token, shopline_app_key, shopline_app_secret, shopline_shared_secret, shopify_access_token, shopify_api_key, shopify_api_password, shopify_shared_secret, shoplazza_access_token, shoplazza_shared_secret, miva_access_token, miva_signature, shopware_access_key, shopware_api_key, shopware_api_secret, volusion_login, volusion_password, walmart_client_id, walmart_client_secret, walmart_environment, walmart_channel_type, walmart_region, square_client_id, square_client_secret, square_refresh_token, squarespace_api_key, squarespace_client_id, squarespace_client_secret, squarespace_access_token, squarespace_refresh_token, hybris_client_id, hybris_client_secret, hybris_username, hybris_password, hybris_websites, lightspeed_api_key, lightspeed_api_secret, commercehq_api_key, commercehq_api_password, wc_consumer_key, wc_consumer_secret, magento_consumer_key, magento_consumer_secret, magento_access_token, magento_token_secret, prestashop_webservice_key, wix_app_id, wix_app_secret_key, wix_instance_id, wix_refresh_token, mercado_libre_app_id, mercado_libre_app_secret_key, mercado_libre_refresh_token, zid_client_id, zid_client_secret, zid_access_token, zid_authorization, zid_refresh_token, flipkart_client_id, flipkart_client_secret, allegro_client_id, allegro_client_secret, allegro_access_token, allegro_refresh_token, allegro_environment, zoho_client_id, zoho_client_secret, zoho_refresh_token, zoho_region, tiendanube_user_id, tiendanube_access_token, tiendanube_client_secret, otto_client_id, otto_client_secret, otto_app_id, otto_refresh_token, otto_environment, otto_access_token, tiktokshop_app_key, tiktokshop_app_secret, tiktokshop_refresh_token, tiktokshop_access_token, salla_client_id, salla_client_secret, salla_refresh_token, salla_access_token)
 account.config.update
 
 Use this method to automate the change of credentials used to connect online stores. The list of supported parameters differs depending on the platform.
@@ -148,6 +148,7 @@ Name | Type | Description  | Required | Notes
 **shopline_access_token** | Option<**String**> | Shopline APP Key |  |
 **shopline_app_key** | Option<**String**> | Shopline APP Key |  |
 **shopline_app_secret** | Option<**String**> | Shopline App Secret |  |
+**shopline_shared_secret** | Option<**String**> | Shopline Shared Secret |  |
 **shopify_access_token** | Option<**String**> | Access token authorizing the app to access resources on behalf of a user |  |
 **shopify_api_key** | Option<**String**> | Shopify API Key |  |
 **shopify_api_password** | Option<**String**> | Shopify API Password |  |
@@ -249,7 +250,7 @@ Name | Type | Description  | Required | Notes
 
 ## account_failed_webhooks
 
-> models::AccountFailedWebhooks200Response account_failed_webhooks(count, start, ids)
+> models::AccountFailedWebhooks200Response account_failed_webhooks(start, count, ids)
 account.failed_webhooks
 
 If the callback of your service for some reason could not accept webhooks from API2Cart, then with the help of this method you can get a list of missed webhooks to perform synchronization again using entity_id. Please note that we keep such records for 24 hours.
@@ -259,8 +260,8 @@ If the callback of your service for some reason could not accept webhooks from A
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
+**count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **ids** | Option<**String**> | List of сomma-separated webhook ids |  |
 
 ### Return type

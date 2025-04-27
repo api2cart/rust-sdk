@@ -93,7 +93,7 @@ This endpoint does not need any parameter.
 
 ## cart_catalog_price_rules_list
 
-> models::ModelResponseCartCatalogPriceRulesList cart_catalog_price_rules_list(page_cursor, start, count, ids, params, response_fields, exclude)
+> models::ModelResponseCartCatalogPriceRulesList cart_catalog_price_rules_list(start, count, page_cursor, ids, response_fields, params, exclude)
 cart.catalog_price_rules.list
 
 Get cart catalog price rules discounts.
@@ -103,12 +103,12 @@ Get cart catalog price rules discounts.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **ids** | Option<**String**> | Retrieves  catalog_price_rules by ids |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description]
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
@@ -250,7 +250,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_coupon_condition_add
 
-> models::BasketLiveShippingServiceDelete200Response cart_coupon_condition_add(coupon_id, entity, key, operator, value, store_id, target, include_tax, include_shipping)
+> models::BasketLiveShippingServiceDelete200Response cart_coupon_condition_add(coupon_id, entity, key, operator, value, target, include_tax, include_shipping, store_id)
 cart.coupon.condition.add
 
 Use this method to add additional conditions for coupon application.
@@ -265,10 +265,10 @@ Name | Type | Description  | Required | Notes
 **key** | **String** | Defines condition entity attribute key | [required] |
 **operator** | **String** | Defines condition operator | [required] |
 **value** | **String** | Defines condition value, can be comma separated according to the operator. | [required] |
-**store_id** | Option<**String**> | Store Id |  |
 **target** | Option<**String**> | Defines condition operator |  |[default to coupon_prerequisite]
 **include_tax** | Option<**bool**> | Indicates whether to apply a discount for taxes. |  |[default to false]
 **include_shipping** | Option<**bool**> | Indicates whether to apply a discount for shipping. |  |[default to false]
+**store_id** | Option<**String**> | Store Id |  |
 
 ### Return type
 
@@ -288,7 +288,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_coupon_count
 
-> models::CartCouponCount200Response cart_coupon_count(store_id, date_start_from, date_start_to, date_end_from, date_end_to, avail)
+> models::CartCouponCount200Response cart_coupon_count(store_id, avail, date_start_from, date_start_to, date_end_from, date_end_to)
 cart.coupon.count
 
 This method allows you to get the number of coupons. On some platforms, you can filter the coupons by the date they were active.
@@ -299,11 +299,11 @@ This method allows you to get the number of coupons. On some platforms, you can 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **store_id** | Option<**String**> | Store Id |  |
+**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
 **date_start_from** | Option<**String**> | Filter entity by date_start (greater or equal) |  |
 **date_start_to** | Option<**String**> | Filter entity by date_start (less or equal) |  |
 **date_end_from** | Option<**String**> | Filter entity by date_end (greater or equal) |  |
 **date_end_to** | Option<**String**> | Filter entity by date_end (less or equal) |  |
-**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
 
 ### Return type
 
@@ -354,7 +354,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_coupon_list
 
-> models::ModelResponseCartCouponList cart_coupon_list(page_cursor, start, count, coupons_ids, store_id, date_start_from, date_start_to, date_end_from, date_end_to, avail, lang_id, params, response_fields, exclude)
+> models::ModelResponseCartCouponList cart_coupon_list(start, count, page_cursor, coupons_ids, store_id, lang_id, avail, date_start_from, date_start_to, date_end_from, date_end_to, response_fields, params, exclude)
 cart.coupon.list
 
 Get cart coupon discounts.
@@ -364,19 +364,19 @@ Get cart coupon discounts.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **coupons_ids** | Option<**String**> | Filter coupons by ids |  |
 **store_id** | Option<**String**> | Filter coupons by store id |  |
+**lang_id** | Option<**String**> | Language id |  |
+**avail** | Option<**bool**> | Filter coupons by avail status |  |
 **date_start_from** | Option<**String**> | Filter entity by date_start (greater or equal) |  |
 **date_start_to** | Option<**String**> | Filter entity by date_start (less or equal) |  |
 **date_end_from** | Option<**String**> | Filter entity by date_end (greater or equal) |  |
 **date_end_to** | Option<**String**> | Filter entity by date_end (less or equal) |  |
-**avail** | Option<**bool**> | Filter coupons by avail status |  |
-**lang_id** | Option<**String**> | Language id |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,code,name,description]
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,code,name,description]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
@@ -582,7 +582,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_giftcard_list
 
-> models::ModelResponseCartGiftCardList cart_giftcard_list(page_cursor, start, count, store_id, params, response_fields, exclude)
+> models::ModelResponseCartGiftCardList cart_giftcard_list(start, count, page_cursor, store_id, response_fields, params, exclude)
 cart.giftcard.list
 
 Get gift cards list.
@@ -592,12 +592,12 @@ Get gift cards list.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **store_id** | Option<**String**> | Store Id |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,code,name]
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,code,name]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
@@ -618,7 +618,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_info
 
-> models::CartInfo200Response cart_info(params, response_fields, exclude, store_id)
+> models::CartInfo200Response cart_info(store_id, response_fields, params, exclude)
 cart.info
 
 This method allows you to get various information about the store, including a list of stores (in the case of a multistore configuration), a list of supported languages, currencies, carriers, warehouses, and many other information. This information contains data that is relatively stable and rarely changes, so API2Cart can cache certain data to reduce the load on the store and speed up the execution of the request. We also recommend that you cache the response of this method on your side to save requests. If you need to clear the cache for a specific store, then use the cart.validate method.
@@ -628,10 +628,10 @@ This method allows you to get various information about the store, including a l
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to store_name,store_url,db_prefix]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **store_id** | Option<**String**> | Store Id |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to store_name,store_url,db_prefix]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -678,7 +678,7 @@ This endpoint does not need any parameter.
 
 ## cart_meta_data_list
 
-> models::ModelResponseCartMetaDataList cart_meta_data_list(entity_id, entity, store_id, lang_id, key, count, page_cursor, params, response_fields, exclude)
+> models::ModelResponseCartMetaDataList cart_meta_data_list(entity_id, count, page_cursor, entity, store_id, lang_id, key, response_fields, params, exclude)
 cart.meta_data.list
 
 Using this method, you can get a list of metadata for various entities (products, options, customers, orders). Usually this is data created by third-party plugins.
@@ -689,14 +689,14 @@ Using this method, you can get a list of metadata for various entities (products
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **entity_id** | **String** | Entity Id | [required] |
+**count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **entity** | Option<**String**> | Entity |  |[default to product]
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
 **key** | Option<**String**> | Key |  |
-**count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
-**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to key,value]
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to key,value]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
@@ -814,7 +814,7 @@ This endpoint does not need any parameter.
 
 ## cart_plugin_list
 
-> models::CartPluginList200Response cart_plugin_list(store_id, start, count)
+> models::CartPluginList200Response cart_plugin_list(start, count, store_id)
 cart.plugin.list
 
 Get a list of third-party plugins installed on the store.
@@ -824,9 +824,9 @@ Get a list of third-party plugins installed on the store.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**store_id** | Option<**String**> | Store Id |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**store_id** | Option<**String**> | Store Id |  |
 
 ### Return type
 
@@ -914,7 +914,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_script_list
 
-> models::ModelResponseCartScriptList cart_script_list(page_cursor, start, count, created_from, created_to, modified_from, modified_to, script_ids, store_id, params, response_fields, exclude)
+> models::ModelResponseCartScriptList cart_script_list(start, count, page_cursor, script_ids, store_id, created_from, created_to, modified_from, modified_to, response_fields, params, exclude)
 cart.script.list
 
 Get scripts installed to the storefront
@@ -924,17 +924,17 @@ Get scripts installed to the storefront
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
+**script_ids** | Option<**String**> | Retrieves only scripts with specific ids |  |
+**store_id** | Option<**String**> | Store Id |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**script_ids** | Option<**String**> | Retrieves only scripts with specific ids |  |
-**store_id** | Option<**String**> | Store Id |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description]
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
@@ -955,7 +955,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_shipping_zones_list
 
-> models::ModelResponseCartShippingZonesList cart_shipping_zones_list(store_id, start, count, params, response_fields, exclude)
+> models::ModelResponseCartShippingZonesList cart_shipping_zones_list(start, count, store_id, response_fields, params, exclude)
 cart.shipping_zones.list
 
 Get list of shipping zones
@@ -965,11 +965,11 @@ Get list of shipping zones
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**store_id** | Option<**String**> | Store Id |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,enabled]
+**store_id** | Option<**String**> | Store Id |  |
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,enabled]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type

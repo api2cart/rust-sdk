@@ -301,36 +301,36 @@ pub async fn cart_catalog_price_rules_count(configuration: &configuration::Confi
 }
 
 /// Get cart catalog price rules discounts.
-pub async fn cart_catalog_price_rules_list(configuration: &configuration::Configuration, page_cursor: Option<&str>, start: Option<i32>, count: Option<i32>, ids: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartCatalogPriceRulesList, Error<CartCatalogPriceRulesListError>> {
+pub async fn cart_catalog_price_rules_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartCatalogPriceRulesList, Error<CartCatalogPriceRulesListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_page_cursor = page_cursor;
     let p_start = start;
     let p_count = count;
+    let p_page_cursor = page_cursor;
     let p_ids = ids;
-    let p_params = params;
     let p_response_fields = response_fields;
+    let p_params = params;
     let p_exclude = exclude;
 
     let uri_str = format!("{}/cart.catalog_price_rules.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_ids {
         req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
@@ -553,37 +553,37 @@ pub async fn cart_coupon_add(configuration: &configuration::Configuration, cart_
 }
 
 /// Use this method to add additional conditions for coupon application.
-pub async fn cart_coupon_condition_add(configuration: &configuration::Configuration, coupon_id: &str, entity: &str, key: &str, operator: &str, value: &str, store_id: Option<&str>, target: Option<&str>, include_tax: Option<bool>, include_shipping: Option<bool>) -> Result<models::BasketLiveShippingServiceDelete200Response, Error<CartCouponConditionAddError>> {
+pub async fn cart_coupon_condition_add(configuration: &configuration::Configuration, coupon_id: &str, entity: &str, key: &str, operator: &str, value: &str, target: Option<&str>, include_tax: Option<bool>, include_shipping: Option<bool>, store_id: Option<&str>) -> Result<models::BasketLiveShippingServiceDelete200Response, Error<CartCouponConditionAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_coupon_id = coupon_id;
     let p_entity = entity;
     let p_key = key;
     let p_operator = operator;
     let p_value = value;
-    let p_store_id = store_id;
     let p_target = target;
     let p_include_tax = include_tax;
     let p_include_shipping = include_shipping;
+    let p_store_id = store_id;
 
     let uri_str = format!("{}/cart.coupon.condition.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
     req_builder = req_builder.query(&[("coupon_id", &p_coupon_id.to_string())]);
-    if let Some(ref param_value) = p_target {
-        req_builder = req_builder.query(&[("target", &param_value.to_string())]);
-    }
     req_builder = req_builder.query(&[("entity", &p_entity.to_string())]);
     req_builder = req_builder.query(&[("key", &p_key.to_string())]);
     req_builder = req_builder.query(&[("operator", &p_operator.to_string())]);
     req_builder = req_builder.query(&[("value", &p_value.to_string())]);
+    if let Some(ref param_value) = p_target {
+        req_builder = req_builder.query(&[("target", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_include_tax {
         req_builder = req_builder.query(&[("include_tax", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_include_shipping {
         req_builder = req_builder.query(&[("include_shipping", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -621,20 +621,23 @@ pub async fn cart_coupon_condition_add(configuration: &configuration::Configurat
 }
 
 /// This method allows you to get the number of coupons. On some platforms, you can filter the coupons by the date they were active.
-pub async fn cart_coupon_count(configuration: &configuration::Configuration, store_id: Option<&str>, date_start_from: Option<&str>, date_start_to: Option<&str>, date_end_from: Option<&str>, date_end_to: Option<&str>, avail: Option<bool>) -> Result<models::CartCouponCount200Response, Error<CartCouponCountError>> {
+pub async fn cart_coupon_count(configuration: &configuration::Configuration, store_id: Option<&str>, avail: Option<bool>, date_start_from: Option<&str>, date_start_to: Option<&str>, date_end_from: Option<&str>, date_end_to: Option<&str>) -> Result<models::CartCouponCount200Response, Error<CartCouponCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_store_id = store_id;
+    let p_avail = avail;
     let p_date_start_from = date_start_from;
     let p_date_start_to = date_start_to;
     let p_date_end_from = date_end_from;
     let p_date_end_to = date_end_to;
-    let p_avail = avail;
 
     let uri_str = format!("{}/cart.coupon.count.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_avail {
+        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_date_start_from {
         req_builder = req_builder.query(&[("date_start_from", &param_value.to_string())]);
@@ -647,9 +650,6 @@ pub async fn cart_coupon_count(configuration: &configuration::Configuration, sto
     }
     if let Some(ref param_value) = p_date_end_to {
         req_builder = req_builder.query(&[("date_end_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_avail {
-        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -735,40 +735,46 @@ pub async fn cart_coupon_delete(configuration: &configuration::Configuration, id
 }
 
 /// Get cart coupon discounts.
-pub async fn cart_coupon_list(configuration: &configuration::Configuration, page_cursor: Option<&str>, start: Option<i32>, count: Option<i32>, coupons_ids: Option<&str>, store_id: Option<&str>, date_start_from: Option<&str>, date_start_to: Option<&str>, date_end_from: Option<&str>, date_end_to: Option<&str>, avail: Option<bool>, lang_id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartCouponList, Error<CartCouponListError>> {
+pub async fn cart_coupon_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, coupons_ids: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, avail: Option<bool>, date_start_from: Option<&str>, date_start_to: Option<&str>, date_end_from: Option<&str>, date_end_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartCouponList, Error<CartCouponListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_page_cursor = page_cursor;
     let p_start = start;
     let p_count = count;
+    let p_page_cursor = page_cursor;
     let p_coupons_ids = coupons_ids;
     let p_store_id = store_id;
+    let p_lang_id = lang_id;
+    let p_avail = avail;
     let p_date_start_from = date_start_from;
     let p_date_start_to = date_start_to;
     let p_date_end_from = date_end_from;
     let p_date_end_to = date_end_to;
-    let p_avail = avail;
-    let p_lang_id = lang_id;
-    let p_params = params;
     let p_response_fields = response_fields;
+    let p_params = params;
     let p_exclude = exclude;
 
     let uri_str = format!("{}/cart.coupon.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_coupons_ids {
         req_builder = req_builder.query(&[("coupons_ids", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_lang_id {
+        req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_avail {
+        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_date_start_from {
         req_builder = req_builder.query(&[("date_start_from", &param_value.to_string())]);
@@ -782,17 +788,11 @@ pub async fn cart_coupon_list(configuration: &configuration::Configuration, page
     if let Some(ref param_value) = p_date_end_to {
         req_builder = req_builder.query(&[("date_end_to", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_avail {
-        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_lang_id {
-        req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
@@ -1115,36 +1115,36 @@ pub async fn cart_giftcard_delete(configuration: &configuration::Configuration, 
 }
 
 /// Get gift cards list.
-pub async fn cart_giftcard_list(configuration: &configuration::Configuration, page_cursor: Option<&str>, start: Option<i32>, count: Option<i32>, store_id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartGiftCardList, Error<CartGiftcardListError>> {
+pub async fn cart_giftcard_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartGiftCardList, Error<CartGiftcardListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_page_cursor = page_cursor;
     let p_start = start;
     let p_count = count;
+    let p_page_cursor = page_cursor;
     let p_store_id = store_id;
-    let p_params = params;
     let p_response_fields = response_fields;
+    let p_params = params;
     let p_exclude = exclude;
 
     let uri_str = format!("{}/cart.giftcard.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
@@ -1185,27 +1185,27 @@ pub async fn cart_giftcard_list(configuration: &configuration::Configuration, pa
 }
 
 /// This method allows you to get various information about the store, including a list of stores (in the case of a multistore configuration), a list of supported languages, currencies, carriers, warehouses, and many other information. This information contains data that is relatively stable and rarely changes, so API2Cart can cache certain data to reduce the load on the store and speed up the execution of the request. We also recommend that you cache the response of this method on your side to save requests. If you need to clear the cache for a specific store, then use the cart.validate method.
-pub async fn cart_info(configuration: &configuration::Configuration, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, store_id: Option<&str>) -> Result<models::CartInfo200Response, Error<CartInfoError>> {
+pub async fn cart_info(configuration: &configuration::Configuration, store_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::CartInfo200Response, Error<CartInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_params = params;
-    let p_response_fields = response_fields;
-    let p_exclude = exclude;
     let p_store_id = store_id;
+    let p_response_fields = response_fields;
+    let p_params = params;
+    let p_exclude = exclude;
 
     let uri_str = format!("{}/cart.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1276,22 +1276,28 @@ pub async fn cart_list(configuration: &configuration::Configuration, ) -> Result
 }
 
 /// Using this method, you can get a list of metadata for various entities (products, options, customers, orders). Usually this is data created by third-party plugins.
-pub async fn cart_meta_data_list(configuration: &configuration::Configuration, entity_id: &str, entity: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, key: Option<&str>, count: Option<i32>, page_cursor: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartMetaDataList, Error<CartMetaDataListError>> {
+pub async fn cart_meta_data_list(configuration: &configuration::Configuration, entity_id: &str, count: Option<i32>, page_cursor: Option<&str>, entity: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, key: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartMetaDataList, Error<CartMetaDataListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_entity_id = entity_id;
+    let p_count = count;
+    let p_page_cursor = page_cursor;
     let p_entity = entity;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
     let p_key = key;
-    let p_count = count;
-    let p_page_cursor = page_cursor;
-    let p_params = params;
     let p_response_fields = response_fields;
+    let p_params = params;
     let p_exclude = exclude;
 
     let uri_str = format!("{}/cart.meta_data.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_count {
+        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
     req_builder = req_builder.query(&[("entity_id", &p_entity_id.to_string())]);
     if let Some(ref param_value) = p_entity {
         req_builder = req_builder.query(&[("entity", &param_value.to_string())]);
@@ -1305,17 +1311,11 @@ pub async fn cart_meta_data_list(configuration: &configuration::Configuration, e
     if let Some(ref param_value) = p_key {
         req_builder = req_builder.query(&[("key", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_count {
-        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
@@ -1370,6 +1370,9 @@ pub async fn cart_meta_data_set(configuration: &configuration::Configuration, en
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     req_builder = req_builder.query(&[("entity_id", &p_entity_id.to_string())]);
+    req_builder = req_builder.query(&[("key", &p_key.to_string())]);
+    req_builder = req_builder.query(&[("value", &p_value.to_string())]);
+    req_builder = req_builder.query(&[("namespace", &p_namespace.to_string())]);
     if let Some(ref param_value) = p_entity {
         req_builder = req_builder.query(&[("entity", &param_value.to_string())]);
     }
@@ -1379,9 +1382,6 @@ pub async fn cart_meta_data_set(configuration: &configuration::Configuration, en
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
     }
-    req_builder = req_builder.query(&[("key", &p_key.to_string())]);
-    req_builder = req_builder.query(&[("value", &p_value.to_string())]);
-    req_builder = req_builder.query(&[("namespace", &p_namespace.to_string())]);
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -1430,14 +1430,14 @@ pub async fn cart_meta_data_unset(configuration: &configuration::Configuration, 
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
 
     req_builder = req_builder.query(&[("entity_id", &p_entity_id.to_string())]);
+    req_builder = req_builder.query(&[("key", &p_key.to_string())]);
+    req_builder = req_builder.query(&[("id", &p_id.to_string())]);
     if let Some(ref param_value) = p_entity {
         req_builder = req_builder.query(&[("entity", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
-    req_builder = req_builder.query(&[("key", &p_key.to_string())]);
-    req_builder = req_builder.query(&[("id", &p_id.to_string())]);
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -1515,23 +1515,23 @@ pub async fn cart_methods(configuration: &configuration::Configuration, ) -> Res
 }
 
 /// Get a list of third-party plugins installed on the store.
-pub async fn cart_plugin_list(configuration: &configuration::Configuration, store_id: Option<&str>, start: Option<i32>, count: Option<i32>) -> Result<models::CartPluginList200Response, Error<CartPluginListError>> {
+pub async fn cart_plugin_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, store_id: Option<&str>) -> Result<models::CartPluginList200Response, Error<CartPluginListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_store_id = store_id;
     let p_start = start;
     let p_count = count;
+    let p_store_id = store_id;
 
     let uri_str = format!("{}/cart.plugin.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1691,32 +1691,38 @@ pub async fn cart_script_delete(configuration: &configuration::Configuration, id
 }
 
 /// Get scripts installed to the storefront
-pub async fn cart_script_list(configuration: &configuration::Configuration, page_cursor: Option<&str>, start: Option<i32>, count: Option<i32>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, script_ids: Option<&str>, store_id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartScriptList, Error<CartScriptListError>> {
+pub async fn cart_script_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, script_ids: Option<&str>, store_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartScriptList, Error<CartScriptListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_page_cursor = page_cursor;
     let p_start = start;
     let p_count = count;
+    let p_page_cursor = page_cursor;
+    let p_script_ids = script_ids;
+    let p_store_id = store_id;
     let p_created_from = created_from;
     let p_created_to = created_to;
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
-    let p_script_ids = script_ids;
-    let p_store_id = store_id;
-    let p_params = params;
     let p_response_fields = response_fields;
+    let p_params = params;
     let p_exclude = exclude;
 
     let uri_str = format!("{}/cart.script.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_script_ids {
+        req_builder = req_builder.query(&[("script_ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
@@ -1730,17 +1736,11 @@ pub async fn cart_script_list(configuration: &configuration::Configuration, page
     if let Some(ref param_value) = p_modified_to {
         req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_script_ids {
-        req_builder = req_builder.query(&[("script_ids", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
@@ -1781,32 +1781,32 @@ pub async fn cart_script_list(configuration: &configuration::Configuration, page
 }
 
 /// Get list of shipping zones
-pub async fn cart_shipping_zones_list(configuration: &configuration::Configuration, store_id: Option<&str>, start: Option<i32>, count: Option<i32>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartShippingZonesList, Error<CartShippingZonesListError>> {
+pub async fn cart_shipping_zones_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, store_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartShippingZonesList, Error<CartShippingZonesListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_store_id = store_id;
     let p_start = start;
     let p_count = count;
-    let p_params = params;
+    let p_store_id = store_id;
     let p_response_fields = response_fields;
+    let p_params = params;
     let p_exclude = exclude;
 
     let uri_str = format!("{}/cart.shipping_zones.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);

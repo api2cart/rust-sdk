@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## batch_job_list
 
-> models::ModelResponseBatchJobList batch_job_list(count, page_cursor, created_from, created_to, processed_from, processed_to, ids, response_fields)
+> models::ModelResponseBatchJobList batch_job_list(count, page_cursor, ids, created_from, created_to, processed_from, processed_to, response_fields)
 batch.job.list
 
 Get list of recent jobs
@@ -23,11 +23,11 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
+**ids** | Option<**String**> | Filter batch jobs by ids |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **processed_from** | Option<**String**> | Retrieve entities according to their processing datetime |  |
 **processed_to** | Option<**String**> | Retrieve entities according to their processing datetime |  |
-**ids** | Option<**String**> | Filter batch jobs by ids |  |
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to {return_code,return_message,pagination,result}]
 
 ### Return type

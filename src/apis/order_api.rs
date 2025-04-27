@@ -178,64 +178,64 @@ pub enum OrderUpdateError {
 
 
 /// Get list of orders that were left by customers before completing the order.
-pub async fn order_abandoned_list(configuration: &configuration::Configuration, customer_id: Option<&str>, customer_email: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, skip_empty_email: Option<bool>, store_id: Option<&str>, page_cursor: Option<&str>, count: Option<i32>, start: Option<i32>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseOrderAbandonedList, Error<OrderAbandonedListError>> {
+pub async fn order_abandoned_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, customer_id: Option<&str>, customer_email: Option<&str>, store_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, skip_empty_email: Option<bool>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseOrderAbandonedList, Error<OrderAbandonedListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
+    let p_start = start;
+    let p_count = count;
+    let p_page_cursor = page_cursor;
     let p_customer_id = customer_id;
     let p_customer_email = customer_email;
-    let p_created_to = created_to;
-    let p_created_from = created_from;
-    let p_modified_to = modified_to;
-    let p_modified_from = modified_from;
-    let p_skip_empty_email = skip_empty_email;
     let p_store_id = store_id;
-    let p_page_cursor = page_cursor;
-    let p_count = count;
-    let p_start = start;
-    let p_params = params;
+    let p_created_from = created_from;
+    let p_created_to = created_to;
+    let p_modified_from = modified_from;
+    let p_modified_to = modified_to;
+    let p_skip_empty_email = skip_empty_email;
     let p_response_fields = response_fields;
+    let p_params = params;
     let p_exclude = exclude;
 
     let uri_str = format!("{}/order.abandoned.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_start {
+        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_count {
+        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_customer_id {
         req_builder = req_builder.query(&[("customer_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_customer_email {
         req_builder = req_builder.query(&[("customer_email", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_created_to {
-        req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_modified_to {
-        req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
+    if let Some(ref param_value) = p_created_to {
+        req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_modified_from {
         req_builder = req_builder.query(&[("modified_from", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_modified_to {
+        req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_skip_empty_email {
         req_builder = req_builder.query(&[("skip_empty_email", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_count {
-        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_start {
-        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
@@ -320,19 +320,15 @@ pub async fn order_add(configuration: &configuration::Configuration, order_add: 
 }
 
 /// Count orders in store
-pub async fn order_count(configuration: &configuration::Configuration, customer_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, store_id: Option<&str>, ids: Option<&str>, order_ids: Option<&str>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_channel: Option<&str>, fulfillment_status: Option<&str>, shipping_method: Option<&str>, delivery_method: Option<&str>, tags: Option<&str>, ship_node_type: Option<&str>) -> Result<models::OrderCount200Response, Error<OrderCountError>> {
+pub async fn order_count(configuration: &configuration::Configuration, order_ids: Option<&str>, ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_channel: Option<&str>, fulfillment_status: Option<&str>, shipping_method: Option<&str>, delivery_method: Option<&str>, tags: Option<&str>, ship_node_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>) -> Result<models::OrderCount200Response, Error<OrderCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
+    let p_order_ids = order_ids;
+    let p_ids = ids;
     let p_customer_id = customer_id;
+    let p_store_id = store_id;
     let p_customer_email = customer_email;
     let p_order_status = order_status;
     let p_order_status_ids = order_status_ids;
-    let p_created_to = created_to;
-    let p_created_from = created_from;
-    let p_modified_to = modified_to;
-    let p_modified_from = modified_from;
-    let p_store_id = store_id;
-    let p_ids = ids;
-    let p_order_ids = order_ids;
     let p_ebay_order_status = ebay_order_status;
     let p_financial_status = financial_status;
     let p_financial_status_ids = financial_status_ids;
@@ -342,12 +338,25 @@ pub async fn order_count(configuration: &configuration::Configuration, customer_
     let p_delivery_method = delivery_method;
     let p_tags = tags;
     let p_ship_node_type = ship_node_type;
+    let p_created_from = created_from;
+    let p_created_to = created_to;
+    let p_modified_from = modified_from;
+    let p_modified_to = modified_to;
 
     let uri_str = format!("{}/order.count.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_order_ids {
+        req_builder = req_builder.query(&[("order_ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_ids {
+        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_customer_id {
         req_builder = req_builder.query(&[("customer_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_customer_email {
         req_builder = req_builder.query(&[("customer_email", &param_value.to_string())]);
@@ -360,27 +369,6 @@ pub async fn order_count(configuration: &configuration::Configuration, customer_
             "multi" => req_builder.query(&param_value.into_iter().map(|p| ("order_status_ids".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
             _ => req_builder.query(&[("order_status_ids", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
         };
-    }
-    if let Some(ref param_value) = p_created_to {
-        req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_created_from {
-        req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_modified_to {
-        req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_modified_from {
-        req_builder = req_builder.query(&[("modified_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_ids {
-        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_order_ids {
-        req_builder = req_builder.query(&[("order_ids", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_ebay_order_status {
         req_builder = req_builder.query(&[("ebay_order_status", &param_value.to_string())]);
@@ -411,6 +399,18 @@ pub async fn order_count(configuration: &configuration::Configuration, customer_
     }
     if let Some(ref param_value) = p_ship_node_type {
         req_builder = req_builder.query(&[("ship_node_type", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_created_from {
+        req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_created_to {
+        req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_modified_from {
+        req_builder = req_builder.query(&[("modified_from", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_modified_to {
+        req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -489,24 +489,30 @@ pub async fn order_financial_status_list(configuration: &configuration::Configur
 }
 
 /// This method is deprecated and won't be supported in the future. Please use \"order.list\" instead.
-pub async fn order_find(configuration: &configuration::Configuration, customer_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, start: Option<i32>, count: Option<i32>, params: Option<&str>, exclude: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, financial_status: Option<&str>) -> Result<models::OrderFind200Response, Error<OrderFindError>> {
+pub async fn order_find(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, customer_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, financial_status: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::OrderFind200Response, Error<OrderFindError>> {
     // add a prefix to parameters to efficiently prevent name collisions
+    let p_start = start;
+    let p_count = count;
     let p_customer_id = customer_id;
     let p_customer_email = customer_email;
     let p_order_status = order_status;
-    let p_start = start;
-    let p_count = count;
-    let p_params = params;
-    let p_exclude = exclude;
+    let p_financial_status = financial_status;
     let p_created_to = created_to;
     let p_created_from = created_from;
     let p_modified_to = modified_to;
     let p_modified_from = modified_from;
-    let p_financial_status = financial_status;
+    let p_params = params;
+    let p_exclude = exclude;
 
     let uri_str = format!("{}/order.find.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_start {
+        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_count {
+        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_customer_id {
         req_builder = req_builder.query(&[("customer_id", &param_value.to_string())]);
     }
@@ -516,17 +522,8 @@ pub async fn order_find(configuration: &configuration::Configuration, customer_i
     if let Some(ref param_value) = p_order_status {
         req_builder = req_builder.query(&[("order_status", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_start {
-        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_count {
-        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
+    if let Some(ref param_value) = p_financial_status {
+        req_builder = req_builder.query(&[("financial_status", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_to {
         req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
@@ -540,8 +537,11 @@ pub async fn order_find(configuration: &configuration::Configuration, customer_i
     if let Some(ref param_value) = p_modified_from {
         req_builder = req_builder.query(&[("modified_from", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_financial_status {
-        req_builder = req_builder.query(&[("financial_status", &param_value.to_string())]);
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_exclude {
+        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -625,25 +625,28 @@ pub async fn order_fulfillment_status_list(configuration: &configuration::Config
 }
 
 /// Info about a specific order by ID
-pub async fn order_info(configuration: &configuration::Configuration, order_id: Option<&str>, id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, store_id: Option<&str>, enable_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::OrderInfo200Response, Error<OrderInfoError>> {
+pub async fn order_info(configuration: &configuration::Configuration, id: Option<&str>, order_id: Option<&str>, store_id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, enable_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::OrderInfo200Response, Error<OrderInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_order_id = order_id;
     let p_id = id;
+    let p_order_id = order_id;
+    let p_store_id = store_id;
     let p_params = params;
     let p_response_fields = response_fields;
     let p_exclude = exclude;
-    let p_store_id = store_id;
     let p_enable_cache = enable_cache;
     let p_use_latest_api_version = use_latest_api_version;
 
     let uri_str = format!("{}/order.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_id {
+        req_builder = req_builder.query(&[("id", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_order_id {
         req_builder = req_builder.query(&[("order_id", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_id {
-        req_builder = req_builder.query(&[("id", &param_value.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
@@ -653,9 +656,6 @@ pub async fn order_info(configuration: &configuration::Configuration, order_id: 
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_enable_cache {
         req_builder = req_builder.query(&[("enable_cache", &param_value.to_string())]);
@@ -699,55 +699,82 @@ pub async fn order_info(configuration: &configuration::Configuration, order_id: 
 }
 
 /// Get list of orders from store.
-pub async fn order_list(configuration: &configuration::Configuration, customer_id: Option<&str>, customer_email: Option<&str>, phone: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, store_id: Option<&str>, ids: Option<&str>, order_ids: Option<&str>, ebay_order_status: Option<&str>, basket_id: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_status: Option<&str>, fulfillment_channel: Option<&str>, shipping_method: Option<&str>, skip_order_ids: Option<&str>, since_id: Option<&str>, is_deleted: Option<bool>, shipping_country_iso3: Option<&str>, enable_cache: Option<bool>, delivery_method: Option<&str>, tags: Option<&str>, ship_node_type: Option<&str>, currency_id: Option<&str>, return_status: Option<&str>, use_latest_api_version: Option<bool>) -> Result<models::ModelResponseOrderList, Error<OrderListError>> {
+pub async fn order_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, order_ids: Option<&str>, since_id: Option<&str>, store_id: Option<&str>, customer_id: Option<&str>, customer_email: Option<&str>, basket_id: Option<&str>, currency_id: Option<&str>, phone: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_status: Option<&str>, return_status: Option<&str>, fulfillment_channel: Option<&str>, shipping_method: Option<&str>, skip_order_ids: Option<&str>, is_deleted: Option<bool>, shipping_country_iso3: Option<&str>, delivery_method: Option<&str>, ship_node_type: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, tags: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, enable_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ModelResponseOrderList, Error<OrderListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_customer_id = customer_id;
-    let p_customer_email = customer_email;
-    let p_phone = phone;
-    let p_order_status = order_status;
-    let p_order_status_ids = order_status_ids;
     let p_start = start;
     let p_count = count;
     let p_page_cursor = page_cursor;
+    let p_ids = ids;
+    let p_order_ids = order_ids;
+    let p_since_id = since_id;
+    let p_store_id = store_id;
+    let p_customer_id = customer_id;
+    let p_customer_email = customer_email;
+    let p_basket_id = basket_id;
+    let p_currency_id = currency_id;
+    let p_phone = phone;
+    let p_order_status = order_status;
+    let p_order_status_ids = order_status_ids;
+    let p_ebay_order_status = ebay_order_status;
+    let p_financial_status = financial_status;
+    let p_financial_status_ids = financial_status_ids;
+    let p_fulfillment_status = fulfillment_status;
+    let p_return_status = return_status;
+    let p_fulfillment_channel = fulfillment_channel;
+    let p_shipping_method = shipping_method;
+    let p_skip_order_ids = skip_order_ids;
+    let p_is_deleted = is_deleted;
+    let p_shipping_country_iso3 = shipping_country_iso3;
+    let p_delivery_method = delivery_method;
+    let p_ship_node_type = ship_node_type;
+    let p_created_to = created_to;
+    let p_created_from = created_from;
+    let p_modified_to = modified_to;
+    let p_modified_from = modified_from;
+    let p_tags = tags;
     let p_sort_by = sort_by;
     let p_sort_direction = sort_direction;
     let p_params = params;
     let p_response_fields = response_fields;
     let p_exclude = exclude;
-    let p_created_to = created_to;
-    let p_created_from = created_from;
-    let p_modified_to = modified_to;
-    let p_modified_from = modified_from;
-    let p_store_id = store_id;
-    let p_ids = ids;
-    let p_order_ids = order_ids;
-    let p_ebay_order_status = ebay_order_status;
-    let p_basket_id = basket_id;
-    let p_financial_status = financial_status;
-    let p_financial_status_ids = financial_status_ids;
-    let p_fulfillment_status = fulfillment_status;
-    let p_fulfillment_channel = fulfillment_channel;
-    let p_shipping_method = shipping_method;
-    let p_skip_order_ids = skip_order_ids;
-    let p_since_id = since_id;
-    let p_is_deleted = is_deleted;
-    let p_shipping_country_iso3 = shipping_country_iso3;
     let p_enable_cache = enable_cache;
-    let p_delivery_method = delivery_method;
-    let p_tags = tags;
-    let p_ship_node_type = ship_node_type;
-    let p_currency_id = currency_id;
-    let p_return_status = return_status;
     let p_use_latest_api_version = use_latest_api_version;
 
     let uri_str = format!("{}/order.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_start {
+        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_count {
+        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_ids {
+        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_order_ids {
+        req_builder = req_builder.query(&[("order_ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_since_id {
+        req_builder = req_builder.query(&[("since_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_customer_id {
         req_builder = req_builder.query(&[("customer_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_customer_email {
         req_builder = req_builder.query(&[("customer_email", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_basket_id {
+        req_builder = req_builder.query(&[("basket_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_currency_id {
+        req_builder = req_builder.query(&[("currency_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_phone {
         req_builder = req_builder.query(&[("phone", &param_value.to_string())]);
@@ -761,14 +788,59 @@ pub async fn order_list(configuration: &configuration::Configuration, customer_i
             _ => req_builder.query(&[("order_status_ids", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
         };
     }
-    if let Some(ref param_value) = p_start {
-        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
+    if let Some(ref param_value) = p_ebay_order_status {
+        req_builder = req_builder.query(&[("ebay_order_status", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_count {
-        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    if let Some(ref param_value) = p_financial_status {
+        req_builder = req_builder.query(&[("financial_status", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    if let Some(ref param_value) = p_financial_status_ids {
+        req_builder = match "multi" {
+            "multi" => req_builder.query(&param_value.into_iter().map(|p| ("financial_status_ids".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
+            _ => req_builder.query(&[("financial_status_ids", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
+        };
+    }
+    if let Some(ref param_value) = p_fulfillment_status {
+        req_builder = req_builder.query(&[("fulfillment_status", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_return_status {
+        req_builder = req_builder.query(&[("return_status", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_fulfillment_channel {
+        req_builder = req_builder.query(&[("fulfillment_channel", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_shipping_method {
+        req_builder = req_builder.query(&[("shipping_method", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_skip_order_ids {
+        req_builder = req_builder.query(&[("skip_order_ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_is_deleted {
+        req_builder = req_builder.query(&[("is_deleted", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_shipping_country_iso3 {
+        req_builder = req_builder.query(&[("shipping_country_iso3", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_delivery_method {
+        req_builder = req_builder.query(&[("delivery_method", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_ship_node_type {
+        req_builder = req_builder.query(&[("ship_node_type", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_created_to {
+        req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_created_from {
+        req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_modified_to {
+        req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_modified_from {
+        req_builder = req_builder.query(&[("modified_from", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_tags {
+        req_builder = req_builder.query(&[("tags", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_sort_by {
         req_builder = req_builder.query(&[("sort_by", &param_value.to_string())]);
@@ -785,80 +857,8 @@ pub async fn order_list(configuration: &configuration::Configuration, customer_i
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_created_to {
-        req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_created_from {
-        req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_modified_to {
-        req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_modified_from {
-        req_builder = req_builder.query(&[("modified_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_ids {
-        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_order_ids {
-        req_builder = req_builder.query(&[("order_ids", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_ebay_order_status {
-        req_builder = req_builder.query(&[("ebay_order_status", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_basket_id {
-        req_builder = req_builder.query(&[("basket_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_financial_status {
-        req_builder = req_builder.query(&[("financial_status", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_financial_status_ids {
-        req_builder = match "multi" {
-            "multi" => req_builder.query(&param_value.into_iter().map(|p| ("financial_status_ids".to_owned(), p.to_string())).collect::<Vec<(std::string::String, std::string::String)>>()),
-            _ => req_builder.query(&[("financial_status_ids", &param_value.into_iter().map(|p| p.to_string()).collect::<Vec<String>>().join(",").to_string())]),
-        };
-    }
-    if let Some(ref param_value) = p_fulfillment_status {
-        req_builder = req_builder.query(&[("fulfillment_status", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_fulfillment_channel {
-        req_builder = req_builder.query(&[("fulfillment_channel", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_shipping_method {
-        req_builder = req_builder.query(&[("shipping_method", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_skip_order_ids {
-        req_builder = req_builder.query(&[("skip_order_ids", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_since_id {
-        req_builder = req_builder.query(&[("since_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_is_deleted {
-        req_builder = req_builder.query(&[("is_deleted", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_shipping_country_iso3 {
-        req_builder = req_builder.query(&[("shipping_country_iso3", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_enable_cache {
         req_builder = req_builder.query(&[("enable_cache", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_delivery_method {
-        req_builder = req_builder.query(&[("delivery_method", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_tags {
-        req_builder = req_builder.query(&[("tags", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_ship_node_type {
-        req_builder = req_builder.query(&[("ship_node_type", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_currency_id {
-        req_builder = req_builder.query(&[("currency_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_return_status {
-        req_builder = req_builder.query(&[("return_status", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_use_latest_api_version {
         req_builder = req_builder.query(&[("use_latest_api_version", &param_value.to_string())]);
@@ -1263,35 +1263,35 @@ pub async fn order_shipment_delete(configuration: &configuration::Configuration,
 }
 
 /// Get information of shipment.
-pub async fn order_shipment_info(configuration: &configuration::Configuration, id: &str, order_id: &str, start: Option<i32>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, store_id: Option<&str>) -> Result<models::OrderShipmentInfo200Response, Error<OrderShipmentInfoError>> {
+pub async fn order_shipment_info(configuration: &configuration::Configuration, id: &str, order_id: &str, start: Option<i32>, store_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::OrderShipmentInfo200Response, Error<OrderShipmentInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_order_id = order_id;
     let p_start = start;
-    let p_params = params;
-    let p_response_fields = response_fields;
-    let p_exclude = exclude;
     let p_store_id = store_id;
+    let p_response_fields = response_fields;
+    let p_params = params;
+    let p_exclude = exclude;
 
     let uri_str = format!("{}/order.shipment.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    req_builder = req_builder.query(&[("id", &p_id.to_string())]);
-    req_builder = req_builder.query(&[("order_id", &p_order_id.to_string())]);
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    req_builder = req_builder.query(&[("id", &p_id.to_string())]);
+    req_builder = req_builder.query(&[("order_id", &p_order_id.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1329,42 +1329,36 @@ pub async fn order_shipment_info(configuration: &configuration::Configuration, i
 }
 
 /// Get list of shipments by orders.
-pub async fn order_shipment_list(configuration: &configuration::Configuration, order_id: &str, page_cursor: Option<&str>, start: Option<i32>, count: Option<i32>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, store_id: Option<&str>) -> Result<models::ModelResponseOrderShipmentList, Error<OrderShipmentListError>> {
+pub async fn order_shipment_list(configuration: &configuration::Configuration, order_id: &str, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseOrderShipmentList, Error<OrderShipmentListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_order_id = order_id;
-    let p_page_cursor = page_cursor;
     let p_start = start;
     let p_count = count;
-    let p_params = params;
-    let p_response_fields = response_fields;
-    let p_exclude = exclude;
+    let p_page_cursor = page_cursor;
+    let p_store_id = store_id;
     let p_created_from = created_from;
     let p_created_to = created_to;
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
-    let p_store_id = store_id;
+    let p_response_fields = response_fields;
+    let p_params = params;
+    let p_exclude = exclude;
 
     let uri_str = format!("{}/order.shipment.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    req_builder = req_builder.query(&[("order_id", &p_order_id.to_string())]);
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
+    req_builder = req_builder.query(&[("order_id", &p_order_id.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
@@ -1378,8 +1372,14 @@ pub async fn order_shipment_list(configuration: &configuration::Configuration, o
     if let Some(ref param_value) = p_modified_to {
         req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_exclude {
+        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1559,21 +1559,24 @@ pub async fn order_status_list(configuration: &configuration::Configuration, sto
 }
 
 /// Retrieve list of order transaction
-pub async fn order_transaction_list(configuration: &configuration::Configuration, order_ids: &str, count: Option<i32>, store_id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, page_cursor: Option<&str>) -> Result<models::ModelResponseOrderTransactionList, Error<OrderTransactionListError>> {
+pub async fn order_transaction_list(configuration: &configuration::Configuration, order_ids: &str, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseOrderTransactionList, Error<OrderTransactionListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_order_ids = order_ids;
     let p_count = count;
+    let p_page_cursor = page_cursor;
     let p_store_id = store_id;
     let p_params = params;
     let p_response_fields = response_fields;
     let p_exclude = exclude;
-    let p_page_cursor = page_cursor;
 
     let uri_str = format!("{}/order.transaction.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
     }
     req_builder = req_builder.query(&[("order_ids", &p_order_ids.to_string())]);
     if let Some(ref param_value) = p_store_id {
@@ -1587,9 +1590,6 @@ pub async fn order_transaction_list(configuration: &configuration::Configuration
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1627,24 +1627,24 @@ pub async fn order_transaction_list(configuration: &configuration::Configuration
 }
 
 /// Update existing order.
-pub async fn order_update(configuration: &configuration::Configuration, order_id: &str, store_id: Option<&str>, order_status: Option<&str>, cancellation_reason: Option<&str>, comment: Option<&str>, admin_comment: Option<&str>, admin_private_comment: Option<&str>, date_modified: Option<&str>, date_finished: Option<&str>, financial_status: Option<&str>, fulfillment_status: Option<&str>, order_payment_method: Option<&str>, send_notifications: Option<bool>, origin: Option<&str>, create_invoice: Option<bool>, invoice_admin_comment: Option<&str>) -> Result<models::AccountConfigUpdate200Response, Error<OrderUpdateError>> {
+pub async fn order_update(configuration: &configuration::Configuration, order_id: &str, store_id: Option<&str>, order_status: Option<&str>, financial_status: Option<&str>, fulfillment_status: Option<&str>, cancellation_reason: Option<&str>, order_payment_method: Option<&str>, comment: Option<&str>, admin_comment: Option<&str>, admin_private_comment: Option<&str>, invoice_admin_comment: Option<&str>, date_modified: Option<&str>, date_finished: Option<&str>, send_notifications: Option<bool>, create_invoice: Option<bool>, origin: Option<&str>) -> Result<models::AccountConfigUpdate200Response, Error<OrderUpdateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_order_id = order_id;
     let p_store_id = store_id;
     let p_order_status = order_status;
+    let p_financial_status = financial_status;
+    let p_fulfillment_status = fulfillment_status;
     let p_cancellation_reason = cancellation_reason;
+    let p_order_payment_method = order_payment_method;
     let p_comment = comment;
     let p_admin_comment = admin_comment;
     let p_admin_private_comment = admin_private_comment;
+    let p_invoice_admin_comment = invoice_admin_comment;
     let p_date_modified = date_modified;
     let p_date_finished = date_finished;
-    let p_financial_status = financial_status;
-    let p_fulfillment_status = fulfillment_status;
-    let p_order_payment_method = order_payment_method;
     let p_send_notifications = send_notifications;
-    let p_origin = origin;
     let p_create_invoice = create_invoice;
-    let p_invoice_admin_comment = invoice_admin_comment;
+    let p_origin = origin;
 
     let uri_str = format!("{}/order.update.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
@@ -1656,8 +1656,17 @@ pub async fn order_update(configuration: &configuration::Configuration, order_id
     if let Some(ref param_value) = p_order_status {
         req_builder = req_builder.query(&[("order_status", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_financial_status {
+        req_builder = req_builder.query(&[("financial_status", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_fulfillment_status {
+        req_builder = req_builder.query(&[("fulfillment_status", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_cancellation_reason {
         req_builder = req_builder.query(&[("cancellation_reason", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_order_payment_method {
+        req_builder = req_builder.query(&[("order_payment_method", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_comment {
         req_builder = req_builder.query(&[("comment", &param_value.to_string())]);
@@ -1668,32 +1677,23 @@ pub async fn order_update(configuration: &configuration::Configuration, order_id
     if let Some(ref param_value) = p_admin_private_comment {
         req_builder = req_builder.query(&[("admin_private_comment", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_invoice_admin_comment {
+        req_builder = req_builder.query(&[("invoice_admin_comment", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_date_modified {
         req_builder = req_builder.query(&[("date_modified", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_date_finished {
         req_builder = req_builder.query(&[("date_finished", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_financial_status {
-        req_builder = req_builder.query(&[("financial_status", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_fulfillment_status {
-        req_builder = req_builder.query(&[("fulfillment_status", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_order_payment_method {
-        req_builder = req_builder.query(&[("order_payment_method", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_send_notifications {
         req_builder = req_builder.query(&[("send_notifications", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_origin {
-        req_builder = req_builder.query(&[("origin", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_create_invoice {
         req_builder = req_builder.query(&[("create_invoice", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_invoice_admin_comment {
-        req_builder = req_builder.query(&[("invoice_admin_comment", &param_value.to_string())]);
+    if let Some(ref param_value) = p_origin {
+        req_builder = req_builder.query(&[("origin", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

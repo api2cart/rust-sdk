@@ -13,18 +13,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CartCouponAdd {
-    /// Store Id
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
     /// Coupon code
     #[serde(rename = "code")]
     pub code: String,
-    /// Coupon name
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
-    /// Entity codes
-    #[serde(rename = "codes", skip_serializing_if = "Option::is_none")]
-    pub codes: Option<Vec<String>>,
     /// Coupon discount type
     #[serde(rename = "action_type")]
     pub action_type: ActionType,
@@ -37,6 +28,12 @@ pub struct CartCouponAdd {
     /// Defines the discount amount value.
     #[serde(rename = "action_amount")]
     pub action_amount: f64,
+    /// Entity codes
+    #[serde(rename = "codes", skip_serializing_if = "Option::is_none")]
+    pub codes: Option<Vec<String>>,
+    /// Coupon name
+    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
     /// Date start
     #[serde(rename = "date_start", skip_serializing_if = "Option::is_none")]
     pub date_start: Option<String>,
@@ -64,19 +61,21 @@ pub struct CartCouponAdd {
     /// Indicates whether to apply a discount for taxes.
     #[serde(rename = "include_tax", skip_serializing_if = "Option::is_none")]
     pub include_tax: Option<bool>,
+    /// Store Id
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
 }
 
 impl CartCouponAdd {
     pub fn new(code: String, action_type: ActionType, action_apply_to: ActionApplyTo, action_scope: ActionScope, action_amount: f64) -> CartCouponAdd {
         CartCouponAdd {
-            store_id: None,
             code,
-            name: None,
-            codes: None,
             action_type,
             action_apply_to,
             action_scope,
             action_amount,
+            codes: None,
+            name: None,
             date_start: None,
             date_end: None,
             usage_limit: None,
@@ -86,6 +85,7 @@ impl CartCouponAdd {
             action_condition_operator: None,
             action_condition_value: None,
             include_tax: None,
+            store_id: None,
         }
     }
 }

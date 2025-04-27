@@ -189,16 +189,16 @@ pub async fn customer_address_add(configuration: &configuration::Configuration, 
 }
 
 /// Get attributes for specific customer
-pub async fn customer_attribute_list(configuration: &configuration::Configuration, customer_id: &str, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, params: Option<&str>, exclude: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseCustomerAttributeList, Error<CustomerAttributeListError>> {
+pub async fn customer_attribute_list(configuration: &configuration::Configuration, customer_id: &str, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCustomerAttributeList, Error<CustomerAttributeListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_customer_id = customer_id;
     let p_count = count;
     let p_page_cursor = page_cursor;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
+    let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
-    let p_response_fields = response_fields;
 
     let uri_str = format!("{}/customer.attribute.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -216,14 +216,14 @@ pub async fn customer_attribute_list(configuration: &configuration::Configuratio
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -261,26 +261,47 @@ pub async fn customer_attribute_list(configuration: &configuration::Configuratio
 }
 
 /// Get number of customers from store.
-pub async fn customer_count(configuration: &configuration::Configuration, group_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, store_id: Option<&str>, customer_list_id: Option<&str>, avail: Option<bool>, find_value: Option<&str>, find_where: Option<&str>, ids: Option<&str>, since_id: Option<&str>) -> Result<models::CustomerCount200Response, Error<CustomerCountError>> {
+pub async fn customer_count(configuration: &configuration::Configuration, ids: Option<&str>, since_id: Option<&str>, customer_list_id: Option<&str>, group_id: Option<&str>, store_id: Option<&str>, avail: Option<bool>, find_value: Option<&str>, find_where: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>) -> Result<models::CustomerCount200Response, Error<CustomerCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
+    let p_ids = ids;
+    let p_since_id = since_id;
+    let p_customer_list_id = customer_list_id;
     let p_group_id = group_id;
+    let p_store_id = store_id;
+    let p_avail = avail;
+    let p_find_value = find_value;
+    let p_find_where = find_where;
     let p_created_from = created_from;
     let p_created_to = created_to;
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
-    let p_store_id = store_id;
-    let p_customer_list_id = customer_list_id;
-    let p_avail = avail;
-    let p_find_value = find_value;
-    let p_find_where = find_where;
-    let p_ids = ids;
-    let p_since_id = since_id;
 
     let uri_str = format!("{}/customer.count.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_ids {
+        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_since_id {
+        req_builder = req_builder.query(&[("since_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_customer_list_id {
+        req_builder = req_builder.query(&[("customer_list_id", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_group_id {
         req_builder = req_builder.query(&[("group_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_avail {
+        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_find_value {
+        req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_find_where {
+        req_builder = req_builder.query(&[("find_where", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
@@ -293,27 +314,6 @@ pub async fn customer_count(configuration: &configuration::Configuration, group_
     }
     if let Some(ref param_value) = p_modified_to {
         req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_customer_list_id {
-        req_builder = req_builder.query(&[("customer_list_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_avail {
-        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_find_value {
-        req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_find_where {
-        req_builder = req_builder.query(&[("find_where", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_ids {
-        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_since_id {
-        req_builder = req_builder.query(&[("since_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -503,33 +503,33 @@ pub async fn customer_group_add(configuration: &configuration::Configuration, na
 }
 
 /// Get list of customers groups.
-pub async fn customer_group_list(configuration: &configuration::Configuration, disable_cache: Option<bool>, page_cursor: Option<&str>, start: Option<i32>, count: Option<i32>, store_id: Option<&str>, lang_id: Option<&str>, group_ids: Option<&str>, params: Option<&str>, exclude: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseCustomerGroupList, Error<CustomerGroupListError>> {
+pub async fn customer_group_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, group_ids: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, disable_cache: Option<bool>) -> Result<models::ModelResponseCustomerGroupList, Error<CustomerGroupListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_disable_cache = disable_cache;
-    let p_page_cursor = page_cursor;
     let p_start = start;
     let p_count = count;
+    let p_page_cursor = page_cursor;
+    let p_group_ids = group_ids;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
-    let p_group_ids = group_ids;
+    let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
-    let p_response_fields = response_fields;
+    let p_disable_cache = disable_cache;
 
     let uri_str = format!("{}/customer.group.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_disable_cache {
-        req_builder = req_builder.query(&[("disable_cache", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_group_ids {
+        req_builder = req_builder.query(&[("group_ids", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
@@ -537,8 +537,8 @@ pub async fn customer_group_list(configuration: &configuration::Configuration, d
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_group_ids {
-        req_builder = req_builder.query(&[("group_ids", &param_value.to_string())]);
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
@@ -546,8 +546,8 @@ pub async fn customer_group_list(configuration: &configuration::Configuration, d
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    if let Some(ref param_value) = p_disable_cache {
+        req_builder = req_builder.query(&[("disable_cache", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -585,29 +585,29 @@ pub async fn customer_group_list(configuration: &configuration::Configuration, d
 }
 
 /// Get customers' details from store.
-pub async fn customer_info(configuration: &configuration::Configuration, id: &str, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, store_id: Option<&str>) -> Result<models::CustomerInfo200Response, Error<CustomerInfoError>> {
+pub async fn customer_info(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::CustomerInfo200Response, Error<CustomerInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
-    let p_params = params;
-    let p_response_fields = response_fields;
-    let p_exclude = exclude;
     let p_store_id = store_id;
+    let p_response_fields = response_fields;
+    let p_params = params;
+    let p_exclude = exclude;
 
     let uri_str = format!("{}/customer.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     req_builder = req_builder.query(&[("id", &p_id.to_string())]);
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -645,40 +645,64 @@ pub async fn customer_info(configuration: &configuration::Configuration, id: &st
 }
 
 /// Get list of customers from store.
-pub async fn customer_list(configuration: &configuration::Configuration, page_cursor: Option<&str>, start: Option<i32>, count: Option<i32>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, group_id: Option<&str>, store_id: Option<&str>, customer_list_id: Option<&str>, avail: Option<bool>, find_value: Option<&str>, find_where: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, ids: Option<&str>, since_id: Option<&str>) -> Result<models::ModelResponseCustomerList, Error<CustomerListError>> {
+pub async fn customer_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, since_id: Option<&str>, customer_list_id: Option<&str>, group_id: Option<&str>, store_id: Option<&str>, avail: Option<bool>, find_value: Option<&str>, find_where: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCustomerList, Error<CustomerListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_page_cursor = page_cursor;
     let p_start = start;
     let p_count = count;
+    let p_page_cursor = page_cursor;
+    let p_ids = ids;
+    let p_since_id = since_id;
+    let p_customer_list_id = customer_list_id;
+    let p_group_id = group_id;
+    let p_store_id = store_id;
+    let p_avail = avail;
+    let p_find_value = find_value;
+    let p_find_where = find_where;
     let p_created_from = created_from;
     let p_created_to = created_to;
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
-    let p_params = params;
-    let p_response_fields = response_fields;
-    let p_exclude = exclude;
-    let p_group_id = group_id;
-    let p_store_id = store_id;
-    let p_customer_list_id = customer_list_id;
-    let p_avail = avail;
-    let p_find_value = find_value;
-    let p_find_where = find_where;
     let p_sort_by = sort_by;
     let p_sort_direction = sort_direction;
-    let p_ids = ids;
-    let p_since_id = since_id;
+    let p_response_fields = response_fields;
+    let p_params = params;
+    let p_exclude = exclude;
 
     let uri_str = format!("{}/customer.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_ids {
+        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_since_id {
+        req_builder = req_builder.query(&[("since_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_customer_list_id {
+        req_builder = req_builder.query(&[("customer_list_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_group_id {
+        req_builder = req_builder.query(&[("group_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_avail {
+        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_find_value {
+        req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_find_where {
+        req_builder = req_builder.query(&[("find_where", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
@@ -692,44 +716,20 @@ pub async fn customer_list(configuration: &configuration::Configuration, page_cu
     if let Some(ref param_value) = p_modified_to {
         req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_group_id {
-        req_builder = req_builder.query(&[("group_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_customer_list_id {
-        req_builder = req_builder.query(&[("customer_list_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_avail {
-        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_find_value {
-        req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_find_where {
-        req_builder = req_builder.query(&[("find_where", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_sort_by {
         req_builder = req_builder.query(&[("sort_by", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_sort_direction {
         req_builder = req_builder.query(&[("sort_direction", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_ids {
-        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_since_id {
-        req_builder = req_builder.query(&[("since_id", &param_value.to_string())]);
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_exclude {
+        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -811,26 +811,19 @@ pub async fn customer_update(configuration: &configuration::Configuration, custo
 }
 
 /// Get a Wish List of customer from the store.
-pub async fn customer_wishlist_list(configuration: &configuration::Configuration, customer_id: &str, id: Option<&str>, store_id: Option<&str>, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseCustomerWishlistList, Error<CustomerWishlistListError>> {
+pub async fn customer_wishlist_list(configuration: &configuration::Configuration, customer_id: &str, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, id: Option<&str>, store_id: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseCustomerWishlistList, Error<CustomerWishlistListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_customer_id = customer_id;
-    let p_id = id;
-    let p_store_id = store_id;
     let p_start = start;
     let p_count = count;
     let p_page_cursor = page_cursor;
+    let p_id = id;
+    let p_store_id = store_id;
     let p_response_fields = response_fields;
 
     let uri_str = format!("{}/customer.wishlist.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    req_builder = req_builder.query(&[("customer_id", &p_customer_id.to_string())]);
-    if let Some(ref param_value) = p_id {
-        req_builder = req_builder.query(&[("id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
@@ -839,6 +832,13 @@ pub async fn customer_wishlist_list(configuration: &configuration::Configuration
     }
     if let Some(ref param_value) = p_page_cursor {
         req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
+    req_builder = req_builder.query(&[("customer_id", &p_customer_id.to_string())]);
+    if let Some(ref param_value) = p_id {
+        req_builder = req_builder.query(&[("id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);

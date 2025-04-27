@@ -31,13 +31,13 @@ pub enum TaxClassListError {
 
 
 /// Use this method to get information about a tax class and its rates. It allows you to calculate the tax percentage for a specific customer's address. This information contains relatively static data that rarely changes, so API2Cart may cache certain data to reduce the load on the store and speed up request execution. We also recommend that you cache the response of this method on your side to save requests. If you need to clear the cache for a specific store, use the cart.validate method.
-pub async fn tax_class_info(configuration: &configuration::Configuration, tax_class_id: &str, store_id: Option<&str>, lang_id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseTaxClassInfo, Error<TaxClassInfoError>> {
+pub async fn tax_class_info(configuration: &configuration::Configuration, tax_class_id: &str, store_id: Option<&str>, lang_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseTaxClassInfo, Error<TaxClassInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_tax_class_id = tax_class_id;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
-    let p_params = params;
     let p_response_fields = response_fields;
+    let p_params = params;
     let p_exclude = exclude;
 
     let uri_str = format!("{}/tax.class.info.json", configuration.base_path);
@@ -50,11 +50,11 @@ pub async fn tax_class_info(configuration: &configuration::Configuration, tax_cl
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
@@ -95,22 +95,37 @@ pub async fn tax_class_info(configuration: &configuration::Configuration, tax_cl
 }
 
 /// Get list of tax classes from your store.
-pub async fn tax_class_list(configuration: &configuration::Configuration, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, store_id: Option<&str>, count: Option<i32>, page_cursor: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseTaxClassList, Error<TaxClassListError>> {
+pub async fn tax_class_list(configuration: &configuration::Configuration, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseTaxClassList, Error<TaxClassListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
+    let p_count = count;
+    let p_page_cursor = page_cursor;
+    let p_store_id = store_id;
+    let p_find_value = find_value;
+    let p_find_where = find_where;
     let p_created_to = created_to;
     let p_created_from = created_from;
     let p_modified_to = modified_to;
     let p_modified_from = modified_from;
-    let p_find_value = find_value;
-    let p_find_where = find_where;
-    let p_store_id = store_id;
-    let p_count = count;
-    let p_page_cursor = page_cursor;
     let p_response_fields = response_fields;
 
     let uri_str = format!("{}/tax.class.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_count {
+        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_find_value {
+        req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_find_where {
+        req_builder = req_builder.query(&[("find_where", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_created_to {
         req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
     }
@@ -122,21 +137,6 @@ pub async fn tax_class_list(configuration: &configuration::Configuration, create
     }
     if let Some(ref param_value) = p_modified_from {
         req_builder = req_builder.query(&[("modified_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_find_value {
-        req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_find_where {
-        req_builder = req_builder.query(&[("find_where", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_count {
-        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);

@@ -232,6 +232,9 @@ pub struct AccountCartAdd {
     /// Shopline App Secret
     #[serde(rename = "shopline_app_secret", skip_serializing_if = "Option::is_none")]
     pub shopline_app_secret: Option<String>,
+    /// Shopline Shared Secret
+    #[serde(rename = "shopline_shared_secret", skip_serializing_if = "Option::is_none")]
+    pub shopline_shared_secret: Option<String>,
     /// Access token authorizing the app to access resources on behalf of a user
     #[serde(rename = "shopify_access_token", skip_serializing_if = "Option::is_none")]
     pub shopify_access_token: Option<String>,
@@ -535,6 +538,7 @@ impl AccountCartAdd {
             shopline_access_token: None,
             shopline_app_key: None,
             shopline_app_secret: None,
+            shopline_shared_secret: None,
             shopify_access_token: None,
             shopify_api_key: None,
             shopify_api_password: None,

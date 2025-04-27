@@ -28,96 +28,15 @@ pub struct OrderAdd {
     /// Defines order status.
     #[serde(rename = "order_status")]
     pub order_status: String,
-    /// Send notifications to customer after order was created
-    #[serde(rename = "send_notifications", skip_serializing_if = "Option::is_none")]
-    pub send_notifications: Option<bool>,
-    /// Notify admin when new order was created.
-    #[serde(rename = "send_admin_notifications", skip_serializing_if = "Option::is_none")]
-    pub send_admin_notifications: Option<bool>,
+    /// Create order with fulfillment status
+    #[serde(rename = "fulfillment_status", skip_serializing_if = "Option::is_none")]
+    pub fulfillment_status: Option<String>,
+    /// Create order with financial status
+    #[serde(rename = "financial_status", skip_serializing_if = "Option::is_none")]
+    pub financial_status: Option<String>,
     /// Defines the customer specified by email for whom order has to be created
     #[serde(rename = "customer_email")]
     pub customer_email: String,
-    /// Specifies billing first name
-    #[serde(rename = "bill_first_name")]
-    pub bill_first_name: String,
-    /// Specifies billing last name
-    #[serde(rename = "bill_last_name")]
-    pub bill_last_name: String,
-    /// Specifies first billing address
-    #[serde(rename = "bill_address_1")]
-    pub bill_address_1: String,
-    /// Specifies billing city
-    #[serde(rename = "bill_city")]
-    pub bill_city: String,
-    /// Specifies billing postcode
-    #[serde(rename = "bill_postcode")]
-    pub bill_postcode: String,
-    /// Specifies billing state code
-    #[serde(rename = "bill_state")]
-    pub bill_state: String,
-    /// Specifies billing country code
-    #[serde(rename = "bill_country")]
-    pub bill_country: String,
-    /// Specifies shipping first name
-    #[serde(rename = "shipp_first_name", skip_serializing_if = "Option::is_none")]
-    pub shipp_first_name: Option<String>,
-    /// Specifies shipping last name
-    #[serde(rename = "shipp_last_name", skip_serializing_if = "Option::is_none")]
-    pub shipp_last_name: Option<String>,
-    /// Specifies first shipping address
-    #[serde(rename = "shipp_address_1", skip_serializing_if = "Option::is_none")]
-    pub shipp_address_1: Option<String>,
-    /// Specifies shipping city
-    #[serde(rename = "shipp_city", skip_serializing_if = "Option::is_none")]
-    pub shipp_city: Option<String>,
-    /// Specifies shipping postcode
-    #[serde(rename = "shipp_postcode", skip_serializing_if = "Option::is_none")]
-    pub shipp_postcode: Option<String>,
-    /// Specifies shipping state code
-    #[serde(rename = "shipp_state", skip_serializing_if = "Option::is_none")]
-    pub shipp_state: Option<String>,
-    /// Specifies shipping country code
-    #[serde(rename = "shipp_country", skip_serializing_if = "Option::is_none")]
-    pub shipp_country: Option<String>,
-    /// Defines order's total price
-    #[serde(rename = "total_price", skip_serializing_if = "Option::is_none")]
-    pub total_price: Option<f64>,
-    /// Specifies an order creation date in format Y-m-d H:i:s
-    #[serde(rename = "date", skip_serializing_if = "Option::is_none")]
-    pub date: Option<String>,
-    /// Defines order payment method.<br/>Setting order_payment_method on Shopify will also change financial_status field value to 'paid'
-    #[serde(rename = "order_payment_method", skip_serializing_if = "Option::is_none")]
-    pub order_payment_method: Option<String>,
-    /// Payment transaction id
-    #[serde(rename = "transaction_id", skip_serializing_if = "Option::is_none")]
-    pub transaction_id: Option<String>,
-    /// Defines order shipping method
-    #[serde(rename = "order_shipping_method", skip_serializing_if = "Option::is_none")]
-    pub order_shipping_method: Option<String>,
-    /// Currency code of order
-    #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
-    pub currency: Option<String>,
-    /// Specifies second billing address
-    #[serde(rename = "bill_address_2", skip_serializing_if = "Option::is_none")]
-    pub bill_address_2: Option<String>,
-    /// Specifies billing company
-    #[serde(rename = "bill_company", skip_serializing_if = "Option::is_none")]
-    pub bill_company: Option<String>,
-    /// Specifies billing phone
-    #[serde(rename = "bill_phone", skip_serializing_if = "Option::is_none")]
-    pub bill_phone: Option<String>,
-    /// Specifies billing fax
-    #[serde(rename = "bill_fax", skip_serializing_if = "Option::is_none")]
-    pub bill_fax: Option<String>,
-    /// Specifies order comment
-    #[serde(rename = "comment", skip_serializing_if = "Option::is_none")]
-    pub comment: Option<String>,
-    /// Specifies admin's order comment
-    #[serde(rename = "admin_comment", skip_serializing_if = "Option::is_none")]
-    pub admin_comment: Option<String>,
-    /// Specifies private admin's order comment
-    #[serde(rename = "admin_private_comment", skip_serializing_if = "Option::is_none")]
-    pub admin_private_comment: Option<String>,
     /// Specifies customer's first name
     #[serde(rename = "customer_first_name", skip_serializing_if = "Option::is_none")]
     pub customer_first_name: Option<String>,
@@ -136,9 +55,81 @@ pub struct OrderAdd {
     /// Specifies customer’s fax
     #[serde(rename = "customer_fax", skip_serializing_if = "Option::is_none")]
     pub customer_fax: Option<String>,
+    /// Defines order payment method.<br/>Setting order_payment_method on Shopify will also change financial_status field value to 'paid'
+    #[serde(rename = "order_payment_method", skip_serializing_if = "Option::is_none")]
+    pub order_payment_method: Option<String>,
+    /// Payment transaction id
+    #[serde(rename = "transaction_id", skip_serializing_if = "Option::is_none")]
+    pub transaction_id: Option<String>,
+    /// Currency code of order
+    #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
+    pub currency: Option<String>,
+    /// Specifies an order creation date in format Y-m-d H:i:s
+    #[serde(rename = "date", skip_serializing_if = "Option::is_none")]
+    pub date: Option<String>,
+    /// Specifies order's  modification date
+    #[serde(rename = "date_modified", skip_serializing_if = "Option::is_none")]
+    pub date_modified: Option<String>,
+    /// Specifies order's  finished date
+    #[serde(rename = "date_finished", skip_serializing_if = "Option::is_none")]
+    pub date_finished: Option<String>,
+    /// Specifies billing first name
+    #[serde(rename = "bill_first_name")]
+    pub bill_first_name: String,
+    /// Specifies billing last name
+    #[serde(rename = "bill_last_name")]
+    pub bill_last_name: String,
+    /// Specifies first billing address
+    #[serde(rename = "bill_address_1")]
+    pub bill_address_1: String,
+    /// Specifies second billing address
+    #[serde(rename = "bill_address_2", skip_serializing_if = "Option::is_none")]
+    pub bill_address_2: Option<String>,
+    /// Specifies billing city
+    #[serde(rename = "bill_city")]
+    pub bill_city: String,
+    /// Specifies billing postcode
+    #[serde(rename = "bill_postcode")]
+    pub bill_postcode: String,
+    /// Specifies billing state code
+    #[serde(rename = "bill_state")]
+    pub bill_state: String,
+    /// Specifies billing country code
+    #[serde(rename = "bill_country")]
+    pub bill_country: String,
+    /// Specifies billing company
+    #[serde(rename = "bill_company", skip_serializing_if = "Option::is_none")]
+    pub bill_company: Option<String>,
+    /// Specifies billing phone
+    #[serde(rename = "bill_phone", skip_serializing_if = "Option::is_none")]
+    pub bill_phone: Option<String>,
+    /// Specifies billing fax
+    #[serde(rename = "bill_fax", skip_serializing_if = "Option::is_none")]
+    pub bill_fax: Option<String>,
+    /// Specifies shipping first name
+    #[serde(rename = "shipp_first_name", skip_serializing_if = "Option::is_none")]
+    pub shipp_first_name: Option<String>,
+    /// Specifies shipping last name
+    #[serde(rename = "shipp_last_name", skip_serializing_if = "Option::is_none")]
+    pub shipp_last_name: Option<String>,
+    /// Specifies first shipping address
+    #[serde(rename = "shipp_address_1", skip_serializing_if = "Option::is_none")]
+    pub shipp_address_1: Option<String>,
     /// Specifies second address line of a shipping street address
     #[serde(rename = "shipp_address_2", skip_serializing_if = "Option::is_none")]
     pub shipp_address_2: Option<String>,
+    /// Specifies shipping city
+    #[serde(rename = "shipp_city", skip_serializing_if = "Option::is_none")]
+    pub shipp_city: Option<String>,
+    /// Specifies shipping postcode
+    #[serde(rename = "shipp_postcode", skip_serializing_if = "Option::is_none")]
+    pub shipp_postcode: Option<String>,
+    /// Specifies shipping state code
+    #[serde(rename = "shipp_state", skip_serializing_if = "Option::is_none")]
+    pub shipp_state: Option<String>,
+    /// Specifies shipping country code
+    #[serde(rename = "shipp_country", skip_serializing_if = "Option::is_none")]
+    pub shipp_country: Option<String>,
     /// Specifies shipping company
     #[serde(rename = "shipp_company", skip_serializing_if = "Option::is_none")]
     pub shipp_company: Option<String>,
@@ -148,18 +139,21 @@ pub struct OrderAdd {
     /// Specifies shipping fax
     #[serde(rename = "shipp_fax", skip_serializing_if = "Option::is_none")]
     pub shipp_fax: Option<String>,
-    /// Specifies order's  modification date
-    #[serde(rename = "date_modified", skip_serializing_if = "Option::is_none")]
-    pub date_modified: Option<String>,
-    /// Specifies order's  finished date
-    #[serde(rename = "date_finished", skip_serializing_if = "Option::is_none")]
-    pub date_finished: Option<String>,
     /// Total price of all ordered products multiplied by their number, excluding tax, shipping price and discounts
     #[serde(rename = "subtotal_price", skip_serializing_if = "Option::is_none")]
     pub subtotal_price: Option<f64>,
     /// The value of tax cost for order
     #[serde(rename = "tax_price", skip_serializing_if = "Option::is_none")]
     pub tax_price: Option<f64>,
+    /// Defines order's total price
+    #[serde(rename = "total_price", skip_serializing_if = "Option::is_none")]
+    pub total_price: Option<f64>,
+    /// Defines total paid amount for the order
+    #[serde(rename = "total_paid", skip_serializing_if = "Option::is_none")]
+    pub total_paid: Option<f64>,
+    /// Defines the sum of all line item weights in grams for the order
+    #[serde(rename = "total_weight", skip_serializing_if = "Option::is_none")]
+    pub total_weight: Option<i32>,
     /// Indicates whether prices and subtotal includes tax.
     #[serde(rename = "prices_inc_tax", skip_serializing_if = "Option::is_none")]
     pub prices_inc_tax: Option<bool>,
@@ -169,39 +163,48 @@ pub struct OrderAdd {
     /// Specifies order's shipping price tax
     #[serde(rename = "shipping_tax", skip_serializing_if = "Option::is_none")]
     pub shipping_tax: Option<f64>,
-    /// Defines tracking carrier id
-    #[serde(rename = "carrier_id", skip_serializing_if = "Option::is_none")]
-    pub carrier_id: Option<String>,
-    /// This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
-    #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
-    pub warehouse_id: Option<String>,
     /// Specifies order's discount
     #[serde(rename = "discount", skip_serializing_if = "Option::is_none")]
     pub discount: Option<f64>,
     /// Specifies order's coupon discount
     #[serde(rename = "coupon_discount", skip_serializing_if = "Option::is_none")]
     pub coupon_discount: Option<f64>,
-    /// Coupons that will be applied to order
-    #[serde(rename = "coupons", skip_serializing_if = "Option::is_none")]
-    pub coupons: Option<Vec<String>>,
     /// Discounts for order with gift certificates
     #[serde(rename = "gift_certificate_discount", skip_serializing_if = "Option::is_none")]
     pub gift_certificate_discount: Option<f64>,
-    /// Create order with fulfillment status
-    #[serde(rename = "fulfillment_status", skip_serializing_if = "Option::is_none")]
-    pub fulfillment_status: Option<String>,
-    /// Create order with financial status
-    #[serde(rename = "financial_status", skip_serializing_if = "Option::is_none")]
-    pub financial_status: Option<String>,
-    /// Defines total paid amount for the order
-    #[serde(rename = "total_paid", skip_serializing_if = "Option::is_none")]
-    pub total_paid: Option<f64>,
-    /// Identifying the system used to generate the order
-    #[serde(rename = "external_source", skip_serializing_if = "Option::is_none")]
-    pub external_source: Option<String>,
+    /// Defines order shipping method
+    #[serde(rename = "order_shipping_method", skip_serializing_if = "Option::is_none")]
+    pub order_shipping_method: Option<String>,
+    /// Defines tracking carrier id
+    #[serde(rename = "carrier_id", skip_serializing_if = "Option::is_none")]
+    pub carrier_id: Option<String>,
+    /// This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+    #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
+    pub warehouse_id: Option<String>,
+    /// Coupons that will be applied to order
+    #[serde(rename = "coupons", skip_serializing_if = "Option::is_none")]
+    pub coupons: Option<Vec<String>>,
     /// Order tags
     #[serde(rename = "tags", skip_serializing_if = "Option::is_none")]
     pub tags: Option<String>,
+    /// Specifies order comment
+    #[serde(rename = "comment", skip_serializing_if = "Option::is_none")]
+    pub comment: Option<String>,
+    /// Specifies admin's order comment
+    #[serde(rename = "admin_comment", skip_serializing_if = "Option::is_none")]
+    pub admin_comment: Option<String>,
+    /// Specifies private admin's order comment
+    #[serde(rename = "admin_private_comment", skip_serializing_if = "Option::is_none")]
+    pub admin_private_comment: Option<String>,
+    /// Send notifications to customer after order was created
+    #[serde(rename = "send_notifications", skip_serializing_if = "Option::is_none")]
+    pub send_notifications: Option<bool>,
+    /// Notify admin when new order was created.
+    #[serde(rename = "send_admin_notifications", skip_serializing_if = "Option::is_none")]
+    pub send_admin_notifications: Option<bool>,
+    /// Identifying the system used to generate the order
+    #[serde(rename = "external_source", skip_serializing_if = "Option::is_none")]
+    pub external_source: Option<String>,
     /// The behaviour to use when updating inventory.<hr><div style=\"font-style:normal\">Values description:<div style=\"margin-left: 2%; padding-top: 2%\"><div style=\"font-size:85%\"><b>bypass</b> = Do not claim inventory </br></br><b>decrement_ignoring_policy</b> = Ignore the product's </br> inventory policy and claim amounts</br></br><b>decrement_obeying_policy</b> =  Obey the product's </br> inventory policy.</br></br></div></div></div>
     #[serde(rename = "inventory_behaviour", skip_serializing_if = "Option::is_none")]
     pub inventory_behaviour: Option<String>,
@@ -211,9 +214,6 @@ pub struct OrderAdd {
     /// Defines note attributes
     #[serde(rename = "note_attributes", skip_serializing_if = "Option::is_none")]
     pub note_attributes: Option<Vec<models::OrderAddNoteAttributesInner>>,
-    /// Defines the sum of all line item weights in grams for the order
-    #[serde(rename = "total_weight", skip_serializing_if = "Option::is_none")]
-    pub total_weight: Option<i32>,
     /// Is cache clear required
     #[serde(rename = "clear_cache", skip_serializing_if = "Option::is_none")]
     pub clear_cache: Option<bool>,
@@ -232,68 +232,68 @@ impl OrderAdd {
             store_id: None,
             channel_id: None,
             order_status,
-            send_notifications: None,
-            send_admin_notifications: None,
+            fulfillment_status: None,
+            financial_status: None,
             customer_email,
-            bill_first_name,
-            bill_last_name,
-            bill_address_1,
-            bill_city,
-            bill_postcode,
-            bill_state,
-            bill_country,
-            shipp_first_name: None,
-            shipp_last_name: None,
-            shipp_address_1: None,
-            shipp_city: None,
-            shipp_postcode: None,
-            shipp_state: None,
-            shipp_country: None,
-            total_price: None,
-            date: None,
-            order_payment_method: None,
-            transaction_id: None,
-            order_shipping_method: None,
-            currency: None,
-            bill_address_2: None,
-            bill_company: None,
-            bill_phone: None,
-            bill_fax: None,
-            comment: None,
-            admin_comment: None,
-            admin_private_comment: None,
             customer_first_name: None,
             customer_last_name: None,
             customer_phone: None,
             customer_country: None,
             customer_birthday: None,
             customer_fax: None,
+            order_payment_method: None,
+            transaction_id: None,
+            currency: None,
+            date: None,
+            date_modified: None,
+            date_finished: None,
+            bill_first_name,
+            bill_last_name,
+            bill_address_1,
+            bill_address_2: None,
+            bill_city,
+            bill_postcode,
+            bill_state,
+            bill_country,
+            bill_company: None,
+            bill_phone: None,
+            bill_fax: None,
+            shipp_first_name: None,
+            shipp_last_name: None,
+            shipp_address_1: None,
             shipp_address_2: None,
+            shipp_city: None,
+            shipp_postcode: None,
+            shipp_state: None,
+            shipp_country: None,
             shipp_company: None,
             shipp_phone: None,
             shipp_fax: None,
-            date_modified: None,
-            date_finished: None,
             subtotal_price: None,
             tax_price: None,
+            total_price: None,
+            total_paid: None,
+            total_weight: None,
             prices_inc_tax: None,
             shipping_price: None,
             shipping_tax: None,
-            carrier_id: None,
-            warehouse_id: None,
             discount: None,
             coupon_discount: None,
-            coupons: None,
             gift_certificate_discount: None,
-            fulfillment_status: None,
-            financial_status: None,
-            total_paid: None,
-            external_source: None,
+            order_shipping_method: None,
+            carrier_id: None,
+            warehouse_id: None,
+            coupons: None,
             tags: None,
+            comment: None,
+            admin_comment: None,
+            admin_private_comment: None,
+            send_notifications: None,
+            send_admin_notifications: None,
+            external_source: None,
             inventory_behaviour: None,
             create_invoice: None,
             note_attributes: None,
-            total_weight: None,
             clear_cache: None,
             origin: None,
             order_item,

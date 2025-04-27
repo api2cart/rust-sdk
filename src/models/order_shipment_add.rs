@@ -16,12 +16,12 @@ pub struct OrderShipmentAdd {
     /// Defines the order for which the shipment will be created
     #[serde(rename = "order_id", skip_serializing_if = "Option::is_none")]
     pub order_id: Option<String>,
-    /// Store Id
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
     /// This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
     #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
     pub warehouse_id: Option<String>,
+    /// Store Id
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
     /// Defines company name that provide tracking of shipment
     #[serde(rename = "shipment_provider", skip_serializing_if = "Option::is_none")]
     pub shipment_provider: Option<String>,
@@ -31,24 +31,24 @@ pub struct OrderShipmentAdd {
     /// Defines items in the order that will be shipped
     #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
     pub items: Option<Vec<models::OrderShipmentAddItemsInner>>,
-    /// Send notifications to customer after shipment was created
-    #[serde(rename = "send_notifications", skip_serializing_if = "Option::is_none")]
-    pub send_notifications: Option<bool>,
     /// Defines shipment's tracking numbers that have to be added</br> How set tracking numbers to appropriate carrier:<ul><li>tracking_numbers[]=a2c.demo1,a2c.demo2 - set default carrier</li><li>tracking_numbers[<b>carrier_id</b>]=a2c.demo - set appropriate carrier</li></ul>To get the list of carriers IDs that are available in your store, use the <a href = \"https://api2cart.com/docs/#/cart/CartInfo\">cart.info</a > method
     #[serde(rename = "tracking_numbers", skip_serializing_if = "Option::is_none")]
     pub tracking_numbers: Option<Vec<models::OrderShipmentAddTrackingNumbersInner>>,
-    /// This parameter is used for adjust stock.
-    #[serde(rename = "adjust_stock", skip_serializing_if = "Option::is_none")]
-    pub adjust_stock: Option<bool>,
-    /// If the value is 'true' and order exist in our cache, we will use order.info from cache to prepare shipment items.
-    #[serde(rename = "enable_cache", skip_serializing_if = "Option::is_none")]
-    pub enable_cache: Option<bool>,
     /// Defines custom tracking link
     #[serde(rename = "tracking_link", skip_serializing_if = "Option::is_none")]
     pub tracking_link: Option<String>,
     /// Defines shipment's status
     #[serde(rename = "is_shipped", skip_serializing_if = "Option::is_none")]
     pub is_shipped: Option<bool>,
+    /// Send notifications to customer after shipment was created
+    #[serde(rename = "send_notifications", skip_serializing_if = "Option::is_none")]
+    pub send_notifications: Option<bool>,
+    /// This parameter is used for adjust stock.
+    #[serde(rename = "adjust_stock", skip_serializing_if = "Option::is_none")]
+    pub adjust_stock: Option<bool>,
+    /// If the value is 'true' and order exist in our cache, we will use order.info from cache to prepare shipment items.
+    #[serde(rename = "enable_cache", skip_serializing_if = "Option::is_none")]
+    pub enable_cache: Option<bool>,
     /// Disable or enable check process status. Please note that the response will be slower due to additional requests to the store.
     #[serde(rename = "check_process_status", skip_serializing_if = "Option::is_none")]
     pub check_process_status: Option<bool>,
@@ -61,17 +61,17 @@ impl OrderShipmentAdd {
     pub fn new() -> OrderShipmentAdd {
         OrderShipmentAdd {
             order_id: None,
-            store_id: None,
             warehouse_id: None,
+            store_id: None,
             shipment_provider: None,
             shipping_method: None,
             items: None,
-            send_notifications: None,
             tracking_numbers: None,
-            adjust_stock: None,
-            enable_cache: None,
             tracking_link: None,
             is_shipped: None,
+            send_notifications: None,
+            adjust_stock: None,
+            enable_cache: None,
             check_process_status: None,
             use_latest_api_version: None,
         }

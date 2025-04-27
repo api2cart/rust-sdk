@@ -13,15 +13,72 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProductVariantUpdate {
-    /// Defines store id where the variant should be found
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
     /// Defines variant update specified by variant id
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
     /// Defines product's id where the variant has to be updated
     #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
     pub product_id: Option<String>,
+    /// Defines store id where the variant should be found
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
+    /// Language id
+    #[serde(rename = "lang_id", skip_serializing_if = "Option::is_none")]
+    pub lang_id: Option<String>,
+    /// Defines variant's options list
+    #[serde(rename = "options", skip_serializing_if = "Option::is_none")]
+    pub options: Option<Vec<models::ProductVariantUpdateOptionsInner>>,
+    /// Defines variant's name that has to be updated
+    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
+    pub name: Option<String>,
+    /// Specifies variant's description
+    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+    /// Defines short description
+    #[serde(rename = "short_description", skip_serializing_if = "Option::is_none")]
+    pub short_description: Option<String>,
+    /// Specifies variant's model that has to be added
+    #[serde(rename = "model", skip_serializing_if = "Option::is_none")]
+    pub model: Option<String>,
+    /// Defines new product's variant sku
+    #[serde(rename = "sku", skip_serializing_if = "Option::is_none")]
+    pub sku: Option<String>,
+    /// Set visibility status
+    #[serde(rename = "visible", skip_serializing_if = "Option::is_none")]
+    pub visible: Option<String>,
+    /// Defines product variant's status
+    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
+    pub status: Option<String>,
+    /// Set backorder status
+    #[serde(rename = "backorder_status", skip_serializing_if = "Option::is_none")]
+    pub backorder_status: Option<String>,
+    /// Specifies the set of visible/invisible product's variants for sale
+    #[serde(rename = "available_for_sale", skip_serializing_if = "Option::is_none")]
+    pub available_for_sale: Option<bool>,
+    /// Defines category's visibility status
+    #[serde(rename = "avail", skip_serializing_if = "Option::is_none")]
+    pub avail: Option<bool>,
+    /// Defines as a default variant
+    #[serde(rename = "is_default", skip_serializing_if = "Option::is_none")]
+    pub is_default: Option<bool>,
+    /// Specifies variant's free shipping flag that has to be added
+    #[serde(rename = "is_free_shipping", skip_serializing_if = "Option::is_none")]
+    pub is_free_shipping: Option<bool>,
+    /// Specifies whether a tax is charged
+    #[serde(rename = "taxable", skip_serializing_if = "Option::is_none")]
+    pub taxable: Option<bool>,
+    /// Defines tax classes where entity has to be added
+    #[serde(rename = "tax_class_id", skip_serializing_if = "Option::is_none")]
+    pub tax_class_id: Option<String>,
+    /// Defines whether the product is virtual
+    #[serde(rename = "is_virtual", skip_serializing_if = "Option::is_none")]
+    pub is_virtual: Option<bool>,
+    /// Defines inventory tracking for product variant
+    #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
+    pub manage_stock: Option<bool>,
+    /// Set stock status
+    #[serde(rename = "in_stock", skip_serializing_if = "Option::is_none")]
+    pub in_stock: Option<bool>,
     /// This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
     #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
     pub warehouse_id: Option<String>,
@@ -61,63 +118,12 @@ pub struct ProductVariantUpdate {
     /// Defines the term of special price offer duration
     #[serde(rename = "sprice_expire", skip_serializing_if = "Option::is_none")]
     pub sprice_expire: Option<String>,
-    /// Defines inventory tracking for product variant
-    #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
-    pub manage_stock: Option<bool>,
-    /// Set stock status
-    #[serde(rename = "in_stock", skip_serializing_if = "Option::is_none")]
-    pub in_stock: Option<bool>,
-    /// Defines variant's name that has to be updated
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
-    /// Specifies variant's description
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    /// Defines new product's variant sku
-    #[serde(rename = "sku", skip_serializing_if = "Option::is_none")]
-    pub sku: Option<String>,
-    /// Defines unique meta title for each entity
-    #[serde(rename = "meta_title", skip_serializing_if = "Option::is_none")]
-    pub meta_title: Option<String>,
-    /// Defines unique meta description of a entity
-    #[serde(rename = "meta_description", skip_serializing_if = "Option::is_none")]
-    pub meta_description: Option<String>,
-    /// Defines unique meta keywords for each entity
-    #[serde(rename = "meta_keywords", skip_serializing_if = "Option::is_none")]
-    pub meta_keywords: Option<String>,
-    /// Defines short description
-    #[serde(rename = "short_description", skip_serializing_if = "Option::is_none")]
-    pub short_description: Option<String>,
-    /// Set visibility status
-    #[serde(rename = "visible", skip_serializing_if = "Option::is_none")]
-    pub visible: Option<String>,
-    /// Defines product variant's status
-    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
-    pub status: Option<String>,
-    /// Set backorder status
-    #[serde(rename = "backorder_status", skip_serializing_if = "Option::is_none")]
-    pub backorder_status: Option<String>,
     /// Weight
     #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
     pub weight: Option<f64>,
     /// A barcode is a unique code composed of numbers used as a product identifier.
     #[serde(rename = "barcode", skip_serializing_if = "Option::is_none")]
     pub barcode: Option<String>,
-    /// Is reindex required
-    #[serde(rename = "reindex", skip_serializing_if = "Option::is_none")]
-    pub reindex: Option<bool>,
-    /// Specifies whether a tax is charged
-    #[serde(rename = "taxable", skip_serializing_if = "Option::is_none")]
-    pub taxable: Option<bool>,
-    /// Defines variant's options list
-    #[serde(rename = "options", skip_serializing_if = "Option::is_none")]
-    pub options: Option<Vec<models::ProductVariantUpdateOptionsInner>>,
-    /// Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
-    #[serde(rename = "harmonized_system_code", skip_serializing_if = "Option::is_none")]
-    pub harmonized_system_code: Option<String>,
-    /// The country where the inventory item was made
-    #[serde(rename = "country_of_origin", skip_serializing_if = "Option::is_none")]
-    pub country_of_origin: Option<String>,
     /// Defines product's width
     #[serde(rename = "width", skip_serializing_if = "Option::is_none")]
     pub width: Option<f64>,
@@ -133,18 +139,6 @@ pub struct ProductVariantUpdate {
     /// Global Trade Item Number. An GTIN is an identifier for trade items.
     #[serde(rename = "gtin", skip_serializing_if = "Option::is_none")]
     pub gtin: Option<String>,
-    /// Is cache clear required
-    #[serde(rename = "clear_cache", skip_serializing_if = "Option::is_none")]
-    pub clear_cache: Option<bool>,
-    /// Language id
-    #[serde(rename = "lang_id", skip_serializing_if = "Option::is_none")]
-    pub lang_id: Option<String>,
-    /// Specifies variant's model that has to be added
-    #[serde(rename = "model", skip_serializing_if = "Option::is_none")]
-    pub model: Option<String>,
-    /// Specifies the set of visible/invisible product's variants for sale
-    #[serde(rename = "available_for_sale", skip_serializing_if = "Option::is_none")]
-    pub available_for_sale: Option<bool>,
     /// Universal Product Code. A UPC (UPC-A) is a commonly used identifer for many different products.
     #[serde(rename = "upc", skip_serializing_if = "Option::is_none")]
     pub upc: Option<String>,
@@ -157,29 +151,54 @@ pub struct ProductVariantUpdate {
     /// International Standard Book Number. An ISBN is a unique identifier for books.
     #[serde(rename = "isbn", skip_serializing_if = "Option::is_none")]
     pub isbn: Option<String>,
-    /// Defines category's visibility status
-    #[serde(rename = "avail", skip_serializing_if = "Option::is_none")]
-    pub avail: Option<bool>,
-    /// Defines as a default variant
-    #[serde(rename = "is_default", skip_serializing_if = "Option::is_none")]
-    pub is_default: Option<bool>,
-    /// Specifies variant's free shipping flag that has to be added
-    #[serde(rename = "is_free_shipping", skip_serializing_if = "Option::is_none")]
-    pub is_free_shipping: Option<bool>,
-    /// Defines tax classes where entity has to be added
-    #[serde(rename = "tax_class_id", skip_serializing_if = "Option::is_none")]
-    pub tax_class_id: Option<String>,
-    /// Defines whether the product is virtual
-    #[serde(rename = "is_virtual", skip_serializing_if = "Option::is_none")]
-    pub is_virtual: Option<bool>,
+    /// Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
+    #[serde(rename = "harmonized_system_code", skip_serializing_if = "Option::is_none")]
+    pub harmonized_system_code: Option<String>,
+    /// The country where the inventory item was made
+    #[serde(rename = "country_of_origin", skip_serializing_if = "Option::is_none")]
+    pub country_of_origin: Option<String>,
+    /// Defines unique meta title for each entity
+    #[serde(rename = "meta_title", skip_serializing_if = "Option::is_none")]
+    pub meta_title: Option<String>,
+    /// Defines unique meta description of a entity
+    #[serde(rename = "meta_description", skip_serializing_if = "Option::is_none")]
+    pub meta_description: Option<String>,
+    /// Defines unique meta keywords for each entity
+    #[serde(rename = "meta_keywords", skip_serializing_if = "Option::is_none")]
+    pub meta_keywords: Option<String>,
+    /// Is reindex required
+    #[serde(rename = "reindex", skip_serializing_if = "Option::is_none")]
+    pub reindex: Option<bool>,
+    /// Is cache clear required
+    #[serde(rename = "clear_cache", skip_serializing_if = "Option::is_none")]
+    pub clear_cache: Option<bool>,
 }
 
 impl ProductVariantUpdate {
     pub fn new() -> ProductVariantUpdate {
         ProductVariantUpdate {
-            store_id: None,
             id: None,
             product_id: None,
+            store_id: None,
+            lang_id: None,
+            options: None,
+            name: None,
+            description: None,
+            short_description: None,
+            model: None,
+            sku: None,
+            visible: None,
+            status: None,
+            backorder_status: None,
+            available_for_sale: None,
+            avail: None,
+            is_default: None,
+            is_free_shipping: None,
+            taxable: None,
+            tax_class_id: None,
+            is_virtual: None,
+            manage_stock: None,
+            in_stock: None,
             warehouse_id: None,
             reserve_quantity: None,
             quantity: None,
@@ -193,43 +212,24 @@ impl ProductVariantUpdate {
             fixed_cost_shipping_price: None,
             sprice_create: None,
             sprice_expire: None,
-            manage_stock: None,
-            in_stock: None,
-            name: None,
-            description: None,
-            sku: None,
-            meta_title: None,
-            meta_description: None,
-            meta_keywords: None,
-            short_description: None,
-            visible: None,
-            status: None,
-            backorder_status: None,
             weight: None,
             barcode: None,
-            reindex: None,
-            taxable: None,
-            options: None,
-            harmonized_system_code: None,
-            country_of_origin: None,
             width: None,
             weight_unit: None,
             height: None,
             length: None,
             gtin: None,
-            clear_cache: None,
-            lang_id: None,
-            model: None,
-            available_for_sale: None,
             upc: None,
             mpn: None,
             ean: None,
             isbn: None,
-            avail: None,
-            is_default: None,
-            is_free_shipping: None,
-            tax_class_id: None,
-            is_virtual: None,
+            harmonized_system_code: None,
+            country_of_origin: None,
+            meta_title: None,
+            meta_description: None,
+            meta_keywords: None,
+            reindex: None,
+            clear_cache: None,
         }
     }
 }

@@ -19,51 +19,117 @@ pub struct ProductAdd {
     /// Defines product's model that has to be added
     #[serde(rename = "model")]
     pub model: String,
-    /// Defines product's sku that has to be added
-    #[serde(rename = "sku", skip_serializing_if = "Option::is_none")]
-    pub sku: Option<String>,
     /// Defines product's description that has to be added
     #[serde(rename = "description")]
     pub description: String,
     /// Defines product's price that has to be added
     #[serde(rename = "price")]
     pub price: f64,
-    /// Defines product's old price
-    #[serde(rename = "old_price", skip_serializing_if = "Option::is_none")]
-    pub old_price: Option<f64>,
-    /// Defines product's model that has to be added
-    #[serde(rename = "special_price", skip_serializing_if = "Option::is_none")]
-    pub special_price: Option<f64>,
-    /// Defines new product's cost price
-    #[serde(rename = "cost_price", skip_serializing_if = "Option::is_none")]
-    pub cost_price: Option<f64>,
-    /// Specifies product's fixed cost shipping price
-    #[serde(rename = "fixed_cost_shipping_price", skip_serializing_if = "Option::is_none")]
-    pub fixed_cost_shipping_price: Option<f64>,
-    /// Defines the date of special price creation
-    #[serde(rename = "sprice_create", skip_serializing_if = "Option::is_none")]
-    pub sprice_create: Option<String>,
-    /// Defines the date of special price modification
-    #[serde(rename = "sprice_modified", skip_serializing_if = "Option::is_none")]
-    pub sprice_modified: Option<String>,
-    /// Defines the term of special price offer duration
-    #[serde(rename = "sprice_expire", skip_serializing_if = "Option::is_none")]
-    pub sprice_expire: Option<String>,
-    /// Defines product's tier prices
-    #[serde(rename = "tier_prices", skip_serializing_if = "Option::is_none")]
-    pub tier_prices: Option<Vec<models::ProductAddTierPricesInner>>,
-    /// Defines product's group prices
-    #[serde(rename = "group_prices", skip_serializing_if = "Option::is_none")]
-    pub group_prices: Option<Vec<models::ProductAddGroupPricesInner>>,
+    /// Defines product's sku that has to be added
+    #[serde(rename = "sku", skip_serializing_if = "Option::is_none")]
+    pub sku: Option<String>,
+    /// Defines short description
+    #[serde(rename = "short_description", skip_serializing_if = "Option::is_none")]
+    pub short_description: Option<String>,
+    /// Defines product's type
+    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<String>,
+    /// Defines product's status
+    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
+    pub status: Option<String>,
+    /// Set visibility status
+    #[serde(rename = "visible", skip_serializing_if = "Option::is_none")]
+    pub visible: Option<String>,
+    /// Defines product add that is specified by category id
+    #[serde(rename = "category_id", skip_serializing_if = "Option::is_none")]
+    pub category_id: Option<String>,
+    /// Defines product add that is specified by comma-separated categories id
+    #[serde(rename = "categories_ids", skip_serializing_if = "Option::is_none")]
+    pub categories_ids: Option<String>,
+    /// A categorization for the product
+    #[serde(rename = "product_class", skip_serializing_if = "Option::is_none")]
+    pub product_class: Option<String>,
+    /// A categorization for the product
+    #[serde(rename = "product_type", skip_serializing_if = "Option::is_none")]
+    pub product_type: Option<String>,
+    /// Defines whether the product is virtual
+    #[serde(rename = "is_virtual", skip_serializing_if = "Option::is_none")]
+    pub is_virtual: Option<bool>,
+    /// Defines whether the product is downloadable
+    #[serde(rename = "downloadable", skip_serializing_if = "Option::is_none")]
+    pub downloadable: Option<bool>,
+    /// If true, it indicates the product as a supply, otherwise it indicates that it is a finished product.
+    #[serde(rename = "is_supply", skip_serializing_if = "Option::is_none")]
+    pub is_supply: Option<bool>,
     /// Specifies the set of visible/invisible products for users
     #[serde(rename = "available_for_view", skip_serializing_if = "Option::is_none")]
     pub available_for_view: Option<bool>,
     /// Specifies the set of visible/invisible products for sale
     #[serde(rename = "available_for_sale", skip_serializing_if = "Option::is_none")]
     pub available_for_sale: Option<bool>,
+    /// Store Id
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
+    /// Assign product to the stores that is specified by comma-separated stores' id
+    #[serde(rename = "stores_ids", skip_serializing_if = "Option::is_none")]
+    pub stores_ids: Option<String>,
+    /// Language id
+    #[serde(rename = "lang_id", skip_serializing_if = "Option::is_none")]
+    pub lang_id: Option<String>,
+    /// Defines product's old price
+    #[serde(rename = "old_price", skip_serializing_if = "Option::is_none")]
+    pub old_price: Option<f64>,
+    /// Defines product's model that has to be added
+    #[serde(rename = "special_price", skip_serializing_if = "Option::is_none")]
+    pub special_price: Option<f64>,
+    /// Defines product's sale price
+    #[serde(rename = "wholesale_price", skip_serializing_if = "Option::is_none")]
+    pub wholesale_price: Option<f64>,
+    /// Defines new product's cost price
+    #[serde(rename = "cost_price", skip_serializing_if = "Option::is_none")]
+    pub cost_price: Option<f64>,
+    /// Specifies product's fixed cost shipping price
+    #[serde(rename = "fixed_cost_shipping_price", skip_serializing_if = "Option::is_none")]
+    pub fixed_cost_shipping_price: Option<f64>,
+    /// Defines product's tier prices
+    #[serde(rename = "tier_prices", skip_serializing_if = "Option::is_none")]
+    pub tier_prices: Option<Vec<models::ProductAddTierPricesInner>>,
+    /// Defines product's group prices
+    #[serde(rename = "group_prices", skip_serializing_if = "Option::is_none")]
+    pub group_prices: Option<Vec<models::ProductAddGroupPricesInner>>,
+    /// Defines buy it now value
+    #[serde(rename = "buyitnow_price", skip_serializing_if = "Option::is_none")]
+    pub buyitnow_price: Option<f64>,
+    /// Defines reserve price value
+    #[serde(rename = "reserve_price", skip_serializing_if = "Option::is_none")]
+    pub reserve_price: Option<f64>,
+    /// Defines product's quantity that has to be added
+    #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
+    pub quantity: Option<f64>,
+    /// Set stock status
+    #[serde(rename = "in_stock", skip_serializing_if = "Option::is_none")]
+    pub in_stock: Option<bool>,
+    /// Defines inventory tracking for product
+    #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
+    pub manage_stock: Option<bool>,
+    /// This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
+    #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
+    pub warehouse_id: Option<String>,
+    /// Set backorder status
+    #[serde(rename = "backorder_status", skip_serializing_if = "Option::is_none")]
+    pub backorder_status: Option<String>,
+    /// The minimum quantity an order must contain, to be eligible to purchase this product.
+    #[serde(rename = "min_order_quantity", skip_serializing_if = "Option::is_none")]
+    pub min_order_quantity: Option<f64>,
+    /// The maximum quantity an order can contain when purchasing the product.
+    #[serde(rename = "max_order_quantity", skip_serializing_if = "Option::is_none")]
+    pub max_order_quantity: Option<f64>,
     /// Weight
     #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
     pub weight: Option<f64>,
+    /// Weight Unit
+    #[serde(rename = "weight_unit", skip_serializing_if = "Option::is_none")]
+    pub weight_unit: Option<String>,
     /// Defines product's width
     #[serde(rename = "width", skip_serializing_if = "Option::is_none")]
     pub width: Option<f64>,
@@ -74,124 +140,8 @@ pub struct ProductAdd {
     #[serde(rename = "length", skip_serializing_if = "Option::is_none")]
     pub length: Option<f64>,
     /// Weight Unit
-    #[serde(rename = "weight_unit", skip_serializing_if = "Option::is_none")]
-    pub weight_unit: Option<String>,
-    /// Weight Unit
     #[serde(rename = "dimensions_unit", skip_serializing_if = "Option::is_none")]
     pub dimensions_unit: Option<String>,
-    /// Defines short description
-    #[serde(rename = "short_description", skip_serializing_if = "Option::is_none")]
-    pub short_description: Option<String>,
-    /// This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
-    #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
-    pub warehouse_id: Option<String>,
-    /// Set backorder status
-    #[serde(rename = "backorder_status", skip_serializing_if = "Option::is_none")]
-    pub backorder_status: Option<String>,
-    /// Defines product's quantity that has to be added
-    #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
-    pub quantity: Option<f64>,
-    /// Defines whether the product is downloadable
-    #[serde(rename = "downloadable", skip_serializing_if = "Option::is_none")]
-    pub downloadable: Option<bool>,
-    /// Defines product's sale price
-    #[serde(rename = "wholesale_price", skip_serializing_if = "Option::is_none")]
-    pub wholesale_price: Option<f64>,
-    /// Defines the date of entity creation
-    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<String>,
-    /// Defines product's manufacturer
-    #[serde(rename = "manufacturer", skip_serializing_if = "Option::is_none")]
-    pub manufacturer: Option<String>,
-    /// Defines product's manufacturer by manufacturer_id
-    #[serde(rename = "manufacturer_id", skip_serializing_if = "Option::is_none")]
-    pub manufacturer_id: Option<String>,
-    /// Defines product add that is specified by comma-separated categories id
-    #[serde(rename = "categories_ids", skip_serializing_if = "Option::is_none")]
-    pub categories_ids: Option<String>,
-    /// Defines product's related products ids that has to be added
-    #[serde(rename = "related_products_ids", skip_serializing_if = "Option::is_none")]
-    pub related_products_ids: Option<String>,
-    /// Defines product's up-sell products ids that has to be added
-    #[serde(rename = "up_sell_products_ids", skip_serializing_if = "Option::is_none")]
-    pub up_sell_products_ids: Option<String>,
-    /// Defines product's cross-sell products ids that has to be added
-    #[serde(rename = "cross_sell_products_ids", skip_serializing_if = "Option::is_none")]
-    pub cross_sell_products_ids: Option<String>,
-    /// Defines tax classes where entity has to be added
-    #[serde(rename = "tax_class_id", skip_serializing_if = "Option::is_none")]
-    pub tax_class_id: Option<String>,
-    /// Defines product's type
-    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<String>,
-    /// Defines unique meta title for each entity
-    #[serde(rename = "meta_title", skip_serializing_if = "Option::is_none")]
-    pub meta_title: Option<String>,
-    /// Defines unique meta keywords for each entity
-    #[serde(rename = "meta_keywords", skip_serializing_if = "Option::is_none")]
-    pub meta_keywords: Option<String>,
-    /// Defines unique meta description of a entity
-    #[serde(rename = "meta_description", skip_serializing_if = "Option::is_none")]
-    pub meta_description: Option<String>,
-    /// Defines unique product's URL
-    #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    /// Language id
-    #[serde(rename = "lang_id", skip_serializing_if = "Option::is_none")]
-    pub lang_id: Option<String>,
-    /// Assign product to the stores that is specified by comma-separated stores' id
-    #[serde(rename = "stores_ids", skip_serializing_if = "Option::is_none")]
-    pub stores_ids: Option<String>,
-    /// Defines product add that is specified by category id
-    #[serde(rename = "category_id", skip_serializing_if = "Option::is_none")]
-    pub category_id: Option<String>,
-    /// Specifies the number of product's reviews
-    #[serde(rename = "viewed_count", skip_serializing_if = "Option::is_none")]
-    pub viewed_count: Option<i32>,
-    /// Defines how many times the product was ordered
-    #[serde(rename = "ordered_count", skip_serializing_if = "Option::is_none")]
-    pub ordered_count: Option<i32>,
-    /// Defines product’s attribute set name in Magento
-    #[serde(rename = "attribute_set_name", skip_serializing_if = "Option::is_none")]
-    pub attribute_set_name: Option<String>,
-    /// Defines product’s attribute name separated with a comma in Magento
-    #[serde(rename = "attribute_name", skip_serializing_if = "Option::is_none")]
-    pub attribute_name: Option<String>,
-    /// The numeric ID of the shipping template associated with the products in Etsy. You can find possible values in the \"cart.info\" API method response, in the field shipping_zones[]->id.
-    #[serde(rename = "shipping_template_id", skip_serializing_if = "Option::is_none")]
-    pub shipping_template_id: Option<i32>,
-    /// Defines product's production partner ids that has to be added
-    #[serde(rename = "production_partner_ids", skip_serializing_if = "Option::is_none")]
-    pub production_partner_ids: Option<String>,
-    /// The human-readable label for the condition (e.g., \"New\").
-    #[serde(rename = "condition", skip_serializing_if = "Option::is_none")]
-    pub condition: Option<String>,
-    /// Describes the number of days the seller wants the listing to be active. Look at cart.info method response for allowed values.
-    #[serde(rename = "listing_duration", skip_serializing_if = "Option::is_none")]
-    pub listing_duration: Option<String>,
-    /// Indicates the selling format of the marketplace listing.
-    #[serde(rename = "listing_type", skip_serializing_if = "Option::is_none")]
-    pub listing_type: Option<String>,
-    /// Identifies the payment method (such as PayPal) that the seller will accept when the buyer pays for the item. Look at cart.info method response for allowed values.<hr><div style=\"font-style:normal\">Param structure:<div style=\"margin-left: 2%;\"><code style=\"padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;\">payment_methods[0] = string</br>payment_methods[1] = string</br></code></div></div>
-    #[serde(rename = "payment_methods", skip_serializing_if = "Option::is_none")]
-    pub payment_methods: Option<Vec<String>>,
-    /// Indicates whether the seller allows the buyer to return the item.
-    #[serde(rename = "return_accepted", skip_serializing_if = "Option::is_none")]
-    pub return_accepted: Option<bool>,
-    /// The shipping details, including flat and calculated shipping costs and shipping insurance costs. Look at cart.info method response for allowed values.<hr><div style=\"font-style:normal\">Param structure:<div style=\"margin-left: 2%;\"><code style=\"padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;\">shipping_details[0][<b>shipping_type</b>] = string </br>shipping_details[0][<b>shipping_service</b>] = string</br>shipping_details[0][<b>shipping_cost</b>] = decimal</br>shipping_details[1][<b>shipping_type</b>] = string </br>shipping_details[1][<b>shipping_service</b>] = string</br>shipping_details[1][<b>shipping_cost</b>] = decimal</br></code></div></div>
-    #[serde(rename = "shipping_details", skip_serializing_if = "Option::is_none")]
-    pub shipping_details: Option<Vec<models::ProductAddShippingDetailsInner>>,
-    /// Valid PayPal email address for the PayPal account that the seller will use if they offer PayPal as a payment method for the listing.
-    #[serde(rename = "paypal_email", skip_serializing_if = "Option::is_none")]
-    pub paypal_email: Option<String>,
-    #[serde(rename = "seller_profiles", skip_serializing_if = "Option::is_none")]
-    pub seller_profiles: Option<Box<models::ProductAddSellerProfiles>>,
-    #[serde(rename = "package_details", skip_serializing_if = "Option::is_none")]
-    pub package_details: Option<Box<models::ProductAddPackageDetails>>,
-    #[serde(rename = "best_offer", skip_serializing_if = "Option::is_none")]
-    pub best_offer: Option<Box<models::ProductAddBestOffer>>,
-    #[serde(rename = "sales_tax", skip_serializing_if = "Option::is_none")]
-    pub sales_tax: Option<Box<models::ProductAddSalesTax>>,
     /// A barcode is a unique code composed of numbers used as a product identifier.
     #[serde(rename = "barcode", skip_serializing_if = "Option::is_none")]
     pub barcode: Option<String>,
@@ -204,9 +154,35 @@ pub struct ProductAdd {
     /// International Standard Book Number. An ISBN is a unique identifier for books.
     #[serde(rename = "isbn", skip_serializing_if = "Option::is_none")]
     pub isbn: Option<String>,
-    /// An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.         The list of possible specifications can be obtained using the category.info method (additional_fields->product_specifics).         <b>The structure of the parameter is different for specific platforms.</b>
-    #[serde(rename = "specifics", skip_serializing_if = "Option::is_none")]
-    pub specifics: Option<Vec<models::ProductAddSpecificsInner>>,
+    /// Global Trade Item Number. An GTIN is an identifier for trade items.
+    #[serde(rename = "gtin", skip_serializing_if = "Option::is_none")]
+    pub gtin: Option<String>,
+    /// Manufacturer Part Number. A MPN is an identifier of a particular part design or material used.
+    #[serde(rename = "mpn", skip_serializing_if = "Option::is_none")]
+    pub mpn: Option<String>,
+    /// Amazon Standard Identification Number.
+    #[serde(rename = "asin", skip_serializing_if = "Option::is_none")]
+    pub asin: Option<String>,
+    /// Groups all variations, that you want to combine into one product.
+    #[serde(rename = "product_reference", skip_serializing_if = "Option::is_none")]
+    pub product_reference: Option<String>,
+    /// Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
+    #[serde(rename = "harmonized_system_code", skip_serializing_if = "Option::is_none")]
+    pub harmonized_system_code: Option<String>,
+    /// The country where the inventory item was made
+    #[serde(rename = "country_of_origin", skip_serializing_if = "Option::is_none")]
+    pub country_of_origin: Option<String>,
+    /// Defines product's manufacturer
+    #[serde(rename = "manufacturer", skip_serializing_if = "Option::is_none")]
+    pub manufacturer: Option<String>,
+    /// Defines product's manufacturer by manufacturer_id
+    #[serde(rename = "manufacturer_id", skip_serializing_if = "Option::is_none")]
+    pub manufacturer_id: Option<String>,
+    #[serde(rename = "manufacturer_info", skip_serializing_if = "Option::is_none")]
+    pub manufacturer_info: Option<Box<models::ProductAddManufacturerInfo>>,
+    /// Defines product brand name
+    #[serde(rename = "brand_name", skip_serializing_if = "Option::is_none")]
+    pub brand_name: Option<String>,
     /// Image Url
     #[serde(rename = "image_url", skip_serializing_if = "Option::is_none")]
     pub image_url: Option<String>,
@@ -216,133 +192,157 @@ pub struct ProductAdd {
     /// Image Url
     #[serde(rename = "additional_image_urls", skip_serializing_if = "Option::is_none")]
     pub additional_image_urls: Option<Vec<String>>,
-    /// Defines reserve price value
-    #[serde(rename = "reserve_price", skip_serializing_if = "Option::is_none")]
-    pub reserve_price: Option<f64>,
-    /// Defines buy it now value
-    #[serde(rename = "buyitnow_price", skip_serializing_if = "Option::is_none")]
-    pub buyitnow_price: Option<f64>,
-    /// Detailed description of the product condition.
-    #[serde(rename = "condition_description", skip_serializing_if = "Option::is_none")]
-    pub condition_description: Option<String>,
-    /// This allows buyers to remain anonymous when the bid or buy an item.
-    #[serde(rename = "auction_confidentiality_level", skip_serializing_if = "Option::is_none")]
-    pub auction_confidentiality_level: Option<String>,
-    /// Defines product's logistic channel settings
-    #[serde(rename = "logistic_info", skip_serializing_if = "Option::is_none")]
-    pub logistic_info: Option<Vec<models::ProductAddLogisticInfoInner>>,
-    /// Allows to schedule a time in the future that the item becomes available. The value should be greater than the current date and time.
-    #[serde(rename = "avail_from", skip_serializing_if = "Option::is_none")]
-    pub avail_from: Option<String>,
-    /// Product tags
-    #[serde(rename = "tags", skip_serializing_if = "Option::is_none")]
-    pub tags: Option<String>,
-    /// Is cache clear required
-    #[serde(rename = "clear_cache", skip_serializing_if = "Option::is_none")]
-    pub clear_cache: Option<bool>,
-    /// Amazon Standard Identification Number.
-    #[serde(rename = "asin", skip_serializing_if = "Option::is_none")]
-    pub asin: Option<String>,
-    /// Global Trade Item Number. An GTIN is an identifier for trade items.
-    #[serde(rename = "gtin", skip_serializing_if = "Option::is_none")]
-    pub gtin: Option<String>,
-    /// Manufacturer Part Number. A MPN is an identifier of a particular part design or material used.
-    #[serde(rename = "mpn", skip_serializing_if = "Option::is_none")]
-    pub mpn: Option<String>,
-    /// Specifies whether a tax is charged
-    #[serde(rename = "taxable", skip_serializing_if = "Option::is_none")]
-    pub taxable: Option<bool>,
-    /// Set visibility status
-    #[serde(rename = "visible", skip_serializing_if = "Option::is_none")]
-    pub visible: Option<String>,
-    /// Defines product's status
-    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
-    pub status: Option<String>,
-    /// Defines unique URL for SEO
-    #[serde(rename = "seo_url", skip_serializing_if = "Option::is_none")]
-    pub seo_url: Option<String>,
-    /// A categorization for the product
-    #[serde(rename = "product_class", skip_serializing_if = "Option::is_none")]
-    pub product_class: Option<String>,
-    /// A categorization for the product
-    #[serde(rename = "product_type", skip_serializing_if = "Option::is_none")]
-    pub product_type: Option<String>,
-    /// String containing the JSON representation of the supplied data
-    #[serde(rename = "marketplace_item_properties", skip_serializing_if = "Option::is_none")]
-    pub marketplace_item_properties: Option<String>,
-    /// Defines inventory tracking for product
-    #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
-    pub manage_stock: Option<bool>,
-    /// Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
-    #[serde(rename = "harmonized_system_code", skip_serializing_if = "Option::is_none")]
-    pub harmonized_system_code: Option<String>,
-    /// The country where the inventory item was made
-    #[serde(rename = "country_of_origin", skip_serializing_if = "Option::is_none")]
-    pub country_of_origin: Option<String>,
     /// File Url
     #[serde(rename = "files", skip_serializing_if = "Option::is_none")]
     pub files: Option<Vec<models::ProductAddFilesInner>>,
+    #[serde(rename = "size_chart", skip_serializing_if = "Option::is_none")]
+    pub size_chart: Option<Box<models::ProductAddSizeChart>>,
+    /// Defines product's related products ids that has to be added
+    #[serde(rename = "related_products_ids", skip_serializing_if = "Option::is_none")]
+    pub related_products_ids: Option<String>,
+    /// Defines product's up-sell products ids that has to be added
+    #[serde(rename = "up_sell_products_ids", skip_serializing_if = "Option::is_none")]
+    pub up_sell_products_ids: Option<String>,
+    /// Defines product's cross-sell products ids that has to be added
+    #[serde(rename = "cross_sell_products_ids", skip_serializing_if = "Option::is_none")]
+    pub cross_sell_products_ids: Option<String>,
+    /// Defines product’s attribute set name in Magento
+    #[serde(rename = "attribute_set_name", skip_serializing_if = "Option::is_none")]
+    pub attribute_set_name: Option<String>,
+    /// Defines product’s attribute name separated with a comma in Magento
+    #[serde(rename = "attribute_name", skip_serializing_if = "Option::is_none")]
+    pub attribute_name: Option<String>,
     /// Defines unique search keywords
     #[serde(rename = "search_keywords", skip_serializing_if = "Option::is_none")]
     pub search_keywords: Option<String>,
-    /// Store Id
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
-    /// Defines product brand name
-    #[serde(rename = "brand_name", skip_serializing_if = "Option::is_none")]
-    pub brand_name: Option<String>,
-    /// Defines whether the product is virtual
-    #[serde(rename = "is_virtual", skip_serializing_if = "Option::is_none")]
-    pub is_virtual: Option<bool>,
+    /// Product tags
+    #[serde(rename = "tags", skip_serializing_if = "Option::is_none")]
+    pub tags: Option<String>,
+    /// A list of material strings for materials used in the product.
+    #[serde(rename = "materials", skip_serializing_if = "Option::is_none")]
+    pub materials: Option<Vec<String>>,
+    /// An array of product certifications. The list of possible certifications can be obtained using the \"<i>category.info</i>\" method (<i>additional_fields->rules->product_certifications</i>).
+    #[serde(rename = "certifications", skip_serializing_if = "Option::is_none")]
+    pub certifications: Option<Vec<models::ProductAddCertificationsInner>>,
+    /// An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.         The list of possible specifications can be obtained using the category.info method (additional_fields->product_specifics).         <b>The structure of the parameter is different for specific platforms.</b>
+    #[serde(rename = "specifics", skip_serializing_if = "Option::is_none")]
+    pub specifics: Option<Vec<models::ProductAddSpecificsInner>>,
+    /// Allows to schedule a time in the future that the item becomes available. The value should be greater than the current date and time.
+    #[serde(rename = "avail_from", skip_serializing_if = "Option::is_none")]
+    pub avail_from: Option<String>,
+    /// Defines the date of special price creation
+    #[serde(rename = "sprice_create", skip_serializing_if = "Option::is_none")]
+    pub sprice_create: Option<String>,
+    /// Defines the date of special price modification
+    #[serde(rename = "sprice_modified", skip_serializing_if = "Option::is_none")]
+    pub sprice_modified: Option<String>,
+    /// Defines the term of special price offer duration
+    #[serde(rename = "sprice_expire", skip_serializing_if = "Option::is_none")]
+    pub sprice_expire: Option<String>,
+    /// Defines the date of entity creation
+    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<String>,
+    /// When true, automatically renews a listing upon its expiration.
+    #[serde(rename = "auto_renew", skip_serializing_if = "Option::is_none")]
+    pub auto_renew: Option<bool>,
+    /// An enumerated string for the era in which the maker made the product.
+    #[serde(rename = "when_made", skip_serializing_if = "Option::is_none")]
+    pub when_made: Option<String>,
+    /// Defines unique meta title for each entity
+    #[serde(rename = "meta_title", skip_serializing_if = "Option::is_none")]
+    pub meta_title: Option<String>,
+    /// Defines unique meta keywords for each entity
+    #[serde(rename = "meta_keywords", skip_serializing_if = "Option::is_none")]
+    pub meta_keywords: Option<String>,
+    /// Defines unique meta description of a entity
+    #[serde(rename = "meta_description", skip_serializing_if = "Option::is_none")]
+    pub meta_description: Option<String>,
+    /// Defines unique product's URL
+    #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    /// Defines unique URL for SEO
+    #[serde(rename = "seo_url", skip_serializing_if = "Option::is_none")]
+    pub seo_url: Option<String>,
+    /// Defines tax classes where entity has to be added
+    #[serde(rename = "tax_class_id", skip_serializing_if = "Option::is_none")]
+    pub tax_class_id: Option<String>,
+    /// Specifies whether a tax is charged
+    #[serde(rename = "taxable", skip_serializing_if = "Option::is_none")]
+    pub taxable: Option<bool>,
+    #[serde(rename = "sales_tax", skip_serializing_if = "Option::is_none")]
+    pub sales_tax: Option<Box<models::ProductAddSalesTax>>,
+    /// The human-readable label for the condition (e.g., \"New\").
+    #[serde(rename = "condition", skip_serializing_if = "Option::is_none")]
+    pub condition: Option<String>,
+    /// Detailed description of the product condition.
+    #[serde(rename = "condition_description", skip_serializing_if = "Option::is_none")]
+    pub condition_description: Option<String>,
+    /// Flag used to determine whether the product condition is shown to the customer on the product page.
+    #[serde(rename = "allow_display_condition", skip_serializing_if = "Option::is_none")]
+    pub allow_display_condition: Option<bool>,
+    /// Identifies the payment method (such as PayPal) that the seller will accept when the buyer pays for the item. Look at cart.info method response for allowed values.<hr><div style=\"font-style:normal\">Param structure:<div style=\"margin-left: 2%;\"><code style=\"padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;\">payment_methods[0] = string</br>payment_methods[1] = string</br></code></div></div>
+    #[serde(rename = "payment_methods", skip_serializing_if = "Option::is_none")]
+    pub payment_methods: Option<Vec<String>>,
+    /// Valid PayPal email address for the PayPal account that the seller will use if they offer PayPal as a payment method for the listing.
+    #[serde(rename = "paypal_email", skip_serializing_if = "Option::is_none")]
+    pub paypal_email: Option<String>,
+    /// The numeric ID of the shipping template associated with the products in Etsy. You can find possible values in the \"cart.info\" API method response, in the field shipping_zones[]->id.
+    #[serde(rename = "shipping_template_id", skip_serializing_if = "Option::is_none")]
+    pub shipping_template_id: Option<i32>,
+    /// The shipping details, including flat and calculated shipping costs and shipping insurance costs. Look at cart.info method response for allowed values.<hr><div style=\"font-style:normal\">Param structure:<div style=\"margin-left: 2%;\"><code style=\"padding:0; background-color:#ffffff;font-size:85%;font-family:monospace;\">shipping_details[0][<b>shipping_type</b>] = string </br>shipping_details[0][<b>shipping_service</b>] = string</br>shipping_details[0][<b>shipping_cost</b>] = decimal</br>shipping_details[1][<b>shipping_type</b>] = string </br>shipping_details[1][<b>shipping_service</b>] = string</br>shipping_details[1][<b>shipping_cost</b>] = decimal</br></code></div></div>
+    #[serde(rename = "shipping_details", skip_serializing_if = "Option::is_none")]
+    pub shipping_details: Option<Vec<models::ProductAddShippingDetailsInner>>,
     /// Specifies product's free shipping flag that has to be added
     #[serde(rename = "is_free_shipping", skip_serializing_if = "Option::is_none")]
     pub is_free_shipping: Option<bool>,
-    /// Set stock status
-    #[serde(rename = "in_stock", skip_serializing_if = "Option::is_none")]
-    pub in_stock: Option<bool>,
     /// The delivery promise that applies to offer
     #[serde(rename = "delivery_code", skip_serializing_if = "Option::is_none")]
     pub delivery_code: Option<String>,
-    /// Groups all variations, that you want to combine into one product.
-    #[serde(rename = "product_reference", skip_serializing_if = "Option::is_none")]
-    pub product_reference: Option<String>,
     /// Defines the type of the delivery.
     #[serde(rename = "delivery_type", skip_serializing_if = "Option::is_none")]
     pub delivery_type: Option<String>,
     /// Defines delivery time in days.
     #[serde(rename = "delivery_time", skip_serializing_if = "Option::is_none")]
     pub delivery_time: Option<i32>,
-    #[serde(rename = "size_chart", skip_serializing_if = "Option::is_none")]
-    pub size_chart: Option<Box<models::ProductAddSizeChart>>,
-    /// An array of product certifications. The list of possible certifications can be obtained using the \"<i>category.info</i>\" method (<i>additional_fields->rules->product_certifications</i>).
-    #[serde(rename = "certifications", skip_serializing_if = "Option::is_none")]
-    pub certifications: Option<Vec<models::ProductAddCertificationsInner>>,
     /// Defines delivery options for product by ids.
     #[serde(rename = "delivery_option_ids", skip_serializing_if = "Option::is_none")]
     pub delivery_option_ids: Option<String>,
-    #[serde(rename = "manufacturer_info", skip_serializing_if = "Option::is_none")]
-    pub manufacturer_info: Option<Box<models::ProductAddManufacturerInfo>>,
-    /// An enumerated string for the era in which the maker made the product.
-    #[serde(rename = "when_made", skip_serializing_if = "Option::is_none")]
-    pub when_made: Option<String>,
-    /// If true, it indicates the product as a supply, otherwise it indicates that it is a finished product.
-    #[serde(rename = "is_supply", skip_serializing_if = "Option::is_none")]
-    pub is_supply: Option<bool>,
-    /// A list of material strings for materials used in the product.
-    #[serde(rename = "materials", skip_serializing_if = "Option::is_none")]
-    pub materials: Option<Vec<String>>,
-    /// When true, automatically renews a listing upon its expiration.
-    #[serde(rename = "auto_renew", skip_serializing_if = "Option::is_none")]
-    pub auto_renew: Option<bool>,
-    /// Flag used to determine whether the product condition is shown to the customer on the product page.
-    #[serde(rename = "allow_display_condition", skip_serializing_if = "Option::is_none")]
-    pub allow_display_condition: Option<bool>,
-    /// The minimum quantity an order must contain, to be eligible to purchase this product.
-    #[serde(rename = "min_order_quantity", skip_serializing_if = "Option::is_none")]
-    pub min_order_quantity: Option<f64>,
-    /// The maximum quantity an order can contain when purchasing the product.
-    #[serde(rename = "max_order_quantity", skip_serializing_if = "Option::is_none")]
-    pub max_order_quantity: Option<f64>,
+    #[serde(rename = "package_details", skip_serializing_if = "Option::is_none")]
+    pub package_details: Option<Box<models::ProductAddPackageDetails>>,
+    /// Defines product's logistic channel settings
+    #[serde(rename = "logistic_info", skip_serializing_if = "Option::is_none")]
+    pub logistic_info: Option<Vec<models::ProductAddLogisticInfoInner>>,
+    /// Describes the number of days the seller wants the listing to be active. Look at cart.info method response for allowed values.
+    #[serde(rename = "listing_duration", skip_serializing_if = "Option::is_none")]
+    pub listing_duration: Option<String>,
+    /// Indicates the selling format of the marketplace listing.
+    #[serde(rename = "listing_type", skip_serializing_if = "Option::is_none")]
+    pub listing_type: Option<String>,
+    /// Indicates whether the seller allows the buyer to return the item.
+    #[serde(rename = "return_accepted", skip_serializing_if = "Option::is_none")]
+    pub return_accepted: Option<bool>,
+    #[serde(rename = "seller_profiles", skip_serializing_if = "Option::is_none")]
+    pub seller_profiles: Option<Box<models::ProductAddSellerProfiles>>,
+    /// This allows buyers to remain anonymous when the bid or buy an item.
+    #[serde(rename = "auction_confidentiality_level", skip_serializing_if = "Option::is_none")]
+    pub auction_confidentiality_level: Option<String>,
+    #[serde(rename = "best_offer", skip_serializing_if = "Option::is_none")]
+    pub best_offer: Option<Box<models::ProductAddBestOffer>>,
+    /// Defines product's production partner ids that has to be added
+    #[serde(rename = "production_partner_ids", skip_serializing_if = "Option::is_none")]
+    pub production_partner_ids: Option<String>,
+    /// String containing the JSON representation of the supplied data
+    #[serde(rename = "marketplace_item_properties", skip_serializing_if = "Option::is_none")]
+    pub marketplace_item_properties: Option<String>,
+    /// Is cache clear required
+    #[serde(rename = "clear_cache", skip_serializing_if = "Option::is_none")]
+    pub clear_cache: Option<bool>,
+    /// Specifies the number of product's reviews
+    #[serde(rename = "viewed_count", skip_serializing_if = "Option::is_none")]
+    pub viewed_count: Option<i32>,
+    /// Defines how many times the product was ordered
+    #[serde(rename = "ordered_count", skip_serializing_if = "Option::is_none")]
+    pub ordered_count: Option<i32>,
 }
 
 impl ProductAdd {
@@ -350,116 +350,116 @@ impl ProductAdd {
         ProductAdd {
             name,
             model,
-            sku: None,
             description,
             price,
-            old_price: None,
-            special_price: None,
-            cost_price: None,
-            fixed_cost_shipping_price: None,
-            sprice_create: None,
-            sprice_modified: None,
-            sprice_expire: None,
-            tier_prices: None,
-            group_prices: None,
+            sku: None,
+            short_description: None,
+            r#type: None,
+            status: None,
+            visible: None,
+            category_id: None,
+            categories_ids: None,
+            product_class: None,
+            product_type: None,
+            is_virtual: None,
+            downloadable: None,
+            is_supply: None,
             available_for_view: None,
             available_for_sale: None,
+            store_id: None,
+            stores_ids: None,
+            lang_id: None,
+            old_price: None,
+            special_price: None,
+            wholesale_price: None,
+            cost_price: None,
+            fixed_cost_shipping_price: None,
+            tier_prices: None,
+            group_prices: None,
+            buyitnow_price: None,
+            reserve_price: None,
+            quantity: None,
+            in_stock: None,
+            manage_stock: None,
+            warehouse_id: None,
+            backorder_status: None,
+            min_order_quantity: None,
+            max_order_quantity: None,
             weight: None,
+            weight_unit: None,
             width: None,
             height: None,
             length: None,
-            weight_unit: None,
             dimensions_unit: None,
-            short_description: None,
-            warehouse_id: None,
-            backorder_status: None,
-            quantity: None,
-            downloadable: None,
-            wholesale_price: None,
-            created_at: None,
-            manufacturer: None,
-            manufacturer_id: None,
-            categories_ids: None,
-            related_products_ids: None,
-            up_sell_products_ids: None,
-            cross_sell_products_ids: None,
-            tax_class_id: None,
-            r#type: None,
-            meta_title: None,
-            meta_keywords: None,
-            meta_description: None,
-            url: None,
-            lang_id: None,
-            stores_ids: None,
-            category_id: None,
-            viewed_count: None,
-            ordered_count: None,
-            attribute_set_name: None,
-            attribute_name: None,
-            shipping_template_id: None,
-            production_partner_ids: None,
-            condition: None,
-            listing_duration: None,
-            listing_type: None,
-            payment_methods: None,
-            return_accepted: None,
-            shipping_details: None,
-            paypal_email: None,
-            seller_profiles: None,
-            package_details: None,
-            best_offer: None,
-            sales_tax: None,
             barcode: None,
             upc: None,
             ean: None,
             isbn: None,
-            specifics: None,
+            gtin: None,
+            mpn: None,
+            asin: None,
+            product_reference: None,
+            harmonized_system_code: None,
+            country_of_origin: None,
+            manufacturer: None,
+            manufacturer_id: None,
+            manufacturer_info: None,
+            brand_name: None,
             image_url: None,
             image_name: None,
             additional_image_urls: None,
-            reserve_price: None,
-            buyitnow_price: None,
-            condition_description: None,
-            auction_confidentiality_level: None,
-            logistic_info: None,
-            avail_from: None,
-            tags: None,
-            clear_cache: None,
-            asin: None,
-            gtin: None,
-            mpn: None,
-            taxable: None,
-            visible: None,
-            status: None,
-            seo_url: None,
-            product_class: None,
-            product_type: None,
-            marketplace_item_properties: None,
-            manage_stock: None,
-            harmonized_system_code: None,
-            country_of_origin: None,
             files: None,
+            size_chart: None,
+            related_products_ids: None,
+            up_sell_products_ids: None,
+            cross_sell_products_ids: None,
+            attribute_set_name: None,
+            attribute_name: None,
             search_keywords: None,
-            store_id: None,
-            brand_name: None,
-            is_virtual: None,
+            tags: None,
+            materials: None,
+            certifications: None,
+            specifics: None,
+            avail_from: None,
+            sprice_create: None,
+            sprice_modified: None,
+            sprice_expire: None,
+            created_at: None,
+            auto_renew: None,
+            when_made: None,
+            meta_title: None,
+            meta_keywords: None,
+            meta_description: None,
+            url: None,
+            seo_url: None,
+            tax_class_id: None,
+            taxable: None,
+            sales_tax: None,
+            condition: None,
+            condition_description: None,
+            allow_display_condition: None,
+            payment_methods: None,
+            paypal_email: None,
+            shipping_template_id: None,
+            shipping_details: None,
             is_free_shipping: None,
-            in_stock: None,
             delivery_code: None,
-            product_reference: None,
             delivery_type: None,
             delivery_time: None,
-            size_chart: None,
-            certifications: None,
             delivery_option_ids: None,
-            manufacturer_info: None,
-            when_made: None,
-            is_supply: None,
-            materials: None,
-            auto_renew: None,
-            allow_display_condition: None,
-            min_order_quantity: None,
-            max_order_quantity: None,
+            package_details: None,
+            logistic_info: None,
+            listing_duration: None,
+            listing_type: None,
+            return_accepted: None,
+            seller_profiles: None,
+            auction_confidentiality_level: None,
+            best_offer: None,
+            production_partner_ids: None,
+            marketplace_item_properties: None,
+            clear_cache: None,
+            viewed_count: None,
+            ordered_count: None,
         }
     }
 }

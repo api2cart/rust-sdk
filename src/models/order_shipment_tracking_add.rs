@@ -13,9 +13,6 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OrderShipmentTrackingAdd {
-    /// Store Id
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
     /// Defines the order id
     #[serde(rename = "order_id", skip_serializing_if = "Option::is_none")]
     pub order_id: Option<String>,
@@ -25,6 +22,9 @@ pub struct OrderShipmentTrackingAdd {
     /// Defines tracking carrier id
     #[serde(rename = "carrier_id", skip_serializing_if = "Option::is_none")]
     pub carrier_id: Option<String>,
+    /// Store Id
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
     /// Defines name of the company which provides shipment tracking
     #[serde(rename = "tracking_provider", skip_serializing_if = "Option::is_none")]
     pub tracking_provider: Option<String>,
@@ -42,10 +42,10 @@ pub struct OrderShipmentTrackingAdd {
 impl OrderShipmentTrackingAdd {
     pub fn new(shipment_id: String, tracking_number: String) -> OrderShipmentTrackingAdd {
         OrderShipmentTrackingAdd {
-            store_id: None,
             order_id: None,
             shipment_id,
             carrier_id: None,
+            store_id: None,
             tracking_provider: None,
             tracking_number,
             tracking_link: None,

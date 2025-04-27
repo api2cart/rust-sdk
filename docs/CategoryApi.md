@@ -21,7 +21,7 @@ Method | HTTP request | Description
 
 ## category_add
 
-> models::CategoryAdd200Response category_add(name, parent_id, stores_ids, store_id, lang_id, avail, sort_order, created_time, modified_time, description, short_description, meta_title, meta_description, meta_keywords, seo_url)
+> models::CategoryAdd200Response category_add(name, description, short_description, parent_id, avail, created_time, modified_time, sort_order, meta_title, meta_description, meta_keywords, seo_url, store_id, stores_ids, lang_id)
 category.add
 
 Add new category in store
@@ -32,20 +32,20 @@ Add new category in store
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **name** | **String** | Defines category's name that has to be added | [required] |
-**parent_id** | Option<**String**> | Adds categories specified by parent id |  |
-**stores_ids** | Option<**String**> | Create category in the stores that is specified by comma-separated stores' id |  |
-**store_id** | Option<**String**> | Store Id |  |
-**lang_id** | Option<**String**> | Language id |  |
-**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
-**sort_order** | Option<**i32**> | Sort number in the list |  |[default to 0]
-**created_time** | Option<**String**> | Entity's date creation |  |
-**modified_time** | Option<**String**> | Entity's date modification |  |
 **description** | Option<**String**> | Defines category's description |  |
 **short_description** | Option<**String**> | Defines short description |  |
+**parent_id** | Option<**String**> | Adds categories specified by parent id |  |
+**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
+**created_time** | Option<**String**> | Entity's date creation |  |
+**modified_time** | Option<**String**> | Entity's date modification |  |
+**sort_order** | Option<**i32**> | Sort number in the list |  |[default to 0]
 **meta_title** | Option<**String**> | Defines unique meta title for each entity |  |
 **meta_description** | Option<**String**> | Defines unique meta description of a entity |  |
 **meta_keywords** | Option<**String**> | Defines unique meta keywords for each entity |  |
 **seo_url** | Option<**String**> | Defines unique category's URL for SEO |  |
+**store_id** | Option<**String**> | Store Id |  |
+**stores_ids** | Option<**String**> | Create category in the stores that is specified by comma-separated stores' id |  |
+**lang_id** | Option<**String**> | Language id |  |
 
 ### Return type
 
@@ -95,7 +95,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_assign
 
-> models::CartConfigUpdate200Response category_assign(product_id, category_id, store_id)
+> models::CartConfigUpdate200Response category_assign(category_id, product_id, store_id)
 category.assign
 
 Assign category to product
@@ -105,8 +105,8 @@ Assign category to product
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**product_id** | **String** | Defines category assign to the product, specified by product id | [required] |
 **category_id** | **String** | Defines category assign, specified by category id | [required] |
+**product_id** | **String** | Defines category assign to the product, specified by product id | [required] |
 **store_id** | Option<**String**> | Store Id |  |
 
 ### Return type
@@ -127,7 +127,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_count
 
-> models::CategoryCount200Response category_count(parent_id, store_id, lang_id, created_from, created_to, modified_from, modified_to, avail, product_type, find_value, find_where, report_request_id, disable_report_cache)
+> models::CategoryCount200Response category_count(parent_id, store_id, lang_id, avail, created_from, created_to, modified_from, modified_to, product_type, find_value, find_where, report_request_id, disable_report_cache)
 category.count
 
 Count categories in store.
@@ -140,11 +140,11 @@ Name | Type | Description  | Required | Notes
 **parent_id** | Option<**String**> | Counts categories specified by parent id |  |
 **store_id** | Option<**String**> | Counts category specified by store id |  |
 **lang_id** | Option<**String**> | Counts category specified by language id |  |
+**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
 **product_type** | Option<**String**> | A categorization for the product |  |
 **find_value** | Option<**String**> | Entity search that is specified by some value |  |
 **find_where** | Option<**String**> | Counts categories that are searched specified by field |  |
@@ -234,7 +234,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_image_add
 
-> models::CategoryImageAdd200Response category_image_add(category_id, image_name, url, r#type, label, mime, position, store_id)
+> models::CategoryImageAdd200Response category_image_add(category_id, image_name, url, r#type, store_id, label, mime, position)
 category.image.add
 
 Add image to category
@@ -248,10 +248,10 @@ Name | Type | Description  | Required | Notes
 **image_name** | **String** | Defines image's name | [required] |
 **url** | **String** | Defines URL of the image that has to be added | [required] |
 **r#type** | **String** | Defines image's types that are specified by comma-separated list | [required] |
+**store_id** | Option<**String**> | Store Id |  |
 **label** | Option<**String**> | Defines alternative text that has to be attached to the picture |  |
 **mime** | Option<**String**> | Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. |  |
 **position** | Option<**i32**> | Defines image’s position in the list |  |[default to 0]
-**store_id** | Option<**String**> | Store Id |  |
 
 ### Return type
 
@@ -303,7 +303,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_info
 
-> models::CategoryInfo200Response category_info(id, params, response_fields, exclude, store_id, lang_id, schema_type, report_request_id, disable_report_cache)
+> models::CategoryInfo200Response category_info(id, store_id, lang_id, schema_type, response_fields, params, exclude, report_request_id, disable_report_cache)
 category.info
 
 Get category info about category ID*** or specify other category ID.
@@ -314,12 +314,12 @@ Get category info about category ID*** or specify other category ID.
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Retrieves category's info specified by category id | [required] |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,parent_id,name,description]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **store_id** | Option<**String**> | Retrieves category info  specified by store id |  |
 **lang_id** | Option<**String**> | Retrieves category info  specified by language id |  |
 **schema_type** | Option<**String**> | The name of the requirements set for the provided schema. |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,parent_id,name,description]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **report_request_id** | Option<**String**> | Report request id |  |
 **disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
 
@@ -341,7 +341,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_list
 
-> models::ModelResponseCategoryList category_list(start, count, page_cursor, parent_id, params, response_fields, exclude, store_id, lang_id, created_from, created_to, modified_from, modified_to, avail, product_type, find_value, find_where, report_request_id, disable_report_cache, disable_cache)
+> models::ModelResponseCategoryList category_list(start, count, page_cursor, store_id, lang_id, parent_id, avail, product_type, created_from, created_to, modified_from, modified_to, find_value, find_where, response_fields, params, exclude, report_request_id, disable_report_cache, disable_cache)
 category.list
 
 Get list of categories from store.
@@ -354,20 +354,20 @@ Name | Type | Description  | Required | Notes
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
-**parent_id** | Option<**String**> | Retrieves categories specified by parent id |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,parent_id,name,description]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **store_id** | Option<**String**> | Retrieves categories specified by store id |  |
 **lang_id** | Option<**String**> | Retrieves categorys specified by language id |  |
+**parent_id** | Option<**String**> | Retrieves categories specified by parent id |  |
+**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
+**product_type** | Option<**String**> | A categorization for the product |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
-**product_type** | Option<**String**> | A categorization for the product |  |
 **find_value** | Option<**String**> | Entity search that is specified by some value |  |
 **find_where** | Option<**String**> | Category search that is specified by field |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,parent_id,name,description]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **report_request_id** | Option<**String**> | Report request id |  |
 **disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
 **disable_cache** | Option<**bool**> | Disable cache for current request |  |[default to false]
@@ -422,7 +422,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_update
 
-> models::AccountConfigUpdate200Response category_update(id, name, parent_id, stores_ids, avail, sort_order, modified_time, description, short_description, meta_title, meta_description, meta_keywords, seo_url, lang_id, store_id)
+> models::AccountConfigUpdate200Response category_update(id, name, description, short_description, parent_id, avail, sort_order, modified_time, meta_title, meta_description, meta_keywords, seo_url, store_id, stores_ids, lang_id)
 category.update
 
 Update category in store
@@ -434,19 +434,19 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Defines category update specified by category id | [required] |
 **name** | Option<**String**> | Defines new category’s name |  |
+**description** | Option<**String**> | Defines new category's description |  |
+**short_description** | Option<**String**> | Defines short description |  |
 **parent_id** | Option<**String**> | Defines new parent category id |  |
-**stores_ids** | Option<**String**> | Update category in the stores that is specified by comma-separated stores' id |  |
 **avail** | Option<**bool**> | Defines category's visibility status |  |
 **sort_order** | Option<**i32**> | Sort number in the list |  |
 **modified_time** | Option<**String**> | Entity's date modification |  |
-**description** | Option<**String**> | Defines new category's description |  |
-**short_description** | Option<**String**> | Defines short description |  |
 **meta_title** | Option<**String**> | Defines unique meta title for each entity |  |
 **meta_description** | Option<**String**> | Defines unique meta description of a entity |  |
 **meta_keywords** | Option<**String**> | Defines unique meta keywords for each entity |  |
 **seo_url** | Option<**String**> | Defines unique category's URL for SEO |  |
-**lang_id** | Option<**String**> | Language id |  |
 **store_id** | Option<**String**> | Store Id |  |
+**stores_ids** | Option<**String**> | Update category in the stores that is specified by comma-separated stores' id |  |
+**lang_id** | Option<**String**> | Language id |  |
 
 ### Return type
 

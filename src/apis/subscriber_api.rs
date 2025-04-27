@@ -24,21 +24,21 @@ pub enum SubscriberListError {
 
 
 /// Get subscribers list
-pub async fn subscriber_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, subscribed: Option<bool>, store_id: Option<&str>, email: Option<&str>, params: Option<&str>, exclude: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, page_cursor: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseSubscriberList, Error<SubscriberListError>> {
+pub async fn subscriber_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, subscribed: Option<bool>, store_id: Option<&str>, email: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseSubscriberList, Error<SubscriberListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
+    let p_page_cursor = page_cursor;
     let p_subscribed = subscribed;
     let p_store_id = store_id;
     let p_email = email;
-    let p_params = params;
-    let p_exclude = exclude;
     let p_created_from = created_from;
     let p_created_to = created_to;
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
-    let p_page_cursor = page_cursor;
     let p_response_fields = response_fields;
+    let p_params = params;
+    let p_exclude = exclude;
 
     let uri_str = format!("{}/subscriber.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -49,6 +49,9 @@ pub async fn subscriber_list(configuration: &configuration::Configuration, start
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_subscribed {
         req_builder = req_builder.query(&[("subscribed", &param_value.to_string())]);
     }
@@ -57,12 +60,6 @@ pub async fn subscriber_list(configuration: &configuration::Configuration, start
     }
     if let Some(ref param_value) = p_email {
         req_builder = req_builder.query(&[("email", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
@@ -76,11 +73,14 @@ pub async fn subscriber_list(configuration: &configuration::Configuration, start
     if let Some(ref param_value) = p_modified_to {
         req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_page_cursor {
-        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_exclude {
+        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

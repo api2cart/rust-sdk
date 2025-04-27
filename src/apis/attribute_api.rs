@@ -157,10 +157,10 @@ pub async fn attribute_add(configuration: &configuration::Configuration, r#type:
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     req_builder = req_builder.query(&[("type", &p_type.to_string())]);
+    req_builder = req_builder.query(&[("name", &p_name.to_string())]);
     if let Some(ref param_value) = p_code {
         req_builder = req_builder.query(&[("code", &param_value.to_string())]);
     }
-    req_builder = req_builder.query(&[("name", &p_name.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
@@ -351,13 +351,13 @@ pub async fn attribute_assign_set(configuration: &configuration::Configuration, 
 }
 
 /// Get attribute_set list
-pub async fn attribute_attributeset_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, params: Option<&str>, exclude: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseAttributeAttributesetList, Error<AttributeAttributesetListError>> {
+pub async fn attribute_attributeset_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseAttributeAttributesetList, Error<AttributeAttributesetListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
+    let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
-    let p_response_fields = response_fields;
 
     let uri_str = format!("{}/attribute.attributeset.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -368,14 +368,14 @@ pub async fn attribute_attributeset_list(configuration: &configuration::Configur
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -491,10 +491,10 @@ pub async fn attribute_delete(configuration: &configuration::Configuration, id: 
     let uri_str = format!("{}/attribute.delete.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
 
+    req_builder = req_builder.query(&[("id", &p_id.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
-    req_builder = req_builder.query(&[("id", &p_id.to_string())]);
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -531,15 +531,15 @@ pub async fn attribute_delete(configuration: &configuration::Configuration, id: 
 }
 
 /// Get attribute group list
-pub async fn attribute_group_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, lang_id: Option<&str>, params: Option<&str>, exclude: Option<&str>, response_fields: Option<&str>, attribute_set_id: Option<&str>) -> Result<models::ModelResponseAttributeGroupList, Error<AttributeGroupListError>> {
+pub async fn attribute_group_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, attribute_set_id: Option<&str>, lang_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseAttributeGroupList, Error<AttributeGroupListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
+    let p_attribute_set_id = attribute_set_id;
     let p_lang_id = lang_id;
+    let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
-    let p_response_fields = response_fields;
-    let p_attribute_set_id = attribute_set_id;
 
     let uri_str = format!("{}/attribute.group.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -550,20 +550,20 @@ pub async fn attribute_group_list(configuration: &configuration::Configuration, 
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_attribute_set_id {
+        req_builder = req_builder.query(&[("attribute_set_id", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_attribute_set_id {
-        req_builder = req_builder.query(&[("attribute_set_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -601,15 +601,15 @@ pub async fn attribute_group_list(configuration: &configuration::Configuration, 
 }
 
 /// Get information about a specific global attribute by its ID.
-pub async fn attribute_info(configuration: &configuration::Configuration, id: &str, attribute_set_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, params: Option<&str>, exclude: Option<&str>, response_fields: Option<&str>) -> Result<models::AttributeInfo200Response, Error<AttributeInfoError>> {
+pub async fn attribute_info(configuration: &configuration::Configuration, id: &str, attribute_set_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::AttributeInfo200Response, Error<AttributeInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_attribute_set_id = attribute_set_id;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
+    let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
-    let p_response_fields = response_fields;
 
     let uri_str = format!("{}/attribute.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -624,14 +624,14 @@ pub async fn attribute_info(configuration: &configuration::Configuration, id: &s
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -669,21 +669,21 @@ pub async fn attribute_info(configuration: &configuration::Configuration, id: &s
 }
 
 /// Get a list of global attributes.
-pub async fn attribute_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, r#type: Option<&str>, attribute_ids: Option<&str>, attribute_set_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, params: Option<&str>, exclude: Option<&str>, response_fields: Option<&str>, visible: Option<bool>, required: Option<bool>, system: Option<bool>) -> Result<models::ModelResponseAttributeList, Error<AttributeListError>> {
+pub async fn attribute_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, attribute_ids: Option<&str>, attribute_set_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, r#type: Option<&str>, visible: Option<bool>, required: Option<bool>, system: Option<bool>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseAttributeList, Error<AttributeListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
-    let p_type = r#type;
     let p_attribute_ids = attribute_ids;
     let p_attribute_set_id = attribute_set_id;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
-    let p_params = params;
-    let p_exclude = exclude;
-    let p_response_fields = response_fields;
+    let p_type = r#type;
     let p_visible = visible;
     let p_required = required;
     let p_system = system;
+    let p_response_fields = response_fields;
+    let p_params = params;
+    let p_exclude = exclude;
 
     let uri_str = format!("{}/attribute.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -693,9 +693,6 @@ pub async fn attribute_list(configuration: &configuration::Configuration, start:
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_type {
-        req_builder = req_builder.query(&[("type", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_attribute_ids {
         req_builder = req_builder.query(&[("attribute_ids", &param_value.to_string())]);
@@ -709,14 +706,8 @@ pub async fn attribute_list(configuration: &configuration::Configuration, start:
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    if let Some(ref param_value) = p_type {
+        req_builder = req_builder.query(&[("type", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_visible {
         req_builder = req_builder.query(&[("visible", &param_value.to_string())]);
@@ -726,6 +717,15 @@ pub async fn attribute_list(configuration: &configuration::Configuration, start:
     }
     if let Some(ref param_value) = p_system {
         req_builder = req_builder.query(&[("system", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_exclude {
+        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

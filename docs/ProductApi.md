@@ -121,7 +121,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_attribute_list
 
-> models::ModelResponseProductAttributeList product_attribute_list(product_id, attribute_id, variant_id, page_cursor, start, count, attribute_group_id, set_name, lang_id, store_id, sort_by, sort_direction, params, response_fields, exclude)
+> models::ModelResponseProductAttributeList product_attribute_list(product_id, start, count, page_cursor, attribute_id, variant_id, attribute_group_id, lang_id, store_id, set_name, sort_by, sort_direction, response_fields, params, exclude)
 product.attribute.list
 
 Get list of attributes and values.
@@ -132,19 +132,19 @@ Get list of attributes and values.
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **product_id** | **String** | Retrieves attributes specified by product id | [required] |
-**attribute_id** | Option<**String**> | Retrieves info for specified attribute_id |  |
-**variant_id** | Option<**String**> | Defines product's variants specified by variant id |  |
-**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
+**attribute_id** | Option<**String**> | Retrieves info for specified attribute_id |  |
+**variant_id** | Option<**String**> | Defines product's variants specified by variant id |  |
 **attribute_group_id** | Option<**String**> | Filter by attribute_group_id |  |
-**set_name** | Option<**String**> | Retrieves attributes specified by set_name in Magento |  |
 **lang_id** | Option<**String**> | Retrieves attributes specified by language id |  |
 **store_id** | Option<**String**> | Retrieves attributes specified by store id |  |
+**set_name** | Option<**String**> | Retrieves attributes specified by set_name in Magento |  |
 **sort_by** | Option<**String**> | Set field to sort by |  |[default to attribute_id]
 **sort_direction** | Option<**String**> | Set sorting direction |  |[default to asc]
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to attribute_id,name]
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to attribute_id,name]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
@@ -237,7 +237,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_brand_list
 
-> models::ModelResponseProductBrandList product_brand_list(start, count, page_cursor, params, brand_ids, exclude, category_id, store_id, lang_id, created_from, created_to, modified_from, modified_to, parent_id, response_fields, find_where, find_value)
+> models::ModelResponseProductBrandList product_brand_list(start, count, page_cursor, brand_ids, category_id, parent_id, store_id, lang_id, find_where, find_value, created_from, created_to, modified_from, modified_to, response_fields, params, exclude)
 product.brand.list
 
 Get list of brands from your store.
@@ -250,20 +250,20 @@ Name | Type | Description  | Required | Notes
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,short_description,active,url]
 **brand_ids** | Option<**String**> | Retrieves brands specified by brand ids |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **category_id** | Option<**String**> | Retrieves product brands specified by category id |  |
+**parent_id** | Option<**String**> | Retrieves brands specified by parent id |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
+**find_where** | Option<**String**> | Entity search that is specified by the comma-separated unique fields |  |
+**find_value** | Option<**String**> | Entity search that is specified by some value |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**parent_id** | Option<**String**> | Retrieves brands specified by parent id |  |
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**find_where** | Option<**String**> | Entity search that is specified by the comma-separated unique fields |  |
-**find_value** | Option<**String**> | Entity search that is specified by some value |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,short_description,active,url]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -316,7 +316,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_child_item_info
 
-> models::ProductChildItemInfo200Response product_child_item_info(product_id, id, params, response_fields, exclude, store_id, lang_id, currency_id, use_latest_api_version)
+> models::ProductChildItemInfo200Response product_child_item_info(product_id, id, store_id, lang_id, currency_id, response_fields, params, exclude, use_latest_api_version)
 product.child_item.info
 
 Get child for specific product.
@@ -328,12 +328,12 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **product_id** | **String** | Filter by parent product id | [required] |
 **id** | **String** | Entity id | [required] |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
 **currency_id** | Option<**String**> | Currency Id |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
 
 ### Return type
@@ -354,7 +354,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_child_item_list
 
-> models::ModelResponseProductChildItemList product_child_item_list(page_cursor, start, count, params, response_fields, exclude, created_from, created_to, modified_from, modified_to, product_id, product_ids, sku, store_id, lang_id, currency_id, avail_sale, find_value, find_where, report_request_id, disable_report_cache, use_latest_api_version, return_global)
+> models::ModelResponseProductChildItemList product_child_item_list(start, count, page_cursor, product_id, product_ids, sku, store_id, lang_id, currency_id, avail_sale, find_value, find_where, created_from, created_to, modified_from, modified_to, return_global, response_fields, params, exclude, report_request_id, disable_report_cache, use_latest_api_version)
 product.child_item.list
 
 Get a list of a product's child items, such as variants or bundle components. The total_count field in the response indicates the total number of items in the context of the current filter.
@@ -364,16 +364,9 @@ Get a list of a product's child items, such as variants or bundle components. Th
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**page_cursor** | Option<**String**> | Used to retrieve products child items via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**created_from** | Option<**String**> | Retrieve entities from their creation date |  |
-**created_to** | Option<**String**> | Retrieve entities to their creation date |  |
-**modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
-**modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
+**page_cursor** | Option<**String**> | Used to retrieve products child items via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **product_id** | Option<**String**> | Filter by parent product id |  |
 **product_ids** | Option<**String**> | Filter by parent product ids |  |
 **sku** | Option<**String**> | Filter by products variant's sku |  |
@@ -383,10 +376,17 @@ Name | Type | Description  | Required | Notes
 **avail_sale** | Option<**bool**> | Specifies the set of available/not available products for sale |  |
 **find_value** | Option<**String**> | Entity search that is specified by some value |  |
 **find_where** | Option<**String**> | Child products search that is specified by field |  |
+**created_from** | Option<**String**> | Retrieve entities from their creation date |  |
+**created_to** | Option<**String**> | Retrieve entities to their creation date |  |
+**modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
+**modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
+**return_global** | Option<**bool**> | Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned. |  |[default to false]
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **report_request_id** | Option<**String**> | Report request id |  |
 **disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
 **use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
-**return_global** | Option<**bool**> | Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned. |  |[default to false]
 
 ### Return type
 
@@ -406,7 +406,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_count
 
-> models::ProductCount200Response product_count(category_id, created_from, created_to, modified_from, modified_to, avail_view, avail_sale, store_id, lang_id, product_ids, since_id, report_request_id, disable_report_cache, brand_name, product_attributes, status, r#type, find_value, find_where, use_latest_api_version, return_global, categories_ids)
+> models::ProductCount200Response product_count(product_ids, since_id, categories_ids, category_id, store_id, lang_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, brand_name, product_attributes, status, r#type, find_value, find_where, report_request_id, return_global, disable_report_cache, use_latest_api_version)
 product.count
 
 Count products in store.
@@ -416,28 +416,28 @@ Count products in store.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
+**product_ids** | Option<**String**> | Counts products specified by product ids |  |
+**since_id** | Option<**String**> | Retrieve entities starting from the specified id. |  |
+**categories_ids** | Option<**String**> | Defines product add that is specified by comma-separated categories id |  |
 **category_id** | Option<**String**> | Counts products specified by category id |  |
+**store_id** | Option<**String**> | Counts products specified by store id |  |
+**lang_id** | Option<**String**> | Counts products specified by language id |  |
+**avail_view** | Option<**bool**> | Specifies the set of visible/invisible products |  |
+**avail_sale** | Option<**bool**> | Specifies the set of available/not available products for sale |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**avail_view** | Option<**bool**> | Specifies the set of visible/invisible products |  |
-**avail_sale** | Option<**bool**> | Specifies the set of available/not available products for sale |  |
-**store_id** | Option<**String**> | Counts products specified by store id |  |
-**lang_id** | Option<**String**> | Counts products specified by language id |  |
-**product_ids** | Option<**String**> | Counts products specified by product ids |  |
-**since_id** | Option<**String**> | Retrieve entities starting from the specified id. |  |
-**report_request_id** | Option<**String**> | Report request id |  |
-**disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
 **brand_name** | Option<**String**> | Retrieves brands specified by brand name |  |
 **product_attributes** | Option<[**Vec<String>**](String.md)> | Defines product attributes |  |
 **status** | Option<**String**> | Defines product's status |  |
 **r#type** | Option<**String**> | Defines products's type |  |
 **find_value** | Option<**String**> | Entity search that is specified by some value |  |
 **find_where** | Option<**String**> | Counts products that are searched specified by field |  |
-**use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
+**report_request_id** | Option<**String**> | Report request id |  |
 **return_global** | Option<**bool**> | Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned. |  |[default to false]
-**categories_ids** | Option<**String**> | Defines product add that is specified by comma-separated categories id |  |
+**disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
+**use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
 
 ### Return type
 
@@ -493,7 +493,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_currency_list
 
-> models::ModelResponseProductCurrencyList product_currency_list(start, count, params, page_cursor, exclude, response_fields, default, avail)
+> models::ModelResponseProductCurrencyList product_currency_list(start, count, page_cursor, default, avail, response_fields, params, exclude)
 product.currency.list
 
 Get list of currencies
@@ -505,12 +505,12 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to name,iso3,default,avail]
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **default** | Option<**bool**> | Specifies the set of default/not default currencies |  |
 **avail** | Option<**bool**> | Specifies the set of available/not available currencies |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to name,iso3,default,avail]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -715,7 +715,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_image_update
 
-> models::ProductImageUpdate200Response product_image_update(product_id, id, variant_ids, image_name, r#type, label, position, store_id, lang_id, hidden)
+> models::ProductImageUpdate200Response product_image_update(product_id, id, variant_ids, store_id, lang_id, image_name, r#type, label, position, hidden)
 product.image.update
 
 Update details of image
@@ -728,12 +728,12 @@ Name | Type | Description  | Required | Notes
 **product_id** | **String** | Defines product id where the image should be updated | [required] |
 **id** | **String** | Defines image update specified by image id | [required] |
 **variant_ids** | Option<**String**> | Defines product's variants ids |  |
+**store_id** | Option<**String**> | Store Id |  |
+**lang_id** | Option<**String**> | Language id |  |
 **image_name** | Option<**String**> | Defines image's name |  |
 **r#type** | Option<**String**> | Defines image's types that are specified by comma-separated list |  |[default to additional]
 **label** | Option<**String**> | Defines alternative text that has to be attached to the picture |  |
 **position** | Option<**i32**> | Defines image’s position in the list |  |
-**store_id** | Option<**String**> | Store Id |  |
-**lang_id** | Option<**String**> | Language id |  |
 **hidden** | Option<**bool**> | Define is hide image |  |
 
 ### Return type
@@ -754,7 +754,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_info
 
-> models::ProductInfo200Response product_info(id, params, response_fields, exclude, store_id, lang_id, currency_id, report_request_id, disable_report_cache, use_latest_api_version)
+> models::ProductInfo200Response product_info(id, store_id, lang_id, currency_id, response_fields, params, exclude, report_request_id, disable_report_cache, use_latest_api_version)
 product.info
 
 Get information about a specific product by its ID. In the case of a multistore configuration, use the store_id filter to get a response in the context of a specific store.
@@ -765,12 +765,12 @@ Get information about a specific product by its ID. In the case of a multistore 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Retrieves product's info specified by product id | [required] |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description,price,categories_ids]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **store_id** | Option<**String**> | Retrieves product info specified by store id |  |
 **lang_id** | Option<**String**> | Retrieves product info specified by language id |  |
 **currency_id** | Option<**String**> | Currency Id |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description,price,categories_ids]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **report_request_id** | Option<**String**> | Report request id |  |
 **disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
 **use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
@@ -793,7 +793,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_list
 
-> models::ModelResponseProductList product_list(page_cursor, start, count, params, response_fields, exclude, category_id, created_from, created_to, modified_from, modified_to, avail_view, avail_sale, store_id, lang_id, currency_id, product_ids, since_id, report_request_id, disable_report_cache, sort_by, sort_direction, sku, disable_cache, brand_name, product_attributes, status, r#type, find_value, find_where, use_latest_api_version, return_global, categories_ids)
+> models::ModelResponseProductList product_list(start, count, page_cursor, product_ids, since_id, categories_ids, category_id, store_id, lang_id, currency_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, sku, brand_name, product_attributes, status, r#type, find_value, find_where, return_global, params, response_fields, exclude, sort_by, sort_direction, report_request_id, disable_cache, disable_report_cache, use_latest_api_version)
 product.list
 
 Get list of products from your store. Returns 10 products by default.
@@ -803,39 +803,39 @@ Get list of products from your store. Returns 10 products by default.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**page_cursor** | Option<**String**> | Used to retrieve products via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description,price,categories_ids]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
+**page_cursor** | Option<**String**> | Used to retrieve products via cursor-based pagination (it can't be used with any other filtering parameter) |  |
+**product_ids** | Option<**String**> | Retrieves products specified by product ids |  |
+**since_id** | Option<**String**> | Retrieve entities starting from the specified id. |  |
+**categories_ids** | Option<**String**> | Retrieves products specified by categories ids |  |
 **category_id** | Option<**String**> | Retrieves products specified by category id |  |
+**store_id** | Option<**String**> | Retrieves products specified by store id |  |
+**lang_id** | Option<**String**> | Retrieves products specified by language id |  |
+**currency_id** | Option<**String**> | Currency Id |  |
+**avail_view** | Option<**bool**> | Specifies the set of visible/invisible products |  |
+**avail_sale** | Option<**bool**> | Specifies the set of available/not available products for sale |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**avail_view** | Option<**bool**> | Specifies the set of visible/invisible products |  |
-**avail_sale** | Option<**bool**> | Specifies the set of available/not available products for sale |  |
-**store_id** | Option<**String**> | Retrieves products specified by store id |  |
-**lang_id** | Option<**String**> | Retrieves products specified by language id |  |
-**currency_id** | Option<**String**> | Currency Id |  |
-**product_ids** | Option<**String**> | Retrieves products specified by product ids |  |
-**since_id** | Option<**String**> | Retrieve entities starting from the specified id. |  |
-**report_request_id** | Option<**String**> | Report request id |  |
-**disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
-**sort_by** | Option<**String**> | Set field to sort by |  |[default to id]
-**sort_direction** | Option<**String**> | Set sorting direction |  |[default to asc]
 **sku** | Option<**String**> | Filter by product's sku |  |
-**disable_cache** | Option<**bool**> | Disable cache for current request |  |[default to false]
 **brand_name** | Option<**String**> | Retrieves brands specified by brand name |  |
 **product_attributes** | Option<[**Vec<String>**](String.md)> | Defines product attributes |  |
 **status** | Option<**String**> | Defines product's status |  |
 **r#type** | Option<**String**> | Defines products's type |  |
 **find_value** | Option<**String**> | Entity search that is specified by some value |  |
 **find_where** | Option<**String**> | Product search that is specified by field |  |
-**use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
 **return_global** | Option<**bool**> | Determines the type of products to be returned. If set to 'true', only global products will be returned; if set to 'false', only local products will be returned. |  |[default to false]
-**categories_ids** | Option<**String**> | Retrieves products specified by categories ids |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description,price,categories_ids]
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
+**sort_by** | Option<**String**> | Set field to sort by |  |[default to id]
+**sort_direction** | Option<**String**> | Set sorting direction |  |[default to asc]
+**report_request_id** | Option<**String**> | Report request id |  |
+**disable_cache** | Option<**bool**> | Disable cache for current request |  |[default to false]
+**disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
+**use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
 
 ### Return type
 
@@ -984,7 +984,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_option_list
 
-> models::ModelResponseProductOptionList product_option_list(start, count, params, exclude, response_fields, product_id, lang_id, store_id)
+> models::ModelResponseProductOptionList product_option_list(start, count, product_id, lang_id, store_id, response_fields, params, exclude)
 product.option.list
 
 Get list of options.
@@ -996,12 +996,12 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **product_id** | Option<**String**> | Retrieves products' options specified by product id |  |
 **lang_id** | Option<**String**> | Language id |  |
 **store_id** | Option<**String**> | Store Id |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -1251,7 +1251,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_review_list
 
-> models::ModelResponseProductReviewList product_review_list(product_id, start, page_cursor, count, ids, store_id, status, params, exclude, response_fields)
+> models::ModelResponseProductReviewList product_review_list(product_id, start, count, page_cursor, ids, store_id, status, response_fields, params, exclude)
 product.review.list
 
 Get reviews of a specific product.
@@ -1263,14 +1263,14 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **product_id** | **String** | Product id | [required] |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
-**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **ids** | Option<**String**> | Retrieves reviews specified by ids |  |
 **store_id** | Option<**String**> | Store Id |  |
 **status** | Option<**String**> | Defines status |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 
 ### Return type
 
@@ -1471,7 +1471,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_variant_count
 
-> models::ProductVariantCount200Response product_variant_count(product_id, created_from, created_to, modified_from, modified_to, category_id, store_id)
+> models::ProductVariantCount200Response product_variant_count(product_id, category_id, store_id, created_from, created_to, modified_from, modified_to)
 product.variant.count
 
 Get count variants.
@@ -1482,12 +1482,12 @@ Get count variants.
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **product_id** | **String** | Retrieves products' variants specified by product id | [required] |
+**category_id** | Option<**String**> | Counts products’ variants specified by category id |  |
+**store_id** | Option<**String**> | Retrieves variants specified by store id |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**category_id** | Option<**String**> | Counts products’ variants specified by category id |  |
-**store_id** | Option<**String**> | Retrieves variants specified by store id |  |
 
 ### Return type
 
@@ -1632,7 +1632,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_variant_info
 
-> models::ProductInfo200Response product_variant_info(id, params, exclude, store_id)
+> models::ProductInfo200Response product_variant_info(id, store_id, params, exclude)
 product.variant.info
 
 Get variant info. This method is deprecated, and its development is stopped. Please use \"product.child_item.info\" instead.
@@ -1643,9 +1643,9 @@ Get variant info. This method is deprecated, and its development is stopped. Ple
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Retrieves variant's info specified by variant id | [required] |
+**store_id** | Option<**String**> | Retrieves variant info specified by store id |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description,price]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**store_id** | Option<**String**> | Retrieves variant info specified by store id |  |
 
 ### Return type
 
@@ -1665,7 +1665,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_variant_list
 
-> models::ProductVariantList200Response product_variant_list(start, count, params, exclude, created_from, created_to, modified_from, modified_to, category_id, product_id, store_id)
+> models::ProductVariantList200Response product_variant_list(start, count, product_id, category_id, store_id, created_from, created_to, modified_from, modified_to, params, exclude)
 product.variant.list
 
 Get a list of variants. This method is deprecated, and its development is stopped. Please use \"product.child_item.list\" instead.
@@ -1677,15 +1677,15 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description,price]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
+**product_id** | Option<**String**> | Retrieves products' variants specified by product id |  |
+**category_id** | Option<**String**> | Retrieves products’ variants specified by category id |  |
+**store_id** | Option<**String**> | Retrieves variants specified by store id |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**category_id** | Option<**String**> | Retrieves products’ variants specified by category id |  |
-**product_id** | Option<**String**> | Retrieves products' variants specified by product id |  |
-**store_id** | Option<**String**> | Retrieves variants specified by store id |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,description,price]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 

@@ -186,14 +186,14 @@ pub async fn return_count(configuration: &configuration::Configuration, order_id
 }
 
 /// Retrieve return information.
-pub async fn return_info(configuration: &configuration::Configuration, id: &str, order_id: Option<&str>, store_id: Option<&str>, params: Option<&str>, exclude: Option<&str>, response_fields: Option<&str>) -> Result<models::ReturnInfo200Response, Error<ReturnInfoError>> {
+pub async fn return_info(configuration: &configuration::Configuration, id: &str, order_id: Option<&str>, store_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ReturnInfo200Response, Error<ReturnInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_order_id = order_id;
     let p_store_id = store_id;
+    let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
-    let p_response_fields = response_fields;
 
     let uri_str = format!("{}/return.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -205,14 +205,14 @@ pub async fn return_info(configuration: &configuration::Configuration, id: &str,
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_params {
         req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -250,14 +250,11 @@ pub async fn return_info(configuration: &configuration::Configuration, id: &str,
 }
 
 /// Get list of return requests from store.
-pub async fn return_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, params: Option<&str>, exclude: Option<&str>, response_fields: Option<&str>, order_id: Option<&str>, order_ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, status: Option<&str>, return_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::ModelResponseReturnList, Error<ReturnListError>> {
+pub async fn return_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, order_id: Option<&str>, order_ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, status: Option<&str>, return_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::ModelResponseReturnList, Error<ReturnListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
     let p_page_cursor = page_cursor;
-    let p_params = params;
-    let p_exclude = exclude;
-    let p_response_fields = response_fields;
     let p_order_id = order_id;
     let p_order_ids = order_ids;
     let p_customer_id = customer_id;
@@ -268,6 +265,9 @@ pub async fn return_list(configuration: &configuration::Configuration, start: Op
     let p_created_to = created_to;
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
+    let p_response_fields = response_fields;
+    let p_params = params;
+    let p_exclude = exclude;
     let p_report_request_id = report_request_id;
     let p_disable_report_cache = disable_report_cache;
 
@@ -282,15 +282,6 @@ pub async fn return_list(configuration: &configuration::Configuration, start: Op
     }
     if let Some(ref param_value) = p_page_cursor {
         req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_order_id {
         req_builder = req_builder.query(&[("order_id", &param_value.to_string())]);
@@ -321,6 +312,15 @@ pub async fn return_list(configuration: &configuration::Configuration, start: Op
     }
     if let Some(ref param_value) = p_modified_to {
         req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_exclude {
+        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_report_request_id {
         req_builder = req_builder.query(&[("report_request_id", &param_value.to_string())]);

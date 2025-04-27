@@ -13,30 +13,15 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProductImageAdd {
-    /// Defines product id where the image should be added
-    #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
-    pub product_id: Option<String>,
-    /// Defines image's name
-    #[serde(rename = "image_name")]
-    pub image_name: String,
     /// Defines image's types that are specified by comma-separated list
     #[serde(rename = "type")]
     pub r#type: Type,
-    /// Defines URL of the image that has to be added
-    #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    /// Defines alternative text that has to be attached to the picture
-    #[serde(rename = "label", skip_serializing_if = "Option::is_none")]
-    pub label: Option<String>,
-    /// Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.
-    #[serde(rename = "mime", skip_serializing_if = "Option::is_none")]
-    pub mime: Option<String>,
-    /// Defines image’s position in the list
-    #[serde(rename = "position", skip_serializing_if = "Option::is_none")]
-    pub position: Option<i32>,
-    /// Content(body) encoded in base64 of image file
-    #[serde(rename = "content", skip_serializing_if = "Option::is_none")]
-    pub content: Option<String>,
+    /// Defines image's name
+    #[serde(rename = "image_name")]
+    pub image_name: String,
+    /// Defines product id where the image should be added
+    #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
+    pub product_id: Option<String>,
     /// Defines product's variants specified by variant id
     #[serde(rename = "product_variant_id", skip_serializing_if = "Option::is_none")]
     pub product_variant_id: Option<String>,
@@ -52,27 +37,42 @@ pub struct ProductImageAdd {
     /// Add product image on specified language id
     #[serde(rename = "lang_id", skip_serializing_if = "Option::is_none")]
     pub lang_id: Option<String>,
+    /// Defines URL of the image that has to be added
+    #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
+    pub url: Option<String>,
+    /// Content(body) encoded in base64 of image file
+    #[serde(rename = "content", skip_serializing_if = "Option::is_none")]
+    pub content: Option<String>,
+    /// Defines alternative text that has to be attached to the picture
+    #[serde(rename = "label", skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    /// Mime type of image http://en.wikipedia.org/wiki/Internet_media_type.
+    #[serde(rename = "mime", skip_serializing_if = "Option::is_none")]
+    pub mime: Option<String>,
+    /// Defines image’s position in the list
+    #[serde(rename = "position", skip_serializing_if = "Option::is_none")]
+    pub position: Option<i32>,
     /// Use the latest platform API version
     #[serde(rename = "use_latest_api_version", skip_serializing_if = "Option::is_none")]
     pub use_latest_api_version: Option<bool>,
 }
 
 impl ProductImageAdd {
-    pub fn new(image_name: String, r#type: Type) -> ProductImageAdd {
+    pub fn new(r#type: Type, image_name: String) -> ProductImageAdd {
         ProductImageAdd {
-            product_id: None,
-            image_name,
             r#type,
-            url: None,
-            label: None,
-            mime: None,
-            position: None,
-            content: None,
+            image_name,
+            product_id: None,
             product_variant_id: None,
             variant_ids: None,
             option_value_ids: None,
             store_id: None,
             lang_id: None,
+            url: None,
+            content: None,
+            label: None,
+            mime: None,
+            position: None,
             use_latest_api_version: None,
         }
     }

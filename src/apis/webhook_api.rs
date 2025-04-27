@@ -264,22 +264,19 @@ pub async fn webhook_events(configuration: &configuration::Configuration, ) -> R
 }
 
 /// List registered webhook on the store.
-pub async fn webhook_list(configuration: &configuration::Configuration, params: Option<&str>, start: Option<i32>, count: Option<i32>, entity: Option<&str>, action: Option<&str>, active: Option<bool>, ids: Option<&str>) -> Result<models::WebhookList200Response, Error<WebhookListError>> {
+pub async fn webhook_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, entity: Option<&str>, action: Option<&str>, active: Option<bool>, ids: Option<&str>, params: Option<&str>) -> Result<models::WebhookList200Response, Error<WebhookListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_params = params;
     let p_start = start;
     let p_count = count;
     let p_entity = entity;
     let p_action = action;
     let p_active = active;
     let p_ids = ids;
+    let p_params = params;
 
     let uri_str = format!("{}/webhook.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
@@ -297,6 +294,9 @@ pub async fn webhook_list(configuration: &configuration::Configuration, params: 
     }
     if let Some(ref param_value) = p_ids {
         req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

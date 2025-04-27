@@ -19,6 +19,9 @@ pub struct ProductVariantImageAdd {
     /// Defines product's variants specified by variant id
     #[serde(rename = "product_variant_id")]
     pub product_variant_id: String,
+    /// Store Id
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
     /// Defines image's name
     #[serde(rename = "image_name")]
     pub image_name: String,
@@ -40,9 +43,6 @@ pub struct ProductVariantImageAdd {
     /// Defines image’s position in the list
     #[serde(rename = "position", skip_serializing_if = "Option::is_none")]
     pub position: Option<i32>,
-    /// Store Id
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
     /// Defines option id of the product variant for which the image will be added
     #[serde(rename = "option_id", skip_serializing_if = "Option::is_none")]
     pub option_id: Option<String>,
@@ -53,6 +53,7 @@ impl ProductVariantImageAdd {
         ProductVariantImageAdd {
             product_id: None,
             product_variant_id,
+            store_id: None,
             image_name,
             r#type,
             url: None,
@@ -60,7 +61,6 @@ impl ProductVariantImageAdd {
             label: None,
             mime: None,
             position: None,
-            store_id: None,
             option_id: None,
         }
     }

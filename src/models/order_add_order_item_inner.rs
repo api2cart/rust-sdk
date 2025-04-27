@@ -37,6 +37,9 @@ pub struct OrderAddOrderItemInner {
     /// Percentage of tax for product order
     #[serde(rename = "order_item_tax", skip_serializing_if = "Option::is_none")]
     pub order_item_tax: Option<f64>,
+    /// Defines if item price includes tax
+    #[serde(rename = "order_item_price_includes_tax", skip_serializing_if = "Option::is_none")]
+    pub order_item_price_includes_tax: Option<bool>,
     /// Index of the parent grouped/bundle product
     #[serde(rename = "order_item_parent", skip_serializing_if = "Option::is_none")]
     pub order_item_parent: Option<i32>,
@@ -49,9 +52,6 @@ pub struct OrderAddOrderItemInner {
     /// Indicates whether subitems of the grouped/bundle product can be shipped separately
     #[serde(rename = "order_item_allow_ship_items_separately", skip_serializing_if = "Option::is_none")]
     pub order_item_allow_ship_items_separately: Option<bool>,
-    /// Defines if item price includes tax
-    #[serde(rename = "order_item_price_includes_tax", skip_serializing_if = "Option::is_none")]
-    pub order_item_price_includes_tax: Option<bool>,
     #[serde(rename = "order_item_option", skip_serializing_if = "Option::is_none")]
     pub order_item_option: Option<Vec<models::OrderAddOrderItemInnerOrderItemOptionInner>>,
     #[serde(rename = "order_item_property", skip_serializing_if = "Option::is_none")]
@@ -69,11 +69,11 @@ impl OrderAddOrderItemInner {
             order_item_weight: None,
             order_item_variant_id: None,
             order_item_tax: None,
+            order_item_price_includes_tax: None,
             order_item_parent: None,
             order_item_parent_option_name: None,
             order_item_allow_refund_items_separately: None,
             order_item_allow_ship_items_separately: None,
-            order_item_price_includes_tax: None,
             order_item_option: None,
             order_item_property: None,
         }

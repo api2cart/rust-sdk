@@ -139,7 +139,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_attributeset_list
 
-> models::ModelResponseAttributeAttributesetList attribute_attributeset_list(start, count, params, exclude, response_fields)
+> models::ModelResponseAttributeAttributesetList attribute_attributeset_list(start, count, response_fields, params, exclude)
 attribute.attributeset.list
 
 Get attribute_set list
@@ -151,9 +151,9 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 
 ### Return type
 
@@ -240,7 +240,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_group_list
 
-> models::ModelResponseAttributeGroupList attribute_group_list(start, count, lang_id, params, exclude, response_fields, attribute_set_id)
+> models::ModelResponseAttributeGroupList attribute_group_list(start, count, attribute_set_id, lang_id, response_fields, params, exclude)
 attribute.group.list
 
 Get attribute group list
@@ -252,11 +252,11 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**attribute_set_id** | Option<**String**> | Attribute set id |  |
 **lang_id** | Option<**String**> | Language id |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**attribute_set_id** | Option<**String**> | Attribute set id |  |
 
 ### Return type
 
@@ -276,7 +276,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_info
 
-> models::AttributeInfo200Response attribute_info(id, attribute_set_id, store_id, lang_id, params, exclude, response_fields)
+> models::AttributeInfo200Response attribute_info(id, attribute_set_id, store_id, lang_id, response_fields, params, exclude)
 attribute.info
 
 Get information about a specific global attribute by its ID.
@@ -290,9 +290,9 @@ Name | Type | Description  | Required | Notes
 **attribute_set_id** | Option<**String**> | Attribute set id |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 
 ### Return type
 
@@ -312,7 +312,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_list
 
-> models::ModelResponseAttributeList attribute_list(start, count, r#type, attribute_ids, attribute_set_id, store_id, lang_id, params, exclude, response_fields, visible, required, system)
+> models::ModelResponseAttributeList attribute_list(start, count, attribute_ids, attribute_set_id, store_id, lang_id, r#type, visible, required, system, response_fields, params, exclude)
 attribute.list
 
 Get a list of global attributes.
@@ -324,17 +324,17 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
-**r#type** | Option<**String**> | Defines attribute's type |  |
 **attribute_ids** | Option<**String**> | Filter attributes by ids |  |
 **attribute_set_id** | Option<**String**> | Filter items by attribute set id |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Retrieves attributes on specified language id |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,code,type]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**r#type** | Option<**String**> | Defines attribute's type |  |
 **visible** | Option<**bool**> | Filter items by visibility status |  |
 **required** | Option<**bool**> | Defines if the option is required |  |
 **system** | Option<**bool**> | True if attribute is system |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,code,type]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 

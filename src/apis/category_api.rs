@@ -101,45 +101,39 @@ pub enum CategoryUpdateError {
 
 
 /// Add new category in store
-pub async fn category_add(configuration: &configuration::Configuration, name: &str, parent_id: Option<&str>, stores_ids: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, avail: Option<bool>, sort_order: Option<i32>, created_time: Option<&str>, modified_time: Option<&str>, description: Option<&str>, short_description: Option<&str>, meta_title: Option<&str>, meta_description: Option<&str>, meta_keywords: Option<&str>, seo_url: Option<&str>) -> Result<models::CategoryAdd200Response, Error<CategoryAddError>> {
+pub async fn category_add(configuration: &configuration::Configuration, name: &str, description: Option<&str>, short_description: Option<&str>, parent_id: Option<&str>, avail: Option<bool>, created_time: Option<&str>, modified_time: Option<&str>, sort_order: Option<i32>, meta_title: Option<&str>, meta_description: Option<&str>, meta_keywords: Option<&str>, seo_url: Option<&str>, store_id: Option<&str>, stores_ids: Option<&str>, lang_id: Option<&str>) -> Result<models::CategoryAdd200Response, Error<CategoryAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_name = name;
-    let p_parent_id = parent_id;
-    let p_stores_ids = stores_ids;
-    let p_store_id = store_id;
-    let p_lang_id = lang_id;
-    let p_avail = avail;
-    let p_sort_order = sort_order;
-    let p_created_time = created_time;
-    let p_modified_time = modified_time;
     let p_description = description;
     let p_short_description = short_description;
+    let p_parent_id = parent_id;
+    let p_avail = avail;
+    let p_created_time = created_time;
+    let p_modified_time = modified_time;
+    let p_sort_order = sort_order;
     let p_meta_title = meta_title;
     let p_meta_description = meta_description;
     let p_meta_keywords = meta_keywords;
     let p_seo_url = seo_url;
+    let p_store_id = store_id;
+    let p_stores_ids = stores_ids;
+    let p_lang_id = lang_id;
 
     let uri_str = format!("{}/category.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     req_builder = req_builder.query(&[("name", &p_name.to_string())]);
+    if let Some(ref param_value) = p_description {
+        req_builder = req_builder.query(&[("description", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_short_description {
+        req_builder = req_builder.query(&[("short_description", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_parent_id {
         req_builder = req_builder.query(&[("parent_id", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_stores_ids {
-        req_builder = req_builder.query(&[("stores_ids", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_lang_id {
-        req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_avail {
         req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_sort_order {
-        req_builder = req_builder.query(&[("sort_order", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_time {
         req_builder = req_builder.query(&[("created_time", &param_value.to_string())]);
@@ -147,11 +141,8 @@ pub async fn category_add(configuration: &configuration::Configuration, name: &s
     if let Some(ref param_value) = p_modified_time {
         req_builder = req_builder.query(&[("modified_time", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_description {
-        req_builder = req_builder.query(&[("description", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_short_description {
-        req_builder = req_builder.query(&[("short_description", &param_value.to_string())]);
+    if let Some(ref param_value) = p_sort_order {
+        req_builder = req_builder.query(&[("sort_order", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_meta_title {
         req_builder = req_builder.query(&[("meta_title", &param_value.to_string())]);
@@ -164,6 +155,15 @@ pub async fn category_add(configuration: &configuration::Configuration, name: &s
     }
     if let Some(ref param_value) = p_seo_url {
         req_builder = req_builder.query(&[("seo_url", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_stores_ids {
+        req_builder = req_builder.query(&[("stores_ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_lang_id {
+        req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -245,17 +245,17 @@ pub async fn category_add_batch(configuration: &configuration::Configuration, ca
 }
 
 /// Assign category to product
-pub async fn category_assign(configuration: &configuration::Configuration, product_id: &str, category_id: &str, store_id: Option<&str>) -> Result<models::CartConfigUpdate200Response, Error<CategoryAssignError>> {
+pub async fn category_assign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>) -> Result<models::CartConfigUpdate200Response, Error<CategoryAssignError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_product_id = product_id;
     let p_category_id = category_id;
+    let p_product_id = product_id;
     let p_store_id = store_id;
 
     let uri_str = format!("{}/category.assign.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
-    req_builder = req_builder.query(&[("product_id", &p_product_id.to_string())]);
     req_builder = req_builder.query(&[("category_id", &p_category_id.to_string())]);
+    req_builder = req_builder.query(&[("product_id", &p_product_id.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
@@ -295,16 +295,16 @@ pub async fn category_assign(configuration: &configuration::Configuration, produ
 }
 
 /// Count categories in store.
-pub async fn category_count(configuration: &configuration::Configuration, parent_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, avail: Option<bool>, product_type: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::CategoryCount200Response, Error<CategoryCountError>> {
+pub async fn category_count(configuration: &configuration::Configuration, parent_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, avail: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, product_type: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::CategoryCount200Response, Error<CategoryCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_parent_id = parent_id;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
+    let p_avail = avail;
     let p_created_from = created_from;
     let p_created_to = created_to;
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
-    let p_avail = avail;
     let p_product_type = product_type;
     let p_find_value = find_value;
     let p_find_where = find_where;
@@ -323,6 +323,9 @@ pub async fn category_count(configuration: &configuration::Configuration, parent
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_avail {
+        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
     }
@@ -334,9 +337,6 @@ pub async fn category_count(configuration: &configuration::Configuration, parent
     }
     if let Some(ref param_value) = p_modified_to {
         req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_avail {
-        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_product_type {
         req_builder = req_builder.query(&[("product_type", &param_value.to_string())]);
@@ -497,16 +497,16 @@ pub async fn category_find(configuration: &configuration::Configuration, find_va
 }
 
 /// Add image to category
-pub async fn category_image_add(configuration: &configuration::Configuration, category_id: &str, image_name: &str, url: &str, r#type: &str, label: Option<&str>, mime: Option<&str>, position: Option<i32>, store_id: Option<&str>) -> Result<models::CategoryImageAdd200Response, Error<CategoryImageAddError>> {
+pub async fn category_image_add(configuration: &configuration::Configuration, category_id: &str, image_name: &str, url: &str, r#type: &str, store_id: Option<&str>, label: Option<&str>, mime: Option<&str>, position: Option<i32>) -> Result<models::CategoryImageAdd200Response, Error<CategoryImageAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_category_id = category_id;
     let p_image_name = image_name;
     let p_url = url;
     let p_type = r#type;
+    let p_store_id = store_id;
     let p_label = label;
     let p_mime = mime;
     let p_position = position;
-    let p_store_id = store_id;
 
     let uri_str = format!("{}/category.image.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -514,18 +514,18 @@ pub async fn category_image_add(configuration: &configuration::Configuration, ca
     req_builder = req_builder.query(&[("category_id", &p_category_id.to_string())]);
     req_builder = req_builder.query(&[("image_name", &p_image_name.to_string())]);
     req_builder = req_builder.query(&[("url", &p_url.to_string())]);
+    req_builder = req_builder.query(&[("type", &p_type.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_label {
         req_builder = req_builder.query(&[("label", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_mime {
         req_builder = req_builder.query(&[("mime", &param_value.to_string())]);
     }
-    req_builder = req_builder.query(&[("type", &p_type.to_string())]);
     if let Some(ref param_value) = p_position {
         req_builder = req_builder.query(&[("position", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -613,15 +613,15 @@ pub async fn category_image_delete(configuration: &configuration::Configuration,
 }
 
 /// Get category info about category ID*** or specify other category ID.
-pub async fn category_info(configuration: &configuration::Configuration, id: &str, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, schema_type: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::CategoryInfo200Response, Error<CategoryInfoError>> {
+pub async fn category_info(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>, lang_id: Option<&str>, schema_type: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::CategoryInfo200Response, Error<CategoryInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
-    let p_params = params;
-    let p_response_fields = response_fields;
-    let p_exclude = exclude;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
     let p_schema_type = schema_type;
+    let p_response_fields = response_fields;
+    let p_params = params;
+    let p_exclude = exclude;
     let p_report_request_id = report_request_id;
     let p_disable_report_cache = disable_report_cache;
 
@@ -629,15 +629,6 @@ pub async fn category_info(configuration: &configuration::Configuration, id: &st
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
     req_builder = req_builder.query(&[("id", &p_id.to_string())]);
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
@@ -646,6 +637,15 @@ pub async fn category_info(configuration: &configuration::Configuration, id: &st
     }
     if let Some(ref param_value) = p_schema_type {
         req_builder = req_builder.query(&[("schema_type", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_exclude {
+        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_report_request_id {
         req_builder = req_builder.query(&[("report_request_id", &param_value.to_string())]);
@@ -689,25 +689,25 @@ pub async fn category_info(configuration: &configuration::Configuration, id: &st
 }
 
 /// Get list of categories from store.
-pub async fn category_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, parent_id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, avail: Option<bool>, product_type: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>, disable_cache: Option<bool>) -> Result<models::ModelResponseCategoryList, Error<CategoryListError>> {
+pub async fn category_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, parent_id: Option<&str>, avail: Option<bool>, product_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>, disable_cache: Option<bool>) -> Result<models::ModelResponseCategoryList, Error<CategoryListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
     let p_page_cursor = page_cursor;
-    let p_parent_id = parent_id;
-    let p_params = params;
-    let p_response_fields = response_fields;
-    let p_exclude = exclude;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
+    let p_parent_id = parent_id;
+    let p_avail = avail;
+    let p_product_type = product_type;
     let p_created_from = created_from;
     let p_created_to = created_to;
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
-    let p_avail = avail;
-    let p_product_type = product_type;
     let p_find_value = find_value;
     let p_find_where = find_where;
+    let p_response_fields = response_fields;
+    let p_params = params;
+    let p_exclude = exclude;
     let p_report_request_id = report_request_id;
     let p_disable_report_cache = disable_report_cache;
     let p_disable_cache = disable_cache;
@@ -724,23 +724,20 @@ pub async fn category_list(configuration: &configuration::Configuration, start: 
     if let Some(ref param_value) = p_page_cursor {
         req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_parent_id {
-        req_builder = req_builder.query(&[("parent_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_parent_id {
+        req_builder = req_builder.query(&[("parent_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_avail {
+        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_product_type {
+        req_builder = req_builder.query(&[("product_type", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
@@ -754,17 +751,20 @@ pub async fn category_list(configuration: &configuration::Configuration, start: 
     if let Some(ref param_value) = p_modified_to {
         req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_avail {
-        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_product_type {
-        req_builder = req_builder.query(&[("product_type", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_find_value {
         req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_find_where {
         req_builder = req_builder.query(&[("find_where", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_params {
+        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_exclude {
+        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_report_request_id {
         req_builder = req_builder.query(&[("report_request_id", &param_value.to_string())]);
@@ -861,23 +861,23 @@ pub async fn category_unassign(configuration: &configuration::Configuration, cat
 }
 
 /// Update category in store
-pub async fn category_update(configuration: &configuration::Configuration, id: &str, name: Option<&str>, parent_id: Option<&str>, stores_ids: Option<&str>, avail: Option<bool>, sort_order: Option<i32>, modified_time: Option<&str>, description: Option<&str>, short_description: Option<&str>, meta_title: Option<&str>, meta_description: Option<&str>, meta_keywords: Option<&str>, seo_url: Option<&str>, lang_id: Option<&str>, store_id: Option<&str>) -> Result<models::AccountConfigUpdate200Response, Error<CategoryUpdateError>> {
+pub async fn category_update(configuration: &configuration::Configuration, id: &str, name: Option<&str>, description: Option<&str>, short_description: Option<&str>, parent_id: Option<&str>, avail: Option<bool>, sort_order: Option<i32>, modified_time: Option<&str>, meta_title: Option<&str>, meta_description: Option<&str>, meta_keywords: Option<&str>, seo_url: Option<&str>, store_id: Option<&str>, stores_ids: Option<&str>, lang_id: Option<&str>) -> Result<models::AccountConfigUpdate200Response, Error<CategoryUpdateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_name = name;
+    let p_description = description;
+    let p_short_description = short_description;
     let p_parent_id = parent_id;
-    let p_stores_ids = stores_ids;
     let p_avail = avail;
     let p_sort_order = sort_order;
     let p_modified_time = modified_time;
-    let p_description = description;
-    let p_short_description = short_description;
     let p_meta_title = meta_title;
     let p_meta_description = meta_description;
     let p_meta_keywords = meta_keywords;
     let p_seo_url = seo_url;
-    let p_lang_id = lang_id;
     let p_store_id = store_id;
+    let p_stores_ids = stores_ids;
+    let p_lang_id = lang_id;
 
     let uri_str = format!("{}/category.update.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
@@ -886,11 +886,14 @@ pub async fn category_update(configuration: &configuration::Configuration, id: &
     if let Some(ref param_value) = p_name {
         req_builder = req_builder.query(&[("name", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_description {
+        req_builder = req_builder.query(&[("description", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_short_description {
+        req_builder = req_builder.query(&[("short_description", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_parent_id {
         req_builder = req_builder.query(&[("parent_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_stores_ids {
-        req_builder = req_builder.query(&[("stores_ids", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_avail {
         req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
@@ -900,12 +903,6 @@ pub async fn category_update(configuration: &configuration::Configuration, id: &
     }
     if let Some(ref param_value) = p_modified_time {
         req_builder = req_builder.query(&[("modified_time", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_description {
-        req_builder = req_builder.query(&[("description", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_short_description {
-        req_builder = req_builder.query(&[("short_description", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_meta_title {
         req_builder = req_builder.query(&[("meta_title", &param_value.to_string())]);
@@ -919,11 +916,14 @@ pub async fn category_update(configuration: &configuration::Configuration, id: &
     if let Some(ref param_value) = p_seo_url {
         req_builder = req_builder.query(&[("seo_url", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_lang_id {
-        req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_stores_ids {
+        req_builder = req_builder.query(&[("stores_ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_lang_id {
+        req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

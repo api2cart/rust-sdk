@@ -81,7 +81,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_attribute_list
 
-> models::ModelResponseCustomerAttributeList customer_attribute_list(customer_id, count, page_cursor, store_id, lang_id, params, exclude, response_fields)
+> models::ModelResponseCustomerAttributeList customer_attribute_list(customer_id, count, page_cursor, store_id, lang_id, response_fields, params, exclude)
 customer.attribute.list
 
 Get attributes for specific customer
@@ -96,9 +96,9 @@ Name | Type | Description  | Required | Notes
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 
 ### Return type
 
@@ -118,7 +118,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_count
 
-> models::CustomerCount200Response customer_count(group_id, created_from, created_to, modified_from, modified_to, store_id, customer_list_id, avail, find_value, find_where, ids, since_id)
+> models::CustomerCount200Response customer_count(ids, since_id, customer_list_id, group_id, store_id, avail, find_value, find_where, created_from, created_to, modified_from, modified_to)
 customer.count
 
 Get number of customers from store.
@@ -128,18 +128,18 @@ Get number of customers from store.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
+**ids** | Option<**String**> | Counts customers specified by ids |  |
+**since_id** | Option<**String**> | Retrieve entities starting from the specified id. |  |
+**customer_list_id** | Option<**String**> | The numeric ID of the customer list in Demandware. |  |
 **group_id** | Option<**String**> | Customer group_id |  |
+**store_id** | Option<**String**> | Counts customer specified by store id |  |
+**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
+**find_value** | Option<**String**> | Entity search that is specified by some value |  |
+**find_where** | Option<**String**> | Counts customers that are searched specified by field |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**store_id** | Option<**String**> | Counts customer specified by store id |  |
-**customer_list_id** | Option<**String**> | The numeric ID of the customer list in Demandware. |  |
-**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
-**find_value** | Option<**String**> | Entity search that is specified by some value |  |
-**find_where** | Option<**String**> | Counts customers that are searched specified by field |  |
-**ids** | Option<**String**> | Counts customers specified by ids |  |
-**since_id** | Option<**String**> | Retrieve entities starting from the specified id. |  |
 
 ### Return type
 
@@ -254,7 +254,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_group_list
 
-> models::ModelResponseCustomerGroupList customer_group_list(disable_cache, page_cursor, start, count, store_id, lang_id, group_ids, params, exclude, response_fields)
+> models::ModelResponseCustomerGroupList customer_group_list(start, count, page_cursor, group_ids, store_id, lang_id, response_fields, params, exclude, disable_cache)
 customer.group.list
 
 Get list of customers groups.
@@ -264,16 +264,16 @@ Get list of customers groups.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**disable_cache** | Option<**bool**> | Disable cache for current request |  |[default to false]
-**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
+**group_ids** | Option<**String**> | Groups that will be assigned to a customer |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
-**group_ids** | Option<**String**> | Groups that will be assigned to a customer |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,additional_fields]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**disable_cache** | Option<**bool**> | Disable cache for current request |  |[default to false]
 
 ### Return type
 
@@ -293,7 +293,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_info
 
-> models::CustomerInfo200Response customer_info(id, params, response_fields, exclude, store_id)
+> models::CustomerInfo200Response customer_info(id, store_id, response_fields, params, exclude)
 customer.info
 
 Get customers' details from store.
@@ -304,10 +304,10 @@ Get customers' details from store.
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Retrieves customer's info specified by customer id | [required] |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,email,first_name,last_name]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **store_id** | Option<**String**> | Retrieves customer info specified by store id |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,email,first_name,last_name]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -327,7 +327,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_list
 
-> models::ModelResponseCustomerList customer_list(page_cursor, start, count, created_from, created_to, modified_from, modified_to, params, response_fields, exclude, group_id, store_id, customer_list_id, avail, find_value, find_where, sort_by, sort_direction, ids, since_id)
+> models::ModelResponseCustomerList customer_list(start, count, page_cursor, ids, since_id, customer_list_id, group_id, store_id, avail, find_value, find_where, created_from, created_to, modified_from, modified_to, sort_by, sort_direction, response_fields, params, exclude)
 customer.list
 
 Get list of customers from store.
@@ -337,26 +337,26 @@ Get list of customers from store.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
+**ids** | Option<**String**> | Retrieves customers specified by ids |  |
+**since_id** | Option<**String**> | Retrieve entities starting from the specified id. |  |
+**customer_list_id** | Option<**String**> | The numeric ID of the customer list in Demandware. |  |
+**group_id** | Option<**String**> | Customer group_id |  |
+**store_id** | Option<**String**> | Retrieves customers specified by store id |  |
+**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
+**find_value** | Option<**String**> | Entity search that is specified by some value |  |
+**find_where** | Option<**String**> | Customer search that is specified by field |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,email,first_name,last_name]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-**group_id** | Option<**String**> | Customer group_id |  |
-**store_id** | Option<**String**> | Retrieves customers specified by store id |  |
-**customer_list_id** | Option<**String**> | The numeric ID of the customer list in Demandware. |  |
-**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
-**find_value** | Option<**String**> | Entity search that is specified by some value |  |
-**find_where** | Option<**String**> | Customer search that is specified by field |  |
 **sort_by** | Option<**String**> | Set field to sort by |  |[default to created_time]
 **sort_direction** | Option<**String**> | Set sorting direction |  |[default to asc]
-**ids** | Option<**String**> | Retrieves customers specified by ids |  |
-**since_id** | Option<**String**> | Retrieve entities starting from the specified id. |  |
+**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
+**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,email,first_name,last_name]
+**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -406,7 +406,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_wishlist_list
 
-> models::ModelResponseCustomerWishlistList customer_wishlist_list(customer_id, id, store_id, start, count, page_cursor, response_fields)
+> models::ModelResponseCustomerWishlistList customer_wishlist_list(customer_id, start, count, page_cursor, id, store_id, response_fields)
 customer.wishlist.list
 
 Get a Wish List of customer from the store.
@@ -417,11 +417,11 @@ Get a Wish List of customer from the store.
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **customer_id** | **String** | Retrieves orders specified by customer id | [required] |
-**id** | Option<**String**> | Entity id |  |
-**store_id** | Option<**String**> | Store Id |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
+**id** | Option<**String**> | Entity id |  |
+**store_id** | Option<**String**> | Store Id |  |
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to {return_code,return_message,pagination,result}]
 
 ### Return type

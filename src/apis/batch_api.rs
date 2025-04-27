@@ -31,15 +31,15 @@ pub enum BatchJobResultError {
 
 
 /// Get list of recent jobs
-pub async fn batch_job_list(configuration: &configuration::Configuration, count: Option<i32>, page_cursor: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, processed_from: Option<&str>, processed_to: Option<&str>, ids: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseBatchJobList, Error<BatchJobListError>> {
+pub async fn batch_job_list(configuration: &configuration::Configuration, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, processed_from: Option<&str>, processed_to: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseBatchJobList, Error<BatchJobListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_count = count;
     let p_page_cursor = page_cursor;
+    let p_ids = ids;
     let p_created_from = created_from;
     let p_created_to = created_to;
     let p_processed_from = processed_from;
     let p_processed_to = processed_to;
-    let p_ids = ids;
     let p_response_fields = response_fields;
 
     let uri_str = format!("{}/batch.job.list.json", configuration.base_path);
@@ -50,6 +50,9 @@ pub async fn batch_job_list(configuration: &configuration::Configuration, count:
     }
     if let Some(ref param_value) = p_page_cursor {
         req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_ids {
+        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
@@ -62,9 +65,6 @@ pub async fn batch_job_list(configuration: &configuration::Configuration, count:
     }
     if let Some(ref param_value) = p_processed_to {
         req_builder = req_builder.query(&[("processed_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_ids {
-        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
