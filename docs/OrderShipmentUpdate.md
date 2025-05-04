@@ -13,6 +13,9 @@ Name | Type | Description | Notes
 **is_shipped** | Option<**bool**> | Defines shipment's status | [optional][default to true]
 **delivered_at** | Option<**String**> | Defines the date of delivery | [optional]
 **replace** | Option<**bool**> | Allows rewrite tracking numbers | [optional][default to true]
+**send_notifications** | Option<**bool**> | Send notifications to customer after order was created | [optional][default to false]
+**tracking_provider** | Option<**String**> | Defines name of the company which provides shipment tracking | [optional]
+**items** | Option<[**Vec<models::OrderShipmentAddItemsInner>**](OrderShipmentAdd_items_inner.md)> | Defines items in the order that will be shipped | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

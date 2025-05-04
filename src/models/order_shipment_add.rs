@@ -52,6 +52,9 @@ pub struct OrderShipmentAdd {
     /// Disable or enable check process status. Please note that the response will be slower due to additional requests to the store.
     #[serde(rename = "check_process_status", skip_serializing_if = "Option::is_none")]
     pub check_process_status: Option<bool>,
+    /// Defines name of the company which provides shipment tracking
+    #[serde(rename = "tracking_provider", skip_serializing_if = "Option::is_none")]
+    pub tracking_provider: Option<String>,
     /// Use the latest platform API version
     #[serde(rename = "use_latest_api_version", skip_serializing_if = "Option::is_none")]
     pub use_latest_api_version: Option<bool>,
@@ -73,6 +76,7 @@ impl OrderShipmentAdd {
             adjust_stock: None,
             enable_cache: None,
             check_process_status: None,
+            tracking_provider: None,
             use_latest_api_version: None,
         }
     }

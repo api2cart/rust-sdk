@@ -434,6 +434,8 @@ pub enum CartId {
     AmazonSp,
     #[serde(rename = "AspDotNetStorefront")]
     AspDotNetStorefront,
+    #[serde(rename = "BigCartel")]
+    BigCartel,
     #[serde(rename = "BigcommerceApi")]
     BigcommerceApi,
     #[serde(rename = "Bol")]

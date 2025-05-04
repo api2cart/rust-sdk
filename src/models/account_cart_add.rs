@@ -115,6 +115,12 @@ pub struct AccountCartAdd {
     /// Bol Retailer ID
     #[serde(rename = "bol_retailer_id", skip_serializing_if = "Option::is_none")]
     pub bol_retailer_id: Option<i32>,
+    /// Subdomain of store
+    #[serde(rename = "bigcartel_user_name")]
+    pub bigcartel_user_name: String,
+    /// BigCartel account password
+    #[serde(rename = "bigcartel_password")]
+    pub bigcartel_password: String,
     /// Demandware client id
     #[serde(rename = "demandware_client_id", skip_serializing_if = "Option::is_none")]
     pub demandware_client_id: Option<String>,
@@ -463,7 +469,7 @@ pub struct AccountCartAdd {
 }
 
 impl AccountCartAdd {
-    pub fn new(cart_id: CartId, wix_app_id: String, wix_app_secret_key: String) -> AccountCartAdd {
+    pub fn new(cart_id: CartId, bigcartel_user_name: String, bigcartel_password: String, wix_app_id: String, wix_app_secret_key: String) -> AccountCartAdd {
         AccountCartAdd {
             cart_id,
             store_url: None,
@@ -499,6 +505,8 @@ impl AccountCartAdd {
             bol_api_key: None,
             bol_api_secret: None,
             bol_retailer_id: None,
+            bigcartel_user_name,
+            bigcartel_password,
             demandware_client_id: None,
             demandware_api_password: None,
             demandware_user_name: None,
@@ -630,6 +638,8 @@ pub enum CartId {
     AmazonSp,
     #[serde(rename = "AspDotNetStorefront")]
     AspDotNetStorefront,
+    #[serde(rename = "BigCartel")]
+    BigCartel,
     #[serde(rename = "BigcommerceApi")]
     BigcommerceApi,
     #[serde(rename = "Bol")]

@@ -40,6 +40,15 @@ pub struct OrderShipmentUpdate {
     /// Allows rewrite tracking numbers
     #[serde(rename = "replace", skip_serializing_if = "Option::is_none")]
     pub replace: Option<bool>,
+    /// Send notifications to customer after order was created
+    #[serde(rename = "send_notifications", skip_serializing_if = "Option::is_none")]
+    pub send_notifications: Option<bool>,
+    /// Defines name of the company which provides shipment tracking
+    #[serde(rename = "tracking_provider", skip_serializing_if = "Option::is_none")]
+    pub tracking_provider: Option<String>,
+    /// Defines items in the order that will be shipped
+    #[serde(rename = "items", skip_serializing_if = "Option::is_none")]
+    pub items: Option<Vec<models::OrderShipmentAddItemsInner>>,
 }
 
 impl OrderShipmentUpdate {
@@ -54,6 +63,9 @@ impl OrderShipmentUpdate {
             is_shipped: None,
             delivered_at: None,
             replace: None,
+            send_notifications: None,
+            tracking_provider: None,
+            items: None,
         }
     }
 }
