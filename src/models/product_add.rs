@@ -343,6 +343,14 @@ pub struct ProductAdd {
     /// Defines how many times the product was ordered
     #[serde(rename = "ordered_count", skip_serializing_if = "Option::is_none")]
     pub ordered_count: Option<i32>,
+    /// Add Shop Section Id
+    #[serde(rename = "shop_section_id", skip_serializing_if = "Option::is_none")]
+    pub shop_section_id: Option<i32>,
+    /// Add Return Policy Id
+    #[serde(rename = "return_policy_id", skip_serializing_if = "Option::is_none")]
+    pub return_policy_id: Option<i32>,
+    #[serde(rename = "personalization_details", skip_serializing_if = "Option::is_none")]
+    pub personalization_details: Option<Box<models::ProductAddPersonalizationDetails>>,
 }
 
 impl ProductAdd {
@@ -460,6 +468,9 @@ impl ProductAdd {
             clear_cache: None,
             viewed_count: None,
             ordered_count: None,
+            shop_section_id: None,
+            return_policy_id: None,
+            personalization_details: None,
         }
     }
 }

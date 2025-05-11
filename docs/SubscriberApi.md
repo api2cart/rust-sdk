@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## subscriber_list
 
-> models::ModelResponseSubscriberList subscriber_list(start, count, page_cursor, subscribed, store_id, email, created_from, created_to, modified_from, modified_to, response_fields, params, exclude)
+> models::ModelResponseSubscriberList subscriber_list(ids, start, count, page_cursor, subscribed, store_id, email, created_from, created_to, modified_from, modified_to, response_fields, params, exclude)
 subscriber.list
 
 Get subscribers list
@@ -20,6 +20,7 @@ Get subscribers list
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
+**ids** | Option<**String**> | Retrieves subscribers specified by ids |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |

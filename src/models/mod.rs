@@ -544,6 +544,8 @@ pub mod product_add_manufacturer_info;
 pub use self::product_add_manufacturer_info::ProductAddManufacturerInfo;
 pub mod product_add_package_details;
 pub use self::product_add_package_details::ProductAddPackageDetails;
+pub mod product_add_personalization_details;
+pub use self::product_add_personalization_details::ProductAddPersonalizationDetails;
 pub mod product_add_sales_tax;
 pub use self::product_add_sales_tax::ProductAddSalesTax;
 pub mod product_add_seller_profiles;

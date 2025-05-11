@@ -24,8 +24,9 @@ pub enum SubscriberListError {
 
 
 /// Get subscribers list
-pub async fn subscriber_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, subscribed: Option<bool>, store_id: Option<&str>, email: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseSubscriberList, Error<SubscriberListError>> {
+pub async fn subscriber_list(configuration: &configuration::Configuration, ids: Option<&str>, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, subscribed: Option<bool>, store_id: Option<&str>, email: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseSubscriberList, Error<SubscriberListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
+    let p_ids = ids;
     let p_start = start;
     let p_count = count;
     let p_page_cursor = page_cursor;
@@ -43,6 +44,9 @@ pub async fn subscriber_list(configuration: &configuration::Configuration, start
     let uri_str = format!("{}/subscriber.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_ids {
+        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }

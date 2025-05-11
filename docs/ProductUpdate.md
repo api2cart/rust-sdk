@@ -86,6 +86,9 @@ Name | Type | Description | Notes
 **reindex** | Option<**bool**> | Is reindex required | [optional][default to true]
 **clear_cache** | Option<**bool**> | Is cache clear required | [optional][default to true]
 **check_process_status** | Option<**bool**> | Disable or enable check process status. Please note that the response will be slower due to additional requests to the store. | [optional][default to false]
+**specifics** | Option<[**Vec<models::ProductAddSpecificsInner>**](ProductAdd_specifics_inner.md)> | An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.         The list of possible specifications can be obtained using the category.info method (additional_fields->product_specifics).         <b>The structure of the parameter is different for specific platforms.</b> | [optional]
+**shop_section_id** | Option<**i32**> | Add Shop Section Id | [optional]
+**personalization_details** | Option<[**models::ProductAddPersonalizationDetails**](ProductAdd_personalization_details.md)> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

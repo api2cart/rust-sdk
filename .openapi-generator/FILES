@@ -286,6 +286,7 @@ docs/ProductAddGroupPricesInner.md
 docs/ProductAddLogisticInfoInner.md
 docs/ProductAddManufacturerInfo.md
 docs/ProductAddPackageDetails.md
+docs/ProductAddPersonalizationDetails.md
 docs/ProductAddSalesTax.md
 docs/ProductAddSellerProfiles.md
 docs/ProductAddShippingDetailsInner.md
@@ -749,6 +750,7 @@ src/models/product_add_group_prices_inner.rs
 src/models/product_add_logistic_info_inner.rs
 src/models/product_add_manufacturer_info.rs
 src/models/product_add_package_details.rs
+src/models/product_add_personalization_details.rs
 src/models/product_add_sales_tax.rs
 src/models/product_add_seller_profiles.rs
 src/models/product_add_shipping_details_inner.rs

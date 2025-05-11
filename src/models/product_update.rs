@@ -257,6 +257,14 @@ pub struct ProductUpdate {
     /// Disable or enable check process status. Please note that the response will be slower due to additional requests to the store.
     #[serde(rename = "check_process_status", skip_serializing_if = "Option::is_none")]
     pub check_process_status: Option<bool>,
+    /// An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.         The list of possible specifications can be obtained using the category.info method (additional_fields->product_specifics).         <b>The structure of the parameter is different for specific platforms.</b>
+    #[serde(rename = "specifics", skip_serializing_if = "Option::is_none")]
+    pub specifics: Option<Vec<models::ProductAddSpecificsInner>>,
+    /// Add Shop Section Id
+    #[serde(rename = "shop_section_id", skip_serializing_if = "Option::is_none")]
+    pub shop_section_id: Option<i32>,
+    #[serde(rename = "personalization_details", skip_serializing_if = "Option::is_none")]
+    pub personalization_details: Option<Box<models::ProductAddPersonalizationDetails>>,
 }
 
 impl ProductUpdate {
@@ -344,6 +352,9 @@ impl ProductUpdate {
             reindex: None,
             clear_cache: None,
             check_process_status: None,
+            specifics: None,
+            shop_section_id: None,
+            personalization_details: None,
         }
     }
 }
