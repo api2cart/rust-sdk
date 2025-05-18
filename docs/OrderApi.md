@@ -805,7 +805,7 @@ Name | Type | Description  | Required | Notes
 
 ## order_update
 
-> models::AccountConfigUpdate200Response order_update(order_id, store_id, order_status, financial_status, fulfillment_status, cancellation_reason, order_payment_method, comment, admin_comment, admin_private_comment, invoice_admin_comment, date_modified, date_finished, send_notifications, create_invoice, origin)
+> models::AccountConfigUpdate200Response order_update(order_id, store_id, order_status, financial_status, fulfillment_status, cancellation_reason, order_payment_method, comment, admin_comment, admin_private_comment, invoice_admin_comment, date_modified, date_finished, send_notifications, create_invoice, origin, tags)
 order.update
 
 Update existing order.
@@ -831,6 +831,7 @@ Name | Type | Description  | Required | Notes
 **send_notifications** | Option<**bool**> | Send notifications to customer after order was created |  |[default to false]
 **create_invoice** | Option<**bool**> | Determines whether an invoice should be created if it has not already been created |  |
 **origin** | Option<**String**> | The source of the order |  |
+**tags** | Option<**String**> | Order tags |  |
 
 ### Return type
 
