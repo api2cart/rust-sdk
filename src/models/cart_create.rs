@@ -502,6 +502,8 @@ pub enum CartId {
     Salla,
     #[serde(rename = "Shopify")]
     Shopify,
+    #[serde(rename = "Shopee")]
+    Shopee,
     #[serde(rename = "Shoplazza")]
     Shoplazza,
     #[serde(rename = "Shopline")]

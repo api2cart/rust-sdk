@@ -253,6 +253,24 @@ pub struct AccountCartAdd {
     /// Shared secret
     #[serde(rename = "shopify_shared_secret", skip_serializing_if = "Option::is_none")]
     pub shopify_shared_secret: Option<String>,
+    /// Shopee Partner ID
+    #[serde(rename = "shopee_partner_id", skip_serializing_if = "Option::is_none")]
+    pub shopee_partner_id: Option<String>,
+    /// Shopee Partner Key
+    #[serde(rename = "shopee_partner_key", skip_serializing_if = "Option::is_none")]
+    pub shopee_partner_key: Option<String>,
+    /// Shopee SHOP ID
+    #[serde(rename = "shopee_shop_id", skip_serializing_if = "Option::is_none")]
+    pub shopee_shop_id: Option<String>,
+    /// Shopee Refresh Token
+    #[serde(rename = "shopee_refresh_token", skip_serializing_if = "Option::is_none")]
+    pub shopee_refresh_token: Option<String>,
+    /// Shopee API endpoint Region. Use for Chinese Mainland or Brazil.
+    #[serde(rename = "shopee_region", skip_serializing_if = "Option::is_none")]
+    pub shopee_region: Option<String>,
+    /// Shopee Environment
+    #[serde(rename = "shopee_environment", skip_serializing_if = "Option::is_none")]
+    pub shopee_environment: Option<String>,
     /// Access token authorizing the app to access resources on behalf of a user
     #[serde(rename = "shoplazza_access_token", skip_serializing_if = "Option::is_none")]
     pub shoplazza_access_token: Option<String>,
@@ -466,10 +484,22 @@ pub struct AccountCartAdd {
     /// Salla Access Token
     #[serde(rename = "salla_access_token", skip_serializing_if = "Option::is_none")]
     pub salla_access_token: Option<String>,
+    /// Temu App Key
+    #[serde(rename = "temu_app_key", skip_serializing_if = "Option::is_none")]
+    pub temu_app_key: Option<String>,
+    /// Temu App Secret
+    #[serde(rename = "temu_app_secret", skip_serializing_if = "Option::is_none")]
+    pub temu_app_secret: Option<String>,
+    /// Temu Access Token
+    #[serde(rename = "temu_access_token")]
+    pub temu_access_token: String,
+    /// Temu API endpoint Region.
+    #[serde(rename = "temu_region", skip_serializing_if = "Option::is_none")]
+    pub temu_region: Option<String>,
 }
 
 impl AccountCartAdd {
-    pub fn new(cart_id: CartId, bigcartel_user_name: String, bigcartel_password: String, wix_app_id: String, wix_app_secret_key: String) -> AccountCartAdd {
+    pub fn new(cart_id: CartId, bigcartel_user_name: String, bigcartel_password: String, wix_app_id: String, wix_app_secret_key: String, temu_access_token: String) -> AccountCartAdd {
         AccountCartAdd {
             cart_id,
             store_url: None,
@@ -551,6 +581,12 @@ impl AccountCartAdd {
             shopify_api_key: None,
             shopify_api_password: None,
             shopify_shared_secret: None,
+            shopee_partner_id: None,
+            shopee_partner_key: None,
+            shopee_shop_id: None,
+            shopee_refresh_token: None,
+            shopee_region: None,
+            shopee_environment: None,
             shoplazza_access_token: None,
             shoplazza_shared_secret: None,
             shopware_access_key: None,
@@ -622,6 +658,10 @@ impl AccountCartAdd {
             salla_client_secret: None,
             salla_refresh_token: None,
             salla_access_token: None,
+            temu_app_key: None,
+            temu_app_secret: None,
+            temu_access_token,
+            temu_region: None,
         }
     }
 }
@@ -706,6 +746,8 @@ pub enum CartId {
     Salla,
     #[serde(rename = "Shopify")]
     Shopify,
+    #[serde(rename = "Shopee")]
+    Shopee,
     #[serde(rename = "Shoplazza")]
     Shoplazza,
     #[serde(rename = "Shopline")]
