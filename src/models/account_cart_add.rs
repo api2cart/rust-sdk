@@ -494,12 +494,12 @@ pub struct AccountCartAdd {
     #[serde(rename = "temu_access_token")]
     pub temu_access_token: String,
     /// Temu API endpoint Region.
-    #[serde(rename = "temu_region", skip_serializing_if = "Option::is_none")]
-    pub temu_region: Option<String>,
+    #[serde(rename = "temu_region")]
+    pub temu_region: TemuRegion,
 }
 
 impl AccountCartAdd {
-    pub fn new(cart_id: CartId, bigcartel_user_name: String, bigcartel_password: String, wix_app_id: String, wix_app_secret_key: String, temu_access_token: String) -> AccountCartAdd {
+    pub fn new(cart_id: CartId, bigcartel_user_name: String, bigcartel_password: String, wix_app_id: String, wix_app_secret_key: String, temu_access_token: String, temu_region: TemuRegion) -> AccountCartAdd {
         AccountCartAdd {
             cart_id,
             store_url: None,
@@ -661,7 +661,7 @@ impl AccountCartAdd {
             temu_app_key: None,
             temu_app_secret: None,
             temu_access_token,
-            temu_region: None,
+            temu_region,
         }
     }
 }
@@ -803,6 +803,22 @@ pub enum CartId {
 impl Default for CartId {
     fn default() -> CartId {
         Self::Variant3DCart
+    }
+}
+/// Temu API endpoint Region.
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum TemuRegion {
+    #[serde(rename = "US")]
+    Us,
+    #[serde(rename = "EU")]
+    Eu,
+    #[serde(rename = "GLOBAL")]
+    Global,
+}
+
+impl Default for TemuRegion {
+    fn default() -> TemuRegion {
+        Self::Us
     }
 }
 
