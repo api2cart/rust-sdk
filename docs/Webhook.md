@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **id** | Option<**i32**> |  | [optional]
 **label** | Option<**String**> |  | [optional]
 **store_id** | Option<**String**> |  | [optional]
+**lang_id** | Option<**String**> |  | [optional]
 **active** | Option<**bool**> |  | [optional]
 **callback** | Option<**String**> |  | [optional]
 **fields** | Option<**String**> |  | [optional]

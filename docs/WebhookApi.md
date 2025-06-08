@@ -47,7 +47,7 @@ Name | Type | Description  | Required | Notes
 
 ## webhook_create
 
-> models::BasketLiveShippingServiceCreate200Response webhook_create(entity, action, callback, label, fields, active, store_id)
+> models::BasketLiveShippingServiceCreate200Response webhook_create(entity, action, callback, label, fields, active, lang_id, store_id)
 webhook.create
 
 Create webhook on the store and subscribe to it.
@@ -63,6 +63,7 @@ Name | Type | Description  | Required | Notes
 **label** | Option<**String**> | The name you give to the webhook |  |
 **fields** | Option<**String**> | Fields the webhook should send |  |[default to force_all]
 **active** | Option<**bool**> | Webhook status |  |[default to true]
+**lang_id** | Option<**String**> | Language id |  |
 **store_id** | Option<**String**> | Defines store id where the webhook should be assigned |  |
 
 ### Return type
@@ -176,7 +177,7 @@ Name | Type | Description  | Required | Notes
 
 ## webhook_update
 
-> models::ProductImageUpdate200Response webhook_update(id, callback, label, fields, active)
+> models::ProductImageUpdate200Response webhook_update(id, callback, label, fields, active, lang_id)
 webhook.update
 
 Update Webhooks parameters.
@@ -191,6 +192,7 @@ Name | Type | Description  | Required | Notes
 **label** | Option<**String**> | The name you give to the webhook |  |
 **fields** | Option<**String**> | Fields the webhook should send |  |
 **active** | Option<**bool**> | Webhook status |  |
+**lang_id** | Option<**String**> | Language id |  |
 
 ### Return type
 
