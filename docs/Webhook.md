@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **active** | Option<**bool**> |  | [optional]
 **callback** | Option<**String**> |  | [optional]
 **fields** | Option<**String**> |  | [optional]
+**response_fields** | Option<**String**> |  | [optional]
 **created_at** | Option<**String**> |  | [optional]
 **updated_at** | Option<**String**> |  | [optional]
 **entity** | Option<**String**> |  | [optional]

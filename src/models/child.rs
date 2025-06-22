@@ -67,6 +67,8 @@ pub struct Child {
     pub allow_backorders: Option<bool>,
     #[serde(rename = "in_stock", skip_serializing_if = "Option::is_none")]
     pub in_stock: Option<bool>,
+    #[serde(rename = "on_sale", skip_serializing_if = "Option::is_none")]
+    pub on_sale: Option<bool>,
     #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
     pub manage_stock: Option<bool>,
     #[serde(rename = "inventory_level", skip_serializing_if = "Option::is_none")]
@@ -137,6 +139,7 @@ impl Child {
             avail_for_sale: None,
             allow_backorders: None,
             in_stock: None,
+            on_sale: None,
             manage_stock: None,
             inventory_level: None,
             inventory: None,

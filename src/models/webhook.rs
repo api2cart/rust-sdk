@@ -27,6 +27,8 @@ pub struct Webhook {
     pub callback: Option<String>,
     #[serde(rename = "fields", skip_serializing_if = "Option::is_none")]
     pub fields: Option<String>,
+    #[serde(rename = "response_fields", skip_serializing_if = "Option::is_none")]
+    pub response_fields: Option<String>,
     #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
     pub created_at: Option<String>,
     #[serde(rename = "updated_at", skip_serializing_if = "Option::is_none")]
@@ -51,6 +53,7 @@ impl Webhook {
             active: None,
             callback: None,
             fields: None,
+            response_fields: None,
             created_at: None,
             updated_at: None,
             entity: None,

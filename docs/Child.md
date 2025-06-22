@@ -31,6 +31,7 @@ Name | Type | Description | Notes
 **avail_for_sale** | Option<**bool**> |  | [optional]
 **allow_backorders** | Option<**bool**> |  | [optional]
 **in_stock** | Option<**bool**> |  | [optional]
+**on_sale** | Option<**bool**> |  | [optional]
 **manage_stock** | Option<**bool**> |  | [optional]
 **inventory_level** | Option<**f64**> |  | [optional]
 **inventory** | Option<[**Vec<models::ProductInventory>**](Product_Inventory.md)> |  | [optional]
