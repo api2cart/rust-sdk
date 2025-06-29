@@ -37,6 +37,9 @@ pub struct OrderAddOrderItemInner {
     /// Percentage of tax for product order
     #[serde(rename = "order_item_tax", skip_serializing_if = "Option::is_none")]
     pub order_item_tax: Option<f64>,
+    /// Id of the tax class of product.
+    #[serde(rename = "order_item_tax_class", skip_serializing_if = "Option::is_none")]
+    pub order_item_tax_class: Option<String>,
     /// Defines if item price includes tax
     #[serde(rename = "order_item_price_includes_tax", skip_serializing_if = "Option::is_none")]
     pub order_item_price_includes_tax: Option<bool>,
@@ -69,6 +72,7 @@ impl OrderAddOrderItemInner {
             order_item_weight: None,
             order_item_variant_id: None,
             order_item_tax: None,
+            order_item_tax_class: None,
             order_item_price_includes_tax: None,
             order_item_parent: None,
             order_item_parent_option_name: None,

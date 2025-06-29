@@ -64,6 +64,9 @@ pub struct CartCouponAdd {
     /// Store Id
     #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
     pub store_id: Option<String>,
+    /// Defines whether the coupon provides free cash on delivery
+    #[serde(rename = "free_cash_on_delivery", skip_serializing_if = "Option::is_none")]
+    pub free_cash_on_delivery: Option<bool>,
 }
 
 impl CartCouponAdd {
@@ -86,6 +89,7 @@ impl CartCouponAdd {
             action_condition_value: None,
             include_tax: None,
             store_id: None,
+            free_cash_on_delivery: None,
         }
     }
 }

@@ -1079,7 +1079,7 @@ pub async fn product_child_item_list(configuration: &configuration::Configuratio
 }
 
 /// Count products in store.
-pub async fn product_count(configuration: &configuration::Configuration, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, brand_name: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, return_global: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ProductCount200Response, Error<ProductCountError>> {
+pub async fn product_count(configuration: &configuration::Configuration, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, brand_name: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, return_global: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ProductCount200Response, Error<ProductCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_ids = product_ids;
     let p_since_id = since_id;
@@ -1097,6 +1097,7 @@ pub async fn product_count(configuration: &configuration::Configuration, product
     let p_product_attributes = product_attributes;
     let p_status = status;
     let p_type = r#type;
+    let p_visible = visible;
     let p_find_value = find_value;
     let p_find_where = find_where;
     let p_report_request_id = report_request_id;
@@ -1157,6 +1158,9 @@ pub async fn product_count(configuration: &configuration::Configuration, product
     }
     if let Some(ref param_value) = p_type {
         req_builder = req_builder.query(&[("type", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_visible {
+        req_builder = req_builder.query(&[("visible", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_find_value {
         req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);
@@ -1801,7 +1805,7 @@ pub async fn product_info(configuration: &configuration::Configuration, id: &str
 }
 
 /// Get list of products from your store. Returns 10 products by default.
-pub async fn product_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, currency_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sku: Option<&str>, brand_name: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, return_global: Option<bool>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, report_request_id: Option<&str>, disable_cache: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ModelResponseProductList, Error<ProductListError>> {
+pub async fn product_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, currency_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sku: Option<&str>, brand_name: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, return_global: Option<bool>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, report_request_id: Option<&str>, disable_cache: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ModelResponseProductList, Error<ProductListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -1824,6 +1828,7 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
     let p_product_attributes = product_attributes;
     let p_status = status;
     let p_type = r#type;
+    let p_visible = visible;
     let p_find_value = find_value;
     let p_find_where = find_where;
     let p_return_global = return_global;
@@ -1905,6 +1910,9 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
     }
     if let Some(ref param_value) = p_type {
         req_builder = req_builder.query(&[("type", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_visible {
+        req_builder = req_builder.query(&[("visible", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_find_value {
         req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);

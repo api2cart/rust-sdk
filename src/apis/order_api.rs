@@ -1328,7 +1328,7 @@ pub async fn order_shipment_info(configuration: &configuration::Configuration, i
     }
 }
 
-/// Get list of shipments by orders.
+/// Get list of shipments per order.
 pub async fn order_shipment_list(configuration: &configuration::Configuration, order_id: &str, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseOrderShipmentList, Error<OrderShipmentListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_order_id = order_id;

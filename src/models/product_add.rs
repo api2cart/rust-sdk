@@ -318,6 +318,9 @@ pub struct ProductAdd {
     /// Indicates the selling format of the marketplace listing.
     #[serde(rename = "listing_type", skip_serializing_if = "Option::is_none")]
     pub listing_type: Option<String>,
+    /// Specifies the type of category (e.g., apparel or other) for the product being added.
+    #[serde(rename = "category_type", skip_serializing_if = "Option::is_none")]
+    pub category_type: Option<String>,
     /// Indicates whether the seller allows the buyer to return the item.
     #[serde(rename = "return_accepted", skip_serializing_if = "Option::is_none")]
     pub return_accepted: Option<bool>,
@@ -459,6 +462,7 @@ impl ProductAdd {
             logistic_info: None,
             listing_duration: None,
             listing_type: None,
+            category_type: None,
             return_accepted: None,
             seller_profiles: None,
             auction_confidentiality_level: None,

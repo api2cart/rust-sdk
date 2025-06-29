@@ -23,6 +23,8 @@ pub struct ProductAddSpecificsInner {
     pub used_for_variations: Option<bool>,
     #[serde(rename = "scale_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub scale_id: Option<Option<i32>>,
+    #[serde(rename = "input_value", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub input_value: Option<Option<String>>,
     #[serde(rename = "food_details", skip_serializing_if = "Option::is_none")]
     pub food_details: Option<Box<models::ProductAddSpecificsInnerFoodDetails>>,
     #[serde(rename = "group_products_details", skip_serializing_if = "Option::is_none")]
@@ -39,6 +41,7 @@ impl ProductAddSpecificsInner {
             values: None,
             used_for_variations: None,
             scale_id: None,
+            input_value: None,
             food_details: None,
             group_products_details: None,
             booking_details: None,

@@ -639,7 +639,7 @@ Name | Type | Description  | Required | Notes
 > models::ModelResponseOrderShipmentList order_shipment_list(order_id, start, count, page_cursor, store_id, created_from, created_to, modified_from, modified_to, response_fields, params, exclude)
 order.shipment.list
 
-Get list of shipments by orders.
+Get list of shipments per order.
 
 ### Parameters
 
