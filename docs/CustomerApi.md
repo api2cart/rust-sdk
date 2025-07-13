@@ -118,7 +118,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_count
 
-> models::CustomerCount200Response customer_count(ids, since_id, customer_list_id, group_id, store_id, avail, find_value, find_where, created_from, created_to, modified_from, modified_to)
+> models::CustomerCount200Response customer_count(ids, since_id, customer_list_id, group_id, store_id, avail, include_guests, find_value, find_where, created_from, created_to, modified_from, modified_to)
 customer.count
 
 Get number of customers from store.
@@ -134,6 +134,7 @@ Name | Type | Description  | Required | Notes
 **group_id** | Option<**String**> | Customer group_id |  |
 **store_id** | Option<**String**> | Counts customer specified by store id |  |
 **avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
+**include_guests** | Option<**bool**> | Indicates whether to include guest customers in the total count. |  |[default to false]
 **find_value** | Option<**String**> | Entity search that is specified by some value |  |
 **find_where** | Option<**String**> | Counts customers that are searched specified by field |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |
@@ -189,7 +190,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_find
 
-> models::CustomerFind200Response customer_find(find_value, find_where, find_params, store_id)
+> models::CustomerFind200Response customer_find(find_value, find_where, find_params, store_id, include_guests)
 customer.find
 
 Find customers in store.
@@ -203,6 +204,7 @@ Name | Type | Description  | Required | Notes
 **find_where** | Option<**String**> | Entity search that is specified by the comma-separated unique fields |  |[default to email]
 **find_params** | Option<**String**> | Entity search that is specified by comma-separated parameters |  |[default to whole_words]
 **store_id** | Option<**String**> | Store Id |  |
+**include_guests** | Option<**bool**> | Indicates whether to search among guest customers when looking up a customer. |  |[default to false]
 
 ### Return type
 
@@ -327,7 +329,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_list
 
-> models::ModelResponseCustomerList customer_list(start, count, page_cursor, ids, since_id, customer_list_id, group_id, store_id, avail, find_value, find_where, created_from, created_to, modified_from, modified_to, sort_by, sort_direction, response_fields, params, exclude)
+> models::ModelResponseCustomerList customer_list(start, count, page_cursor, ids, since_id, customer_list_id, group_id, store_id, avail, include_guests, find_value, find_where, created_from, created_to, modified_from, modified_to, sort_by, sort_direction, response_fields, params, exclude)
 customer.list
 
 Get list of customers from store.
@@ -346,6 +348,7 @@ Name | Type | Description  | Required | Notes
 **group_id** | Option<**String**> | Customer group_id |  |
 **store_id** | Option<**String**> | Retrieves customers specified by store id |  |
 **avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
+**include_guests** | Option<**bool**> | Indicates whether to include guest customers in the list results. |  |[default to false]
 **find_value** | Option<**String**> | Entity search that is specified by some value |  |
 **find_where** | Option<**String**> | Customer search that is specified by field |  |
 **created_from** | Option<**String**> | Retrieve entities from their creation date |  |

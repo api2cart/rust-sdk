@@ -760,6 +760,8 @@ pub enum CartId {
     Square,
     #[serde(rename = "Squarespace")]
     Squarespace,
+    #[serde(rename = "Temu")]
+    Temu,
     #[serde(rename = "Tiendanube")]
     Tiendanube,
     #[serde(rename = "TikTokShop")]

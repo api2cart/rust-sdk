@@ -37,6 +37,8 @@ pub struct Customer {
     pub birth_day: Option<Box<models::A2CDateTime>>,
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
+    #[serde(rename = "is_guest", skip_serializing_if = "Option::is_none")]
+    pub is_guest: Option<bool>,
     #[serde(rename = "news_letter_subscription", skip_serializing_if = "Option::is_none")]
     pub news_letter_subscription: Option<bool>,
     #[serde(rename = "consents", skip_serializing_if = "Option::is_none")]
@@ -82,6 +84,7 @@ impl Customer {
             last_login: None,
             birth_day: None,
             status: None,
+            is_guest: None,
             news_letter_subscription: None,
             consents: None,
             gender: None,

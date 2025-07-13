@@ -261,7 +261,7 @@ pub async fn customer_attribute_list(configuration: &configuration::Configuratio
 }
 
 /// Get number of customers from store.
-pub async fn customer_count(configuration: &configuration::Configuration, ids: Option<&str>, since_id: Option<&str>, customer_list_id: Option<&str>, group_id: Option<&str>, store_id: Option<&str>, avail: Option<bool>, find_value: Option<&str>, find_where: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>) -> Result<models::CustomerCount200Response, Error<CustomerCountError>> {
+pub async fn customer_count(configuration: &configuration::Configuration, ids: Option<&str>, since_id: Option<&str>, customer_list_id: Option<&str>, group_id: Option<&str>, store_id: Option<&str>, avail: Option<bool>, include_guests: Option<bool>, find_value: Option<&str>, find_where: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>) -> Result<models::CustomerCount200Response, Error<CustomerCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_ids = ids;
     let p_since_id = since_id;
@@ -269,6 +269,7 @@ pub async fn customer_count(configuration: &configuration::Configuration, ids: O
     let p_group_id = group_id;
     let p_store_id = store_id;
     let p_avail = avail;
+    let p_include_guests = include_guests;
     let p_find_value = find_value;
     let p_find_where = find_where;
     let p_created_from = created_from;
@@ -296,6 +297,9 @@ pub async fn customer_count(configuration: &configuration::Configuration, ids: O
     }
     if let Some(ref param_value) = p_avail {
         req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_include_guests {
+        req_builder = req_builder.query(&[("include_guests", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_find_value {
         req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);
@@ -395,12 +399,13 @@ pub async fn customer_delete(configuration: &configuration::Configuration, id: &
 }
 
 /// Find customers in store.
-pub async fn customer_find(configuration: &configuration::Configuration, find_value: &str, find_where: Option<&str>, find_params: Option<&str>, store_id: Option<&str>) -> Result<models::CustomerFind200Response, Error<CustomerFindError>> {
+pub async fn customer_find(configuration: &configuration::Configuration, find_value: &str, find_where: Option<&str>, find_params: Option<&str>, store_id: Option<&str>, include_guests: Option<bool>) -> Result<models::CustomerFind200Response, Error<CustomerFindError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_find_value = find_value;
     let p_find_where = find_where;
     let p_find_params = find_params;
     let p_store_id = store_id;
+    let p_include_guests = include_guests;
 
     let uri_str = format!("{}/customer.find.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -414,6 +419,9 @@ pub async fn customer_find(configuration: &configuration::Configuration, find_va
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_include_guests {
+        req_builder = req_builder.query(&[("include_guests", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -645,7 +653,7 @@ pub async fn customer_info(configuration: &configuration::Configuration, id: &st
 }
 
 /// Get list of customers from store.
-pub async fn customer_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, since_id: Option<&str>, customer_list_id: Option<&str>, group_id: Option<&str>, store_id: Option<&str>, avail: Option<bool>, find_value: Option<&str>, find_where: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCustomerList, Error<CustomerListError>> {
+pub async fn customer_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, since_id: Option<&str>, customer_list_id: Option<&str>, group_id: Option<&str>, store_id: Option<&str>, avail: Option<bool>, include_guests: Option<bool>, find_value: Option<&str>, find_where: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCustomerList, Error<CustomerListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -656,6 +664,7 @@ pub async fn customer_list(configuration: &configuration::Configuration, start: 
     let p_group_id = group_id;
     let p_store_id = store_id;
     let p_avail = avail;
+    let p_include_guests = include_guests;
     let p_find_value = find_value;
     let p_find_where = find_where;
     let p_created_from = created_from;
@@ -697,6 +706,9 @@ pub async fn customer_list(configuration: &configuration::Configuration, start: 
     }
     if let Some(ref param_value) = p_avail {
         req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_include_guests {
+        req_builder = req_builder.query(&[("include_guests", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_find_value {
         req_builder = req_builder.query(&[("find_value", &param_value.to_string())]);

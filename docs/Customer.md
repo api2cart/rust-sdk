@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **last_login** | Option<[**models::A2CDateTime**](A2CDateTime.md)> |  | [optional]
 **birth_day** | Option<[**models::A2CDateTime**](A2CDateTime.md)> |  | [optional]
 **status** | Option<**String**> |  | [optional]
+**is_guest** | Option<**bool**> |  | [optional]
 **news_letter_subscription** | Option<**bool**> |  | [optional]
 **consents** | Option<[**Vec<models::CustomerConsent>**](Customer_Consent.md)> |  | [optional]
 **gender** | Option<**String**> |  | [optional]
