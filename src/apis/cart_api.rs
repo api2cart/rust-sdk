@@ -15,13 +15,6 @@ use crate::{apis::ResponseContent, models};
 use super::{Error, configuration};
 
 
-/// struct for typed errors of method [`cart_bridge`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CartBridgeError {
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`cart_catalog_price_rules_count`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -33,27 +26,6 @@ pub enum CartCatalogPriceRulesCountError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CartCatalogPriceRulesListError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`cart_clear_cache`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CartClearCacheError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`cart_config`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CartConfigError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`cart_config_update`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CartConfigUpdateError {
     UnknownValue(serde_json::Value),
 }
 
@@ -92,24 +64,10 @@ pub enum CartCouponListError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`cart_create`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CartCreateError {
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`cart_delete`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CartDeleteError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`cart_disconnect`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CartDisconnectError {
     UnknownValue(serde_json::Value),
 }
 
@@ -145,13 +103,6 @@ pub enum CartGiftcardListError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CartInfoError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`cart_list`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CartListError {
     UnknownValue(serde_json::Value),
 }
 
@@ -225,39 +176,6 @@ pub enum CartValidateError {
     UnknownValue(serde_json::Value),
 }
 
-
-/// Get bridge key and store key
-pub async fn cart_bridge(configuration: &configuration::Configuration, ) -> Result<models::CartBridge200Response, Error<CartBridgeError>> {
-
-    let uri_str = format!("{}/cart.bridge.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<CartBridgeError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
 
 /// Get count of cart catalog price rules discounts.
 pub async fn cart_catalog_price_rules_count(configuration: &configuration::Configuration, ) -> Result<models::CartCatalogPriceRulesCount200Response, Error<CartCatalogPriceRulesCountError>> {
@@ -366,144 +284,6 @@ pub async fn cart_catalog_price_rules_list(configuration: &configuration::Config
     } else {
         let content = resp.text().await?;
         let entity: Option<CartCatalogPriceRulesListError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Clear cache on store.
-pub async fn cart_clear_cache(configuration: &configuration::Configuration, cache_type: &str) -> Result<models::CartClearCache200Response, Error<CartClearCacheError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_cache_type = cache_type;
-
-    let uri_str = format!("{}/cart.clear_cache.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
-
-    req_builder = req_builder.query(&[("cache_type", &p_cache_type.to_string())]);
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-store-key", value);
-    };
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<CartClearCacheError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Get list of cart configs
-pub async fn cart_config(configuration: &configuration::Configuration, params: Option<&str>, exclude: Option<&str>) -> Result<models::CartConfig200Response, Error<CartConfigError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_params = params;
-    let p_exclude = exclude;
-
-    let uri_str = format!("{}/cart.config.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-store-key", value);
-    };
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<CartConfigError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Use this API method to update custom data in client database.
-pub async fn cart_config_update(configuration: &configuration::Configuration, cart_config_update: models::CartConfigUpdate) -> Result<models::CartConfigUpdate200Response, Error<CartConfigUpdateError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_cart_config_update = cart_config_update;
-
-    let uri_str = format!("{}/cart.config.update.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-store-key", value);
-    };
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-    req_builder = req_builder.json(&p_cart_config_update);
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<CartConfigUpdateError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -832,42 +612,6 @@ pub async fn cart_coupon_list(configuration: &configuration::Configuration, star
     }
 }
 
-/// Add store to the account
-pub async fn cart_create(configuration: &configuration::Configuration, cart_create: models::CartCreate) -> Result<models::AccountCartAdd200Response, Error<CartCreateError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_cart_create = cart_create;
-
-    let uri_str = format!("{}/cart.create.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-    req_builder = req_builder.json(&p_cart_create);
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<CartCreateError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
 /// Remove store from API2Cart
 pub async fn cart_delete(configuration: &configuration::Configuration, delete_bridge: Option<bool>) -> Result<models::CartDelete200Response, Error<CartDeleteError>> {
     // add a prefix to parameters to efficiently prevent name collisions
@@ -910,52 +654,6 @@ pub async fn cart_delete(configuration: &configuration::Configuration, delete_br
     } else {
         let content = resp.text().await?;
         let entity: Option<CartDeleteError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Disconnect with the store and clear store session data.
-pub async fn cart_disconnect(configuration: &configuration::Configuration, delete_bridge: Option<bool>) -> Result<models::CartDisconnect200Response, Error<CartDisconnectError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_delete_bridge = delete_bridge;
-
-    let uri_str = format!("{}/cart.disconnect.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref param_value) = p_delete_bridge {
-        req_builder = req_builder.query(&[("delete_bridge", &param_value.to_string())]);
-    }
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-store-key", value);
-    };
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<CartDisconnectError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -1238,39 +936,6 @@ pub async fn cart_info(configuration: &configuration::Configuration, store_id: O
     } else {
         let content = resp.text().await?;
         let entity: Option<CartInfoError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Get list of supported carts
-pub async fn cart_list(configuration: &configuration::Configuration, ) -> Result<models::CartList200Response, Error<CartListError>> {
-
-    let uri_str = format!("{}/cart.list.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<CartListError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

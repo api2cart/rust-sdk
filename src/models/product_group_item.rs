@@ -13,20 +13,20 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProductGroupItem {
-    #[serde(rename = "child_item_id", skip_serializing_if = "Option::is_none")]
-    pub child_item_id: Option<String>,
+    #[serde(rename = "child_item_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub child_item_id: Option<Option<String>>,
     #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
     pub product_id: Option<String>,
     #[serde(rename = "default_qty_in_pack", skip_serializing_if = "Option::is_none")]
     pub default_qty_in_pack: Option<String>,
-    #[serde(rename = "is_qty_in_pack_fixed", skip_serializing_if = "Option::is_none")]
-    pub is_qty_in_pack_fixed: Option<bool>,
-    #[serde(rename = "price", skip_serializing_if = "Option::is_none")]
-    pub price: Option<f64>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "is_qty_in_pack_fixed", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub is_qty_in_pack_fixed: Option<Option<bool>>,
+    #[serde(rename = "price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub price: Option<Option<f64>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ProductGroupItem {

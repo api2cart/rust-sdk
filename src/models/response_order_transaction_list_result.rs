@@ -13,14 +13,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ResponseOrderTransactionListResult {
-    #[serde(rename = "transactions_count", skip_serializing_if = "Option::is_none")]
-    pub transactions_count: Option<i32>,
+    #[serde(rename = "transactions_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub transactions_count: Option<Option<i32>>,
     #[serde(rename = "transactions", skip_serializing_if = "Option::is_none")]
     pub transactions: Option<Vec<models::OrderTransaction>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ResponseOrderTransactionListResult {

@@ -1,6 +1,6 @@
 # \OrderApi
 
-All URIs are relative to *https://api.api2cart.com/v1.1*
+All URIs are relative to *https://api.api2cart.local.com/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -8,7 +8,6 @@ Method | HTTP request | Description
 [**order_add**](OrderApi.md#order_add) | **POST** /order.add.json | order.add
 [**order_count**](OrderApi.md#order_count) | **GET** /order.count.json | order.count
 [**order_financial_status_list**](OrderApi.md#order_financial_status_list) | **GET** /order.financial_status.list.json | order.financial_status.list
-[**order_find**](OrderApi.md#order_find) | **GET** /order.find.json | order.find
 [**order_fulfillment_status_list**](OrderApi.md#order_fulfillment_status_list) | **GET** /order.fulfillment_status.list.json | order.fulfillment_status.list
 [**order_info**](OrderApi.md#order_info) | **GET** /order.info.json | order.info
 [**order_list**](OrderApi.md#order_list) | **GET** /order.list.json | order.list
@@ -166,47 +165,6 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**models::OrderFinancialStatusList200Response**](OrderFinancialStatusList_200_response.md)
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## order_find
-
-> models::OrderFind200Response order_find(start, count, customer_id, customer_email, order_status, financial_status, created_to, created_from, modified_to, modified_from, params, exclude)
-order.find
-
-This method is deprecated and won't be supported in the future. Please use \"order.list\" instead.
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
-**count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
-**customer_id** | Option<**String**> | Retrieves orders specified by customer id |  |
-**customer_email** | Option<**String**> | Retrieves orders specified by customer email |  |
-**order_status** | Option<**String**> | Retrieves orders specified by order status |  |
-**financial_status** | Option<**String**> | Retrieves orders specified by financial status |  |
-**created_to** | Option<**String**> | Retrieve entities to their creation date |  |
-**created_from** | Option<**String**> | Retrieve entities from their creation date |  |
-**modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
-**modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to order_id,customer,totals,address,items,bundles,status]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-
-### Return type
-
-[**models::OrderFind200Response**](OrderFind_200_response.md)
 
 ### Authorization
 

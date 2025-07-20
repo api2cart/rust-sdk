@@ -17,96 +17,96 @@ pub struct Child {
     pub id: Option<String>,
     #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
     pub parent_id: Option<String>,
-    #[serde(rename = "sku", skip_serializing_if = "Option::is_none")]
-    pub sku: Option<String>,
-    #[serde(rename = "upc", skip_serializing_if = "Option::is_none")]
-    pub upc: Option<String>,
-    #[serde(rename = "ean", skip_serializing_if = "Option::is_none")]
-    pub ean: Option<String>,
-    #[serde(rename = "mpn", skip_serializing_if = "Option::is_none")]
-    pub mpn: Option<String>,
-    #[serde(rename = "gtin", skip_serializing_if = "Option::is_none")]
-    pub gtin: Option<String>,
-    #[serde(rename = "isbn", skip_serializing_if = "Option::is_none")]
-    pub isbn: Option<String>,
-    #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
-    pub url: Option<String>,
-    #[serde(rename = "seo_url", skip_serializing_if = "Option::is_none")]
-    pub seo_url: Option<String>,
-    #[serde(rename = "sort_order", skip_serializing_if = "Option::is_none")]
-    pub sort_order: Option<i32>,
-    #[serde(rename = "created_time", skip_serializing_if = "Option::is_none")]
-    pub created_time: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "modified_time", skip_serializing_if = "Option::is_none")]
-    pub modified_time: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
-    #[serde(rename = "short_description", skip_serializing_if = "Option::is_none")]
-    pub short_description: Option<String>,
-    #[serde(rename = "full_description", skip_serializing_if = "Option::is_none")]
-    pub full_description: Option<String>,
+    #[serde(rename = "sku", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub sku: Option<Option<String>>,
+    #[serde(rename = "upc", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub upc: Option<Option<String>>,
+    #[serde(rename = "ean", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub ean: Option<Option<String>>,
+    #[serde(rename = "mpn", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub mpn: Option<Option<String>>,
+    #[serde(rename = "gtin", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub gtin: Option<Option<String>>,
+    #[serde(rename = "isbn", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub isbn: Option<Option<String>>,
+    #[serde(rename = "url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub url: Option<Option<String>>,
+    #[serde(rename = "seo_url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub seo_url: Option<Option<String>>,
+    #[serde(rename = "sort_order", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub sort_order: Option<Option<i32>>,
+    #[serde(rename = "created_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub created_time: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "modified_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_time: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub name: Option<Option<String>>,
+    #[serde(rename = "short_description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub short_description: Option<Option<String>>,
+    #[serde(rename = "full_description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub full_description: Option<Option<String>>,
     #[serde(rename = "images", skip_serializing_if = "Option::is_none")]
     pub images: Option<Vec<models::Image>>,
     #[serde(rename = "combination", skip_serializing_if = "Option::is_none")]
     pub combination: Option<Vec<models::ProductChildItemCombination>>,
-    #[serde(rename = "default_price", skip_serializing_if = "Option::is_none")]
-    pub default_price: Option<f64>,
-    #[serde(rename = "cost_price", skip_serializing_if = "Option::is_none")]
-    pub cost_price: Option<f64>,
-    #[serde(rename = "list_price", skip_serializing_if = "Option::is_none")]
-    pub list_price: Option<f64>,
-    #[serde(rename = "wholesale_price", skip_serializing_if = "Option::is_none")]
-    pub wholesale_price: Option<f64>,
+    #[serde(rename = "default_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub default_price: Option<Option<f64>>,
+    #[serde(rename = "cost_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub cost_price: Option<Option<f64>>,
+    #[serde(rename = "list_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub list_price: Option<Option<f64>>,
+    #[serde(rename = "wholesale_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub wholesale_price: Option<Option<f64>>,
     #[serde(rename = "advanced_price", skip_serializing_if = "Option::is_none")]
     pub advanced_price: Option<Vec<models::ProductAdvancedPrice>>,
-    #[serde(rename = "tax_class_id", skip_serializing_if = "Option::is_none")]
-    pub tax_class_id: Option<String>,
-    #[serde(rename = "avail_for_sale", skip_serializing_if = "Option::is_none")]
-    pub avail_for_sale: Option<bool>,
-    #[serde(rename = "allow_backorders", skip_serializing_if = "Option::is_none")]
-    pub allow_backorders: Option<bool>,
-    #[serde(rename = "in_stock", skip_serializing_if = "Option::is_none")]
-    pub in_stock: Option<bool>,
-    #[serde(rename = "on_sale", skip_serializing_if = "Option::is_none")]
-    pub on_sale: Option<bool>,
-    #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
-    pub manage_stock: Option<bool>,
-    #[serde(rename = "inventory_level", skip_serializing_if = "Option::is_none")]
-    pub inventory_level: Option<f64>,
+    #[serde(rename = "tax_class_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub tax_class_id: Option<Option<String>>,
+    #[serde(rename = "avail_for_sale", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub avail_for_sale: Option<Option<bool>>,
+    #[serde(rename = "allow_backorders", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub allow_backorders: Option<Option<bool>>,
+    #[serde(rename = "in_stock", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub in_stock: Option<Option<bool>>,
+    #[serde(rename = "on_sale", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub on_sale: Option<Option<bool>>,
+    #[serde(rename = "manage_stock", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub manage_stock: Option<Option<bool>>,
+    #[serde(rename = "inventory_level", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub inventory_level: Option<Option<f64>>,
     #[serde(rename = "inventory", skip_serializing_if = "Option::is_none")]
     pub inventory: Option<Vec<models::ProductInventory>>,
-    #[serde(rename = "min_quantity", skip_serializing_if = "Option::is_none")]
-    pub min_quantity: Option<f64>,
-    #[serde(rename = "default_qty_in_pack", skip_serializing_if = "Option::is_none")]
-    pub default_qty_in_pack: Option<f64>,
-    #[serde(rename = "is_qty_in_pack_fixed", skip_serializing_if = "Option::is_none")]
-    pub is_qty_in_pack_fixed: Option<bool>,
-    #[serde(rename = "weight_unit", skip_serializing_if = "Option::is_none")]
-    pub weight_unit: Option<String>,
-    #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
-    pub weight: Option<f64>,
-    #[serde(rename = "dimensions_unit", skip_serializing_if = "Option::is_none")]
-    pub dimensions_unit: Option<String>,
-    #[serde(rename = "width", skip_serializing_if = "Option::is_none")]
-    pub width: Option<f64>,
-    #[serde(rename = "height", skip_serializing_if = "Option::is_none")]
-    pub height: Option<f64>,
-    #[serde(rename = "length", skip_serializing_if = "Option::is_none")]
-    pub length: Option<f64>,
-    #[serde(rename = "meta_title", skip_serializing_if = "Option::is_none")]
-    pub meta_title: Option<String>,
-    #[serde(rename = "meta_description", skip_serializing_if = "Option::is_none")]
-    pub meta_description: Option<String>,
-    #[serde(rename = "meta_keywords", skip_serializing_if = "Option::is_none")]
-    pub meta_keywords: Option<String>,
+    #[serde(rename = "min_quantity", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub min_quantity: Option<Option<f64>>,
+    #[serde(rename = "default_qty_in_pack", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub default_qty_in_pack: Option<Option<f64>>,
+    #[serde(rename = "is_qty_in_pack_fixed", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub is_qty_in_pack_fixed: Option<Option<bool>>,
+    #[serde(rename = "weight_unit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub weight_unit: Option<Option<String>>,
+    #[serde(rename = "weight", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub weight: Option<Option<f64>>,
+    #[serde(rename = "dimensions_unit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub dimensions_unit: Option<Option<String>>,
+    #[serde(rename = "width", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub width: Option<Option<f64>>,
+    #[serde(rename = "height", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub height: Option<Option<f64>>,
+    #[serde(rename = "length", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub length: Option<Option<f64>>,
+    #[serde(rename = "meta_title", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub meta_title: Option<Option<String>>,
+    #[serde(rename = "meta_description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub meta_description: Option<Option<String>>,
+    #[serde(rename = "meta_keywords", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub meta_keywords: Option<Option<String>>,
     #[serde(rename = "discounts", skip_serializing_if = "Option::is_none")]
     pub discounts: Option<Vec<models::Discount>>,
-    #[serde(rename = "is_virtual", skip_serializing_if = "Option::is_none")]
-    pub is_virtual: Option<bool>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "is_virtual", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub is_virtual: Option<Option<bool>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Child {

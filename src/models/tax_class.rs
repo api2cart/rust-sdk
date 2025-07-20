@@ -17,20 +17,20 @@ pub struct TaxClass {
     pub id: Option<String>,
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
-    #[serde(rename = "avail", skip_serializing_if = "Option::is_none")]
-    pub avail: Option<bool>,
-    #[serde(rename = "tax", skip_serializing_if = "Option::is_none")]
-    pub tax: Option<f64>,
-    #[serde(rename = "tax_type", skip_serializing_if = "Option::is_none")]
-    pub tax_type: Option<i32>,
-    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "modified_at", skip_serializing_if = "Option::is_none")]
-    pub modified_at: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "avail", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub avail: Option<Option<bool>>,
+    #[serde(rename = "tax", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub tax: Option<Option<f64>>,
+    #[serde(rename = "tax_type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub tax_type: Option<Option<i32>>,
+    #[serde(rename = "created_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "modified_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_at: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl TaxClass {

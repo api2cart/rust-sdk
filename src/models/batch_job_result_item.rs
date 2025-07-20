@@ -17,16 +17,16 @@ pub struct BatchJobResultItem {
     pub id: Option<i32>,
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
-    #[serde(rename = "entity_id", skip_serializing_if = "Option::is_none")]
-    pub entity_id: Option<String>,
+    #[serde(rename = "entity_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub entity_id: Option<Option<String>>,
     #[serde(rename = "errors", skip_serializing_if = "Option::is_none")]
     pub errors: Option<Vec<String>>,
     #[serde(rename = "warnings", skip_serializing_if = "Option::is_none")]
     pub warnings: Option<Vec<String>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl BatchJobResultItem {

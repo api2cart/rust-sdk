@@ -13,34 +13,34 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Webhook {
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<i32>,
-    #[serde(rename = "label", skip_serializing_if = "Option::is_none")]
-    pub label: Option<String>,
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
-    #[serde(rename = "lang_id", skip_serializing_if = "Option::is_none")]
-    pub lang_id: Option<String>,
-    #[serde(rename = "active", skip_serializing_if = "Option::is_none")]
-    pub active: Option<bool>,
-    #[serde(rename = "callback", skip_serializing_if = "Option::is_none")]
-    pub callback: Option<String>,
-    #[serde(rename = "fields", skip_serializing_if = "Option::is_none")]
-    pub fields: Option<String>,
-    #[serde(rename = "response_fields", skip_serializing_if = "Option::is_none")]
-    pub response_fields: Option<String>,
-    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<String>,
-    #[serde(rename = "updated_at", skip_serializing_if = "Option::is_none")]
-    pub updated_at: Option<String>,
-    #[serde(rename = "entity", skip_serializing_if = "Option::is_none")]
-    pub entity: Option<String>,
-    #[serde(rename = "action", skip_serializing_if = "Option::is_none")]
-    pub action: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub id: Option<Option<i32>>,
+    #[serde(rename = "label", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub label: Option<Option<String>>,
+    #[serde(rename = "store_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<Option<String>>,
+    #[serde(rename = "lang_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub lang_id: Option<Option<String>>,
+    #[serde(rename = "active", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub active: Option<Option<bool>>,
+    #[serde(rename = "callback", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub callback: Option<Option<String>>,
+    #[serde(rename = "fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub fields: Option<Option<String>>,
+    #[serde(rename = "response_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub response_fields: Option<Option<String>>,
+    #[serde(rename = "created_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<Option<String>>,
+    #[serde(rename = "updated_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub updated_at: Option<Option<String>>,
+    #[serde(rename = "entity", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub entity: Option<Option<String>>,
+    #[serde(rename = "action", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub action: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Webhook {

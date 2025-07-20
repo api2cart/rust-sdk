@@ -13,14 +13,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ShipmentTrackingNumber {
-    #[serde(rename = "carrier_id", skip_serializing_if = "Option::is_none")]
-    pub carrier_id: Option<String>,
-    #[serde(rename = "tracking_number", skip_serializing_if = "Option::is_none")]
-    pub tracking_number: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "carrier_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub carrier_id: Option<Option<String>>,
+    #[serde(rename = "tracking_number", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub tracking_number: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ShipmentTrackingNumber {

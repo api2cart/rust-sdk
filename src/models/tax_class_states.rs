@@ -13,8 +13,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TaxClassStates {
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<String>,
+    #[serde(rename = "id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub id: Option<Option<String>>,
     #[serde(rename = "tax", skip_serializing_if = "Option::is_none")]
     pub tax: Option<f64>,
     #[serde(rename = "tax_type", skip_serializing_if = "Option::is_none")]
@@ -25,10 +25,10 @@ pub struct TaxClassStates {
     pub code: Option<String>,
     #[serde(rename = "zip_codes", skip_serializing_if = "Option::is_none")]
     pub zip_codes: Option<Vec<models::TaxClassZipCodes>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl TaxClassStates {

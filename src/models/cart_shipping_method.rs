@@ -13,30 +13,30 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CartShippingMethod {
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
-    #[serde(rename = "handling_fee", skip_serializing_if = "Option::is_none")]
-    pub handling_fee: Option<String>,
-    #[serde(rename = "handling_enabled", skip_serializing_if = "Option::is_none")]
-    pub handling_enabled: Option<String>,
-    #[serde(rename = "handling_type", skip_serializing_if = "Option::is_none")]
-    pub handling_type: Option<String>,
-    #[serde(rename = "default_price", skip_serializing_if = "Option::is_none")]
-    pub default_price: Option<String>,
-    #[serde(rename = "default_price_type", skip_serializing_if = "Option::is_none")]
-    pub default_price_type: Option<String>,
-    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<String>,
-    #[serde(rename = "enabled", skip_serializing_if = "Option::is_none")]
-    pub enabled: Option<String>,
-    #[serde(rename = "min_order_amount", skip_serializing_if = "Option::is_none")]
-    pub min_order_amount: Option<String>,
+    #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub name: Option<Option<String>>,
+    #[serde(rename = "handling_fee", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub handling_fee: Option<Option<String>>,
+    #[serde(rename = "handling_enabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub handling_enabled: Option<Option<String>>,
+    #[serde(rename = "handling_type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub handling_type: Option<Option<String>>,
+    #[serde(rename = "default_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub default_price: Option<Option<String>>,
+    #[serde(rename = "default_price_type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub default_price_type: Option<Option<String>>,
+    #[serde(rename = "type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<Option<String>>,
+    #[serde(rename = "enabled", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub enabled: Option<Option<String>>,
+    #[serde(rename = "min_order_amount", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub min_order_amount: Option<Option<String>>,
     #[serde(rename = "rates", skip_serializing_if = "Option::is_none")]
     pub rates: Option<Vec<models::CartShippingMethodRate>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl CartShippingMethod {

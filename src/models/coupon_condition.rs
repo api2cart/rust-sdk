@@ -17,22 +17,22 @@ pub struct CouponCondition {
     pub id: Option<String>,
     #[serde(rename = "entity", skip_serializing_if = "Option::is_none")]
     pub entity: Option<String>,
-    #[serde(rename = "match_items", skip_serializing_if = "Option::is_none")]
-    pub match_items: Option<String>,
-    #[serde(rename = "key", skip_serializing_if = "Option::is_none")]
-    pub key: Option<String>,
-    #[serde(rename = "operator", skip_serializing_if = "Option::is_none")]
-    pub operator: Option<String>,
-    #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
-    pub value: Option<String>,
-    #[serde(rename = "logic_operator", skip_serializing_if = "Option::is_none")]
-    pub logic_operator: Option<String>,
+    #[serde(rename = "match_items", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub match_items: Option<Option<String>>,
+    #[serde(rename = "key", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub key: Option<Option<String>>,
+    #[serde(rename = "operator", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub operator: Option<Option<String>>,
+    #[serde(rename = "value", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub value: Option<Option<String>>,
+    #[serde(rename = "logic_operator", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub logic_operator: Option<Option<String>>,
     #[serde(rename = "sub-conditions", skip_serializing_if = "Option::is_none")]
     pub sub_conditions: Option<Vec<models::CouponCondition>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl CouponCondition {

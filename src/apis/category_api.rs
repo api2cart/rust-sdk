@@ -245,7 +245,7 @@ pub async fn category_add_batch(configuration: &configuration::Configuration, ca
 }
 
 /// Assign category to product
-pub async fn category_assign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>) -> Result<models::CartConfigUpdate200Response, Error<CategoryAssignError>> {
+pub async fn category_assign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>) -> Result<models::CategoryAssign200Response, Error<CategoryAssignError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_category_id = category_id;
     let p_product_id = product_id;
@@ -811,7 +811,7 @@ pub async fn category_list(configuration: &configuration::Configuration, start: 
 }
 
 /// Unassign category to product
-pub async fn category_unassign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>) -> Result<models::CartConfigUpdate200Response, Error<CategoryUnassignError>> {
+pub async fn category_unassign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>) -> Result<models::CategoryAssign200Response, Error<CategoryUnassignError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_category_id = category_id;
     let p_product_id = product_id;

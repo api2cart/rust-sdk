@@ -39,7 +39,7 @@ impl Configuration {
 impl Default for Configuration {
     fn default() -> Self {
         Configuration {
-            base_path: "https://api.api2cart.com/v1.1".to_owned(),
+            base_path: "https://api.api2cart.local.com/v1.1".to_owned(),
             user_agent: Some("OpenAPI-Generator/1.1/rust".to_owned()),
             client: reqwest::Client::new(),
             basic_auth: None,

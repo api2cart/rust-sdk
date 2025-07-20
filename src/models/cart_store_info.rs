@@ -15,44 +15,44 @@ use serde::{Deserialize, Serialize};
 pub struct CartStoreInfo {
     #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
     pub store_id: Option<String>,
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
-    #[serde(rename = "language", skip_serializing_if = "Option::is_none")]
-    pub language: Option<String>,
+    #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub name: Option<Option<String>>,
+    #[serde(rename = "language", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub language: Option<Option<String>>,
     #[serde(rename = "store_languages", skip_serializing_if = "Option::is_none")]
     pub store_languages: Option<Vec<models::Language>>,
     #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
     pub currency: Option<Box<models::Currency>>,
     #[serde(rename = "store_currencies", skip_serializing_if = "Option::is_none")]
     pub store_currencies: Option<Vec<models::Currency>>,
-    #[serde(rename = "timezone", skip_serializing_if = "Option::is_none")]
-    pub timezone: Option<String>,
-    #[serde(rename = "country", skip_serializing_if = "Option::is_none")]
-    pub country: Option<String>,
-    #[serde(rename = "root_category_id", skip_serializing_if = "Option::is_none")]
-    pub root_category_id: Option<String>,
-    #[serde(rename = "multi_store_url", skip_serializing_if = "Option::is_none")]
-    pub multi_store_url: Option<String>,
-    #[serde(rename = "active", skip_serializing_if = "Option::is_none")]
-    pub active: Option<bool>,
-    #[serde(rename = "weight_unit", skip_serializing_if = "Option::is_none")]
-    pub weight_unit: Option<String>,
-    #[serde(rename = "dimension_unit", skip_serializing_if = "Option::is_none")]
-    pub dimension_unit: Option<String>,
-    #[serde(rename = "prices_include_tax", skip_serializing_if = "Option::is_none")]
-    pub prices_include_tax: Option<bool>,
+    #[serde(rename = "timezone", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub timezone: Option<Option<String>>,
+    #[serde(rename = "country", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub country: Option<Option<String>>,
+    #[serde(rename = "root_category_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub root_category_id: Option<Option<String>>,
+    #[serde(rename = "multi_store_url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub multi_store_url: Option<Option<String>>,
+    #[serde(rename = "active", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub active: Option<Option<bool>>,
+    #[serde(rename = "weight_unit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub weight_unit: Option<Option<String>>,
+    #[serde(rename = "dimension_unit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub dimension_unit: Option<Option<String>>,
+    #[serde(rename = "prices_include_tax", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub prices_include_tax: Option<Option<bool>>,
     #[serde(rename = "carrier_info", skip_serializing_if = "Option::is_none")]
     pub carrier_info: Option<Vec<models::Carrier>>,
-    #[serde(rename = "store_owner_info", skip_serializing_if = "Option::is_none")]
-    pub store_owner_info: Option<Box<models::Info>>,
-    #[serde(rename = "default_warehouse_id", skip_serializing_if = "Option::is_none")]
-    pub default_warehouse_id: Option<String>,
+    #[serde(rename = "store_owner_info", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub store_owner_info: Option<Option<Box<models::Info>>>,
+    #[serde(rename = "default_warehouse_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub default_warehouse_id: Option<Option<String>>,
     #[serde(rename = "channels", skip_serializing_if = "Option::is_none")]
     pub channels: Option<Vec<models::CartChannel>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl CartStoreInfo {

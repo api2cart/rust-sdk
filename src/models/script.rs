@@ -15,28 +15,28 @@ use serde::{Deserialize, Serialize};
 pub struct Script {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "src", skip_serializing_if = "Option::is_none")]
-    pub src: Option<String>,
-    #[serde(rename = "scope", skip_serializing_if = "Option::is_none")]
-    pub scope: Option<String>,
-    #[serde(rename = "event", skip_serializing_if = "Option::is_none")]
-    pub event: Option<String>,
-    #[serde(rename = "load_method", skip_serializing_if = "Option::is_none")]
-    pub load_method: Option<String>,
-    #[serde(rename = "html", skip_serializing_if = "Option::is_none")]
-    pub html: Option<String>,
-    #[serde(rename = "created_time", skip_serializing_if = "Option::is_none")]
-    pub created_time: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "modified_time", skip_serializing_if = "Option::is_none")]
-    pub modified_time: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub name: Option<Option<String>>,
+    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub description: Option<Option<String>>,
+    #[serde(rename = "src", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub src: Option<Option<String>>,
+    #[serde(rename = "scope", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub scope: Option<Option<String>>,
+    #[serde(rename = "event", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub event: Option<Option<String>>,
+    #[serde(rename = "load_method", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub load_method: Option<Option<String>>,
+    #[serde(rename = "html", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub html: Option<Option<String>>,
+    #[serde(rename = "created_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub created_time: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "modified_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_time: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Script {

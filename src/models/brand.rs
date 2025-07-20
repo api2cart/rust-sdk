@@ -17,32 +17,32 @@ pub struct Brand {
     pub id: Option<String>,
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
-    #[serde(rename = "created_time", skip_serializing_if = "Option::is_none")]
-    pub created_time: Option<String>,
-    #[serde(rename = "modified_time", skip_serializing_if = "Option::is_none")]
-    pub modified_time: Option<String>,
-    #[serde(rename = "full_description", skip_serializing_if = "Option::is_none")]
-    pub full_description: Option<String>,
-    #[serde(rename = "short_description", skip_serializing_if = "Option::is_none")]
-    pub short_description: Option<String>,
+    #[serde(rename = "created_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub created_time: Option<Option<String>>,
+    #[serde(rename = "modified_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_time: Option<Option<String>>,
+    #[serde(rename = "full_description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub full_description: Option<Option<String>>,
+    #[serde(rename = "short_description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub short_description: Option<Option<String>>,
     #[serde(rename = "stores_ids", skip_serializing_if = "Option::is_none")]
     pub stores_ids: Option<Vec<String>>,
     #[serde(rename = "active", skip_serializing_if = "Option::is_none")]
     pub active: Option<bool>,
     #[serde(rename = "url", skip_serializing_if = "Option::is_none")]
     pub url: Option<String>,
-    #[serde(rename = "meta_title", skip_serializing_if = "Option::is_none")]
-    pub meta_title: Option<String>,
-    #[serde(rename = "meta_keywords", skip_serializing_if = "Option::is_none")]
-    pub meta_keywords: Option<String>,
-    #[serde(rename = "meta_description", skip_serializing_if = "Option::is_none")]
-    pub meta_description: Option<String>,
+    #[serde(rename = "meta_title", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub meta_title: Option<Option<String>>,
+    #[serde(rename = "meta_keywords", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub meta_keywords: Option<Option<String>>,
+    #[serde(rename = "meta_description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub meta_description: Option<Option<String>>,
     #[serde(rename = "images", skip_serializing_if = "Option::is_none")]
     pub images: Option<Vec<models::Image>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Brand {

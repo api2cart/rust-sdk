@@ -15,20 +15,20 @@ use serde::{Deserialize, Serialize};
 pub struct CustomerConsent {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
-    pub r#type: Option<String>,
-    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
-    pub status: Option<String>,
-    #[serde(rename = "source", skip_serializing_if = "Option::is_none")]
-    pub source: Option<String>,
-    #[serde(rename = "opt_in_level", skip_serializing_if = "Option::is_none")]
-    pub opt_in_level: Option<String>,
-    #[serde(rename = "modified_time", skip_serializing_if = "Option::is_none")]
-    pub modified_time: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "type", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub r#type: Option<Option<String>>,
+    #[serde(rename = "status", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub status: Option<Option<String>>,
+    #[serde(rename = "source", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub source: Option<Option<String>>,
+    #[serde(rename = "opt_in_level", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub opt_in_level: Option<Option<String>>,
+    #[serde(rename = "modified_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_time: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl CustomerConsent {

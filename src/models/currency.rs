@@ -15,24 +15,24 @@ use serde::{Deserialize, Serialize};
 pub struct Currency {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
+    #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub name: Option<Option<String>>,
     #[serde(rename = "iso3", skip_serializing_if = "Option::is_none")]
     pub iso3: Option<String>,
     #[serde(rename = "symbol_left", skip_serializing_if = "Option::is_none")]
     pub symbol_left: Option<String>,
-    #[serde(rename = "symbol_right", skip_serializing_if = "Option::is_none")]
-    pub symbol_right: Option<String>,
-    #[serde(rename = "rate", skip_serializing_if = "Option::is_none")]
-    pub rate: Option<f64>,
-    #[serde(rename = "avail", skip_serializing_if = "Option::is_none")]
-    pub avail: Option<bool>,
-    #[serde(rename = "default", skip_serializing_if = "Option::is_none")]
-    pub default: Option<bool>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "symbol_right", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub symbol_right: Option<Option<String>>,
+    #[serde(rename = "rate", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub rate: Option<Option<f64>>,
+    #[serde(rename = "avail", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub avail: Option<Option<bool>>,
+    #[serde(rename = "default", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub default: Option<Option<bool>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Currency {

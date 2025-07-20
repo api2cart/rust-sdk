@@ -17,14 +17,14 @@ pub struct ProductInventory {
     pub warehouse_id: Option<String>,
     #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<f64>,
-    #[serde(rename = "in_stock", skip_serializing_if = "Option::is_none")]
-    pub in_stock: Option<bool>,
-    #[serde(rename = "priority", skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i32>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "in_stock", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub in_stock: Option<Option<bool>>,
+    #[serde(rename = "priority", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub priority: Option<Option<i32>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ProductInventory {

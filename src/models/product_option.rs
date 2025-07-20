@@ -15,28 +15,28 @@ use serde::{Deserialize, Serialize};
 pub struct ProductOption {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    #[serde(rename = "product_option_id", skip_serializing_if = "Option::is_none")]
-    pub product_option_id: Option<String>,
+    #[serde(rename = "product_option_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub product_option_id: Option<Option<String>>,
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "sort_order", skip_serializing_if = "Option::is_none")]
-    pub sort_order: Option<i32>,
+    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub description: Option<Option<String>>,
+    #[serde(rename = "sort_order", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub sort_order: Option<Option<i32>>,
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<String>,
-    #[serde(rename = "required", skip_serializing_if = "Option::is_none")]
-    pub required: Option<bool>,
-    #[serde(rename = "available", skip_serializing_if = "Option::is_none")]
-    pub available: Option<bool>,
-    #[serde(rename = "used_in_combination", skip_serializing_if = "Option::is_none")]
-    pub used_in_combination: Option<bool>,
+    #[serde(rename = "required", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub required: Option<Option<bool>>,
+    #[serde(rename = "available", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub available: Option<Option<bool>>,
+    #[serde(rename = "used_in_combination", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub used_in_combination: Option<Option<bool>>,
     #[serde(rename = "option_items", skip_serializing_if = "Option::is_none")]
     pub option_items: Option<Vec<models::ProductOptionItem>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ProductOption {

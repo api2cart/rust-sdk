@@ -15,40 +15,40 @@ use serde::{Deserialize, Serialize};
 pub struct Coupon {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
-    pub code: Option<String>,
+    #[serde(rename = "code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub code: Option<Option<String>>,
     #[serde(rename = "codes", skip_serializing_if = "Option::is_none")]
     pub codes: Option<Vec<models::CouponCode>>,
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
+    #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub name: Option<Option<String>>,
+    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub description: Option<Option<String>>,
     #[serde(rename = "actions", skip_serializing_if = "Option::is_none")]
     pub actions: Option<Vec<models::CouponAction>>,
-    #[serde(rename = "date_start", skip_serializing_if = "Option::is_none")]
-    pub date_start: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "date_end", skip_serializing_if = "Option::is_none")]
-    pub date_end: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "avail", skip_serializing_if = "Option::is_none")]
-    pub avail: Option<bool>,
-    #[serde(rename = "priority", skip_serializing_if = "Option::is_none")]
-    pub priority: Option<i32>,
-    #[serde(rename = "used_times", skip_serializing_if = "Option::is_none")]
-    pub used_times: Option<i32>,
-    #[serde(rename = "usage_limit", skip_serializing_if = "Option::is_none")]
-    pub usage_limit: Option<i32>,
-    #[serde(rename = "usage_limit_per_customer", skip_serializing_if = "Option::is_none")]
-    pub usage_limit_per_customer: Option<i32>,
-    #[serde(rename = "logic_operator", skip_serializing_if = "Option::is_none")]
-    pub logic_operator: Option<String>,
+    #[serde(rename = "date_start", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub date_start: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "date_end", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub date_end: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "avail", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub avail: Option<Option<bool>>,
+    #[serde(rename = "priority", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub priority: Option<Option<i32>>,
+    #[serde(rename = "used_times", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub used_times: Option<Option<i32>>,
+    #[serde(rename = "usage_limit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub usage_limit: Option<Option<i32>>,
+    #[serde(rename = "usage_limit_per_customer", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub usage_limit_per_customer: Option<Option<i32>>,
+    #[serde(rename = "logic_operator", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub logic_operator: Option<Option<String>>,
     #[serde(rename = "conditions", skip_serializing_if = "Option::is_none")]
     pub conditions: Option<Vec<models::CouponCondition>>,
     #[serde(rename = "usage_history", skip_serializing_if = "Option::is_none")]
     pub usage_history: Option<Vec<models::CouponHistory>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Coupon {

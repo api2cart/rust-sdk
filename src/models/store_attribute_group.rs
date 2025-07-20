@@ -17,16 +17,16 @@ pub struct StoreAttributeGroup {
     pub id: Option<String>,
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
-    #[serde(rename = "position", skip_serializing_if = "Option::is_none")]
-    pub position: Option<i32>,
-    #[serde(rename = "attribute_set_id", skip_serializing_if = "Option::is_none")]
-    pub attribute_set_id: Option<String>,
+    #[serde(rename = "position", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub position: Option<Option<i32>>,
+    #[serde(rename = "attribute_set_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub attribute_set_id: Option<Option<String>>,
     #[serde(rename = "assigned_attribute_ids", skip_serializing_if = "Option::is_none")]
     pub assigned_attribute_ids: Option<Vec<String>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl StoreAttributeGroup {

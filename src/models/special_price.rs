@@ -17,16 +17,16 @@ pub struct SpecialPrice {
     pub value: Option<f64>,
     #[serde(rename = "avail", skip_serializing_if = "Option::is_none")]
     pub avail: Option<bool>,
-    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "modified_at", skip_serializing_if = "Option::is_none")]
-    pub modified_at: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "expired_at", skip_serializing_if = "Option::is_none")]
-    pub expired_at: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "created_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "modified_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_at: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "expired_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub expired_at: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl SpecialPrice {

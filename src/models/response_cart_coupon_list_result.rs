@@ -13,14 +13,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ResponseCartCouponListResult {
-    #[serde(rename = "coupon_count", skip_serializing_if = "Option::is_none")]
-    pub coupon_count: Option<i32>,
+    #[serde(rename = "coupon_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub coupon_count: Option<Option<i32>>,
     #[serde(rename = "coupon", skip_serializing_if = "Option::is_none")]
     pub coupon: Option<Vec<models::Coupon>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ResponseCartCouponListResult {

@@ -13,30 +13,30 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Info {
-    #[serde(rename = "owner", skip_serializing_if = "Option::is_none")]
-    pub owner: Option<String>,
-    #[serde(rename = "country", skip_serializing_if = "Option::is_none")]
-    pub country: Option<String>,
-    #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
-    pub state: Option<String>,
-    #[serde(rename = "state_code", skip_serializing_if = "Option::is_none")]
-    pub state_code: Option<String>,
-    #[serde(rename = "city", skip_serializing_if = "Option::is_none")]
-    pub city: Option<String>,
-    #[serde(rename = "street_address", skip_serializing_if = "Option::is_none")]
-    pub street_address: Option<String>,
-    #[serde(rename = "street_address_line_2", skip_serializing_if = "Option::is_none")]
-    pub street_address_line_2: Option<String>,
-    #[serde(rename = "zip_code", skip_serializing_if = "Option::is_none")]
-    pub zip_code: Option<String>,
-    #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
-    pub email: Option<String>,
-    #[serde(rename = "phone", skip_serializing_if = "Option::is_none")]
-    pub phone: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "owner", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub owner: Option<Option<String>>,
+    #[serde(rename = "country", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub country: Option<Option<String>>,
+    #[serde(rename = "state", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub state: Option<Option<String>>,
+    #[serde(rename = "state_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub state_code: Option<Option<String>>,
+    #[serde(rename = "city", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub city: Option<Option<String>>,
+    #[serde(rename = "street_address", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub street_address: Option<Option<String>>,
+    #[serde(rename = "street_address_line_2", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub street_address_line_2: Option<Option<String>>,
+    #[serde(rename = "zip_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub zip_code: Option<Option<String>>,
+    #[serde(rename = "email", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub email: Option<Option<String>>,
+    #[serde(rename = "phone", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub phone: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Info {

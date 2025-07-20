@@ -15,24 +15,24 @@ use serde::{Deserialize, Serialize};
 pub struct OrderPreestimateShipping {
     #[serde(rename = "method_code", skip_serializing_if = "Option::is_none")]
     pub method_code: Option<String>,
-    #[serde(rename = "method_name", skip_serializing_if = "Option::is_none")]
-    pub method_name: Option<String>,
-    #[serde(rename = "carrier_code", skip_serializing_if = "Option::is_none")]
-    pub carrier_code: Option<String>,
-    #[serde(rename = "carrier_name", skip_serializing_if = "Option::is_none")]
-    pub carrier_name: Option<String>,
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
-    #[serde(rename = "price", skip_serializing_if = "Option::is_none")]
-    pub price: Option<f64>,
-    #[serde(rename = "price_inc_tax", skip_serializing_if = "Option::is_none")]
-    pub price_inc_tax: Option<f64>,
-    #[serde(rename = "delivery_time", skip_serializing_if = "Option::is_none")]
-    pub delivery_time: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "method_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub method_name: Option<Option<String>>,
+    #[serde(rename = "carrier_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub carrier_code: Option<Option<String>>,
+    #[serde(rename = "carrier_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub carrier_name: Option<Option<String>>,
+    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub description: Option<Option<String>>,
+    #[serde(rename = "price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub price: Option<Option<f64>>,
+    #[serde(rename = "price_inc_tax", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub price_inc_tax: Option<Option<f64>>,
+    #[serde(rename = "delivery_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub delivery_time: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl OrderPreestimateShipping {

@@ -19,12 +19,12 @@ pub struct OrderStatus {
     pub name: Option<String>,
     #[serde(rename = "history", skip_serializing_if = "Option::is_none")]
     pub history: Option<Vec<models::OrderStatusHistoryItem>>,
-    #[serde(rename = "refund_info", skip_serializing_if = "Option::is_none")]
-    pub refund_info: Option<Box<models::OrderStatusRefund>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "refund_info", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub refund_info: Option<Option<Box<models::OrderStatusRefund>>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl OrderStatus {

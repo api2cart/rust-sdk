@@ -13,24 +13,24 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CartShippingMethodRate {
-    #[serde(rename = "min_weight", skip_serializing_if = "Option::is_none")]
-    pub min_weight: Option<String>,
-    #[serde(rename = "max_weight", skip_serializing_if = "Option::is_none")]
-    pub max_weight: Option<String>,
-    #[serde(rename = "min_order_amount", skip_serializing_if = "Option::is_none")]
-    pub min_order_amount: Option<String>,
-    #[serde(rename = "max_order_amount", skip_serializing_if = "Option::is_none")]
-    pub max_order_amount: Option<String>,
-    #[serde(rename = "min_items_count", skip_serializing_if = "Option::is_none")]
-    pub min_items_count: Option<String>,
-    #[serde(rename = "max_items_count", skip_serializing_if = "Option::is_none")]
-    pub max_items_count: Option<String>,
-    #[serde(rename = "price", skip_serializing_if = "Option::is_none")]
-    pub price: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "min_weight", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub min_weight: Option<Option<String>>,
+    #[serde(rename = "max_weight", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub max_weight: Option<Option<String>>,
+    #[serde(rename = "min_order_amount", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub min_order_amount: Option<Option<String>>,
+    #[serde(rename = "max_order_amount", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub max_order_amount: Option<Option<String>>,
+    #[serde(rename = "min_items_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub min_items_count: Option<Option<String>>,
+    #[serde(rename = "max_items_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub max_items_count: Option<Option<String>>,
+    #[serde(rename = "price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub price: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl CartShippingMethodRate {

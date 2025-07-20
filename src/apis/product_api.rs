@@ -113,13 +113,6 @@ pub enum ProductDeleteBatchError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`product_fields`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum ProductFieldsError {
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`product_find`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -295,13 +288,6 @@ pub enum ProductVariantAddBatchError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`product_variant_count`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum ProductVariantCountError {
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`product_variant_delete`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -327,20 +313,6 @@ pub enum ProductVariantImageAddError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ProductVariantImageDeleteError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`product_variant_info`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum ProductVariantInfoError {
-    UnknownValue(serde_json::Value),
-}
-
-/// struct for typed errors of method [`product_variant_list`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum ProductVariantListError {
     UnknownValue(serde_json::Value),
 }
 
@@ -1443,47 +1415,6 @@ pub async fn product_delete_batch(configuration: &configuration::Configuration, 
     } else {
         let content = resp.text().await?;
         let entity: Option<ProductDeleteBatchError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Retrieve all available fields for product item in store.
-pub async fn product_fields(configuration: &configuration::Configuration, ) -> Result<models::CartConfigUpdate200Response, Error<ProductFieldsError>> {
-
-    let uri_str = format!("{}/product.fields.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-store-key", value);
-    };
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<ProductFieldsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -2987,74 +2918,6 @@ pub async fn product_variant_add_batch(configuration: &configuration::Configurat
     }
 }
 
-/// Get count variants.
-pub async fn product_variant_count(configuration: &configuration::Configuration, product_id: &str, category_id: Option<&str>, store_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>) -> Result<models::ProductVariantCount200Response, Error<ProductVariantCountError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_product_id = product_id;
-    let p_category_id = category_id;
-    let p_store_id = store_id;
-    let p_created_from = created_from;
-    let p_created_to = created_to;
-    let p_modified_from = modified_from;
-    let p_modified_to = modified_to;
-
-    let uri_str = format!("{}/product.variant.count.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    req_builder = req_builder.query(&[("product_id", &p_product_id.to_string())]);
-    if let Some(ref param_value) = p_category_id {
-        req_builder = req_builder.query(&[("category_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_created_from {
-        req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_created_to {
-        req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_modified_from {
-        req_builder = req_builder.query(&[("modified_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_modified_to {
-        req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
-    }
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-store-key", value);
-    };
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<ProductVariantCountError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
 /// Delete variant.
 pub async fn product_variant_delete(configuration: &configuration::Configuration, id: &str, product_id: &str, store_id: Option<&str>) -> Result<models::AttributeValueDelete200Response, Error<ProductVariantDeleteError>> {
     // add a prefix to parameters to efficiently prevent name collisions
@@ -3241,148 +3104,6 @@ pub async fn product_variant_image_delete(configuration: &configuration::Configu
     } else {
         let content = resp.text().await?;
         let entity: Option<ProductVariantImageDeleteError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Get variant info. This method is deprecated, and its development is stopped. Please use \"product.child_item.info\" instead.
-pub async fn product_variant_info(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ProductInfo200Response, Error<ProductVariantInfoError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
-    let p_store_id = store_id;
-    let p_params = params;
-    let p_exclude = exclude;
-
-    let uri_str = format!("{}/product.variant.info.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    req_builder = req_builder.query(&[("id", &p_id.to_string())]);
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-store-key", value);
-    };
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<ProductVariantInfoError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// Get a list of variants. This method is deprecated, and its development is stopped. Please use \"product.child_item.list\" instead.
-pub async fn product_variant_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, product_id: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ProductVariantList200Response, Error<ProductVariantListError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_start = start;
-    let p_count = count;
-    let p_product_id = product_id;
-    let p_category_id = category_id;
-    let p_store_id = store_id;
-    let p_created_from = created_from;
-    let p_created_to = created_to;
-    let p_modified_from = modified_from;
-    let p_modified_to = modified_to;
-    let p_params = params;
-    let p_exclude = exclude;
-
-    let uri_str = format!("{}/product.variant.list.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref param_value) = p_start {
-        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_count {
-        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_product_id {
-        req_builder = req_builder.query(&[("product_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_category_id {
-        req_builder = req_builder.query(&[("category_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_created_from {
-        req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_created_to {
-        req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_modified_from {
-        req_builder = req_builder.query(&[("modified_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_modified_to {
-        req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-store-key", value);
-    };
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<ProductVariantListError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

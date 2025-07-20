@@ -17,24 +17,24 @@ pub struct OrderAbandoned {
     pub id: Option<String>,
     #[serde(rename = "customer", skip_serializing_if = "Option::is_none")]
     pub customer: Option<Box<models::BaseCustomer>>,
-    #[serde(rename = "basket_id", skip_serializing_if = "Option::is_none")]
-    pub basket_id: Option<String>,
-    #[serde(rename = "basket_url", skip_serializing_if = "Option::is_none")]
-    pub basket_url: Option<String>,
-    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "modified_at", skip_serializing_if = "Option::is_none")]
-    pub modified_at: Option<Box<models::A2CDateTime>>,
+    #[serde(rename = "basket_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub basket_id: Option<Option<String>>,
+    #[serde(rename = "basket_url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub basket_url: Option<Option<String>>,
+    #[serde(rename = "created_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "modified_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_at: Option<Option<Box<models::A2CDateTime>>>,
     #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
     pub currency: Option<Box<models::Currency>>,
     #[serde(rename = "totals", skip_serializing_if = "Option::is_none")]
     pub totals: Option<Box<models::OrderTotals>>,
     #[serde(rename = "order_products", skip_serializing_if = "Option::is_none")]
     pub order_products: Option<Vec<models::OrderItem>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl OrderAbandoned {

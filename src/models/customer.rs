@@ -17,56 +17,56 @@ pub struct Customer {
     pub id: Option<String>,
     #[serde(rename = "email", skip_serializing_if = "Option::is_none")]
     pub email: Option<String>,
-    #[serde(rename = "first_name", skip_serializing_if = "Option::is_none")]
-    pub first_name: Option<String>,
-    #[serde(rename = "last_name", skip_serializing_if = "Option::is_none")]
-    pub last_name: Option<String>,
-    #[serde(rename = "phone", skip_serializing_if = "Option::is_none")]
-    pub phone: Option<String>,
-    #[serde(rename = "created_time", skip_serializing_if = "Option::is_none")]
-    pub created_time: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "modified_time", skip_serializing_if = "Option::is_none")]
-    pub modified_time: Option<Box<models::A2CDateTime>>,
+    #[serde(rename = "first_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub first_name: Option<Option<String>>,
+    #[serde(rename = "last_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub last_name: Option<Option<String>>,
+    #[serde(rename = "phone", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub phone: Option<Option<String>>,
+    #[serde(rename = "created_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub created_time: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "modified_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_time: Option<Option<Box<models::A2CDateTime>>>,
     #[serde(rename = "group", skip_serializing_if = "Option::is_none")]
     pub group: Option<Vec<models::CustomerGroup>>,
-    #[serde(rename = "login", skip_serializing_if = "Option::is_none")]
-    pub login: Option<String>,
-    #[serde(rename = "last_login", skip_serializing_if = "Option::is_none")]
-    pub last_login: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "birth_day", skip_serializing_if = "Option::is_none")]
-    pub birth_day: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
-    pub status: Option<String>,
-    #[serde(rename = "is_guest", skip_serializing_if = "Option::is_none")]
-    pub is_guest: Option<bool>,
-    #[serde(rename = "news_letter_subscription", skip_serializing_if = "Option::is_none")]
-    pub news_letter_subscription: Option<bool>,
+    #[serde(rename = "login", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub login: Option<Option<String>>,
+    #[serde(rename = "last_login", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub last_login: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "birth_day", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub birth_day: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "status", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub status: Option<Option<String>>,
+    #[serde(rename = "is_guest", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub is_guest: Option<Option<bool>>,
+    #[serde(rename = "news_letter_subscription", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub news_letter_subscription: Option<Option<bool>>,
     #[serde(rename = "consents", skip_serializing_if = "Option::is_none")]
     pub consents: Option<Vec<models::CustomerConsent>>,
-    #[serde(rename = "gender", skip_serializing_if = "Option::is_none")]
-    pub gender: Option<String>,
+    #[serde(rename = "gender", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub gender: Option<Option<String>>,
     #[serde(rename = "stores_ids", skip_serializing_if = "Option::is_none")]
     pub stores_ids: Option<Vec<String>>,
-    #[serde(rename = "website", skip_serializing_if = "Option::is_none")]
-    pub website: Option<String>,
-    #[serde(rename = "fax", skip_serializing_if = "Option::is_none")]
-    pub fax: Option<String>,
-    #[serde(rename = "company", skip_serializing_if = "Option::is_none")]
-    pub company: Option<String>,
-    #[serde(rename = "ip_address", skip_serializing_if = "Option::is_none")]
-    pub ip_address: Option<String>,
+    #[serde(rename = "website", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub website: Option<Option<String>>,
+    #[serde(rename = "fax", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub fax: Option<Option<String>>,
+    #[serde(rename = "company", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub company: Option<Option<String>>,
+    #[serde(rename = "ip_address", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub ip_address: Option<Option<String>>,
     #[serde(rename = "address_book", skip_serializing_if = "Option::is_none")]
     pub address_book: Option<Vec<models::CustomerAddress>>,
-    #[serde(rename = "lang_id", skip_serializing_if = "Option::is_none")]
-    pub lang_id: Option<String>,
-    #[serde(rename = "orders_count", skip_serializing_if = "Option::is_none")]
-    pub orders_count: Option<i32>,
-    #[serde(rename = "last_order_id", skip_serializing_if = "Option::is_none")]
-    pub last_order_id: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "lang_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub lang_id: Option<Option<String>>,
+    #[serde(rename = "orders_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub orders_count: Option<Option<i32>>,
+    #[serde(rename = "last_order_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub last_order_id: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Customer {

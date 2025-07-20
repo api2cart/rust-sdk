@@ -121,6 +121,18 @@ pub struct AccountCartAdd {
     /// BigCartel account password
     #[serde(rename = "bigcartel_password")]
     pub bigcartel_password: String,
+    /// Bricklink Consumer Key
+    #[serde(rename = "bricklink_consumer_key")]
+    pub bricklink_consumer_key: String,
+    /// Bricklink Consumer Secret
+    #[serde(rename = "bricklink_consumer_secret")]
+    pub bricklink_consumer_secret: String,
+    /// Bricklink Access Token
+    #[serde(rename = "bricklink_token")]
+    pub bricklink_token: String,
+    /// Bricklink Access Token Secret
+    #[serde(rename = "bricklink_token_secret")]
+    pub bricklink_token_secret: String,
     /// Demandware client id
     #[serde(rename = "demandware_client_id", skip_serializing_if = "Option::is_none")]
     pub demandware_client_id: Option<String>,
@@ -499,7 +511,7 @@ pub struct AccountCartAdd {
 }
 
 impl AccountCartAdd {
-    pub fn new(cart_id: CartId, bigcartel_user_name: String, bigcartel_password: String, wix_app_id: String, wix_app_secret_key: String, temu_access_token: String, temu_region: TemuRegion) -> AccountCartAdd {
+    pub fn new(cart_id: CartId, bigcartel_user_name: String, bigcartel_password: String, bricklink_consumer_key: String, bricklink_consumer_secret: String, bricklink_token: String, bricklink_token_secret: String, wix_app_id: String, wix_app_secret_key: String, temu_access_token: String, temu_region: TemuRegion) -> AccountCartAdd {
         AccountCartAdd {
             cart_id,
             store_url: None,
@@ -537,6 +549,10 @@ impl AccountCartAdd {
             bol_retailer_id: None,
             bigcartel_user_name,
             bigcartel_password,
+            bricklink_consumer_key,
+            bricklink_consumer_secret,
+            bricklink_token,
+            bricklink_token_secret,
             demandware_client_id: None,
             demandware_api_password: None,
             demandware_user_name: None,

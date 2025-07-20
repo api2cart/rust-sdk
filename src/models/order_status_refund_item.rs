@@ -13,20 +13,20 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OrderStatusRefundItem {
-    #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
-    pub product_id: Option<String>,
-    #[serde(rename = "variant_id", skip_serializing_if = "Option::is_none")]
-    pub variant_id: Option<String>,
-    #[serde(rename = "order_product_id", skip_serializing_if = "Option::is_none")]
-    pub order_product_id: Option<String>,
-    #[serde(rename = "qty", skip_serializing_if = "Option::is_none")]
-    pub qty: Option<f64>,
-    #[serde(rename = "refund", skip_serializing_if = "Option::is_none")]
-    pub refund: Option<f64>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "product_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub product_id: Option<Option<String>>,
+    #[serde(rename = "variant_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub variant_id: Option<Option<String>>,
+    #[serde(rename = "order_product_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub order_product_id: Option<Option<String>>,
+    #[serde(rename = "qty", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub qty: Option<Option<f64>>,
+    #[serde(rename = "refund", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub refund: Option<Option<f64>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl OrderStatusRefundItem {

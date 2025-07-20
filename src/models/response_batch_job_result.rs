@@ -13,16 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ResponseBatchJobResult {
-    #[serde(rename = "return_code", skip_serializing_if = "Option::is_none")]
-    pub return_code: Option<i32>,
-    #[serde(rename = "return_message", skip_serializing_if = "Option::is_none")]
-    pub return_message: Option<String>,
-    #[serde(rename = "result", skip_serializing_if = "Option::is_none")]
-    pub result: Option<Box<models::BatchJobResult>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "return_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub return_code: Option<Option<i32>>,
+    #[serde(rename = "return_message", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub return_message: Option<Option<String>>,
+    #[serde(rename = "result", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub result: Option<Option<Box<models::BatchJobResult>>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ResponseBatchJobResult {

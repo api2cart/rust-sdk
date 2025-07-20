@@ -19,20 +19,20 @@ pub struct CatalogPriceRuleAction {
     pub apply_to: Option<String>,
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<String>,
-    #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
-    pub quantity: Option<f64>,
+    #[serde(rename = "quantity", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub quantity: Option<Option<f64>>,
     #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
     pub value: Option<f64>,
-    #[serde(rename = "currency_code", skip_serializing_if = "Option::is_none")]
-    pub currency_code: Option<String>,
-    #[serde(rename = "include_tax", skip_serializing_if = "Option::is_none")]
-    pub include_tax: Option<bool>,
+    #[serde(rename = "currency_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub currency_code: Option<Option<String>>,
+    #[serde(rename = "include_tax", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub include_tax: Option<Option<bool>>,
     #[serde(rename = "conditions", skip_serializing_if = "Option::is_none")]
     pub conditions: Option<Vec<models::CouponCondition>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl CatalogPriceRuleAction {

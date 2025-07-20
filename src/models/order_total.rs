@@ -15,8 +15,8 @@ use serde::{Deserialize, Serialize};
 pub struct OrderTotal {
     #[serde(rename = "subtotal_ex_tax", skip_serializing_if = "Option::is_none")]
     pub subtotal_ex_tax: Option<f64>,
-    #[serde(rename = "wrapping_ex_tax", skip_serializing_if = "Option::is_none")]
-    pub wrapping_ex_tax: Option<f64>,
+    #[serde(rename = "wrapping_ex_tax", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub wrapping_ex_tax: Option<Option<f64>>,
     #[serde(rename = "shipping_ex_tax", skip_serializing_if = "Option::is_none")]
     pub shipping_ex_tax: Option<f64>,
     #[serde(rename = "total_discount", skip_serializing_if = "Option::is_none")]
@@ -25,12 +25,12 @@ pub struct OrderTotal {
     pub total_tax: Option<f64>,
     #[serde(rename = "total", skip_serializing_if = "Option::is_none")]
     pub total: Option<f64>,
-    #[serde(rename = "total_paid", skip_serializing_if = "Option::is_none")]
-    pub total_paid: Option<f64>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "total_paid", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub total_paid: Option<Option<f64>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl OrderTotal {

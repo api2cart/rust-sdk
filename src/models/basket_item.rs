@@ -13,34 +13,34 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct BasketItem {
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<String>,
-    #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
-    pub parent_id: Option<String>,
+    #[serde(rename = "id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub id: Option<Option<String>>,
+    #[serde(rename = "parent_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub parent_id: Option<Option<String>>,
     #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
     pub product_id: Option<String>,
-    #[serde(rename = "variant_id", skip_serializing_if = "Option::is_none")]
-    pub variant_id: Option<String>,
-    #[serde(rename = "sku", skip_serializing_if = "Option::is_none")]
-    pub sku: Option<String>,
+    #[serde(rename = "variant_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub variant_id: Option<Option<String>>,
+    #[serde(rename = "sku", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub sku: Option<Option<String>>,
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
     #[serde(rename = "price", skip_serializing_if = "Option::is_none")]
     pub price: Option<f64>,
-    #[serde(rename = "tax", skip_serializing_if = "Option::is_none")]
-    pub tax: Option<f64>,
-    #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
-    pub quantity: Option<f64>,
-    #[serde(rename = "weight_unit", skip_serializing_if = "Option::is_none")]
-    pub weight_unit: Option<String>,
-    #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
-    pub weight: Option<f64>,
+    #[serde(rename = "tax", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub tax: Option<Option<f64>>,
+    #[serde(rename = "quantity", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub quantity: Option<Option<f64>>,
+    #[serde(rename = "weight_unit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub weight_unit: Option<Option<String>>,
+    #[serde(rename = "weight", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub weight: Option<Option<f64>>,
     #[serde(rename = "options", skip_serializing_if = "Option::is_none")]
     pub options: Option<Vec<models::BasketItemOption>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl BasketItem {

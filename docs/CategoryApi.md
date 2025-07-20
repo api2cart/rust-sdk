@@ -1,6 +1,6 @@
 # \CategoryApi
 
-All URIs are relative to *https://api.api2cart.com/v1.1*
+All URIs are relative to *https://api.api2cart.local.com/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -95,7 +95,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_assign
 
-> models::CartConfigUpdate200Response category_assign(category_id, product_id, store_id)
+> models::CategoryAssign200Response category_assign(category_id, product_id, store_id)
 category.assign
 
 Assign category to product
@@ -111,7 +111,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CartConfigUpdate200Response**](CartConfigUpdate_200_response.md)
+[**models::CategoryAssign200Response**](CategoryAssign_200_response.md)
 
 ### Authorization
 
@@ -390,7 +390,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_unassign
 
-> models::CartConfigUpdate200Response category_unassign(category_id, product_id, store_id)
+> models::CategoryAssign200Response category_unassign(category_id, product_id, store_id)
 category.unassign
 
 Unassign category to product
@@ -406,7 +406,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CartConfigUpdate200Response**](CartConfigUpdate_200_response.md)
+[**models::CategoryAssign200Response**](CategoryAssign_200_response.md)
 
 ### Authorization
 

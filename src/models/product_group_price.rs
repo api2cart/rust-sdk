@@ -13,24 +13,24 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ProductGroupPrice {
-    #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
-    pub id: Option<String>,
+    #[serde(rename = "id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub id: Option<Option<String>>,
     #[serde(rename = "group_id", skip_serializing_if = "Option::is_none")]
     pub group_id: Option<String>,
     #[serde(rename = "price", skip_serializing_if = "Option::is_none")]
     pub price: Option<f64>,
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
-    #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
-    pub quantity: Option<f64>,
-    #[serde(rename = "start_time", skip_serializing_if = "Option::is_none")]
-    pub start_time: Option<String>,
-    #[serde(rename = "expire_time", skip_serializing_if = "Option::is_none")]
-    pub expire_time: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "store_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<Option<String>>,
+    #[serde(rename = "quantity", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub quantity: Option<Option<f64>>,
+    #[serde(rename = "start_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub start_time: Option<Option<String>>,
+    #[serde(rename = "expire_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub expire_time: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ProductGroupPrice {

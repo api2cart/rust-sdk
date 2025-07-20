@@ -17,40 +17,40 @@ pub struct GiftCard {
     pub id: Option<String>,
     #[serde(rename = "code", skip_serializing_if = "Option::is_none")]
     pub code: Option<String>,
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
+    #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub name: Option<Option<String>>,
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<String>,
-    #[serde(rename = "currency_code", skip_serializing_if = "Option::is_none")]
-    pub currency_code: Option<String>,
+    #[serde(rename = "currency_code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub currency_code: Option<Option<String>>,
     #[serde(rename = "amount", skip_serializing_if = "Option::is_none")]
     pub amount: Option<f64>,
     #[serde(rename = "initial_amount", skip_serializing_if = "Option::is_none")]
     pub initial_amount: Option<f64>,
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
-    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<String>,
-    #[serde(rename = "avail_to", skip_serializing_if = "Option::is_none")]
-    pub avail_to: Option<String>,
-    #[serde(rename = "free_product_ids", skip_serializing_if = "Option::is_none")]
-    pub free_product_ids: Option<String>,
-    #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
-    pub message: Option<String>,
-    #[serde(rename = "issuer_email", skip_serializing_if = "Option::is_none")]
-    pub issuer_email: Option<String>,
-    #[serde(rename = "recipient_email", skip_serializing_if = "Option::is_none")]
-    pub recipient_email: Option<String>,
-    #[serde(rename = "issuer_name", skip_serializing_if = "Option::is_none")]
-    pub issuer_name: Option<String>,
-    #[serde(rename = "recipient_name", skip_serializing_if = "Option::is_none")]
-    pub recipient_name: Option<String>,
+    #[serde(rename = "created_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<Option<String>>,
+    #[serde(rename = "avail_to", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub avail_to: Option<Option<String>>,
+    #[serde(rename = "free_product_ids", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub free_product_ids: Option<Option<String>>,
+    #[serde(rename = "message", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub message: Option<Option<String>>,
+    #[serde(rename = "issuer_email", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub issuer_email: Option<Option<String>>,
+    #[serde(rename = "recipient_email", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub recipient_email: Option<Option<String>>,
+    #[serde(rename = "issuer_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub issuer_name: Option<Option<String>>,
+    #[serde(rename = "recipient_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub recipient_name: Option<Option<String>>,
     #[serde(rename = "usage_history", skip_serializing_if = "Option::is_none")]
     pub usage_history: Option<Vec<models::CouponHistory>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl GiftCard {

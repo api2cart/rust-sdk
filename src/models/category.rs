@@ -15,40 +15,40 @@ use serde::{Deserialize, Serialize};
 pub struct Category {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    #[serde(rename = "parent_id", skip_serializing_if = "Option::is_none")]
-    pub parent_id: Option<String>,
-    #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "modified_at", skip_serializing_if = "Option::is_none")]
-    pub modified_at: Option<Box<models::A2CDateTime>>,
+    #[serde(rename = "parent_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub parent_id: Option<Option<String>>,
+    #[serde(rename = "created_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub created_at: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "modified_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_at: Option<Option<Box<models::A2CDateTime>>>,
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
-    #[serde(rename = "short_description", skip_serializing_if = "Option::is_none")]
-    pub short_description: Option<String>,
-    #[serde(rename = "description", skip_serializing_if = "Option::is_none")]
-    pub description: Option<String>,
+    #[serde(rename = "short_description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub short_description: Option<Option<String>>,
+    #[serde(rename = "description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub description: Option<Option<String>>,
     #[serde(rename = "stores_ids", skip_serializing_if = "Option::is_none")]
     pub stores_ids: Option<Vec<String>>,
-    #[serde(rename = "keywords", skip_serializing_if = "Option::is_none")]
-    pub keywords: Option<String>,
-    #[serde(rename = "meta_description", skip_serializing_if = "Option::is_none")]
-    pub meta_description: Option<String>,
-    #[serde(rename = "meta_title", skip_serializing_if = "Option::is_none")]
-    pub meta_title: Option<String>,
+    #[serde(rename = "keywords", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub keywords: Option<Option<String>>,
+    #[serde(rename = "meta_description", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub meta_description: Option<Option<String>>,
+    #[serde(rename = "meta_title", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub meta_title: Option<Option<String>>,
     #[serde(rename = "avail", skip_serializing_if = "Option::is_none")]
     pub avail: Option<bool>,
-    #[serde(rename = "path", skip_serializing_if = "Option::is_none")]
-    pub path: Option<String>,
-    #[serde(rename = "seo_url", skip_serializing_if = "Option::is_none")]
-    pub seo_url: Option<String>,
-    #[serde(rename = "sort_order", skip_serializing_if = "Option::is_none")]
-    pub sort_order: Option<i32>,
+    #[serde(rename = "path", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub path: Option<Option<String>>,
+    #[serde(rename = "seo_url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub seo_url: Option<Option<String>>,
+    #[serde(rename = "sort_order", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub sort_order: Option<Option<i32>>,
     #[serde(rename = "images", skip_serializing_if = "Option::is_none")]
     pub images: Option<Vec<models::Image>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Category {

@@ -1,29 +1,22 @@
 # \CartApi
 
-All URIs are relative to *https://api.api2cart.com/v1.1*
+All URIs are relative to *https://api.api2cart.local.com/v1.1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**cart_bridge**](CartApi.md#cart_bridge) | **GET** /cart.bridge.json | cart.bridge
 [**cart_catalog_price_rules_count**](CartApi.md#cart_catalog_price_rules_count) | **GET** /cart.catalog_price_rules.count.json | cart.catalog_price_rules.count
 [**cart_catalog_price_rules_list**](CartApi.md#cart_catalog_price_rules_list) | **GET** /cart.catalog_price_rules.list.json | cart.catalog_price_rules.list
-[**cart_clear_cache**](CartApi.md#cart_clear_cache) | **POST** /cart.clear_cache.json | cart.clear_cache
-[**cart_config**](CartApi.md#cart_config) | **GET** /cart.config.json | cart.config
-[**cart_config_update**](CartApi.md#cart_config_update) | **PUT** /cart.config.update.json | cart.config.update
 [**cart_coupon_add**](CartApi.md#cart_coupon_add) | **POST** /cart.coupon.add.json | cart.coupon.add
 [**cart_coupon_condition_add**](CartApi.md#cart_coupon_condition_add) | **POST** /cart.coupon.condition.add.json | cart.coupon.condition.add
 [**cart_coupon_count**](CartApi.md#cart_coupon_count) | **GET** /cart.coupon.count.json | cart.coupon.count
 [**cart_coupon_delete**](CartApi.md#cart_coupon_delete) | **DELETE** /cart.coupon.delete.json | cart.coupon.delete
 [**cart_coupon_list**](CartApi.md#cart_coupon_list) | **GET** /cart.coupon.list.json | cart.coupon.list
-[**cart_create**](CartApi.md#cart_create) | **POST** /cart.create.json | cart.create
 [**cart_delete**](CartApi.md#cart_delete) | **DELETE** /cart.delete.json | cart.delete
-[**cart_disconnect**](CartApi.md#cart_disconnect) | **GET** /cart.disconnect.json | cart.disconnect
 [**cart_giftcard_add**](CartApi.md#cart_giftcard_add) | **POST** /cart.giftcard.add.json | cart.giftcard.add
 [**cart_giftcard_count**](CartApi.md#cart_giftcard_count) | **GET** /cart.giftcard.count.json | cart.giftcard.count
 [**cart_giftcard_delete**](CartApi.md#cart_giftcard_delete) | **DELETE** /cart.giftcard.delete.json | cart.giftcard.delete
 [**cart_giftcard_list**](CartApi.md#cart_giftcard_list) | **GET** /cart.giftcard.list.json | cart.giftcard.list
 [**cart_info**](CartApi.md#cart_info) | **GET** /cart.info.json | cart.info
-[**cart_list**](CartApi.md#cart_list) | **GET** /cart.list.json | cart.list
 [**cart_meta_data_list**](CartApi.md#cart_meta_data_list) | **GET** /cart.meta_data.list.json | cart.meta_data.list
 [**cart_meta_data_set**](CartApi.md#cart_meta_data_set) | **POST** /cart.meta_data.set.json | cart.meta_data.set
 [**cart_meta_data_unset**](CartApi.md#cart_meta_data_unset) | **DELETE** /cart.meta_data.unset.json | cart.meta_data.unset
@@ -35,33 +28,6 @@ Method | HTTP request | Description
 [**cart_shipping_zones_list**](CartApi.md#cart_shipping_zones_list) | **GET** /cart.shipping_zones.list.json | cart.shipping_zones.list
 [**cart_validate**](CartApi.md#cart_validate) | **GET** /cart.validate.json | cart.validate
 
-
-
-## cart_bridge
-
-> models::CartBridge200Response cart_bridge()
-cart.bridge
-
-Get bridge key and store key
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**models::CartBridge200Response**](CartBridge_200_response.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
 ## cart_catalog_price_rules_count
@@ -122,97 +88,6 @@ Name | Type | Description  | Required | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## cart_clear_cache
-
-> models::CartClearCache200Response cart_clear_cache(cache_type)
-cart.clear_cache
-
-Clear cache on store.
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**cache_type** | **String** | Defines which cache should be cleared. | [required] |
-
-### Return type
-
-[**models::CartClearCache200Response**](CartClearCache_200_response.md)
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## cart_config
-
-> models::CartConfig200Response cart_config(params, exclude)
-cart.config
-
-Get list of cart configs
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to store_name,store_url,db_prefix]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
-
-### Return type
-
-[**models::CartConfig200Response**](CartConfig_200_response.md)
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## cart_config_update
-
-> models::CartConfigUpdate200Response cart_config_update(cart_config_update)
-cart.config.update
-
-Use this API method to update custom data in client database.
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**cart_config_update** | [**CartConfigUpdate**](CartConfigUpdate.md) |  | [required] |
-
-### Return type
-
-[**models::CartConfigUpdate200Response**](CartConfigUpdate_200_response.md)
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -395,36 +270,6 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
-## cart_create
-
-> models::AccountCartAdd200Response cart_create(cart_create)
-cart.create
-
-Add store to the account
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**cart_create** | [**CartCreate**](CartCreate.md) |  | [required] |
-
-### Return type
-
-[**models::AccountCartAdd200Response**](AccountCartAdd_200_response.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
 ## cart_delete
 
 > models::CartDelete200Response cart_delete(delete_bridge)
@@ -442,36 +287,6 @@ Name | Type | Description  | Required | Notes
 ### Return type
 
 [**models::CartDelete200Response**](CartDelete_200_response.md)
-
-### Authorization
-
-[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## cart_disconnect
-
-> models::CartDisconnect200Response cart_disconnect(delete_bridge)
-cart.disconnect
-
-Disconnect with the store and clear store session data.
-
-### Parameters
-
-
-Name | Type | Description  | Required | Notes
-------------- | ------------- | ------------- | ------------- | -------------
-**delete_bridge** | Option<**bool**> | Identifies if there is a necessity to delete bridge |  |[default to false]
-
-### Return type
-
-[**models::CartDisconnect200Response**](CartDisconnect_200_response.md)
 
 ### Authorization
 
@@ -640,33 +455,6 @@ Name | Type | Description  | Required | Notes
 ### Authorization
 
 [StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-
-## cart_list
-
-> models::CartList200Response cart_list()
-cart.list
-
-Get list of supported carts
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**models::CartList200Response**](CartList_200_response.md)
-
-### Authorization
-
-[ApiKeyAuth](../README.md#ApiKeyAuth)
 
 ### HTTP request headers
 

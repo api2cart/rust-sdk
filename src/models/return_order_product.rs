@@ -13,28 +13,28 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ReturnOrderProduct {
-    #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
-    pub product_id: Option<String>,
+    #[serde(rename = "product_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub product_id: Option<Option<String>>,
     #[serde(rename = "order_product_id", skip_serializing_if = "Option::is_none")]
     pub order_product_id: Option<String>,
-    #[serde(rename = "sku", skip_serializing_if = "Option::is_none")]
-    pub sku: Option<String>,
-    #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
-    pub name: Option<String>,
+    #[serde(rename = "sku", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub sku: Option<Option<String>>,
+    #[serde(rename = "name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub name: Option<Option<String>>,
     #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<i32>,
     #[serde(rename = "reason", skip_serializing_if = "Option::is_none")]
     pub reason: Option<Box<models::ReturnReason>>,
-    #[serde(rename = "action", skip_serializing_if = "Option::is_none")]
-    pub action: Option<Box<models::ReturnAction>>,
-    #[serde(rename = "condition", skip_serializing_if = "Option::is_none")]
-    pub condition: Option<String>,
-    #[serde(rename = "customer_comment", skip_serializing_if = "Option::is_none")]
-    pub customer_comment: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "action", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub action: Option<Option<Box<models::ReturnAction>>>,
+    #[serde(rename = "condition", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub condition: Option<Option<String>>,
+    #[serde(rename = "customer_comment", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub customer_comment: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ReturnOrderProduct {

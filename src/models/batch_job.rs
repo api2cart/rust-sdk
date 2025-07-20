@@ -21,12 +21,12 @@ pub struct BatchJob {
     pub status: Option<String>,
     #[serde(rename = "created_time", skip_serializing_if = "Option::is_none")]
     pub created_time: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "processed_time", skip_serializing_if = "Option::is_none")]
-    pub processed_time: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "processed_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub processed_time: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl BatchJob {

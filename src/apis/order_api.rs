@@ -43,13 +43,6 @@ pub enum OrderFinancialStatusListError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`order_find`]
-#[derive(Debug, Clone, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum OrderFindError {
-    UnknownValue(serde_json::Value),
-}
-
 /// struct for typed errors of method [`order_fulfillment_status_list`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -484,96 +477,6 @@ pub async fn order_financial_status_list(configuration: &configuration::Configur
     } else {
         let content = resp.text().await?;
         let entity: Option<OrderFinancialStatusListError> = serde_json::from_str(&content).ok();
-        Err(Error::ResponseError(ResponseContent { status, content, entity }))
-    }
-}
-
-/// This method is deprecated and won't be supported in the future. Please use \"order.list\" instead.
-pub async fn order_find(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, customer_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, financial_status: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::OrderFind200Response, Error<OrderFindError>> {
-    // add a prefix to parameters to efficiently prevent name collisions
-    let p_start = start;
-    let p_count = count;
-    let p_customer_id = customer_id;
-    let p_customer_email = customer_email;
-    let p_order_status = order_status;
-    let p_financial_status = financial_status;
-    let p_created_to = created_to;
-    let p_created_from = created_from;
-    let p_modified_to = modified_to;
-    let p_modified_from = modified_from;
-    let p_params = params;
-    let p_exclude = exclude;
-
-    let uri_str = format!("{}/order.find.json", configuration.base_path);
-    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
-
-    if let Some(ref param_value) = p_start {
-        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_count {
-        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_customer_id {
-        req_builder = req_builder.query(&[("customer_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_customer_email {
-        req_builder = req_builder.query(&[("customer_email", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_order_status {
-        req_builder = req_builder.query(&[("order_status", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_financial_status {
-        req_builder = req_builder.query(&[("financial_status", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_created_to {
-        req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_created_from {
-        req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_modified_to {
-        req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_modified_from {
-        req_builder = req_builder.query(&[("modified_from", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_params {
-        req_builder = req_builder.query(&[("params", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_exclude {
-        req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
-    }
-    if let Some(ref user_agent) = configuration.user_agent {
-        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
-    }
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-store-key", value);
-    };
-    if let Some(ref apikey) = configuration.api_key {
-        let key = apikey.key.clone();
-        let value = match apikey.prefix {
-            Some(ref prefix) => format!("{} {}", prefix, key),
-            None => key,
-        };
-        req_builder = req_builder.header("x-api-key", value);
-    };
-
-    let req = req_builder.build()?;
-    let resp = configuration.client.execute(req).await?;
-
-    let status = resp.status();
-
-    if !status.is_client_error() && !status.is_server_error() {
-        let content = resp.text().await?;
-        serde_json::from_str(&content).map_err(Error::from)
-    } else {
-        let content = resp.text().await?;
-        let entity: Option<OrderFindError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

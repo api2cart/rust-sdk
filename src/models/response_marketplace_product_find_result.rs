@@ -13,14 +13,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ResponseMarketplaceProductFindResult {
-    #[serde(rename = "marketplace_products_count", skip_serializing_if = "Option::is_none")]
-    pub marketplace_products_count: Option<i32>,
+    #[serde(rename = "marketplace_products_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub marketplace_products_count: Option<Option<i32>>,
     #[serde(rename = "marketplace_product", skip_serializing_if = "Option::is_none")]
     pub marketplace_product: Option<Vec<models::MarketplaceProduct>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ResponseMarketplaceProductFindResult {

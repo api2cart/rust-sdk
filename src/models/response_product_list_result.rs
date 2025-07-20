@@ -13,14 +13,14 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ResponseProductListResult {
-    #[serde(rename = "products_count", skip_serializing_if = "Option::is_none")]
-    pub products_count: Option<i32>,
+    #[serde(rename = "products_count", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub products_count: Option<Option<i32>>,
     #[serde(rename = "product", skip_serializing_if = "Option::is_none")]
     pub product: Option<Vec<models::Product>>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl ResponseProductListResult {

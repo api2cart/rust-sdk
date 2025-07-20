@@ -17,48 +17,48 @@ pub struct CustomerAddress {
     pub id: Option<String>,
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<String>,
-    #[serde(rename = "first_name", skip_serializing_if = "Option::is_none")]
-    pub first_name: Option<String>,
-    #[serde(rename = "last_name", skip_serializing_if = "Option::is_none")]
-    pub last_name: Option<String>,
+    #[serde(rename = "first_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub first_name: Option<Option<String>>,
+    #[serde(rename = "last_name", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub last_name: Option<Option<String>>,
     #[serde(rename = "postcode", skip_serializing_if = "Option::is_none")]
     pub postcode: Option<String>,
     #[serde(rename = "address1", skip_serializing_if = "Option::is_none")]
     pub address1: Option<String>,
-    #[serde(rename = "address2", skip_serializing_if = "Option::is_none")]
-    pub address2: Option<String>,
-    #[serde(rename = "phone", skip_serializing_if = "Option::is_none")]
-    pub phone: Option<String>,
-    #[serde(rename = "phone_mobile", skip_serializing_if = "Option::is_none")]
-    pub phone_mobile: Option<String>,
+    #[serde(rename = "address2", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub address2: Option<Option<String>>,
+    #[serde(rename = "phone", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub phone: Option<Option<String>>,
+    #[serde(rename = "phone_mobile", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub phone_mobile: Option<Option<String>>,
     #[serde(rename = "city", skip_serializing_if = "Option::is_none")]
     pub city: Option<String>,
     #[serde(rename = "country", skip_serializing_if = "Option::is_none")]
     pub country: Option<Box<models::Country>>,
-    #[serde(rename = "state", skip_serializing_if = "Option::is_none")]
-    pub state: Option<Box<models::State>>,
-    #[serde(rename = "company", skip_serializing_if = "Option::is_none")]
-    pub company: Option<String>,
-    #[serde(rename = "fax", skip_serializing_if = "Option::is_none")]
-    pub fax: Option<String>,
-    #[serde(rename = "website", skip_serializing_if = "Option::is_none")]
-    pub website: Option<String>,
-    #[serde(rename = "gender", skip_serializing_if = "Option::is_none")]
-    pub gender: Option<String>,
-    #[serde(rename = "region", skip_serializing_if = "Option::is_none")]
-    pub region: Option<String>,
+    #[serde(rename = "state", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub state: Option<Option<Box<models::State>>>,
+    #[serde(rename = "company", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub company: Option<Option<String>>,
+    #[serde(rename = "fax", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub fax: Option<Option<String>>,
+    #[serde(rename = "website", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub website: Option<Option<String>>,
+    #[serde(rename = "gender", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub gender: Option<Option<String>>,
+    #[serde(rename = "region", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub region: Option<Option<String>>,
     #[serde(rename = "default", skip_serializing_if = "Option::is_none")]
     pub default: Option<bool>,
-    #[serde(rename = "tax_id", skip_serializing_if = "Option::is_none")]
-    pub tax_id: Option<String>,
-    #[serde(rename = "identification_number", skip_serializing_if = "Option::is_none")]
-    pub identification_number: Option<String>,
-    #[serde(rename = "alias", skip_serializing_if = "Option::is_none")]
-    pub alias: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "tax_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub tax_id: Option<Option<String>>,
+    #[serde(rename = "identification_number", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub identification_number: Option<Option<String>>,
+    #[serde(rename = "alias", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub alias: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl CustomerAddress {

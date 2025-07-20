@@ -17,58 +17,58 @@ pub struct Order {
     pub id: Option<String>,
     #[serde(rename = "order_id", skip_serializing_if = "Option::is_none")]
     pub order_id: Option<String>,
-    #[serde(rename = "basket_id", skip_serializing_if = "Option::is_none")]
-    pub basket_id: Option<String>,
-    #[serde(rename = "channel_id", skip_serializing_if = "Option::is_none")]
-    pub channel_id: Option<String>,
+    #[serde(rename = "basket_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub basket_id: Option<Option<String>>,
+    #[serde(rename = "channel_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub channel_id: Option<Option<String>>,
     #[serde(rename = "customer", skip_serializing_if = "Option::is_none")]
     pub customer: Option<Box<models::BaseCustomer>>,
     #[serde(rename = "create_at", skip_serializing_if = "Option::is_none")]
     pub create_at: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
-    pub currency: Option<Box<models::Currency>>,
-    #[serde(rename = "shipping_address", skip_serializing_if = "Option::is_none")]
-    pub shipping_address: Option<Box<models::CustomerAddress>>,
-    #[serde(rename = "billing_address", skip_serializing_if = "Option::is_none")]
-    pub billing_address: Option<Box<models::CustomerAddress>>,
-    #[serde(rename = "payment_method", skip_serializing_if = "Option::is_none")]
-    pub payment_method: Option<Box<models::OrderPaymentMethod>>,
-    #[serde(rename = "shipping_method", skip_serializing_if = "Option::is_none")]
-    pub shipping_method: Option<Box<models::OrderShippingMethod>>,
+    #[serde(rename = "currency", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub currency: Option<Option<Box<models::Currency>>>,
+    #[serde(rename = "shipping_address", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub shipping_address: Option<Option<Box<models::CustomerAddress>>>,
+    #[serde(rename = "billing_address", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub billing_address: Option<Option<Box<models::CustomerAddress>>>,
+    #[serde(rename = "payment_method", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub payment_method: Option<Option<Box<models::OrderPaymentMethod>>>,
+    #[serde(rename = "shipping_method", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub shipping_method: Option<Option<Box<models::OrderShippingMethod>>>,
     #[serde(rename = "shipping_methods", skip_serializing_if = "Option::is_none")]
     pub shipping_methods: Option<Vec<models::OrderShippingMethod>>,
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<Box<models::OrderStatus>>,
-    #[serde(rename = "totals", skip_serializing_if = "Option::is_none")]
-    pub totals: Option<Box<models::OrderTotals>>,
-    #[serde(rename = "total", skip_serializing_if = "Option::is_none")]
-    pub total: Option<Box<models::OrderTotal>>,
+    #[serde(rename = "totals", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub totals: Option<Option<Box<models::OrderTotals>>>,
+    #[serde(rename = "total", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub total: Option<Option<Box<models::OrderTotal>>>,
     #[serde(rename = "discounts", skip_serializing_if = "Option::is_none")]
     pub discounts: Option<Vec<models::OrderTotalsNewDiscount>>,
     #[serde(rename = "order_products", skip_serializing_if = "Option::is_none")]
     pub order_products: Option<Vec<models::OrderItem>>,
     #[serde(rename = "bundles", skip_serializing_if = "Option::is_none")]
     pub bundles: Option<Vec<models::OrderItem>>,
-    #[serde(rename = "modified_at", skip_serializing_if = "Option::is_none")]
-    pub modified_at: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "finished_time", skip_serializing_if = "Option::is_none")]
-    pub finished_time: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "comment", skip_serializing_if = "Option::is_none")]
-    pub comment: Option<String>,
-    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
-    pub store_id: Option<String>,
+    #[serde(rename = "modified_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_at: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "finished_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub finished_time: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "comment", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub comment: Option<Option<String>>,
+    #[serde(rename = "store_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<Option<String>>,
     #[serde(rename = "warehouses_ids", skip_serializing_if = "Option::is_none")]
     pub warehouses_ids: Option<Vec<String>>,
     #[serde(rename = "refunds", skip_serializing_if = "Option::is_none")]
     pub refunds: Option<Vec<models::OrderRefund>>,
-    #[serde(rename = "gift_message", skip_serializing_if = "Option::is_none")]
-    pub gift_message: Option<String>,
-    #[serde(rename = "order_details_url", skip_serializing_if = "Option::is_none")]
-    pub order_details_url: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "gift_message", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub gift_message: Option<Option<String>>,
+    #[serde(rename = "order_details_url", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub order_details_url: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Order {

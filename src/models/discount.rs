@@ -21,18 +21,18 @@ pub struct Discount {
     pub modifier_type: Option<String>,
     #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
     pub value: Option<f64>,
-    #[serde(rename = "from_time", skip_serializing_if = "Option::is_none")]
-    pub from_time: Option<String>,
-    #[serde(rename = "to_time", skip_serializing_if = "Option::is_none")]
-    pub to_time: Option<String>,
-    #[serde(rename = "customer_group_ids", skip_serializing_if = "Option::is_none")]
-    pub customer_group_ids: Option<String>,
-    #[serde(rename = "sort_order", skip_serializing_if = "Option::is_none")]
-    pub sort_order: Option<i32>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "from_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub from_time: Option<Option<String>>,
+    #[serde(rename = "to_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub to_time: Option<Option<String>>,
+    #[serde(rename = "customer_group_ids", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub customer_group_ids: Option<Option<String>>,
+    #[serde(rename = "sort_order", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub sort_order: Option<Option<i32>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl Discount {

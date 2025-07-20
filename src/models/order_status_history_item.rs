@@ -19,14 +19,14 @@ pub struct OrderStatusHistoryItem {
     pub name: Option<String>,
     #[serde(rename = "modified_time", skip_serializing_if = "Option::is_none")]
     pub modified_time: Option<Box<models::A2CDateTime>>,
-    #[serde(rename = "notify", skip_serializing_if = "Option::is_none")]
-    pub notify: Option<bool>,
-    #[serde(rename = "comment", skip_serializing_if = "Option::is_none")]
-    pub comment: Option<String>,
-    #[serde(rename = "additional_fields", skip_serializing_if = "Option::is_none")]
-    pub additional_fields: Option<serde_json::Value>,
-    #[serde(rename = "custom_fields", skip_serializing_if = "Option::is_none")]
-    pub custom_fields: Option<serde_json::Value>,
+    #[serde(rename = "notify", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub notify: Option<Option<bool>>,
+    #[serde(rename = "comment", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub comment: Option<Option<String>>,
+    #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub additional_fields: Option<Option<serde_json::Value>>,
+    #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
 impl OrderStatusHistoryItem {
