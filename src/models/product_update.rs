@@ -124,6 +124,9 @@ pub struct ProductUpdate {
     /// Defines the decrement changes in product quantity
     #[serde(rename = "reduce_quantity", skip_serializing_if = "Option::is_none")]
     pub reduce_quantity: Option<f64>,
+    /// Specify the quantity threshold below which the product is considered low in stock
+    #[serde(rename = "low_stock_threshold", skip_serializing_if = "Option::is_none")]
+    pub low_stock_threshold: Option<f64>,
     /// This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
     #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
     pub warehouse_id: Option<String>,
@@ -307,6 +310,7 @@ impl ProductUpdate {
             backorder_status: None,
             increase_quantity: None,
             reduce_quantity: None,
+            low_stock_threshold: None,
             warehouse_id: None,
             weight: None,
             weight_unit: None,

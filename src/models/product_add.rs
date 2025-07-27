@@ -124,6 +124,9 @@ pub struct ProductAdd {
     /// The maximum quantity an order can contain when purchasing the product.
     #[serde(rename = "max_order_quantity", skip_serializing_if = "Option::is_none")]
     pub max_order_quantity: Option<f64>,
+    /// Specify the quantity threshold below which the product is considered low in stock
+    #[serde(rename = "low_stock_threshold", skip_serializing_if = "Option::is_none")]
+    pub low_stock_threshold: Option<f64>,
     /// Weight
     #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
     pub weight: Option<f64>,
@@ -396,6 +399,7 @@ impl ProductAdd {
             backorder_status: None,
             min_order_quantity: None,
             max_order_quantity: None,
+            low_stock_threshold: None,
             weight: None,
             weight_unit: None,
             width: None,

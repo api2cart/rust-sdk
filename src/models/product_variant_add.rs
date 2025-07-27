@@ -91,6 +91,9 @@ pub struct ProductVariantAdd {
     /// Defines inventory tracking for product variant
     #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
     pub manage_stock: Option<bool>,
+    /// Specify the quantity threshold below which the product is considered low in stock
+    #[serde(rename = "low_stock_threshold", skip_serializing_if = "Option::is_none")]
+    pub low_stock_threshold: Option<f64>,
     /// Weight
     #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
     pub weight: Option<f64>,
@@ -200,6 +203,7 @@ impl ProductVariantAdd {
             in_stock: None,
             backorder_status: None,
             manage_stock: None,
+            low_stock_threshold: None,
             weight: None,
             width: None,
             height: None,

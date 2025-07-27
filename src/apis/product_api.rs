@@ -1736,7 +1736,7 @@ pub async fn product_info(configuration: &configuration::Configuration, id: &str
 }
 
 /// Get list of products from your store. Returns 10 products by default.
-pub async fn product_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, currency_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sku: Option<&str>, brand_name: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, return_global: Option<bool>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, report_request_id: Option<&str>, disable_cache: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ModelResponseProductList, Error<ProductListError>> {
+pub async fn product_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, currency_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sku: Option<&str>, brand_name: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, return_global: Option<bool>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, report_request_id: Option<&str>, disable_cache: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>, product_type: Option<&str>) -> Result<models::ModelResponseProductList, Error<ProductListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -1772,6 +1772,7 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
     let p_disable_cache = disable_cache;
     let p_disable_report_cache = disable_report_cache;
     let p_use_latest_api_version = use_latest_api_version;
+    let p_product_type = product_type;
 
     let uri_str = format!("{}/product.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -1880,6 +1881,9 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
     }
     if let Some(ref param_value) = p_use_latest_api_version {
         req_builder = req_builder.query(&[("use_latest_api_version", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_product_type {
+        req_builder = req_builder.query(&[("product_type", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

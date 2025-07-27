@@ -36,6 +36,7 @@ Name | Type | Description | Notes
 **inventory_level** | Option<**f64**> |  | [optional]
 **inventory** | Option<[**Vec<models::ProductInventory>**](Product_Inventory.md)> |  | [optional]
 **min_quantity** | Option<**f64**> |  | [optional]
+**low_stock_threshold** | Option<**f64**> |  | [optional]
 **default_qty_in_pack** | Option<**f64**> |  | [optional]
 **is_qty_in_pack_fixed** | Option<**bool**> |  | [optional]
 **weight_unit** | Option<**String**> |  | [optional]

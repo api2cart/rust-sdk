@@ -77,6 +77,8 @@ pub struct Child {
     pub inventory: Option<Vec<models::ProductInventory>>,
     #[serde(rename = "min_quantity", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub min_quantity: Option<Option<f64>>,
+    #[serde(rename = "low_stock_threshold", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub low_stock_threshold: Option<Option<f64>>,
     #[serde(rename = "default_qty_in_pack", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub default_qty_in_pack: Option<Option<f64>>,
     #[serde(rename = "is_qty_in_pack_fixed", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -144,6 +146,7 @@ impl Child {
             inventory_level: None,
             inventory: None,
             min_quantity: None,
+            low_stock_threshold: None,
             default_qty_in_pack: None,
             is_qty_in_pack_fixed: None,
             weight_unit: None,

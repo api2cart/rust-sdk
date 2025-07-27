@@ -41,6 +41,7 @@ Name | Type | Description | Notes
 **backorder_status** | Option<**String**> | Set backorder status | [optional]
 **increase_quantity** | Option<**f64**> | Defines the incremental changes in product quantity | [optional]
 **reduce_quantity** | Option<**f64**> | Defines the decrement changes in product quantity | [optional]
+**low_stock_threshold** | Option<**f64**> | Specify the quantity threshold below which the product is considered low in stock | [optional]
 **warehouse_id** | Option<**String**> | This parameter is used for selecting a warehouse where you need to set/modify a product quantity. | [optional]
 **weight** | Option<**f64**> | Weight | [optional]
 **weight_unit** | Option<**String**> | Weight Unit | [optional]

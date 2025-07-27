@@ -52,6 +52,9 @@ pub struct ProductVariantUpdate {
     /// Set backorder status
     #[serde(rename = "backorder_status", skip_serializing_if = "Option::is_none")]
     pub backorder_status: Option<String>,
+    /// Specify the quantity threshold below which the product is considered low in stock
+    #[serde(rename = "low_stock_threshold", skip_serializing_if = "Option::is_none")]
+    pub low_stock_threshold: Option<f64>,
     /// Specifies the set of visible/invisible product's variants for sale
     #[serde(rename = "available_for_sale", skip_serializing_if = "Option::is_none")]
     pub available_for_sale: Option<bool>,
@@ -190,6 +193,7 @@ impl ProductVariantUpdate {
             visible: None,
             status: None,
             backorder_status: None,
+            low_stock_threshold: None,
             available_for_sale: None,
             avail: None,
             is_default: None,

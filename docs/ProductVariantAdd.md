@@ -30,6 +30,7 @@ Name | Type | Description | Notes
 **in_stock** | Option<**bool**> | Set stock status | [optional]
 **backorder_status** | Option<**String**> | Set backorder status | [optional]
 **manage_stock** | Option<**bool**> | Defines inventory tracking for product variant | [optional]
+**low_stock_threshold** | Option<**f64**> | Specify the quantity threshold below which the product is considered low in stock | [optional]
 **weight** | Option<**f64**> | Weight | [optional][default to 0]
 **width** | Option<**f64**> | Defines product's width | [optional]
 **height** | Option<**f64**> | Defines product's height | [optional]

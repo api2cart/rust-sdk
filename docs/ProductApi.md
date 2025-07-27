@@ -763,7 +763,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_list
 
-> models::ModelResponseProductList product_list(start, count, page_cursor, product_ids, since_id, categories_ids, category_id, store_id, lang_id, currency_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, sku, brand_name, product_attributes, status, r#type, visible, find_value, find_where, return_global, params, response_fields, exclude, sort_by, sort_direction, report_request_id, disable_cache, disable_report_cache, use_latest_api_version)
+> models::ModelResponseProductList product_list(start, count, page_cursor, product_ids, since_id, categories_ids, category_id, store_id, lang_id, currency_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, sku, brand_name, product_attributes, status, r#type, visible, find_value, find_where, return_global, params, response_fields, exclude, sort_by, sort_direction, report_request_id, disable_cache, disable_report_cache, use_latest_api_version, product_type)
 product.list
 
 Get list of products from your store. Returns 10 products by default.
@@ -807,6 +807,7 @@ Name | Type | Description  | Required | Notes
 **disable_cache** | Option<**bool**> | Disable cache for current request |  |[default to false]
 **disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
 **use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
+**product_type** | Option<**String**> | A categorization for the product |  |
 
 ### Return type
 

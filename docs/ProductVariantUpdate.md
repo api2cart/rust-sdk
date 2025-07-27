@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **visible** | Option<**String**> | Set visibility status | [optional]
 **status** | Option<**String**> | Defines product variant's status | [optional]
 **backorder_status** | Option<**String**> | Set backorder status | [optional]
+**low_stock_threshold** | Option<**f64**> | Specify the quantity threshold below which the product is considered low in stock | [optional]
 **available_for_sale** | Option<**bool**> | Specifies the set of visible/invisible product's variants for sale | [optional][default to true]
 **avail** | Option<**bool**> | Defines category's visibility status | [optional][default to true]
 **is_default** | Option<**bool**> | Defines as a default variant | [optional]
