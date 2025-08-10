@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **name** | Option<**String**> |  | [optional]
 **url** | Option<**String**> |  | [optional]
 **version** | Option<**String**> |  | [optional]
+**bridge_version** | Option<**String**> |  | [optional]
 **db_prefix** | Option<**String**> |  | [optional]
 **stores_info** | Option<[**Vec<models::CartStoreInfo>**](Cart_StoreInfo.md)> |  | [optional]
 **warehouses** | Option<[**Vec<models::CartWarehouse>**](Cart_Warehouse.md)> |  | [optional]

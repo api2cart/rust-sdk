@@ -73,14 +73,14 @@ pub struct Product {
     pub sort_order: Option<Option<i32>>,
     #[serde(rename = "in_stock", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub in_stock: Option<Option<bool>>,
-    #[serde(rename = "on_sale", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub on_sale: Option<Option<bool>>,
     #[serde(rename = "backorders", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub backorders: Option<Option<String>>,
     #[serde(rename = "manage_stock", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub manage_stock: Option<Option<String>>,
     #[serde(rename = "is_stock_managed", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub is_stock_managed: Option<Option<bool>>,
+    #[serde(rename = "on_sale", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub on_sale: Option<Option<bool>>,
     #[serde(rename = "create_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub create_at: Option<Option<Box<models::A2CDateTime>>>,
     #[serde(rename = "modified_at", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -162,10 +162,10 @@ impl Product {
             weight_unit: None,
             sort_order: None,
             in_stock: None,
-            on_sale: None,
             backorders: None,
             manage_stock: None,
             is_stock_managed: None,
+            on_sale: None,
             create_at: None,
             modified_at: None,
             tax_class_id: None,

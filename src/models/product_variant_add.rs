@@ -37,6 +37,9 @@ pub struct ProductVariantAdd {
     /// Specifies the set of visible/invisible product's variants for sale
     #[serde(rename = "available_for_sale", skip_serializing_if = "Option::is_none")]
     pub available_for_sale: Option<bool>,
+    /// Defines status
+    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
+    pub status: Option<String>,
     /// Defines whether the product is virtual
     #[serde(rename = "is_virtual", skip_serializing_if = "Option::is_none")]
     pub is_virtual: Option<bool>,
@@ -130,6 +133,9 @@ pub struct ProductVariantAdd {
     /// International Standard Book Number. An ISBN is a unique identifier for books.
     #[serde(rename = "isbn", skip_serializing_if = "Option::is_none")]
     pub isbn: Option<String>,
+    /// Defines unique URL for SEO
+    #[serde(rename = "seo_url", skip_serializing_if = "Option::is_none")]
+    pub seo_url: Option<String>,
     /// Specifies the product variant's manufacturer
     #[serde(rename = "manufacturer", skip_serializing_if = "Option::is_none")]
     pub manufacturer: Option<String>,
@@ -185,6 +191,7 @@ impl ProductVariantAdd {
             short_description: None,
             available_for_view: None,
             available_for_sale: None,
+            status: None,
             is_virtual: None,
             is_default: None,
             store_id: None,
@@ -216,6 +223,7 @@ impl ProductVariantAdd {
             ean: None,
             mpn: None,
             isbn: None,
+            seo_url: None,
             manufacturer: None,
             created_at: None,
             meta_title: None,

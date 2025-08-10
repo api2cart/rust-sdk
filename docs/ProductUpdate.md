@@ -90,6 +90,8 @@ Name | Type | Description | Notes
 **specifics** | Option<[**Vec<models::ProductAddSpecificsInner>**](ProductAdd_specifics_inner.md)> | An array of Item Specific Name/Value pairs used by the seller to provide descriptive details of an item in a structured manner.         The list of possible specifications can be obtained using the category.info method (additional_fields->product_specifics).         <b>The structure of the parameter is different for specific platforms.</b> | [optional]
 **shop_section_id** | Option<**i32**> | Add Shop Section Id | [optional]
 **personalization_details** | Option<[**models::ProductAddPersonalizationDetails**](ProductAdd_personalization_details.md)> |  | [optional]
+**marketplace_item_properties** | Option<**String**> | String containing the JSON representation of the supplied data | [optional]
+**min_order_quantity** | Option<**f64**> | The minimum quantity an order must contain, to be eligible to purchase this product. | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

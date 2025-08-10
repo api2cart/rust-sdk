@@ -38,12 +38,12 @@ Name | Type | Description | Notes
 **bol_api_key** | Option<**String**> | Bol API Key | [optional]
 **bol_api_secret** | Option<**String**> | Bol API Secret | [optional]
 **bol_retailer_id** | Option<**i32**> | Bol Retailer ID | [optional]
-**bigcartel_user_name** | **String** | Subdomain of store | 
-**bigcartel_password** | **String** | BigCartel account password | 
-**bricklink_consumer_key** | **String** | Bricklink Consumer Key | 
-**bricklink_consumer_secret** | **String** | Bricklink Consumer Secret | 
-**bricklink_token** | **String** | Bricklink Access Token | 
-**bricklink_token_secret** | **String** | Bricklink Access Token Secret | 
+**bigcartel_user_name** | Option<**String**> | Subdomain of store | [optional]
+**bigcartel_password** | Option<**String**> | BigCartel account password | [optional]
+**bricklink_consumer_key** | Option<**String**> | Bricklink Consumer Key | [optional]
+**bricklink_consumer_secret** | Option<**String**> | Bricklink Consumer Secret | [optional]
+**bricklink_token** | Option<**String**> | Bricklink Access Token | [optional]
+**bricklink_token_secret** | Option<**String**> | Bricklink Access Token Secret | [optional]
 **demandware_client_id** | Option<**String**> | Demandware client id | [optional]
 **demandware_api_password** | Option<**String**> | Demandware api password | [optional]
 **demandware_user_name** | Option<**String**> | Demandware user name | [optional]
@@ -128,8 +128,8 @@ Name | Type | Description | Notes
 **magento_access_token** | Option<**String**> | Magento Access Token | [optional]
 **magento_token_secret** | Option<**String**> | Magento Token Secret | [optional]
 **prestashop_webservice_key** | Option<**String**> | Prestashop webservice key | [optional]
-**wix_app_id** | **String** | Wix App ID | 
-**wix_app_secret_key** | **String** | Wix App Secret Key | 
+**wix_app_id** | Option<**String**> | Wix App ID | [optional]
+**wix_app_secret_key** | Option<**String**> | Wix App Secret Key | [optional]
 **wix_instance_id** | Option<**String**> | Wix Instance ID | [optional]
 **wix_refresh_token** | Option<**String**> | Wix refresh token | [optional]
 **mercado_libre_app_id** | Option<**String**> | Mercado Libre App ID | [optional]
@@ -167,8 +167,8 @@ Name | Type | Description | Notes
 **salla_access_token** | Option<**String**> | Salla Access Token | [optional]
 **temu_app_key** | Option<**String**> | Temu App Key | [optional]
 **temu_app_secret** | Option<**String**> | Temu App Secret | [optional]
-**temu_access_token** | **String** | Temu Access Token | 
-**temu_region** | **String** | Temu API endpoint Region. | 
+**temu_access_token** | Option<**String**> | Temu Access Token | [optional]
+**temu_region** | Option<**String**> | Temu API endpoint Region. | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
