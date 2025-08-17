@@ -515,7 +515,7 @@ pub async fn cart_coupon_delete(configuration: &configuration::Configuration, id
 }
 
 /// Get cart coupon discounts.
-pub async fn cart_coupon_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, coupons_ids: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, avail: Option<bool>, date_start_from: Option<&str>, date_start_to: Option<&str>, date_end_from: Option<&str>, date_end_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartCouponList, Error<CartCouponListError>> {
+pub async fn cart_coupon_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, coupons_ids: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, avail: Option<bool>, status: Option<&str>, date_start_from: Option<&str>, date_start_to: Option<&str>, date_end_from: Option<&str>, date_end_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartCouponList, Error<CartCouponListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -524,6 +524,7 @@ pub async fn cart_coupon_list(configuration: &configuration::Configuration, star
     let p_store_id = store_id;
     let p_lang_id = lang_id;
     let p_avail = avail;
+    let p_status = status;
     let p_date_start_from = date_start_from;
     let p_date_start_to = date_start_to;
     let p_date_end_from = date_end_from;
@@ -555,6 +556,9 @@ pub async fn cart_coupon_list(configuration: &configuration::Configuration, star
     }
     if let Some(ref param_value) = p_avail {
         req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_status {
+        req_builder = req_builder.query(&[("status", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_date_start_from {
         req_builder = req_builder.query(&[("date_start_from", &param_value.to_string())]);

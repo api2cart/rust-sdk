@@ -229,7 +229,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_coupon_list
 
-> models::ModelResponseCartCouponList cart_coupon_list(start, count, page_cursor, coupons_ids, store_id, lang_id, avail, date_start_from, date_start_to, date_end_from, date_end_to, response_fields, params, exclude)
+> models::ModelResponseCartCouponList cart_coupon_list(start, count, page_cursor, coupons_ids, store_id, lang_id, avail, status, date_start_from, date_start_to, date_end_from, date_end_to, response_fields, params, exclude)
 cart.coupon.list
 
 Get cart coupon discounts.
@@ -246,6 +246,7 @@ Name | Type | Description  | Required | Notes
 **store_id** | Option<**String**> | Filter coupons by store id |  |
 **lang_id** | Option<**String**> | Language id |  |
 **avail** | Option<**bool**> | Filter coupons by avail status |  |
+**status** | Option<**String**> | Defines coupon's status |  |
 **date_start_from** | Option<**String**> | Filter entity by date_start (greater or equal) |  |
 **date_start_to** | Option<**String**> | Filter entity by date_start (less or equal) |  |
 **date_end_from** | Option<**String**> | Filter entity by date_end (greater or equal) |  |

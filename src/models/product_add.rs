@@ -169,6 +169,9 @@ pub struct ProductAdd {
     /// Groups all variations, that you want to combine into one product.
     #[serde(rename = "product_reference", skip_serializing_if = "Option::is_none")]
     pub product_reference: Option<String>,
+    /// External product link
+    #[serde(rename = "external_product_link", skip_serializing_if = "Option::is_none")]
+    pub external_product_link: Option<String>,
     /// Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
     #[serde(rename = "harmonized_system_code", skip_serializing_if = "Option::is_none")]
     pub harmonized_system_code: Option<String>,
@@ -414,6 +417,7 @@ impl ProductAdd {
             mpn: None,
             asin: None,
             product_reference: None,
+            external_product_link: None,
             harmonized_system_code: None,
             country_of_origin: None,
             manufacturer: None,

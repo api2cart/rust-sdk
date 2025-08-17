@@ -696,6 +696,8 @@ pub enum CartId {
     AspDotNetStorefront,
     #[serde(rename = "BigCartel")]
     BigCartel,
+    #[serde(rename = "Bricklink")]
+    Bricklink,
     #[serde(rename = "BigcommerceApi")]
     BigcommerceApi,
     #[serde(rename = "Bol")]
