@@ -268,6 +268,9 @@ pub struct ProductUpdate {
     pub shop_section_id: Option<i32>,
     #[serde(rename = "personalization_details", skip_serializing_if = "Option::is_none")]
     pub personalization_details: Option<Box<models::ProductAddPersonalizationDetails>>,
+    /// External product link
+    #[serde(rename = "external_product_link", skip_serializing_if = "Option::is_none")]
+    pub external_product_link: Option<String>,
     /// String containing the JSON representation of the supplied data
     #[serde(rename = "marketplace_item_properties", skip_serializing_if = "Option::is_none")]
     pub marketplace_item_properties: Option<String>,
@@ -365,6 +368,7 @@ impl ProductUpdate {
             specifics: None,
             shop_section_id: None,
             personalization_details: None,
+            external_product_link: None,
             marketplace_item_properties: None,
             min_order_quantity: None,
         }
