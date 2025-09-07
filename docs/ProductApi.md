@@ -827,7 +827,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_manufacturer_add
 
-> models::ProductManufacturerAdd200Response product_manufacturer_add(product_id, manufacturer, store_id)
+> models::ProductManufacturerAdd200Response product_manufacturer_add(product_id, manufacturer, store_id, meta_title, meta_keywords, meta_description, search_keywords, image_url, seo_url)
 product.manufacturer.add
 
 Add manufacturer to store and assign to product
@@ -840,6 +840,12 @@ Name | Type | Description  | Required | Notes
 **product_id** | **String** | Defines products specified by product id | [required] |
 **manufacturer** | **String** | Defines product’s manufacturer's name | [required] |
 **store_id** | Option<**String**> | Store Id |  |
+**meta_title** | Option<**String**> | Defines unique meta title for each entity |  |
+**meta_keywords** | Option<**String**> | Defines unique meta keywords for each entity |  |
+**meta_description** | Option<**String**> | Defines unique meta description of a entity |  |
+**search_keywords** | Option<**String**> | Defines unique search keywords |  |
+**image_url** | Option<**String**> | Image Url |  |
+**seo_url** | Option<**String**> | Defines unique URL for SEO |  |
 
 ### Return type
 
@@ -1223,7 +1229,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_review_list
 
-> models::ModelResponseProductReviewList product_review_list(product_id, start, count, page_cursor, ids, store_id, status, response_fields, params, exclude)
+> models::ModelResponseProductReviewList product_review_list(product_id, start, count, page_cursor, ids, store_id, lang_id, status, created_from, created_to, customer_id, sort_by, sort_direction, response_fields, params, exclude)
 product.review.list
 
 Get reviews of a specific product.
@@ -1239,7 +1245,13 @@ Name | Type | Description  | Required | Notes
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **ids** | Option<**String**> | Retrieves reviews specified by ids |  |
 **store_id** | Option<**String**> | Store Id |  |
+**lang_id** | Option<**String**> | Language id |  |
 **status** | Option<**String**> | Defines status |  |
+**created_from** | Option<**String**> | Retrieve entities from their creation date |  |
+**created_to** | Option<**String**> | Retrieve entities to their creation date |  |
+**customer_id** | Option<**String**> | Retrieves orders specified by customer id |  |
+**sort_by** | Option<**String**> | Set field to sort by |  |[default to id]
+**sort_direction** | Option<**String**> | Set sorting direction |  |[default to asc]
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,customer_id,email,message,status,product_id,nick_name,summary,rating,ratings,status,created_time]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |

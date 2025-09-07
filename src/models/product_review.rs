@@ -35,6 +35,8 @@ pub struct ProductReview {
     pub status: Option<Option<String>>,
     #[serde(rename = "created_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub created_time: Option<Option<Box<models::A2CDateTime>>>,
+    #[serde(rename = "modified_time", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub modified_time: Option<Option<Box<models::A2CDateTime>>>,
     #[serde(rename = "medias", skip_serializing_if = "Option::is_none")]
     pub medias: Option<Vec<models::Media>>,
     #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -57,6 +59,7 @@ impl ProductReview {
             ratings: None,
             status: None,
             created_time: None,
+            modified_time: None,
             medias: None,
             additional_fields: None,
             custom_fields: None,

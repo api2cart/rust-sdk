@@ -718,6 +718,8 @@ pub enum CartId {
     Ecwid,
     #[serde(rename = "EtsyAPIv3")]
     EtsyApiv3,
+    #[serde(rename = "Facebook")]
+    Facebook,
     #[serde(rename = "Flipkart")]
     Flipkart,
     #[serde(rename = "Gambio")]

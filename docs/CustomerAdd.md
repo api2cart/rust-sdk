@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **last_name** | Option<**String**> | Defines customer's last name | [optional]
 **password** | Option<**String**> | Defines customer's unique password | [optional]
 **group** | Option<**String**> | Defines the group where the customer | [optional]
+**group_id** | Option<**String**> | Customer group_id | [optional]
 **group_ids** | Option<**String**> | Groups that will be assigned to a customer | [optional]
 **status** | Option<**String**> | Defines customer's status | [optional][default to enabled]
 **created_time** | Option<**String**> | Entity's date creation | [optional]

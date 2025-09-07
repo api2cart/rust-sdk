@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **ratings** | Option<[**Vec<models::ProductReviewRating>**](Product_Review_Rating.md)> |  | [optional]
 **status** | Option<**String**> |  | [optional]
 **created_time** | Option<[**models::A2CDateTime**](A2CDateTime.md)> |  | [optional]
+**modified_time** | Option<[**models::A2CDateTime**](A2CDateTime.md)> |  | [optional]
 **medias** | Option<[**Vec<models::Media>**](Media.md)> |  | [optional]
 **additional_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]
 **custom_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]

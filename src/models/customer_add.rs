@@ -28,6 +28,9 @@ pub struct CustomerAdd {
     /// Defines the group where the customer
     #[serde(rename = "group", skip_serializing_if = "Option::is_none")]
     pub group: Option<String>,
+    /// Customer group_id
+    #[serde(rename = "group_id", skip_serializing_if = "Option::is_none")]
+    pub group_id: Option<String>,
     /// Groups that will be assigned to a customer
     #[serde(rename = "group_ids", skip_serializing_if = "Option::is_none")]
     pub group_ids: Option<String>,
@@ -91,6 +94,7 @@ impl CustomerAdd {
             last_name: None,
             password: None,
             group: None,
+            group_id: None,
             group_ids: None,
             status: None,
             created_time: None,

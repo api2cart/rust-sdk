@@ -59,6 +59,8 @@ pub struct ProductAddBatchPayloadInner {
     pub product_type: Option<String>,
     #[serde(rename = "marketplace_item_properties", skip_serializing_if = "Option::is_none")]
     pub marketplace_item_properties: Option<serde_json::Value>,
+    #[serde(rename = "specifics", skip_serializing_if = "Option::is_none")]
+    pub specifics: Option<serde_json::Value>,
     #[serde(rename = "is_free_shipping", skip_serializing_if = "Option::is_none")]
     pub is_free_shipping: Option<bool>,
     #[serde(rename = "taxable", skip_serializing_if = "Option::is_none")]
@@ -127,6 +129,8 @@ pub struct ProductAddBatchPayloadInner {
     pub url: Option<String>,
     #[serde(rename = "seo_url", skip_serializing_if = "Option::is_none")]
     pub seo_url: Option<String>,
+    #[serde(rename = "external_product_link", skip_serializing_if = "Option::is_none")]
+    pub external_product_link: Option<String>,
     #[serde(rename = "manufacturer", skip_serializing_if = "Option::is_none")]
     pub manufacturer: Option<String>,
     #[serde(rename = "manufacturer_id", skip_serializing_if = "Option::is_none")]
@@ -167,6 +171,7 @@ impl ProductAddBatchPayloadInner {
             manage_stock: None,
             product_type: None,
             marketplace_item_properties: None,
+            specifics: None,
             is_free_shipping: None,
             taxable: None,
             status: None,
@@ -201,6 +206,7 @@ impl ProductAddBatchPayloadInner {
             harmonized_system_code: None,
             url: None,
             seo_url: None,
+            external_product_link: None,
             manufacturer: None,
             manufacturer_id: None,
             backorder_status: None,

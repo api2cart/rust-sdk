@@ -1921,11 +1921,17 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
 }
 
 /// Add manufacturer to store and assign to product
-pub async fn product_manufacturer_add(configuration: &configuration::Configuration, product_id: &str, manufacturer: &str, store_id: Option<&str>) -> Result<models::ProductManufacturerAdd200Response, Error<ProductManufacturerAddError>> {
+pub async fn product_manufacturer_add(configuration: &configuration::Configuration, product_id: &str, manufacturer: &str, store_id: Option<&str>, meta_title: Option<&str>, meta_keywords: Option<&str>, meta_description: Option<&str>, search_keywords: Option<&str>, image_url: Option<&str>, seo_url: Option<&str>) -> Result<models::ProductManufacturerAdd200Response, Error<ProductManufacturerAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_manufacturer = manufacturer;
     let p_store_id = store_id;
+    let p_meta_title = meta_title;
+    let p_meta_keywords = meta_keywords;
+    let p_meta_description = meta_description;
+    let p_search_keywords = search_keywords;
+    let p_image_url = image_url;
+    let p_seo_url = seo_url;
 
     let uri_str = format!("{}/product.manufacturer.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -1934,6 +1940,24 @@ pub async fn product_manufacturer_add(configuration: &configuration::Configurati
     req_builder = req_builder.query(&[("manufacturer", &p_manufacturer.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_meta_title {
+        req_builder = req_builder.query(&[("meta_title", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_meta_keywords {
+        req_builder = req_builder.query(&[("meta_keywords", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_meta_description {
+        req_builder = req_builder.query(&[("meta_description", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_search_keywords {
+        req_builder = req_builder.query(&[("search_keywords", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_image_url {
+        req_builder = req_builder.query(&[("image_url", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_seo_url {
+        req_builder = req_builder.query(&[("seo_url", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -2577,7 +2601,7 @@ pub async fn product_price_update(configuration: &configuration::Configuration, 
 }
 
 /// Get reviews of a specific product.
-pub async fn product_review_list(configuration: &configuration::Configuration, product_id: &str, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, store_id: Option<&str>, status: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseProductReviewList, Error<ProductReviewListError>> {
+pub async fn product_review_list(configuration: &configuration::Configuration, product_id: &str, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, status: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, customer_id: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseProductReviewList, Error<ProductReviewListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_start = start;
@@ -2585,7 +2609,13 @@ pub async fn product_review_list(configuration: &configuration::Configuration, p
     let p_page_cursor = page_cursor;
     let p_ids = ids;
     let p_store_id = store_id;
+    let p_lang_id = lang_id;
     let p_status = status;
+    let p_created_from = created_from;
+    let p_created_to = created_to;
+    let p_customer_id = customer_id;
+    let p_sort_by = sort_by;
+    let p_sort_direction = sort_direction;
     let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
@@ -2609,8 +2639,26 @@ pub async fn product_review_list(configuration: &configuration::Configuration, p
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_lang_id {
+        req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_status {
         req_builder = req_builder.query(&[("status", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_created_from {
+        req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_created_to {
+        req_builder = req_builder.query(&[("created_to", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_customer_id {
+        req_builder = req_builder.query(&[("customer_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_sort_by {
+        req_builder = req_builder.query(&[("sort_by", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_sort_direction {
+        req_builder = req_builder.query(&[("sort_direction", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
