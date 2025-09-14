@@ -94,6 +94,9 @@ pub struct ProductUpdate {
     /// A categorization for the product
     #[serde(rename = "product_class", skip_serializing_if = "Option::is_none")]
     pub product_class: Option<String>,
+    /// Retrieves brands specified by brand name
+    #[serde(rename = "brand_name", skip_serializing_if = "Option::is_none")]
+    pub brand_name: Option<String>,
     /// Specifies the set of visible/invisible products for users
     #[serde(rename = "available_for_view", skip_serializing_if = "Option::is_none")]
     pub available_for_view: Option<bool>,
@@ -309,6 +312,7 @@ impl ProductUpdate {
             avail: None,
             avail_from: None,
             product_class: None,
+            brand_name: None,
             available_for_view: None,
             stores_ids: None,
             store_id: None,

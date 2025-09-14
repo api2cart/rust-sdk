@@ -60,6 +60,8 @@ pub struct ProductUpdateBatchPayloadInner {
     pub r#type: Option<String>,
     #[serde(rename = "condition", skip_serializing_if = "Option::is_none")]
     pub condition: Option<String>,
+    #[serde(rename = "condition_description", skip_serializing_if = "Option::is_none")]
+    pub condition_description: Option<String>,
     #[serde(rename = "visible", skip_serializing_if = "Option::is_none")]
     pub visible: Option<String>,
     #[serde(rename = "available_for_view", skip_serializing_if = "Option::is_none")]
@@ -172,6 +174,7 @@ impl ProductUpdateBatchPayloadInner {
             status: None,
             r#type: None,
             condition: None,
+            condition_description: None,
             visible: None,
             available_for_view: None,
             available_for_sale: None,
