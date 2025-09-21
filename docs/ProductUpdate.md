@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **tier_prices** | Option<[**Vec<models::ProductAddTierPricesInner>**](ProductAdd_tier_prices_inner.md)> | Defines product's tier prices | [optional]
 **reserve_price** | Option<**f64**> | Defines reserve price value | [optional]
 **buyitnow_price** | Option<**f64**> | Defines buy it now value | [optional]
-**taxable** | Option<**bool**> | Specifies whether a tax is charged | [optional][default to true]
+**taxable** | Option<**bool**> | Specifies whether a tax is charged | [optional]
 **tax_class_id** | Option<**String**> | Defines tax classes where entity has to be added | [optional]
 **r#type** | Option<**String**> | Defines product's type | [optional]
 **status** | Option<**String**> | Defines product's status | [optional]

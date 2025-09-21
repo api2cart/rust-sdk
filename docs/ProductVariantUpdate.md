@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **avail** | Option<**bool**> | Defines category's visibility status | [optional][default to true]
 **is_default** | Option<**bool**> | Defines as a default variant | [optional]
 **is_free_shipping** | Option<**bool**> | Specifies variant's free shipping flag that has to be added | [optional]
-**taxable** | Option<**bool**> | Specifies whether a tax is charged | [optional][default to true]
+**taxable** | Option<**bool**> | Specifies whether a tax is charged | [optional]
 **tax_class_id** | Option<**String**> | Defines tax classes where entity has to be added | [optional]
 **is_virtual** | Option<**bool**> | Defines whether the product is virtual | [optional][default to false]
 **manage_stock** | Option<**bool**> | Defines inventory tracking for product variant | [optional]
@@ -56,6 +56,7 @@ Name | Type | Description | Notes
 **meta_title** | Option<**String**> | Defines unique meta title for each entity | [optional]
 **meta_description** | Option<**String**> | Defines unique meta description of a entity | [optional]
 **meta_keywords** | Option<**String**> | Defines unique meta keywords for each entity | [optional]
+**manufacturer** | Option<**String**> | Specifies the product variant's manufacturer | [optional]
 **reindex** | Option<**bool**> | Is reindex required | [optional][default to true]
 **clear_cache** | Option<**bool**> | Is cache clear required | [optional][default to true]
 

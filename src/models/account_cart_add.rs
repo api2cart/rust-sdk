@@ -292,6 +292,9 @@ pub struct AccountCartAdd {
     /// Shopware access key
     #[serde(rename = "shopware_access_key", skip_serializing_if = "Option::is_none")]
     pub shopware_access_key: Option<String>,
+    /// UNAS API Key
+    #[serde(rename = "unas_api_key", skip_serializing_if = "Option::is_none")]
+    pub unas_api_key: Option<String>,
     /// Shopware api key
     #[serde(rename = "shopware_api_key", skip_serializing_if = "Option::is_none")]
     pub shopware_api_key: Option<String>,
@@ -606,6 +609,7 @@ impl AccountCartAdd {
             shoplazza_access_token: None,
             shoplazza_shared_secret: None,
             shopware_access_key: None,
+            unas_api_key: None,
             shopware_api_key: None,
             shopware_api_secret: None,
             miva_access_token: None,

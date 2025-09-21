@@ -169,6 +169,9 @@ pub struct ProductVariantUpdate {
     /// Defines unique meta keywords for each entity
     #[serde(rename = "meta_keywords", skip_serializing_if = "Option::is_none")]
     pub meta_keywords: Option<String>,
+    /// Specifies the product variant's manufacturer
+    #[serde(rename = "manufacturer", skip_serializing_if = "Option::is_none")]
+    pub manufacturer: Option<String>,
     /// Is reindex required
     #[serde(rename = "reindex", skip_serializing_if = "Option::is_none")]
     pub reindex: Option<bool>,
@@ -232,6 +235,7 @@ impl ProductVariantUpdate {
             meta_title: None,
             meta_description: None,
             meta_keywords: None,
+            manufacturer: None,
             reindex: None,
             clear_cache: None,
         }
