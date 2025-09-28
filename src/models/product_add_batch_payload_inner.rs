@@ -33,6 +33,8 @@ pub struct ProductAddBatchPayloadInner {
     pub gtin: Option<String>,
     #[serde(rename = "mpn", skip_serializing_if = "Option::is_none")]
     pub mpn: Option<String>,
+    #[serde(rename = "isbn", skip_serializing_if = "Option::is_none")]
+    pub isbn: Option<String>,
     #[serde(rename = "barcode", skip_serializing_if = "Option::is_none")]
     pub barcode: Option<String>,
     #[serde(rename = "price", skip_serializing_if = "Option::is_none")]
@@ -47,10 +49,18 @@ pub struct ProductAddBatchPayloadInner {
     pub sprice_create: Option<String>,
     #[serde(rename = "sprice_expire", skip_serializing_if = "Option::is_none")]
     pub sprice_expire: Option<String>,
+    #[serde(rename = "avail_from", skip_serializing_if = "Option::is_none")]
+    pub avail_from: Option<String>,
     #[serde(rename = "advanced_prices", skip_serializing_if = "Option::is_none")]
     pub advanced_prices: Option<Vec<models::ProductAddBatchPayloadInnerAdvancedPricesInner>>,
     #[serde(rename = "fixed_cost_shipping_price", skip_serializing_if = "Option::is_none")]
     pub fixed_cost_shipping_price: Option<f64>,
+    #[serde(rename = "buyitnow_price", skip_serializing_if = "Option::is_none")]
+    pub buyitnow_price: Option<f64>,
+    #[serde(rename = "reserve_price", skip_serializing_if = "Option::is_none")]
+    pub reserve_price: Option<f64>,
+    #[serde(rename = "best_offer", skip_serializing_if = "Option::is_none")]
+    pub best_offer: Option<f64>,
     #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<f64>,
     #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
@@ -69,6 +79,8 @@ pub struct ProductAddBatchPayloadInner {
     pub status: Option<String>,
     #[serde(rename = "condition", skip_serializing_if = "Option::is_none")]
     pub condition: Option<String>,
+    #[serde(rename = "condition_description", skip_serializing_if = "Option::is_none")]
+    pub condition_description: Option<String>,
     #[serde(rename = "visible", skip_serializing_if = "Option::is_none")]
     pub visible: Option<String>,
     #[serde(rename = "available_for_view", skip_serializing_if = "Option::is_none")]
@@ -81,6 +93,10 @@ pub struct ProductAddBatchPayloadInner {
     pub in_stock: Option<bool>,
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<String>,
+    #[serde(rename = "listing_type", skip_serializing_if = "Option::is_none")]
+    pub listing_type: Option<String>,
+    #[serde(rename = "listing_duration", skip_serializing_if = "Option::is_none")]
+    pub listing_duration: Option<String>,
     #[serde(rename = "downloadable", skip_serializing_if = "Option::is_none")]
     pub downloadable: Option<bool>,
     #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
@@ -115,6 +131,8 @@ pub struct ProductAddBatchPayloadInner {
     pub stores_ids: Option<Vec<String>>,
     #[serde(rename = "tax_class_id", skip_serializing_if = "Option::is_none")]
     pub tax_class_id: Option<String>,
+    #[serde(rename = "sales_tax", skip_serializing_if = "Option::is_none")]
+    pub sales_tax: Option<Box<models::ProductAddBatchPayloadInnerSalesTax>>,
     #[serde(rename = "meta_title", skip_serializing_if = "Option::is_none")]
     pub meta_title: Option<String>,
     #[serde(rename = "meta_description", skip_serializing_if = "Option::is_none")]
@@ -158,6 +176,7 @@ impl ProductAddBatchPayloadInner {
             ean: None,
             gtin: None,
             mpn: None,
+            isbn: None,
             barcode: None,
             price: None,
             old_price: None,
@@ -165,8 +184,12 @@ impl ProductAddBatchPayloadInner {
             special_price: None,
             sprice_create: None,
             sprice_expire: None,
+            avail_from: None,
             advanced_prices: None,
             fixed_cost_shipping_price: None,
+            buyitnow_price: None,
+            reserve_price: None,
+            best_offer: None,
             quantity: None,
             manage_stock: None,
             product_type: None,
@@ -176,12 +199,15 @@ impl ProductAddBatchPayloadInner {
             taxable: None,
             status: None,
             condition: None,
+            condition_description: None,
             visible: None,
             available_for_view: None,
             available_for_sale: None,
             is_virtual: None,
             in_stock: None,
             r#type: None,
+            listing_type: None,
+            listing_duration: None,
             downloadable: None,
             weight: None,
             length: None,
@@ -199,6 +225,7 @@ impl ProductAddBatchPayloadInner {
             cross_sell_products_ids: None,
             stores_ids: None,
             tax_class_id: None,
+            sales_tax: None,
             meta_title: None,
             meta_description: None,
             meta_keywords: None,

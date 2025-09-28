@@ -1,4 +1,4 @@
-# OrderCalculateItem
+# OrderCalculateBundle
 
 ## Properties
 
@@ -16,7 +16,6 @@ Name | Type | Description | Notes
 **weight_unit** | Option<**String**> |  | [optional]
 **barcode** | Option<**String**> |  | [optional]
 **variant_id** | Option<**String**> |  | [optional]
-**bundle_product_id** | Option<**String**> |  | [optional]
 **options** | Option<[**Vec<models::OrderItemOption>**](Order_Item_Option.md)> |  | [optional]
 **additional_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]
 **custom_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]

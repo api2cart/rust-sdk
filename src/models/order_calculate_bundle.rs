@@ -12,7 +12,7 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct OrderCalculateItem {
+pub struct OrderCalculateBundle {
     #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
     pub product_id: Option<String>,
     #[serde(rename = "sku", skip_serializing_if = "Option::is_none")]
@@ -37,8 +37,6 @@ pub struct OrderCalculateItem {
     pub barcode: Option<Option<String>>,
     #[serde(rename = "variant_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub variant_id: Option<Option<String>>,
-    #[serde(rename = "bundle_product_id", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub bundle_product_id: Option<Option<String>>,
     #[serde(rename = "options", skip_serializing_if = "Option::is_none")]
     pub options: Option<Vec<models::OrderItemOption>>,
     #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -47,9 +45,9 @@ pub struct OrderCalculateItem {
     pub custom_fields: Option<Option<serde_json::Value>>,
 }
 
-impl OrderCalculateItem {
-    pub fn new() -> OrderCalculateItem {
-        OrderCalculateItem {
+impl OrderCalculateBundle {
+    pub fn new() -> OrderCalculateBundle {
+        OrderCalculateBundle {
             product_id: None,
             sku: None,
             name: None,
@@ -62,7 +60,6 @@ impl OrderCalculateItem {
             weight_unit: None,
             barcode: None,
             variant_id: None,
-            bundle_product_id: None,
             options: None,
             additional_fields: None,
             custom_fields: None,

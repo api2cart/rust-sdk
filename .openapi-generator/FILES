@@ -203,6 +203,7 @@ docs/OrderAddOrderItemInnerOrderItemPropertyInner.md
 docs/OrderApi.md
 docs/OrderCalculate.md
 docs/OrderCalculate200Response.md
+docs/OrderCalculateBundle.md
 docs/OrderCalculateDiscount.md
 docs/OrderCalculateItem.md
 docs/OrderCalculateOrderItemInner.md
@@ -271,6 +272,7 @@ docs/ProductAddBatch.md
 docs/ProductAddBatchPayloadInner.md
 docs/ProductAddBatchPayloadInnerAdvancedPricesInner.md
 docs/ProductAddBatchPayloadInnerImagesInner.md
+docs/ProductAddBatchPayloadInnerSalesTax.md
 docs/ProductAddBestOffer.md
 docs/ProductAddCertificationsInner.md
 docs/ProductAddCertificationsInnerFilesInner.md
@@ -657,6 +659,7 @@ src/models/order_add_order_item_inner_order_item_option_inner.rs
 src/models/order_add_order_item_inner_order_item_property_inner.rs
 src/models/order_calculate.rs
 src/models/order_calculate_200_response.rs
+src/models/order_calculate_bundle.rs
 src/models/order_calculate_discount.rs
 src/models/order_calculate_item.rs
 src/models/order_calculate_order_item_inner.rs
@@ -725,6 +728,7 @@ src/models/product_add_batch.rs
 src/models/product_add_batch_payload_inner.rs
 src/models/product_add_batch_payload_inner_advanced_prices_inner.rs
 src/models/product_add_batch_payload_inner_images_inner.rs
+src/models/product_add_batch_payload_inner_sales_tax.rs
 src/models/product_add_best_offer.rs
 src/models/product_add_certifications_inner.rs
 src/models/product_add_certifications_inner_files_inner.rs

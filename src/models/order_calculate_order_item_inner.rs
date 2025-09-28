@@ -22,6 +22,12 @@ pub struct OrderCalculateOrderItemInner {
     /// Ordered product variant. Where x is order item ID
     #[serde(rename = "order_item_variant_id", skip_serializing_if = "Option::is_none")]
     pub order_item_variant_id: Option<String>,
+    /// Index of the parent grouped/bundle product
+    #[serde(rename = "order_item_parent", skip_serializing_if = "Option::is_none")]
+    pub order_item_parent: Option<i32>,
+    /// Option name of the parent grouped/bundle product
+    #[serde(rename = "order_item_parent_option_name", skip_serializing_if = "Option::is_none")]
+    pub order_item_parent_option_name: Option<String>,
     #[serde(rename = "order_item_option", skip_serializing_if = "Option::is_none")]
     pub order_item_option: Option<Vec<models::OrderCalculateOrderItemInnerOrderItemOptionInner>>,
 }
@@ -32,6 +38,8 @@ impl OrderCalculateOrderItemInner {
             order_item_id,
             order_item_quantity,
             order_item_variant_id: None,
+            order_item_parent: None,
+            order_item_parent_option_name: None,
             order_item_option: None,
         }
     }
