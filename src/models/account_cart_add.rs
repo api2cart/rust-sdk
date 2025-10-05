@@ -794,6 +794,8 @@ pub enum CartId {
     Tomatocart,
     #[serde(rename = "Ubercart")]
     Ubercart,
+    #[serde(rename = "Unas")]
+    Unas,
     #[serde(rename = "Virtuemart")]
     Virtuemart,
     #[serde(rename = "Volusion")]
