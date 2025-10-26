@@ -225,6 +225,9 @@ pub struct ProductUpdate {
     /// The numeric ID of the shipping template associated with the products in Etsy. You can find possible values in the \"cart.info\" API method response, in the field shipping_zones[]->id.
     #[serde(rename = "shipping_template_id", skip_serializing_if = "Option::is_none")]
     pub shipping_template_id: Option<i32>,
+    /// The numeric ID of the processing profile (readiness state) for physical products in Etsy. You can find possible values in the \"cart.info\" API method response, in the field processing_profiles[]->readiness_state_id.
+    #[serde(rename = "processing_profile_id", skip_serializing_if = "Option::is_none")]
+    pub processing_profile_id: Option<i32>,
     /// An enumerated string for the era in which the maker made the product.
     #[serde(rename = "when_made", skip_serializing_if = "Option::is_none")]
     pub when_made: Option<String>,
@@ -356,6 +359,7 @@ impl ProductUpdate {
             country_of_origin: None,
             harmonized_system_code: None,
             shipping_template_id: None,
+            processing_profile_id: None,
             when_made: None,
             is_supply: None,
             downloadable: None,

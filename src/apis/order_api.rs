@@ -579,7 +579,7 @@ pub async fn order_fulfillment_status_list(configuration: &configuration::Config
 }
 
 /// Info about a specific order by ID
-pub async fn order_info(configuration: &configuration::Configuration, id: Option<&str>, order_id: Option<&str>, store_id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, enable_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::OrderInfo200Response, Error<OrderInfoError>> {
+pub async fn order_info(configuration: &configuration::Configuration, id: Option<&str>, order_id: Option<&str>, store_id: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, enable_cache: Option<bool>, use_latest_api_version: Option<bool>, rounding_precision: Option<i32>) -> Result<models::OrderInfo200Response, Error<OrderInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_order_id = order_id;
@@ -589,6 +589,7 @@ pub async fn order_info(configuration: &configuration::Configuration, id: Option
     let p_exclude = exclude;
     let p_enable_cache = enable_cache;
     let p_use_latest_api_version = use_latest_api_version;
+    let p_rounding_precision = rounding_precision;
 
     let uri_str = format!("{}/order.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -616,6 +617,9 @@ pub async fn order_info(configuration: &configuration::Configuration, id: Option
     }
     if let Some(ref param_value) = p_use_latest_api_version {
         req_builder = req_builder.query(&[("use_latest_api_version", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_rounding_precision {
+        req_builder = req_builder.query(&[("rounding_precision", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -653,7 +657,7 @@ pub async fn order_info(configuration: &configuration::Configuration, id: Option
 }
 
 /// Get list of orders from store.
-pub async fn order_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, order_ids: Option<&str>, since_id: Option<&str>, store_id: Option<&str>, customer_id: Option<&str>, customer_email: Option<&str>, basket_id: Option<&str>, currency_id: Option<&str>, phone: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_status: Option<&str>, return_status: Option<&str>, fulfillment_channel: Option<&str>, shipping_method: Option<&str>, skip_order_ids: Option<&str>, is_deleted: Option<bool>, shipping_country_iso3: Option<&str>, delivery_method: Option<&str>, ship_node_type: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, tags: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, enable_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ModelResponseOrderList, Error<OrderListError>> {
+pub async fn order_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, order_ids: Option<&str>, since_id: Option<&str>, store_id: Option<&str>, customer_id: Option<&str>, customer_email: Option<&str>, basket_id: Option<&str>, currency_id: Option<&str>, phone: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_status: Option<&str>, return_status: Option<&str>, fulfillment_channel: Option<&str>, shipping_method: Option<&str>, skip_order_ids: Option<&str>, is_deleted: Option<bool>, shipping_country_iso3: Option<&str>, delivery_method: Option<&str>, ship_node_type: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, tags: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, enable_cache: Option<bool>, use_latest_api_version: Option<bool>, rounding_precision: Option<i32>) -> Result<models::ModelResponseOrderList, Error<OrderListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -693,6 +697,7 @@ pub async fn order_list(configuration: &configuration::Configuration, start: Opt
     let p_exclude = exclude;
     let p_enable_cache = enable_cache;
     let p_use_latest_api_version = use_latest_api_version;
+    let p_rounding_precision = rounding_precision;
 
     let uri_str = format!("{}/order.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -816,6 +821,9 @@ pub async fn order_list(configuration: &configuration::Configuration, start: Opt
     }
     if let Some(ref param_value) = p_use_latest_api_version {
         req_builder = req_builder.query(&[("use_latest_api_version", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_rounding_precision {
+        req_builder = req_builder.query(&[("rounding_precision", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

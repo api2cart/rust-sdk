@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **url** | Option<**String**> |  | [optional]
 **version** | Option<**String**> |  | [optional]
 **bridge_version** | Option<**String**> |  | [optional]
+**default_rounding_precision** | Option<**i32**> |  | [optional]
 **db_prefix** | Option<**String**> |  | [optional]
 **stores_info** | Option<[**Vec<models::CartStoreInfo>**](Cart_StoreInfo.md)> |  | [optional]
 **warehouses** | Option<[**Vec<models::CartWarehouse>**](Cart_Warehouse.md)> |  | [optional]

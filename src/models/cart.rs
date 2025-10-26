@@ -21,6 +21,8 @@ pub struct Cart {
     pub version: Option<Option<String>>,
     #[serde(rename = "bridge_version", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub bridge_version: Option<Option<String>>,
+    #[serde(rename = "default_rounding_precision", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub default_rounding_precision: Option<Option<i32>>,
     #[serde(rename = "db_prefix", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub db_prefix: Option<Option<String>>,
     #[serde(rename = "stores_info", skip_serializing_if = "Option::is_none")]
@@ -42,6 +44,7 @@ impl Cart {
             url: None,
             version: None,
             bridge_version: None,
+            default_rounding_precision: None,
             db_prefix: None,
             stores_info: None,
             warehouses: None,
