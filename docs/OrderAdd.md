@@ -73,6 +73,7 @@ Name | Type | Description | Notes
 **note_attributes** | Option<[**Vec<models::OrderAddNoteAttributesInner>**](OrderAdd_note_attributes_inner.md)> | Defines note attributes | [optional]
 **clear_cache** | Option<**bool**> | Is cache clear required | [optional][default to true]
 **origin** | Option<**String**> | The source of the order | [optional]
+**fee_price** | Option<**f64**> | Specifies refund's fee price | [optional]
 **order_item** | [**Vec<models::OrderAddOrderItemInner>**](OrderAdd_order_item_inner.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -220,6 +220,9 @@ pub struct OrderAdd {
     /// The source of the order
     #[serde(rename = "origin", skip_serializing_if = "Option::is_none")]
     pub origin: Option<String>,
+    /// Specifies refund's fee price
+    #[serde(rename = "fee_price", skip_serializing_if = "Option::is_none")]
+    pub fee_price: Option<f64>,
     #[serde(rename = "order_item")]
     pub order_item: Vec<models::OrderAddOrderItemInner>,
 }
@@ -296,6 +299,7 @@ impl OrderAdd {
             note_attributes: None,
             clear_cache: None,
             origin: None,
+            fee_price: None,
             order_item,
         }
     }

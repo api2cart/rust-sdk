@@ -402,7 +402,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_count
 
-> models::ProductCount200Response product_count(product_ids, since_id, categories_ids, category_id, store_id, lang_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, brand_name, product_attributes, status, r#type, visible, find_value, find_where, report_request_id, return_global, disable_report_cache, use_latest_api_version)
+> models::ProductCount200Response product_count(sku, product_ids, since_id, categories_ids, category_id, store_id, lang_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, brand_name, manufacturer_id, product_attributes, status, r#type, visible, find_value, find_where, report_request_id, return_global, disable_report_cache, use_latest_api_version)
 product.count
 
 Count products in store.
@@ -412,6 +412,7 @@ Count products in store.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
+**sku** | Option<**String**> | Filter by product's sku |  |
 **product_ids** | Option<**String**> | Counts products specified by product ids |  |
 **since_id** | Option<**String**> | Retrieve entities starting from the specified id. |  |
 **categories_ids** | Option<**String**> | Defines product add that is specified by comma-separated categories id |  |
@@ -425,6 +426,7 @@ Name | Type | Description  | Required | Notes
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
 **brand_name** | Option<**String**> | Retrieves brands specified by brand name |  |
+**manufacturer_id** | Option<**String**> | Defines product's manufacturer by manufacturer_id |  |
 **product_attributes** | Option<[**Vec<String>**](String.md)> | Defines product attributes |  |
 **status** | Option<**String**> | Defines product's status |  |
 **r#type** | Option<**String**> | Defines products's type |  |
@@ -763,7 +765,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_list
 
-> models::ModelResponseProductList product_list(start, count, page_cursor, product_ids, since_id, categories_ids, category_id, store_id, lang_id, currency_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, sku, brand_name, product_attributes, status, r#type, visible, find_value, find_where, return_global, params, response_fields, exclude, sort_by, sort_direction, report_request_id, disable_cache, disable_report_cache, use_latest_api_version, product_type)
+> models::ModelResponseProductList product_list(start, count, page_cursor, product_ids, since_id, categories_ids, category_id, store_id, lang_id, currency_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, sku, brand_name, product_attributes, manufacturer_id, status, r#type, visible, find_value, find_where, return_global, params, response_fields, exclude, sort_by, sort_direction, report_request_id, disable_cache, disable_report_cache, use_latest_api_version, product_type)
 product.list
 
 Get list of products from your store. Returns 10 products by default.
@@ -792,6 +794,7 @@ Name | Type | Description  | Required | Notes
 **sku** | Option<**String**> | Filter by product's sku |  |
 **brand_name** | Option<**String**> | Retrieves brands specified by brand name |  |
 **product_attributes** | Option<[**Vec<String>**](String.md)> | Defines product attributes |  |
+**manufacturer_id** | Option<**String**> | Defines product's manufacturer by manufacturer_id |  |
 **status** | Option<**String**> | Defines product's status |  |
 **r#type** | Option<**String**> | Defines products's type |  |
 **visible** | Option<**String**> | Filter items by visibility status |  |[default to everywhere]
