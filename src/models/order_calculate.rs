@@ -25,6 +25,9 @@ pub struct OrderCalculate {
     /// Coupons that will be applied to order. If the order isn't eligible for any given discount code or there is no discount with such a code it will be skipped during calculation
     #[serde(rename = "coupons", skip_serializing_if = "Option::is_none")]
     pub coupons: Option<Vec<String>>,
+    /// <p>Specifies the rounding precision for fractional numeric values (such as prices, taxes, and weights).</p> <p>Supported values range from <b>1</b> to <b>6</b>.</p> <p>The default rounding precision may vary depending on the platform. You can retrieve the default value using the <strong>cart.info</strong> method in the <code>default_rounding_precision</code> field. </p><p>Values are rounded to the nearest number at the specified precision. Fractions of .5 or higher are rounded up, while fractions lower than .5 are rounded down.</p>
+    #[serde(rename = "rounding_precision", skip_serializing_if = "Option::is_none")]
+    pub rounding_precision: Option<i32>,
     /// Specifies shipping first name
     #[serde(rename = "shipp_first_name")]
     pub shipp_first_name: String,
@@ -99,6 +102,7 @@ impl OrderCalculate {
             currency_id: None,
             store_id: None,
             coupons: None,
+            rounding_precision: None,
             shipp_first_name,
             shipp_last_name,
             shipp_address_1,

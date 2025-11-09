@@ -88,6 +88,18 @@ pub struct AccountCartAdd {
     /// AspDotNetStorefront API Password
     #[serde(rename = "aspdotnetstorefront_api_pass", skip_serializing_if = "Option::is_none")]
     pub aspdotnetstorefront_api_pass: Option<String>,
+    /// Americommerce App ID
+    #[serde(rename = "americommerce_app_id", skip_serializing_if = "Option::is_none")]
+    pub americommerce_app_id: Option<String>,
+    /// Americommerce App Secret
+    #[serde(rename = "americommerce_app_secret", skip_serializing_if = "Option::is_none")]
+    pub americommerce_app_secret: Option<String>,
+    /// Americommerce Access Token
+    #[serde(rename = "americommerce_access_token", skip_serializing_if = "Option::is_none")]
+    pub americommerce_access_token: Option<String>,
+    /// Americommerce Refresh Token
+    #[serde(rename = "americommerce_refresh_token", skip_serializing_if = "Option::is_none")]
+    pub americommerce_refresh_token: Option<String>,
     /// It's a BigCommerce account for which API is enabled
     #[serde(rename = "bigcommerceapi_admin_account", skip_serializing_if = "Option::is_none")]
     pub bigcommerceapi_admin_account: Option<String>,
@@ -541,6 +553,10 @@ impl AccountCartAdd {
             amazon_seller_id: None,
             aspdotnetstorefront_api_user: None,
             aspdotnetstorefront_api_pass: None,
+            americommerce_app_id: None,
+            americommerce_app_secret: None,
+            americommerce_access_token: None,
+            americommerce_refresh_token: None,
             bigcommerceapi_admin_account: None,
             bigcommerceapi_api_path: None,
             bigcommerceapi_api_key: None,
@@ -696,6 +712,8 @@ pub enum CartId {
     AceShop,
     #[serde(rename = "AmazonSP")]
     AmazonSp,
+    #[serde(rename = "Americommerce")]
+    Americommerce,
     #[serde(rename = "AspDotNetStorefront")]
     AspDotNetStorefront,
     #[serde(rename = "BigCartel")]

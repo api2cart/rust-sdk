@@ -19,6 +19,8 @@ pub struct ProductPriceUpdateGroupPricesInner {
     pub group_id: Option<String>,
     #[serde(rename = "price", skip_serializing_if = "Option::is_none")]
     pub price: Option<f64>,
+    #[serde(rename = "qty", skip_serializing_if = "Option::is_none")]
+    pub qty: Option<i32>,
 }
 
 impl ProductPriceUpdateGroupPricesInner {
@@ -27,6 +29,7 @@ impl ProductPriceUpdateGroupPricesInner {
             id: None,
             group_id: None,
             price: None,
+            qty: None,
         }
     }
 }
