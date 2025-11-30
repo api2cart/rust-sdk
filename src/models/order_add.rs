@@ -55,6 +55,9 @@ pub struct OrderAdd {
     /// Specifies customer’s fax
     #[serde(rename = "customer_fax", skip_serializing_if = "Option::is_none")]
     pub customer_fax: Option<String>,
+    /// Indicates whether the customer is a guest customer
+    #[serde(rename = "is_guest", skip_serializing_if = "Option::is_none")]
+    pub is_guest: Option<bool>,
     /// Defines order payment method.<br/>Setting order_payment_method on Shopify will also change financial_status field value to 'paid'
     #[serde(rename = "order_payment_method", skip_serializing_if = "Option::is_none")]
     pub order_payment_method: Option<String>,
@@ -244,6 +247,7 @@ impl OrderAdd {
             customer_country: None,
             customer_birthday: None,
             customer_fax: None,
+            is_guest: None,
             order_payment_method: None,
             transaction_id: None,
             currency: None,

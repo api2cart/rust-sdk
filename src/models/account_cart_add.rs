@@ -523,6 +523,21 @@ pub struct AccountCartAdd {
     /// Temu API endpoint Region.
     #[serde(rename = "temu_region", skip_serializing_if = "Option::is_none")]
     pub temu_region: Option<String>,
+    /// Salesforce Commerce API Client ID
+    #[serde(rename = "scapi_client_id", skip_serializing_if = "Option::is_none")]
+    pub scapi_client_id: Option<String>,
+    /// Salesforce Commerce API Client Secret
+    #[serde(rename = "scapi_client_secret", skip_serializing_if = "Option::is_none")]
+    pub scapi_client_secret: Option<String>,
+    /// Salesforce Commerce Organization ID
+    #[serde(rename = "scapi_organization_id", skip_serializing_if = "Option::is_none")]
+    pub scapi_organization_id: Option<String>,
+    /// Salesforce Commerce Short Code
+    #[serde(rename = "scapi_short_code", skip_serializing_if = "Option::is_none")]
+    pub scapi_short_code: Option<String>,
+    /// Salesforce Commerce API Scopes
+    #[serde(rename = "scapi_scopes", skip_serializing_if = "Option::is_none")]
+    pub scapi_scopes: Option<String>,
 }
 
 impl AccountCartAdd {
@@ -698,6 +713,11 @@ impl AccountCartAdd {
             temu_app_secret: None,
             temu_access_token: None,
             temu_region: None,
+            scapi_client_id: None,
+            scapi_client_secret: None,
+            scapi_organization_id: None,
+            scapi_short_code: None,
+            scapi_scopes: None,
         }
     }
 }
