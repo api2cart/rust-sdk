@@ -172,6 +172,9 @@ pub struct ProductVariantAdd {
     /// Harmonized System Code. An HSC is a 6-digit identifier that allows participating countries to classify traded goods on a common basis for customs purposes
     #[serde(rename = "harmonized_system_code", skip_serializing_if = "Option::is_none")]
     pub harmonized_system_code: Option<String>,
+    /// The numeric ID of the processing profile (readiness state) for physical products in Etsy. You can find possible values in the \"cart.info\" API method response, in the field processing_profiles[]->readiness_state_id.
+    #[serde(rename = "processing_profile_id", skip_serializing_if = "Option::is_none")]
+    pub processing_profile_id: Option<i32>,
     /// String containing the JSON representation of the supplied data
     #[serde(rename = "marketplace_item_properties", skip_serializing_if = "Option::is_none")]
     pub marketplace_item_properties: Option<String>,
@@ -236,6 +239,7 @@ impl ProductVariantAdd {
             is_free_shipping: None,
             country_of_origin: None,
             harmonized_system_code: None,
+            processing_profile_id: None,
             marketplace_item_properties: None,
             clear_cache: None,
         }
