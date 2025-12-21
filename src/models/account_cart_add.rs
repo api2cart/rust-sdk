@@ -268,6 +268,9 @@ pub struct AccountCartAdd {
     /// Access token authorizing the app to access resources on behalf of a user
     #[serde(rename = "shopify_access_token", skip_serializing_if = "Option::is_none")]
     pub shopify_access_token: Option<String>,
+    /// Shopify Client ID
+    #[serde(rename = "shopify_client_id", skip_serializing_if = "Option::is_none")]
+    pub shopify_client_id: Option<String>,
     /// Shopify API Key
     #[serde(rename = "shopify_api_key", skip_serializing_if = "Option::is_none")]
     pub shopify_api_key: Option<String>,
@@ -628,6 +631,7 @@ impl AccountCartAdd {
             shopline_app_secret: None,
             shopline_shared_secret: None,
             shopify_access_token: None,
+            shopify_client_id: None,
             shopify_api_key: None,
             shopify_api_password: None,
             shopify_shared_secret: None,

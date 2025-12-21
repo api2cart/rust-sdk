@@ -89,6 +89,7 @@ Name | Type | Description | Notes
 **shopline_app_secret** | Option<**String**> | Shopline App Secret | [optional]
 **shopline_shared_secret** | Option<**String**> | Shopline Shared Secret | [optional]
 **shopify_access_token** | Option<**String**> | Access token authorizing the app to access resources on behalf of a user | [optional]
+**shopify_client_id** | Option<**String**> | Shopify Client ID | [optional]
 **shopify_api_key** | Option<**String**> | Shopify API Key | [optional]
 **shopify_api_password** | Option<**String**> | Shopify API Password | [optional]
 **shopify_shared_secret** | Option<**String**> | Shared secret | [optional]
