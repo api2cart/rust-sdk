@@ -241,7 +241,7 @@ Name | Type | Description  | Required | Notes
 
 ## order_info
 
-> models::OrderInfo200Response order_info(id, order_id, store_id, params, response_fields, exclude, enable_cache, use_latest_api_version, rounding_precision)
+> models::OrderInfo200Response order_info(id, order_id, store_id, params, response_fields, exclude, enable_cache, use_latest_api_version, rounding_precision, allow_user_defined_order_statuses)
 order.info
 
 Info about a specific order by ID
@@ -260,6 +260,7 @@ Name | Type | Description  | Required | Notes
 **enable_cache** | Option<**bool**> | If the value is 'true' and order exist in our cache, we will return order.info response from cache |  |[default to false]
 **use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
 **rounding_precision** | Option<**i32**> | <p>Specifies the rounding precision for fractional numeric values (such as prices, taxes, and weights).</p> <p>Supported values range from <b>1</b> to <b>6</b>.</p> <p>The default rounding precision may vary depending on the platform. You can retrieve the default value using the <strong>cart.info</strong> method in the <code>default_rounding_precision</code> field. </p><p>Values are rounded to the nearest number at the specified precision. Fractions of .5 or higher are rounded up, while fractions lower than .5 are rounded down.</p> |  |
+**allow_user_defined_order_statuses** | Option<**bool**> | Indicates whether custom (user-defined) order statuses should be included in the response. |  |[default to false]
 
 ### Return type
 
@@ -279,7 +280,7 @@ Name | Type | Description  | Required | Notes
 
 ## order_list
 
-> models::ModelResponseOrderList order_list(start, count, page_cursor, ids, order_ids, since_id, store_id, customer_id, customer_email, basket_id, currency_id, phone, order_status, order_status_ids, ebay_order_status, financial_status, financial_status_ids, fulfillment_status, return_status, fulfillment_channel, shipping_method, skip_order_ids, is_deleted, shipping_country_iso3, delivery_method, ship_node_type, created_to, created_from, modified_to, modified_from, tags, sort_by, sort_direction, params, response_fields, exclude, enable_cache, use_latest_api_version, rounding_precision)
+> models::ModelResponseOrderList order_list(start, count, page_cursor, ids, order_ids, since_id, store_id, customer_id, customer_email, basket_id, currency_id, phone, order_status, order_status_ids, ebay_order_status, financial_status, financial_status_ids, fulfillment_status, return_status, fulfillment_channel, shipping_method, skip_order_ids, is_deleted, shipping_country_iso3, delivery_method, ship_node_type, created_to, created_from, modified_to, modified_from, tags, sort_by, sort_direction, params, response_fields, exclude, enable_cache, use_latest_api_version, rounding_precision, allow_user_defined_order_statuses)
 order.list
 
 Get list of orders from store.
@@ -328,6 +329,7 @@ Name | Type | Description  | Required | Notes
 **enable_cache** | Option<**bool**> | If the value is 'true', we will cache orders for a 15 minutes in order to increase speed and reduce requests throttling for some methods and shoping platforms (for example order.shipment.add) |  |[default to false]
 **use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
 **rounding_precision** | Option<**i32**> | <p>Specifies the rounding precision for fractional numeric values (such as prices, taxes, and weights).</p> <p>Supported values range from <b>1</b> to <b>6</b>.</p> <p>The default rounding precision may vary depending on the platform. You can retrieve the default value using the <strong>cart.info</strong> method in the <code>default_rounding_precision</code> field. </p><p>Values are rounded to the nearest number at the specified precision. Fractions of .5 or higher are rounded up, while fractions lower than .5 are rounded down.</p> |  |
+**allow_user_defined_order_statuses** | Option<**bool**> | Indicates whether custom (user-defined) order statuses should be included in the response. |  |[default to false]
 
 ### Return type
 
@@ -728,7 +730,7 @@ Name | Type | Description  | Required | Notes
 
 ## order_status_list
 
-> models::ModelResponseOrderStatusList order_status_list(store_id, action, response_fields)
+> models::ModelResponseOrderStatusList order_status_list(store_id, action, allow_user_defined_order_statuses, response_fields)
 order.status.list
 
 Retrieve list of statuses
@@ -740,6 +742,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **store_id** | Option<**String**> | Store Id |  |
 **action** | Option<**String**> | Available statuses for the specified action. |  |
+**allow_user_defined_order_statuses** | Option<**bool**> | Indicates whether custom (user-defined) order statuses should be included in the response. |  |[default to false]
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 
 ### Return type

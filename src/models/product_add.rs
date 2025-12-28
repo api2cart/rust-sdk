@@ -82,7 +82,7 @@ pub struct ProductAdd {
     /// Defines product's model that has to be added
     #[serde(rename = "special_price", skip_serializing_if = "Option::is_none")]
     pub special_price: Option<f64>,
-    /// Defines product's sale price
+    /// This parameter is deprecated. Please use the <strong>old_price</strong> parameter instead.
     #[serde(rename = "wholesale_price", skip_serializing_if = "Option::is_none")]
     pub wholesale_price: Option<f64>,
     /// Defines new product's cost price

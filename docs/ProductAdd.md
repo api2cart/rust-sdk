@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **lang_id** | Option<**String**> | Language id | [optional]
 **old_price** | Option<**f64**> | Defines product's old price | [optional]
 **special_price** | Option<**f64**> | Defines product's model that has to be added | [optional]
-**wholesale_price** | Option<**f64**> | Defines product's sale price | [optional]
+**wholesale_price** | Option<**f64**> | This parameter is deprecated. Please use the <strong>old_price</strong> parameter instead. | [optional]
 **cost_price** | Option<**f64**> | Defines new product's cost price | [optional]
 **fixed_cost_shipping_price** | Option<**f64**> | Specifies product's fixed cost shipping price | [optional]
 **tier_prices** | Option<[**Vec<models::ProductAddTierPricesInner>**](ProductAdd_tier_prices_inner.md)> | Defines product's tier prices | [optional]
