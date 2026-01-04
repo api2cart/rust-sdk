@@ -33,6 +33,10 @@ pub struct Product {
     pub advanced_price: Option<Vec<models::ProductAdvancedPrice>>,
     #[serde(rename = "cost_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub cost_price: Option<Option<f64>>,
+    #[serde(rename = "unit_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub unit_price: Option<Option<f64>>,
+    #[serde(rename = "measure_unit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub measure_unit: Option<Option<String>>,
     #[serde(rename = "quantity", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<Option<f64>>,
     #[serde(rename = "inventory", skip_serializing_if = "Option::is_none")]
@@ -142,6 +146,8 @@ impl Product {
             price: None,
             advanced_price: None,
             cost_price: None,
+            unit_price: None,
+            measure_unit: None,
             quantity: None,
             inventory: None,
             group_items: None,

@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **price** | Option<**f64**> |  | [optional]
 **advanced_price** | Option<[**Vec<models::ProductAdvancedPrice>**](Product_AdvancedPrice.md)> |  | [optional]
 **cost_price** | Option<**f64**> |  | [optional]
+**unit_price** | Option<**f64**> |  | [optional]
+**measure_unit** | Option<**String**> |  | [optional]
 **quantity** | Option<**f64**> |  | [optional]
 **inventory** | Option<[**Vec<models::ProductInventory>**](Product_Inventory.md)> |  | [optional]
 **group_items** | Option<[**Vec<models::ProductGroupItem>**](Product_GroupItem.md)> |  | [optional]

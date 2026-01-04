@@ -24,6 +24,8 @@ Name | Type | Description | Notes
 **combination** | Option<[**Vec<models::ProductChildItemCombination>**](Product_ChildItem_Combination.md)> |  | [optional]
 **default_price** | Option<**f64**> |  | [optional]
 **cost_price** | Option<**f64**> |  | [optional]
+**unit_price** | Option<**f64**> |  | [optional]
+**measure_unit** | Option<**String**> |  | [optional]
 **list_price** | Option<**f64**> |  | [optional]
 **wholesale_price** | Option<**f64**> |  | [optional]
 **advanced_price** | Option<[**Vec<models::ProductAdvancedPrice>**](Product_AdvancedPrice.md)> |  | [optional]

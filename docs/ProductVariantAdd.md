@@ -26,6 +26,8 @@ Name | Type | Description | Notes
 **sprice_modified** | Option<**String**> | Defines the date of special price modification | [optional]
 **sprice_expire** | Option<**String**> | Defines the term of special price offer duration | [optional]
 **tier_prices** | Option<[**Vec<models::ProductAddTierPricesInner>**](ProductAdd_tier_prices_inner.md)> | Defines product's tier prices | [optional]
+**measure_unit** | Option<**String**> | Unit for the price per unit. Must be in allowed list | [optional]
+**unit_price** | Option<**f64**> | Defines new product's unit price | [optional]
 **quantity** | Option<**f64**> | Defines product variant's quantity that has to be added | [optional][default to 0]
 **warehouse_id** | Option<**String**> | This parameter is used for selecting a warehouse where you need to set/modify a product quantity. | [optional]
 **in_stock** | Option<**bool**> | Set stock status | [optional]

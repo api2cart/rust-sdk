@@ -100,6 +100,12 @@ pub struct ProductUpdate {
     /// Specifies the set of visible/invisible products for users
     #[serde(rename = "available_for_view", skip_serializing_if = "Option::is_none")]
     pub available_for_view: Option<bool>,
+    /// Unit for the price per unit. Must be in allowed list
+    #[serde(rename = "measure_unit", skip_serializing_if = "Option::is_none")]
+    pub measure_unit: Option<String>,
+    /// Defines new product's unit price
+    #[serde(rename = "unit_price", skip_serializing_if = "Option::is_none")]
+    pub unit_price: Option<f64>,
     /// Assign product to the stores that is specified by comma-separated stores' id
     #[serde(rename = "stores_ids", skip_serializing_if = "Option::is_none")]
     pub stores_ids: Option<String>,
@@ -317,6 +323,8 @@ impl ProductUpdate {
             product_class: None,
             brand_name: None,
             available_for_view: None,
+            measure_unit: None,
+            unit_price: None,
             stores_ids: None,
             store_id: None,
             lang_id: None,

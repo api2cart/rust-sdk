@@ -121,6 +121,12 @@ pub struct ProductVariantUpdate {
     /// Defines the term of special price offer duration
     #[serde(rename = "sprice_expire", skip_serializing_if = "Option::is_none")]
     pub sprice_expire: Option<String>,
+    /// Unit for the price per unit. Must be in allowed list
+    #[serde(rename = "measure_unit", skip_serializing_if = "Option::is_none")]
+    pub measure_unit: Option<String>,
+    /// Defines new product's unit price
+    #[serde(rename = "unit_price", skip_serializing_if = "Option::is_none")]
+    pub unit_price: Option<f64>,
     /// Weight
     #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
     pub weight: Option<f64>,
@@ -222,6 +228,8 @@ impl ProductVariantUpdate {
             fixed_cost_shipping_price: None,
             sprice_create: None,
             sprice_expire: None,
+            measure_unit: None,
+            unit_price: None,
             weight: None,
             barcode: None,
             width: None,

@@ -53,6 +53,10 @@ pub struct Child {
     pub default_price: Option<Option<f64>>,
     #[serde(rename = "cost_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub cost_price: Option<Option<f64>>,
+    #[serde(rename = "unit_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub unit_price: Option<Option<f64>>,
+    #[serde(rename = "measure_unit", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub measure_unit: Option<Option<String>>,
     #[serde(rename = "list_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub list_price: Option<Option<f64>>,
     #[serde(rename = "wholesale_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -134,6 +138,8 @@ impl Child {
             combination: None,
             default_price: None,
             cost_price: None,
+            unit_price: None,
+            measure_unit: None,
             list_price: None,
             wholesale_price: None,
             advanced_price: None,

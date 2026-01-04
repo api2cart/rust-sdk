@@ -103,6 +103,12 @@ pub struct ProductAdd {
     /// Defines reserve price value
     #[serde(rename = "reserve_price", skip_serializing_if = "Option::is_none")]
     pub reserve_price: Option<f64>,
+    /// Unit for the price per unit. Must be in allowed list
+    #[serde(rename = "measure_unit", skip_serializing_if = "Option::is_none")]
+    pub measure_unit: Option<String>,
+    /// Defines new product's unit price
+    #[serde(rename = "unit_price", skip_serializing_if = "Option::is_none")]
+    pub unit_price: Option<f64>,
     /// Defines product's quantity that has to be added
     #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<f64>,
@@ -398,6 +404,8 @@ impl ProductAdd {
             group_prices: None,
             buyitnow_price: None,
             reserve_price: None,
+            measure_unit: None,
+            unit_price: None,
             quantity: None,
             in_stock: None,
             manage_stock: None,

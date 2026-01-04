@@ -79,6 +79,12 @@ pub struct ProductVariantAdd {
     /// Defines product's tier prices
     #[serde(rename = "tier_prices", skip_serializing_if = "Option::is_none")]
     pub tier_prices: Option<Vec<models::ProductAddTierPricesInner>>,
+    /// Unit for the price per unit. Must be in allowed list
+    #[serde(rename = "measure_unit", skip_serializing_if = "Option::is_none")]
+    pub measure_unit: Option<String>,
+    /// Defines new product's unit price
+    #[serde(rename = "unit_price", skip_serializing_if = "Option::is_none")]
+    pub unit_price: Option<f64>,
     /// Defines product variant's quantity that has to be added
     #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<f64>,
@@ -208,6 +214,8 @@ impl ProductVariantAdd {
             sprice_modified: None,
             sprice_expire: None,
             tier_prices: None,
+            measure_unit: None,
+            unit_price: None,
             quantity: None,
             warehouse_id: None,
             in_stock: None,

@@ -33,6 +33,8 @@ Name | Type | Description | Notes
 **product_class** | Option<**String**> | A categorization for the product | [optional]
 **brand_name** | Option<**String**> | Retrieves brands specified by brand name | [optional]
 **available_for_view** | Option<**bool**> | Specifies the set of visible/invisible products for users | [optional]
+**measure_unit** | Option<**String**> | Unit for the price per unit. Must be in allowed list | [optional]
+**unit_price** | Option<**f64**> | Defines new product's unit price | [optional]
 **stores_ids** | Option<**String**> | Assign product to the stores that is specified by comma-separated stores' id | [optional]
 **store_id** | Option<**String**> | Defines store id where the product should be found | [optional]
 **lang_id** | Option<**String**> | Language id | [optional]
