@@ -110,6 +110,8 @@ docs/CategoryCount200Response.md
 docs/CategoryCount200ResponseResult.md
 docs/CategoryDelete200Response.md
 docs/CategoryDelete200ResponseResult.md
+docs/CategoryDeleteBatch.md
+docs/CategoryDeleteBatchPayloadInner.md
 docs/CategoryFind200Response.md
 docs/CategoryFind200ResponseResult.md
 docs/CategoryFind200ResponseResultCategoryInner.md
@@ -567,6 +569,8 @@ src/models/category_count_200_response.rs
 src/models/category_count_200_response_result.rs
 src/models/category_delete_200_response.rs
 src/models/category_delete_200_response_result.rs
+src/models/category_delete_batch.rs
+src/models/category_delete_batch_payload_inner.rs
 src/models/category_find_200_response.rs
 src/models/category_find_200_response_result.rs
 src/models/category_find_200_response_result_category_inner.rs

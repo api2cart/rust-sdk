@@ -187,6 +187,9 @@ pub struct ProductVariantUpdate {
     /// The numeric ID of the processing profile (readiness state) for physical products in Etsy. You can find possible values in the \"cart.info\" API method response, in the field processing_profiles[]->readiness_state_id.
     #[serde(rename = "processing_profile_id", skip_serializing_if = "Option::is_none")]
     pub processing_profile_id: Option<i32>,
+    /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
+    #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
+    pub idempotency_key: Option<String>,
 }
 
 impl ProductVariantUpdate {
@@ -250,6 +253,7 @@ impl ProductVariantUpdate {
             reindex: None,
             clear_cache: None,
             processing_profile_id: None,
+            idempotency_key: None,
         }
     }
 }

@@ -810,6 +810,8 @@ pub enum CartId {
     SsPremium,
     #[serde(rename = "Salla")]
     Salla,
+    #[serde(rename = "SCAPI")]
+    Scapi,
     #[serde(rename = "Shopify")]
     Shopify,
     #[serde(rename = "Shopee")]

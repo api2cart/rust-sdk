@@ -187,6 +187,9 @@ pub struct ProductVariantAdd {
     /// Is cache clear required
     #[serde(rename = "clear_cache", skip_serializing_if = "Option::is_none")]
     pub clear_cache: Option<bool>,
+    /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
+    #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
+    pub idempotency_key: Option<String>,
 }
 
 impl ProductVariantAdd {
@@ -250,6 +253,7 @@ impl ProductVariantAdd {
             processing_profile_id: None,
             marketplace_item_properties: None,
             clear_cache: None,
+            idempotency_key: None,
         }
     }
 }

@@ -355,14 +355,18 @@ pub async fn customer_count(configuration: &configuration::Configuration, ids: O
 }
 
 /// Delete customer from store.
-pub async fn customer_delete(configuration: &configuration::Configuration, id: &str) -> Result<models::CustomerDelete200Response, Error<CustomerDeleteError>> {
+pub async fn customer_delete(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>) -> Result<models::CustomerDelete200Response, Error<CustomerDeleteError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
+    let p_store_id = store_id;
 
     let uri_str = format!("{}/customer.delete.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
 
     req_builder = req_builder.query(&[("id", &p_id.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -459,11 +463,12 @@ pub async fn customer_find(configuration: &configuration::Configuration, find_va
 }
 
 /// Create customer group.
-pub async fn customer_group_add(configuration: &configuration::Configuration, name: &str, store_id: Option<&str>, stores_ids: Option<&str>) -> Result<models::CustomerGroupAdd200Response, Error<CustomerGroupAddError>> {
+pub async fn customer_group_add(configuration: &configuration::Configuration, name: &str, store_id: Option<&str>, stores_ids: Option<&str>, idempotency_key: Option<&str>) -> Result<models::CustomerGroupAdd200Response, Error<CustomerGroupAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_name = name;
     let p_store_id = store_id;
     let p_stores_ids = stores_ids;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/customer.group.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -474,6 +479,9 @@ pub async fn customer_group_add(configuration: &configuration::Configuration, na
     }
     if let Some(ref param_value) = p_stores_ids {
         req_builder = req_builder.query(&[("stores_ids", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

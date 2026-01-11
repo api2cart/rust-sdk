@@ -799,7 +799,7 @@ Name | Type | Description  | Required | Notes
 
 ## order_update
 
-> models::AccountConfigUpdate200Response order_update(order_id, store_id, order_status, financial_status, fulfillment_status, cancellation_reason, order_payment_method, comment, admin_comment, admin_private_comment, invoice_admin_comment, date_modified, date_finished, send_notifications, create_invoice, origin, tags)
+> models::AccountConfigUpdate200Response order_update(order_id, store_id, order_status, financial_status, fulfillment_status, cancellation_reason, order_payment_method, comment, admin_comment, admin_private_comment, invoice_admin_comment, date_modified, date_finished, send_notifications, create_invoice, origin, tags, idempotency_key)
 order.update
 
 Update existing order.
@@ -826,6 +826,7 @@ Name | Type | Description  | Required | Notes
 **create_invoice** | Option<**bool**> | Determines whether an invoice should be created if it has not already been created |  |
 **origin** | Option<**String**> | The source of the order |  |
 **tags** | Option<**String**> | Order tags |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 

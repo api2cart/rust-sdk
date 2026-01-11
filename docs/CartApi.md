@@ -125,7 +125,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_coupon_condition_add
 
-> models::BasketLiveShippingServiceDelete200Response cart_coupon_condition_add(coupon_id, entity, key, operator, value, target, include_tax, include_shipping, store_id)
+> models::BasketLiveShippingServiceDelete200Response cart_coupon_condition_add(coupon_id, entity, key, operator, value, target, include_tax, include_shipping, store_id, idempotency_key)
 cart.coupon.condition.add
 
 Use this method to add additional conditions for coupon application.
@@ -144,6 +144,7 @@ Name | Type | Description  | Required | Notes
 **include_tax** | Option<**bool**> | Indicates whether to apply a discount for taxes. |  |[default to false]
 **include_shipping** | Option<**bool**> | Indicates whether to apply a discount for shipping. |  |[default to false]
 **store_id** | Option<**String**> | Store Id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -303,7 +304,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_giftcard_add
 
-> models::CartGiftcardAdd200Response cart_giftcard_add(amount, code, owner_email, recipient_email, recipient_name, owner_name)
+> models::CartGiftcardAdd200Response cart_giftcard_add(amount, code, owner_email, recipient_email, recipient_name, owner_name, idempotency_key)
 cart.giftcard.add
 
 Use this method to create a gift card for a specified amount.
@@ -319,6 +320,7 @@ Name | Type | Description  | Required | Notes
 **recipient_email** | Option<**String**> | Gift card recipient email |  |
 **recipient_name** | Option<**String**> | Gift card recipient name |  |
 **owner_name** | Option<**String**> | Gift card owner name |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -506,7 +508,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_meta_data_set
 
-> models::AttributeAdd200Response cart_meta_data_set(entity_id, key, value, namespace, entity, store_id, lang_id)
+> models::AttributeAdd200Response cart_meta_data_set(entity_id, key, value, namespace, entity, store_id, lang_id, idempotency_key)
 cart.meta_data.set
 
 Set meta data for a specific entity
@@ -523,6 +525,7 @@ Name | Type | Description  | Required | Notes
 **entity** | Option<**String**> | Entity |  |[default to product]
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -635,7 +638,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_script_add
 
-> models::CartScriptAdd200Response cart_script_add(name, description, html, src, load_method, scope, events, store_id)
+> models::CartScriptAdd200Response cart_script_add(name, description, html, src, load_method, scope, events, store_id, idempotency_key)
 cart.script.add
 
 Add new script to the storefront
@@ -653,6 +656,7 @@ Name | Type | Description  | Required | Notes
 **scope** | Option<**String**> | The page or pages on the online store where the script should be included |  |[default to storefront]
 **events** | Option<**String**> | Event for run scripts |  |
 **store_id** | Option<**String**> | Store Id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 

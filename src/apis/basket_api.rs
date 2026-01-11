@@ -112,13 +112,14 @@ pub async fn basket_info(configuration: &configuration::Configuration, id: &str,
 }
 
 /// Add item to basket
-pub async fn basket_item_add(configuration: &configuration::Configuration, customer_id: &str, product_id: &str, variant_id: Option<&str>, quantity: Option<f64>, store_id: Option<&str>) -> Result<models::BasketItemAdd200Response, Error<BasketItemAddError>> {
+pub async fn basket_item_add(configuration: &configuration::Configuration, customer_id: &str, product_id: &str, variant_id: Option<&str>, quantity: Option<f64>, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::BasketItemAdd200Response, Error<BasketItemAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_customer_id = customer_id;
     let p_product_id = product_id;
     let p_variant_id = variant_id;
     let p_quantity = quantity;
     let p_store_id = store_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/basket.item.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -133,6 +134,9 @@ pub async fn basket_item_add(configuration: &configuration::Configuration, custo
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -170,11 +174,12 @@ pub async fn basket_item_add(configuration: &configuration::Configuration, custo
 }
 
 /// Create live shipping rate service.
-pub async fn basket_live_shipping_service_create(configuration: &configuration::Configuration, name: &str, callback: &str, store_id: Option<&str>) -> Result<models::BasketLiveShippingServiceCreate200Response, Error<BasketLiveShippingServiceCreateError>> {
+pub async fn basket_live_shipping_service_create(configuration: &configuration::Configuration, name: &str, callback: &str, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::BasketLiveShippingServiceCreate200Response, Error<BasketLiveShippingServiceCreateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_name = name;
     let p_callback = callback;
     let p_store_id = store_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/basket.live_shipping_service.create.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -183,6 +188,9 @@ pub async fn basket_live_shipping_service_create(configuration: &configuration::
     req_builder = req_builder.query(&[("callback", &p_callback.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

@@ -48,7 +48,7 @@ Name | Type | Description  | Required | Notes
 
 ## basket_item_add
 
-> models::BasketItemAdd200Response basket_item_add(customer_id, product_id, variant_id, quantity, store_id)
+> models::BasketItemAdd200Response basket_item_add(customer_id, product_id, variant_id, quantity, store_id, idempotency_key)
 basket.item.add
 
 Add item to basket
@@ -63,6 +63,7 @@ Name | Type | Description  | Required | Notes
 **variant_id** | Option<**String**> | Defines product's variants specified by variant id |  |
 **quantity** | Option<**f64**> | Defines new items quantity |  |[default to 0]
 **store_id** | Option<**String**> | Store Id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -82,7 +83,7 @@ Name | Type | Description  | Required | Notes
 
 ## basket_live_shipping_service_create
 
-> models::BasketLiveShippingServiceCreate200Response basket_live_shipping_service_create(name, callback, store_id)
+> models::BasketLiveShippingServiceCreate200Response basket_live_shipping_service_create(name, callback, store_id, idempotency_key)
 basket.live_shipping_service.create
 
 Create live shipping rate service.
@@ -95,6 +96,7 @@ Name | Type | Description  | Required | Notes
 **name** | **String** | Shipping Service Name | [required] |
 **callback** | **String** | Callback url that returns shipping rates. It should be able to accept POST requests with json data. | [required] |
 **store_id** | Option<**String**> | Store Id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 

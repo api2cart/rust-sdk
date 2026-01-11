@@ -161,7 +161,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_attribute_value_set
 
-> models::ProductAttributeValueSet200Response product_attribute_value_set(product_id, attribute_id, attribute_group_id, attribute_name, value, value_id, lang_id, store_id)
+> models::ProductAttributeValueSet200Response product_attribute_value_set(product_id, attribute_id, attribute_group_id, attribute_name, value, value_id, lang_id, store_id, idempotency_key)
 product.attribute.value.set
 
 Set attribute value to product.
@@ -179,6 +179,7 @@ Name | Type | Description  | Required | Notes
 **value_id** | Option<**i32**> | Define attribute value id |  |
 **lang_id** | Option<**String**> | Language id |  |
 **store_id** | Option<**String**> | Store Id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -198,7 +199,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_attribute_value_unset
 
-> models::ProductAttributeValueUnset200Response product_attribute_value_unset(product_id, attribute_id, store_id, include_default, reindex, clear_cache)
+> models::ProductAttributeValueUnset200Response product_attribute_value_unset(product_id, attribute_id, store_id, include_default, reindex, clear_cache, idempotency_key)
 product.attribute.value.unset
 
 Removes attribute value for a product.
@@ -214,6 +215,7 @@ Name | Type | Description  | Required | Notes
 **include_default** | Option<**bool**> | Boolean, whether or not to unset default value of the attribute, if applicable |  |[default to false]
 **reindex** | Option<**bool**> | Is reindex required |  |[default to true]
 **clear_cache** | Option<**bool**> | Is cache clear required |  |[default to true]
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -456,7 +458,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_currency_add
 
-> models::ProductCurrencyAdd200Response product_currency_add(iso3, rate, name, avail, symbol_left, symbol_right, default)
+> models::ProductCurrencyAdd200Response product_currency_add(iso3, rate, name, avail, symbol_left, symbol_right, default, idempotency_key)
 product.currency.add
 
 Add currency and/or set default in store
@@ -473,6 +475,7 @@ Name | Type | Description  | Required | Notes
 **symbol_left** | Option<**String**> | Defines the symbol that is located before the currency |  |
 **symbol_right** | Option<**String**> | Defines the symbol that is located after the currency |  |
 **default** | Option<**bool**> | Specifies currency's default meaning |  |[default to false]
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -687,7 +690,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_image_update
 
-> models::ProductImageUpdate200Response product_image_update(product_id, id, variant_ids, store_id, lang_id, image_name, r#type, label, position, hidden)
+> models::ProductImageUpdate200Response product_image_update(product_id, id, variant_ids, store_id, lang_id, image_name, r#type, label, position, hidden, idempotency_key)
 product.image.update
 
 Update details of image
@@ -707,6 +710,7 @@ Name | Type | Description  | Required | Notes
 **label** | Option<**String**> | Defines alternative text that has to be attached to the picture |  |
 **position** | Option<**i32**> | Defines image’s position in the list |  |
 **hidden** | Option<**bool**> | Define is hide image |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -830,7 +834,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_manufacturer_add
 
-> models::ProductManufacturerAdd200Response product_manufacturer_add(product_id, manufacturer, store_id, meta_title, meta_keywords, meta_description, search_keywords, image_url, seo_url)
+> models::ProductManufacturerAdd200Response product_manufacturer_add(product_id, manufacturer, store_id, meta_title, meta_keywords, meta_description, search_keywords, image_url, seo_url, idempotency_key)
 product.manufacturer.add
 
 Add manufacturer to store and assign to product
@@ -849,6 +853,7 @@ Name | Type | Description  | Required | Notes
 **search_keywords** | Option<**String**> | Defines unique search keywords |  |
 **image_url** | Option<**String**> | Image Url |  |
 **seo_url** | Option<**String**> | Defines unique URL for SEO |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -898,7 +903,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_option_assign
 
-> models::ProductOptionAssign200Response product_option_assign(product_id, option_id, required, sort_order, option_values, clear_cache)
+> models::ProductOptionAssign200Response product_option_assign(product_id, option_id, required, sort_order, option_values, clear_cache, idempotency_key)
 product.option.assign
 
 Assign option from product.
@@ -914,6 +919,7 @@ Name | Type | Description  | Required | Notes
 **sort_order** | Option<**i32**> | Sort number in the list |  |[default to 0]
 **option_values** | Option<**String**> | Defines option values that has to be assigned |  |
 **clear_cache** | Option<**bool**> | Is cache clear required |  |[default to true]
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -1002,7 +1008,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_option_value_add
 
-> models::ProductOptionValueAdd200Response product_option_value_add(product_id, option_id, option_value, sort_order, display_value, is_default, clear_cache)
+> models::ProductOptionValueAdd200Response product_option_value_add(product_id, option_id, option_value, sort_order, display_value, is_default, clear_cache, idempotency_key)
 product.option.value.add
 
 Add product option item from option.
@@ -1019,6 +1025,7 @@ Name | Type | Description  | Required | Notes
 **display_value** | Option<**String**> | Defines the value that will be displayed for the option value |  |
 **is_default** | Option<**bool**> | Defines as a default |  |
 **clear_cache** | Option<**bool**> | Is cache clear required |  |[default to true]
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -1038,7 +1045,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_option_value_assign
 
-> models::ProductOptionValueAssign200Response product_option_value_assign(product_option_id, option_value_id, clear_cache)
+> models::ProductOptionValueAssign200Response product_option_value_assign(product_option_id, option_value_id, clear_cache, idempotency_key)
 product.option.value.assign
 
 Assign product option item from product.
@@ -1051,6 +1058,7 @@ Name | Type | Description  | Required | Notes
 **product_option_id** | **i32** | Defines product's option id where the value has to be assigned | [required] |
 **option_value_id** | **String** | Defines value id that has to be assigned | [required] |
 **clear_cache** | Option<**bool**> | Is cache clear required |  |[default to true]
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -1103,7 +1111,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_option_value_update
 
-> models::AccountConfigUpdate200Response product_option_value_update(product_id, option_id, option_value_id, option_value, price, quantity, display_value, clear_cache)
+> models::AccountConfigUpdate200Response product_option_value_update(product_id, option_id, option_value_id, option_value, price, quantity, display_value, clear_cache, idempotency_key)
 product.option.value.update
 
 Update product option item from option.
@@ -1121,6 +1129,7 @@ Name | Type | Description  | Required | Notes
 **quantity** | Option<**f64**> | Defines new products' options quantity |  |
 **display_value** | Option<**String**> | Defines the value that will be displayed for the option value |  |
 **clear_cache** | Option<**bool**> | Is cache clear required |  |[default to true]
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -1277,7 +1286,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_store_assign
 
-> models::AccountConfigUpdate200Response product_store_assign(product_id, store_id)
+> models::AccountConfigUpdate200Response product_store_assign(product_id, store_id, idempotency_key)
 product.store.assign
 
 Assign product to store
@@ -1289,6 +1298,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **product_id** | **String** | Defines id of the product which should be assigned to a store | [required] |
 **store_id** | **String** | Defines id of the store product should be assigned to | [required] |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 

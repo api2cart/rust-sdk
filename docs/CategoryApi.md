@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**category_assign**](CategoryApi.md#category_assign) | **POST** /category.assign.json | category.assign
 [**category_count**](CategoryApi.md#category_count) | **GET** /category.count.json | category.count
 [**category_delete**](CategoryApi.md#category_delete) | **DELETE** /category.delete.json | category.delete
+[**category_delete_batch**](CategoryApi.md#category_delete_batch) | **POST** /category.delete.batch.json | category.delete.batch
 [**category_find**](CategoryApi.md#category_find) | **GET** /category.find.json | category.find
 [**category_image_add**](CategoryApi.md#category_image_add) | **POST** /category.image.add.json | category.image.add
 [**category_image_delete**](CategoryApi.md#category_image_delete) | **DELETE** /category.image.delete.json | category.image.delete
@@ -21,7 +22,7 @@ Method | HTTP request | Description
 
 ## category_add
 
-> models::CategoryAdd200Response category_add(name, description, short_description, parent_id, avail, created_time, modified_time, sort_order, meta_title, meta_description, meta_keywords, seo_url, store_id, stores_ids, lang_id)
+> models::CategoryAdd200Response category_add(name, description, short_description, parent_id, avail, created_time, modified_time, sort_order, meta_title, meta_description, meta_keywords, seo_url, store_id, stores_ids, lang_id, idempotency_key)
 category.add
 
 Add new category in store
@@ -46,6 +47,7 @@ Name | Type | Description  | Required | Notes
 **store_id** | Option<**String**> | Store Id |  |
 **stores_ids** | Option<**String**> | Create category in the stores that is specified by comma-separated stores' id |  |
 **lang_id** | Option<**String**> | Language id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -95,7 +97,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_assign
 
-> models::CategoryAssign200Response category_assign(category_id, product_id, store_id)
+> models::CategoryAssign200Response category_assign(category_id, product_id, store_id, idempotency_key)
 category.assign
 
 Assign category to product
@@ -108,6 +110,7 @@ Name | Type | Description  | Required | Notes
 **category_id** | **String** | Defines category assign, specified by category id | [required] |
 **product_id** | **String** | Defines category assign to the product, specified by product id | [required] |
 **store_id** | Option<**String**> | Store Id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -198,6 +201,36 @@ Name | Type | Description  | Required | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 
+## category_delete_batch
+
+> models::CategoryAddBatch200Response category_delete_batch(category_delete_batch)
+category.delete.batch
+
+Delete categories from the store.
+
+### Parameters
+
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**category_delete_batch** | [**CategoryDeleteBatch**](CategoryDeleteBatch.md) |  | [required] |
+
+### Return type
+
+[**models::CategoryAddBatch200Response**](CategoryAddBatch_200_response.md)
+
+### Authorization
+
+[StoreKeyAuth](../README.md#StoreKeyAuth), [ApiKeyAuth](../README.md#ApiKeyAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+
 ## category_find
 
 > models::CategoryFind200Response category_find(find_value, find_where, find_params, store_id, lang_id)
@@ -234,7 +267,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_image_add
 
-> models::CategoryImageAdd200Response category_image_add(category_id, image_name, url, r#type, store_id, label, mime, position)
+> models::CategoryImageAdd200Response category_image_add(category_id, image_name, url, r#type, store_id, label, mime, position, idempotency_key)
 category.image.add
 
 Add image to category
@@ -252,6 +285,7 @@ Name | Type | Description  | Required | Notes
 **label** | Option<**String**> | Defines alternative text that has to be attached to the picture |  |
 **mime** | Option<**String**> | Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. |  |
 **position** | Option<**i32**> | Defines image’s position in the list |  |[default to 0]
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -390,7 +424,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_unassign
 
-> models::CategoryAssign200Response category_unassign(category_id, product_id, store_id)
+> models::CategoryAssign200Response category_unassign(category_id, product_id, store_id, idempotency_key)
 category.unassign
 
 Unassign category to product
@@ -403,6 +437,7 @@ Name | Type | Description  | Required | Notes
 **category_id** | **String** | Defines category unassign, specified by category id | [required] |
 **product_id** | **String** | Defines category unassign to the product, specified by product id | [required] |
 **store_id** | Option<**String**> | Store Id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -422,7 +457,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_update
 
-> models::AccountConfigUpdate200Response category_update(id, name, description, short_description, parent_id, avail, sort_order, modified_time, meta_title, meta_description, meta_keywords, seo_url, store_id, stores_ids, lang_id)
+> models::AccountConfigUpdate200Response category_update(id, name, description, short_description, parent_id, avail, sort_order, modified_time, meta_title, meta_description, meta_keywords, seo_url, store_id, stores_ids, lang_id, idempotency_key)
 category.update
 
 Update category in store
@@ -447,6 +482,7 @@ Name | Type | Description  | Required | Notes
 **store_id** | Option<**String**> | Store Id |  |
 **stores_ids** | Option<**String**> | Update category in the stores that is specified by comma-separated stores' id |  |
 **lang_id** | Option<**String**> | Language id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 

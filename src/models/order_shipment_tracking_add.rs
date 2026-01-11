@@ -37,6 +37,9 @@ pub struct OrderShipmentTrackingAdd {
     /// Send notifications to customer after tracking was created
     #[serde(rename = "send_notifications", skip_serializing_if = "Option::is_none")]
     pub send_notifications: Option<bool>,
+    /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
+    #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
+    pub idempotency_key: Option<String>,
 }
 
 impl OrderShipmentTrackingAdd {
@@ -50,6 +53,7 @@ impl OrderShipmentTrackingAdd {
             tracking_number,
             tracking_link: None,
             send_notifications: None,
+            idempotency_key: None,
         }
     }
 }

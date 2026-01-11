@@ -76,6 +76,9 @@ pub struct CustomerAddressAdd {
     /// Specifies customer's alias in the address book
     #[serde(rename = "alias", skip_serializing_if = "Option::is_none")]
     pub alias: Option<String>,
+    /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
+    #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
+    pub idempotency_key: Option<String>,
 }
 
 impl CustomerAddressAdd {
@@ -102,6 +105,7 @@ impl CustomerAddressAdd {
             gender: None,
             tax_id: None,
             alias: None,
+            idempotency_key: None,
         }
     }
 }

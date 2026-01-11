@@ -369,6 +369,9 @@ pub struct ProductAdd {
     pub return_policy_id: Option<i32>,
     #[serde(rename = "personalization_details", skip_serializing_if = "Option::is_none")]
     pub personalization_details: Option<Box<models::ProductAddPersonalizationDetails>>,
+    /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
+    #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
+    pub idempotency_key: Option<String>,
 }
 
 impl ProductAdd {
@@ -495,6 +498,7 @@ impl ProductAdd {
             shop_section_id: None,
             return_policy_id: None,
             personalization_details: None,
+            idempotency_key: None,
         }
     }
 }

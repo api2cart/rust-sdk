@@ -16,12 +16,16 @@ pub struct OrderShipmentAddBatch {
     /// Contains an array of order shipment objects. The list of properties may vary depending on the specific platform.
     #[serde(rename = "payload")]
     pub payload: Vec<models::OrderShipmentAddBatchPayloadInner>,
+    /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
+    #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
+    pub idempotency_key: Option<String>,
 }
 
 impl OrderShipmentAddBatch {
     pub fn new(payload: Vec<models::OrderShipmentAddBatchPayloadInner>) -> OrderShipmentAddBatch {
         OrderShipmentAddBatch {
             payload,
+            idempotency_key: None,
         }
     }
 }

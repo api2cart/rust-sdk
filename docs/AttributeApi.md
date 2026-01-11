@@ -25,7 +25,7 @@ Method | HTTP request | Description
 
 ## attribute_add
 
-> models::AttributeAdd200Response attribute_add(r#type, name, code, store_id, lang_id, visible, required, position, attribute_group_id, is_global, is_searchable, is_filterable, is_comparable, is_html_allowed_on_front, is_filterable_in_search, is_configurable, is_visible_in_advanced_search, is_used_for_promo_rules, used_in_product_listing, used_for_sort_by, apply_to)
+> models::AttributeAdd200Response attribute_add(r#type, name, code, store_id, lang_id, visible, required, position, attribute_group_id, is_global, is_searchable, is_filterable, is_comparable, is_html_allowed_on_front, is_filterable_in_search, is_configurable, is_visible_in_advanced_search, is_used_for_promo_rules, used_in_product_listing, used_for_sort_by, apply_to, idempotency_key)
 attribute.add
 
 Add new attribute
@@ -56,6 +56,7 @@ Name | Type | Description  | Required | Notes
 **used_in_product_listing** | Option<**bool**> | Used in Product Listing |  |[default to false]
 **used_for_sort_by** | Option<**bool**> | Used for Sorting in Product Listing |  |[default to false]
 **apply_to** | Option<**String**> | Types of products which can have this attribute |  |[default to all_types]
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -75,7 +76,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_assign_group
 
-> models::AttributeAssignGroup200Response attribute_assign_group(id, group_id, attribute_set_id)
+> models::AttributeAssignGroup200Response attribute_assign_group(id, group_id, attribute_set_id, idempotency_key)
 attribute.assign.group
 
 Assign attribute to the group
@@ -88,6 +89,7 @@ Name | Type | Description  | Required | Notes
 **id** | **String** | Entity id | [required] |
 **group_id** | **String** | Attribute group_id | [required] |
 **attribute_set_id** | Option<**String**> | Attribute set id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -107,7 +109,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_assign_set
 
-> models::AttributeAssignGroup200Response attribute_assign_set(id, attribute_set_id, group_id)
+> models::AttributeAssignGroup200Response attribute_assign_set(id, attribute_set_id, group_id, idempotency_key)
 attribute.assign.set
 
 Assign attribute to the attribute set
@@ -120,6 +122,7 @@ Name | Type | Description  | Required | Notes
 **id** | **String** | Entity id | [required] |
 **attribute_set_id** | **String** | Attribute set id | [required] |
 **group_id** | Option<**String**> | Attribute group_id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -381,7 +384,7 @@ This endpoint does not need any parameter.
 
 ## attribute_unassign_group
 
-> models::AttributeUnassignGroup200Response attribute_unassign_group(id, group_id)
+> models::AttributeUnassignGroup200Response attribute_unassign_group(id, group_id, idempotency_key)
 attribute.unassign.group
 
 Unassign attribute from group
@@ -393,6 +396,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Entity id | [required] |
 **group_id** | **String** | Customer group_id | [required] |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -412,7 +416,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_unassign_set
 
-> models::AttributeUnassignGroup200Response attribute_unassign_set(id, attribute_set_id)
+> models::AttributeUnassignGroup200Response attribute_unassign_set(id, attribute_set_id, idempotency_key)
 attribute.unassign.set
 
 Unassign attribute from attribute set
@@ -424,6 +428,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Entity id | [required] |
 **attribute_set_id** | **String** | Attribute set id | [required] |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -443,7 +448,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_update
 
-> models::AttributeUpdate200Response attribute_update(id, name, store_id, lang_id)
+> models::AttributeUpdate200Response attribute_update(id, name, store_id, lang_id, idempotency_key)
 attribute.update
 
 Update attribute data
@@ -457,6 +462,7 @@ Name | Type | Description  | Required | Notes
 **name** | **String** | Defines new attributes's name | [required] |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -476,7 +482,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_value_add
 
-> models::AttributeAdd200Response attribute_value_add(attribute_id, name, code, description, store_id, lang_id)
+> models::AttributeAdd200Response attribute_value_add(attribute_id, name, code, description, store_id, lang_id, idempotency_key)
 attribute.value.add
 
 Add new value to attribute.
@@ -492,6 +498,7 @@ Name | Type | Description  | Required | Notes
 **description** | Option<**String**> | Defines attribute value's description |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -543,7 +550,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_value_update
 
-> models::AttributeUpdate200Response attribute_value_update(id, attribute_id, name, description, code, store_id, lang_id)
+> models::AttributeUpdate200Response attribute_value_update(id, attribute_id, name, description, code, store_id, lang_id, idempotency_key)
 attribute.value.update
 
 Update attribute value.
@@ -560,6 +567,7 @@ Name | Type | Description  | Required | Notes
 **code** | Option<**String**> | Entity code |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 

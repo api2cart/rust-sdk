@@ -50,6 +50,13 @@ pub enum CategoryDeleteError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`category_delete_batch`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum CategoryDeleteBatchError {
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`category_find`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -101,7 +108,7 @@ pub enum CategoryUpdateError {
 
 
 /// Add new category in store
-pub async fn category_add(configuration: &configuration::Configuration, name: &str, description: Option<&str>, short_description: Option<&str>, parent_id: Option<&str>, avail: Option<bool>, created_time: Option<&str>, modified_time: Option<&str>, sort_order: Option<i32>, meta_title: Option<&str>, meta_description: Option<&str>, meta_keywords: Option<&str>, seo_url: Option<&str>, store_id: Option<&str>, stores_ids: Option<&str>, lang_id: Option<&str>) -> Result<models::CategoryAdd200Response, Error<CategoryAddError>> {
+pub async fn category_add(configuration: &configuration::Configuration, name: &str, description: Option<&str>, short_description: Option<&str>, parent_id: Option<&str>, avail: Option<bool>, created_time: Option<&str>, modified_time: Option<&str>, sort_order: Option<i32>, meta_title: Option<&str>, meta_description: Option<&str>, meta_keywords: Option<&str>, seo_url: Option<&str>, store_id: Option<&str>, stores_ids: Option<&str>, lang_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::CategoryAdd200Response, Error<CategoryAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_name = name;
     let p_description = description;
@@ -118,6 +125,7 @@ pub async fn category_add(configuration: &configuration::Configuration, name: &s
     let p_store_id = store_id;
     let p_stores_ids = stores_ids;
     let p_lang_id = lang_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/category.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -164,6 +172,9 @@ pub async fn category_add(configuration: &configuration::Configuration, name: &s
     }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -245,11 +256,12 @@ pub async fn category_add_batch(configuration: &configuration::Configuration, ca
 }
 
 /// Assign category to product
-pub async fn category_assign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>) -> Result<models::CategoryAssign200Response, Error<CategoryAssignError>> {
+pub async fn category_assign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::CategoryAssign200Response, Error<CategoryAssignError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_category_id = category_id;
     let p_product_id = product_id;
     let p_store_id = store_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/category.assign.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -258,6 +270,9 @@ pub async fn category_assign(configuration: &configuration::Configuration, categ
     req_builder = req_builder.query(&[("product_id", &p_product_id.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -436,6 +451,50 @@ pub async fn category_delete(configuration: &configuration::Configuration, id: &
     }
 }
 
+/// Delete categories from the store.
+pub async fn category_delete_batch(configuration: &configuration::Configuration, category_delete_batch: models::CategoryDeleteBatch) -> Result<models::CategoryAddBatch200Response, Error<CategoryDeleteBatchError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_category_delete_batch = category_delete_batch;
+
+    let uri_str = format!("{}/category.delete.batch.json", configuration.base_path);
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref apikey) = configuration.api_key {
+        let key = apikey.key.clone();
+        let value = match apikey.prefix {
+            Some(ref prefix) => format!("{} {}", prefix, key),
+            None => key,
+        };
+        req_builder = req_builder.header("x-store-key", value);
+    };
+    if let Some(ref apikey) = configuration.api_key {
+        let key = apikey.key.clone();
+        let value = match apikey.prefix {
+            Some(ref prefix) => format!("{} {}", prefix, key),
+            None => key,
+        };
+        req_builder = req_builder.header("x-api-key", value);
+    };
+    req_builder = req_builder.json(&p_category_delete_batch);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req).await?;
+
+    let status = resp.status();
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text().await?;
+        serde_json::from_str(&content).map_err(Error::from)
+    } else {
+        let content = resp.text().await?;
+        let entity: Option<CategoryDeleteBatchError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
 /// Search category in store. \"Laptop\" is specified here by default.
 pub async fn category_find(configuration: &configuration::Configuration, find_value: &str, find_where: Option<&str>, find_params: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>) -> Result<models::CategoryFind200Response, Error<CategoryFindError>> {
     // add a prefix to parameters to efficiently prevent name collisions
@@ -497,7 +556,7 @@ pub async fn category_find(configuration: &configuration::Configuration, find_va
 }
 
 /// Add image to category
-pub async fn category_image_add(configuration: &configuration::Configuration, category_id: &str, image_name: &str, url: &str, r#type: &str, store_id: Option<&str>, label: Option<&str>, mime: Option<&str>, position: Option<i32>) -> Result<models::CategoryImageAdd200Response, Error<CategoryImageAddError>> {
+pub async fn category_image_add(configuration: &configuration::Configuration, category_id: &str, image_name: &str, url: &str, r#type: &str, store_id: Option<&str>, label: Option<&str>, mime: Option<&str>, position: Option<i32>, idempotency_key: Option<&str>) -> Result<models::CategoryImageAdd200Response, Error<CategoryImageAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_category_id = category_id;
     let p_image_name = image_name;
@@ -507,6 +566,7 @@ pub async fn category_image_add(configuration: &configuration::Configuration, ca
     let p_label = label;
     let p_mime = mime;
     let p_position = position;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/category.image.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -526,6 +586,9 @@ pub async fn category_image_add(configuration: &configuration::Configuration, ca
     }
     if let Some(ref param_value) = p_position {
         req_builder = req_builder.query(&[("position", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -811,11 +874,12 @@ pub async fn category_list(configuration: &configuration::Configuration, start: 
 }
 
 /// Unassign category to product
-pub async fn category_unassign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>) -> Result<models::CategoryAssign200Response, Error<CategoryUnassignError>> {
+pub async fn category_unassign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::CategoryAssign200Response, Error<CategoryUnassignError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_category_id = category_id;
     let p_product_id = product_id;
     let p_store_id = store_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/category.unassign.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -824,6 +888,9 @@ pub async fn category_unassign(configuration: &configuration::Configuration, cat
     req_builder = req_builder.query(&[("product_id", &p_product_id.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -861,7 +928,7 @@ pub async fn category_unassign(configuration: &configuration::Configuration, cat
 }
 
 /// Update category in store
-pub async fn category_update(configuration: &configuration::Configuration, id: &str, name: Option<&str>, description: Option<&str>, short_description: Option<&str>, parent_id: Option<&str>, avail: Option<bool>, sort_order: Option<i32>, modified_time: Option<&str>, meta_title: Option<&str>, meta_description: Option<&str>, meta_keywords: Option<&str>, seo_url: Option<&str>, store_id: Option<&str>, stores_ids: Option<&str>, lang_id: Option<&str>) -> Result<models::AccountConfigUpdate200Response, Error<CategoryUpdateError>> {
+pub async fn category_update(configuration: &configuration::Configuration, id: &str, name: Option<&str>, description: Option<&str>, short_description: Option<&str>, parent_id: Option<&str>, avail: Option<bool>, sort_order: Option<i32>, modified_time: Option<&str>, meta_title: Option<&str>, meta_description: Option<&str>, meta_keywords: Option<&str>, seo_url: Option<&str>, store_id: Option<&str>, stores_ids: Option<&str>, lang_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AccountConfigUpdate200Response, Error<CategoryUpdateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_name = name;
@@ -878,6 +945,7 @@ pub async fn category_update(configuration: &configuration::Configuration, id: &
     let p_store_id = store_id;
     let p_stores_ids = stores_ids;
     let p_lang_id = lang_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/category.update.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
@@ -924,6 +992,9 @@ pub async fn category_update(configuration: &configuration::Configuration, id: &
     }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

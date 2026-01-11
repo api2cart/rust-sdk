@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **required** | Option<**bool**> | Defines if the option is required | [optional][default to false]
 **values** | Option<[**Vec<models::ProductOptionAddValuesInner>**](ProductOptionAdd_values_inner.md)> | An array of option values.</b> | [optional]
 **clear_cache** | Option<**bool**> | Is cache clear required | [optional][default to true]
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -58,6 +58,9 @@ pub struct OrderShipmentAdd {
     /// Use the latest platform API version
     #[serde(rename = "use_latest_api_version", skip_serializing_if = "Option::is_none")]
     pub use_latest_api_version: Option<bool>,
+    /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
+    #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
+    pub idempotency_key: Option<String>,
 }
 
 impl OrderShipmentAdd {
@@ -78,6 +81,7 @@ impl OrderShipmentAdd {
             check_process_status: None,
             tracking_provider: None,
             use_latest_api_version: None,
+            idempotency_key: None,
         }
     }
 }

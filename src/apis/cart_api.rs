@@ -333,7 +333,7 @@ pub async fn cart_coupon_add(configuration: &configuration::Configuration, cart_
 }
 
 /// Use this method to add additional conditions for coupon application.
-pub async fn cart_coupon_condition_add(configuration: &configuration::Configuration, coupon_id: &str, entity: &str, key: &str, operator: &str, value: &str, target: Option<&str>, include_tax: Option<bool>, include_shipping: Option<bool>, store_id: Option<&str>) -> Result<models::BasketLiveShippingServiceDelete200Response, Error<CartCouponConditionAddError>> {
+pub async fn cart_coupon_condition_add(configuration: &configuration::Configuration, coupon_id: &str, entity: &str, key: &str, operator: &str, value: &str, target: Option<&str>, include_tax: Option<bool>, include_shipping: Option<bool>, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::BasketLiveShippingServiceDelete200Response, Error<CartCouponConditionAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_coupon_id = coupon_id;
     let p_entity = entity;
@@ -344,6 +344,7 @@ pub async fn cart_coupon_condition_add(configuration: &configuration::Configurat
     let p_include_tax = include_tax;
     let p_include_shipping = include_shipping;
     let p_store_id = store_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/cart.coupon.condition.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -364,6 +365,9 @@ pub async fn cart_coupon_condition_add(configuration: &configuration::Configurat
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -663,7 +667,7 @@ pub async fn cart_delete(configuration: &configuration::Configuration, delete_br
 }
 
 /// Use this method to create a gift card for a specified amount.
-pub async fn cart_giftcard_add(configuration: &configuration::Configuration, amount: f64, code: Option<&str>, owner_email: Option<&str>, recipient_email: Option<&str>, recipient_name: Option<&str>, owner_name: Option<&str>) -> Result<models::CartGiftcardAdd200Response, Error<CartGiftcardAddError>> {
+pub async fn cart_giftcard_add(configuration: &configuration::Configuration, amount: f64, code: Option<&str>, owner_email: Option<&str>, recipient_email: Option<&str>, recipient_name: Option<&str>, owner_name: Option<&str>, idempotency_key: Option<&str>) -> Result<models::CartGiftcardAdd200Response, Error<CartGiftcardAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_amount = amount;
     let p_code = code;
@@ -671,6 +675,7 @@ pub async fn cart_giftcard_add(configuration: &configuration::Configuration, amo
     let p_recipient_email = recipient_email;
     let p_recipient_name = recipient_name;
     let p_owner_name = owner_name;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/cart.giftcard.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -690,6 +695,9 @@ pub async fn cart_giftcard_add(configuration: &configuration::Configuration, amo
     }
     if let Some(ref param_value) = p_owner_name {
         req_builder = req_builder.query(&[("owner_name", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1025,7 +1033,7 @@ pub async fn cart_meta_data_list(configuration: &configuration::Configuration, e
 }
 
 /// Set meta data for a specific entity
-pub async fn cart_meta_data_set(configuration: &configuration::Configuration, entity_id: &str, key: &str, value: &str, namespace: &str, entity: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>) -> Result<models::AttributeAdd200Response, Error<CartMetaDataSetError>> {
+pub async fn cart_meta_data_set(configuration: &configuration::Configuration, entity_id: &str, key: &str, value: &str, namespace: &str, entity: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AttributeAdd200Response, Error<CartMetaDataSetError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_entity_id = entity_id;
     let p_key = key;
@@ -1034,6 +1042,7 @@ pub async fn cart_meta_data_set(configuration: &configuration::Configuration, en
     let p_entity = entity;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/cart.meta_data.set.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -1050,6 +1059,9 @@ pub async fn cart_meta_data_set(configuration: &configuration::Configuration, en
     }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1238,7 +1250,7 @@ pub async fn cart_plugin_list(configuration: &configuration::Configuration, star
 }
 
 /// Add new script to the storefront
-pub async fn cart_script_add(configuration: &configuration::Configuration, name: Option<&str>, description: Option<&str>, html: Option<&str>, src: Option<&str>, load_method: Option<&str>, scope: Option<&str>, events: Option<&str>, store_id: Option<&str>) -> Result<models::CartScriptAdd200Response, Error<CartScriptAddError>> {
+pub async fn cart_script_add(configuration: &configuration::Configuration, name: Option<&str>, description: Option<&str>, html: Option<&str>, src: Option<&str>, load_method: Option<&str>, scope: Option<&str>, events: Option<&str>, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::CartScriptAdd200Response, Error<CartScriptAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_name = name;
     let p_description = description;
@@ -1248,6 +1260,7 @@ pub async fn cart_script_add(configuration: &configuration::Configuration, name:
     let p_scope = scope;
     let p_events = events;
     let p_store_id = store_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/cart.script.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -1275,6 +1288,9 @@ pub async fn cart_script_add(configuration: &configuration::Configuration, name:
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

@@ -129,7 +129,7 @@ pub enum AttributeValueUpdateError {
 
 
 /// Add new attribute
-pub async fn attribute_add(configuration: &configuration::Configuration, r#type: &str, name: &str, code: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, visible: Option<bool>, required: Option<bool>, position: Option<i32>, attribute_group_id: Option<&str>, is_global: Option<&str>, is_searchable: Option<bool>, is_filterable: Option<&str>, is_comparable: Option<bool>, is_html_allowed_on_front: Option<bool>, is_filterable_in_search: Option<bool>, is_configurable: Option<bool>, is_visible_in_advanced_search: Option<bool>, is_used_for_promo_rules: Option<bool>, used_in_product_listing: Option<bool>, used_for_sort_by: Option<bool>, apply_to: Option<&str>) -> Result<models::AttributeAdd200Response, Error<AttributeAddError>> {
+pub async fn attribute_add(configuration: &configuration::Configuration, r#type: &str, name: &str, code: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, visible: Option<bool>, required: Option<bool>, position: Option<i32>, attribute_group_id: Option<&str>, is_global: Option<&str>, is_searchable: Option<bool>, is_filterable: Option<&str>, is_comparable: Option<bool>, is_html_allowed_on_front: Option<bool>, is_filterable_in_search: Option<bool>, is_configurable: Option<bool>, is_visible_in_advanced_search: Option<bool>, is_used_for_promo_rules: Option<bool>, used_in_product_listing: Option<bool>, used_for_sort_by: Option<bool>, apply_to: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AttributeAdd200Response, Error<AttributeAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_type = r#type;
     let p_name = name;
@@ -152,6 +152,7 @@ pub async fn attribute_add(configuration: &configuration::Configuration, r#type:
     let p_used_in_product_listing = used_in_product_listing;
     let p_used_for_sort_by = used_for_sort_by;
     let p_apply_to = apply_to;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/attribute.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -215,6 +216,9 @@ pub async fn attribute_add(configuration: &configuration::Configuration, r#type:
     if let Some(ref param_value) = p_apply_to {
         req_builder = req_builder.query(&[("apply_to", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -251,11 +255,12 @@ pub async fn attribute_add(configuration: &configuration::Configuration, r#type:
 }
 
 /// Assign attribute to the group
-pub async fn attribute_assign_group(configuration: &configuration::Configuration, id: &str, group_id: &str, attribute_set_id: Option<&str>) -> Result<models::AttributeAssignGroup200Response, Error<AttributeAssignGroupError>> {
+pub async fn attribute_assign_group(configuration: &configuration::Configuration, id: &str, group_id: &str, attribute_set_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AttributeAssignGroup200Response, Error<AttributeAssignGroupError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_group_id = group_id;
     let p_attribute_set_id = attribute_set_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/attribute.assign.group.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -264,6 +269,9 @@ pub async fn attribute_assign_group(configuration: &configuration::Configuration
     req_builder = req_builder.query(&[("group_id", &p_group_id.to_string())]);
     if let Some(ref param_value) = p_attribute_set_id {
         req_builder = req_builder.query(&[("attribute_set_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -301,11 +309,12 @@ pub async fn attribute_assign_group(configuration: &configuration::Configuration
 }
 
 /// Assign attribute to the attribute set
-pub async fn attribute_assign_set(configuration: &configuration::Configuration, id: &str, attribute_set_id: &str, group_id: Option<&str>) -> Result<models::AttributeAssignGroup200Response, Error<AttributeAssignSetError>> {
+pub async fn attribute_assign_set(configuration: &configuration::Configuration, id: &str, attribute_set_id: &str, group_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AttributeAssignGroup200Response, Error<AttributeAssignSetError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_attribute_set_id = attribute_set_id;
     let p_group_id = group_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/attribute.assign.set.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -315,6 +324,9 @@ pub async fn attribute_assign_set(configuration: &configuration::Configuration, 
         req_builder = req_builder.query(&[("group_id", &param_value.to_string())]);
     }
     req_builder = req_builder.query(&[("attribute_set_id", &p_attribute_set_id.to_string())]);
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -804,16 +816,20 @@ pub async fn attribute_type_list(configuration: &configuration::Configuration, )
 }
 
 /// Unassign attribute from group
-pub async fn attribute_unassign_group(configuration: &configuration::Configuration, id: &str, group_id: &str) -> Result<models::AttributeUnassignGroup200Response, Error<AttributeUnassignGroupError>> {
+pub async fn attribute_unassign_group(configuration: &configuration::Configuration, id: &str, group_id: &str, idempotency_key: Option<&str>) -> Result<models::AttributeUnassignGroup200Response, Error<AttributeUnassignGroupError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_group_id = group_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/attribute.unassign.group.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     req_builder = req_builder.query(&[("id", &p_id.to_string())]);
     req_builder = req_builder.query(&[("group_id", &p_group_id.to_string())]);
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -850,16 +866,20 @@ pub async fn attribute_unassign_group(configuration: &configuration::Configurati
 }
 
 /// Unassign attribute from attribute set
-pub async fn attribute_unassign_set(configuration: &configuration::Configuration, id: &str, attribute_set_id: &str) -> Result<models::AttributeUnassignGroup200Response, Error<AttributeUnassignSetError>> {
+pub async fn attribute_unassign_set(configuration: &configuration::Configuration, id: &str, attribute_set_id: &str, idempotency_key: Option<&str>) -> Result<models::AttributeUnassignGroup200Response, Error<AttributeUnassignSetError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_attribute_set_id = attribute_set_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/attribute.unassign.set.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     req_builder = req_builder.query(&[("id", &p_id.to_string())]);
     req_builder = req_builder.query(&[("attribute_set_id", &p_attribute_set_id.to_string())]);
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -896,12 +916,13 @@ pub async fn attribute_unassign_set(configuration: &configuration::Configuration
 }
 
 /// Update attribute data
-pub async fn attribute_update(configuration: &configuration::Configuration, id: &str, name: &str, store_id: Option<&str>, lang_id: Option<&str>) -> Result<models::AttributeUpdate200Response, Error<AttributeUpdateError>> {
+pub async fn attribute_update(configuration: &configuration::Configuration, id: &str, name: &str, store_id: Option<&str>, lang_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AttributeUpdate200Response, Error<AttributeUpdateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_name = name;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/attribute.update.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
@@ -913,6 +934,9 @@ pub async fn attribute_update(configuration: &configuration::Configuration, id: 
     }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -950,7 +974,7 @@ pub async fn attribute_update(configuration: &configuration::Configuration, id: 
 }
 
 /// Add new value to attribute.
-pub async fn attribute_value_add(configuration: &configuration::Configuration, attribute_id: &str, name: &str, code: Option<&str>, description: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>) -> Result<models::AttributeAdd200Response, Error<AttributeValueAddError>> {
+pub async fn attribute_value_add(configuration: &configuration::Configuration, attribute_id: &str, name: &str, code: Option<&str>, description: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AttributeAdd200Response, Error<AttributeValueAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_attribute_id = attribute_id;
     let p_name = name;
@@ -958,6 +982,7 @@ pub async fn attribute_value_add(configuration: &configuration::Configuration, a
     let p_description = description;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/attribute.value.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -975,6 +1000,9 @@ pub async fn attribute_value_add(configuration: &configuration::Configuration, a
     }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1062,7 +1090,7 @@ pub async fn attribute_value_delete(configuration: &configuration::Configuration
 }
 
 /// Update attribute value.
-pub async fn attribute_value_update(configuration: &configuration::Configuration, id: &str, attribute_id: &str, name: Option<&str>, description: Option<&str>, code: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>) -> Result<models::AttributeUpdate200Response, Error<AttributeValueUpdateError>> {
+pub async fn attribute_value_update(configuration: &configuration::Configuration, id: &str, attribute_id: &str, name: Option<&str>, description: Option<&str>, code: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AttributeUpdate200Response, Error<AttributeValueUpdateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_attribute_id = attribute_id;
@@ -1071,6 +1099,7 @@ pub async fn attribute_value_update(configuration: &configuration::Configuration
     let p_code = code;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/attribute.value.update.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
@@ -1091,6 +1120,9 @@ pub async fn attribute_value_update(configuration: &configuration::Configuration
     }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

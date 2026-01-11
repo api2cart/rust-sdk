@@ -82,6 +82,9 @@ pub struct CustomerAdd {
     /// Store Id
     #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
     pub store_id: Option<String>,
+    /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
+    #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
+    pub idempotency_key: Option<String>,
     #[serde(rename = "address", skip_serializing_if = "Option::is_none")]
     pub address: Option<Vec<models::CustomerAddAddressInner>>,
 }
@@ -112,6 +115,7 @@ impl CustomerAdd {
             note: None,
             country: None,
             store_id: None,
+            idempotency_key: None,
             address: None,
         }
     }

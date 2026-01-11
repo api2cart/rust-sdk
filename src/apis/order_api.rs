@@ -1601,7 +1601,7 @@ pub async fn order_transaction_list(configuration: &configuration::Configuration
 }
 
 /// Update existing order.
-pub async fn order_update(configuration: &configuration::Configuration, order_id: &str, store_id: Option<&str>, order_status: Option<&str>, financial_status: Option<&str>, fulfillment_status: Option<&str>, cancellation_reason: Option<&str>, order_payment_method: Option<&str>, comment: Option<&str>, admin_comment: Option<&str>, admin_private_comment: Option<&str>, invoice_admin_comment: Option<&str>, date_modified: Option<&str>, date_finished: Option<&str>, send_notifications: Option<bool>, create_invoice: Option<bool>, origin: Option<&str>, tags: Option<&str>) -> Result<models::AccountConfigUpdate200Response, Error<OrderUpdateError>> {
+pub async fn order_update(configuration: &configuration::Configuration, order_id: &str, store_id: Option<&str>, order_status: Option<&str>, financial_status: Option<&str>, fulfillment_status: Option<&str>, cancellation_reason: Option<&str>, order_payment_method: Option<&str>, comment: Option<&str>, admin_comment: Option<&str>, admin_private_comment: Option<&str>, invoice_admin_comment: Option<&str>, date_modified: Option<&str>, date_finished: Option<&str>, send_notifications: Option<bool>, create_invoice: Option<bool>, origin: Option<&str>, tags: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AccountConfigUpdate200Response, Error<OrderUpdateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_order_id = order_id;
     let p_store_id = store_id;
@@ -1620,6 +1620,7 @@ pub async fn order_update(configuration: &configuration::Configuration, order_id
     let p_create_invoice = create_invoice;
     let p_origin = origin;
     let p_tags = tags;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/order.update.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
@@ -1672,6 +1673,9 @@ pub async fn order_update(configuration: &configuration::Configuration, order_id
     }
     if let Some(ref param_value) = p_tags {
         req_builder = req_builder.query(&[("tags", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

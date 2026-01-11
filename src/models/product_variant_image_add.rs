@@ -46,6 +46,9 @@ pub struct ProductVariantImageAdd {
     /// Defines option id of the product variant for which the image will be added
     #[serde(rename = "option_id", skip_serializing_if = "Option::is_none")]
     pub option_id: Option<String>,
+    /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
+    #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
+    pub idempotency_key: Option<String>,
 }
 
 impl ProductVariantImageAdd {
@@ -62,6 +65,7 @@ impl ProductVariantImageAdd {
             mime: None,
             position: None,
             option_id: None,
+            idempotency_key: None,
         }
     }
 }

@@ -47,7 +47,7 @@ Name | Type | Description  | Required | Notes
 
 ## webhook_create
 
-> models::BasketLiveShippingServiceCreate200Response webhook_create(entity, action, callback, label, fields, response_fields, active, lang_id, store_id)
+> models::BasketLiveShippingServiceCreate200Response webhook_create(entity, action, callback, label, fields, response_fields, active, lang_id, store_id, idempotency_key)
 webhook.create
 
 Create webhook on the store and subscribe to it.
@@ -66,6 +66,7 @@ Name | Type | Description  | Required | Notes
 **active** | Option<**bool**> | Webhook status |  |[default to true]
 **lang_id** | Option<**String**> | Language id |  |
 **store_id** | Option<**String**> | Defines store id where the webhook should be assigned |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -178,7 +179,7 @@ Name | Type | Description  | Required | Notes
 
 ## webhook_update
 
-> models::ProductImageUpdate200Response webhook_update(id, callback, label, fields, response_fields, active, lang_id)
+> models::ProductImageUpdate200Response webhook_update(id, callback, label, fields, response_fields, active, lang_id, idempotency_key)
 webhook.update
 
 Update Webhooks parameters.
@@ -195,6 +196,7 @@ Name | Type | Description  | Required | Notes
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **active** | Option<**bool**> | Webhook status |  |
 **lang_id** | Option<**String**> | Language id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 

@@ -541,7 +541,7 @@ pub async fn product_attribute_list(configuration: &configuration::Configuration
 }
 
 /// Set attribute value to product.
-pub async fn product_attribute_value_set(configuration: &configuration::Configuration, product_id: &str, attribute_id: Option<&str>, attribute_group_id: Option<&str>, attribute_name: Option<&str>, value: Option<&str>, value_id: Option<i32>, lang_id: Option<&str>, store_id: Option<&str>) -> Result<models::ProductAttributeValueSet200Response, Error<ProductAttributeValueSetError>> {
+pub async fn product_attribute_value_set(configuration: &configuration::Configuration, product_id: &str, attribute_id: Option<&str>, attribute_group_id: Option<&str>, attribute_name: Option<&str>, value: Option<&str>, value_id: Option<i32>, lang_id: Option<&str>, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::ProductAttributeValueSet200Response, Error<ProductAttributeValueSetError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_attribute_id = attribute_id;
@@ -551,6 +551,7 @@ pub async fn product_attribute_value_set(configuration: &configuration::Configur
     let p_value_id = value_id;
     let p_lang_id = lang_id;
     let p_store_id = store_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/product.attribute.value.set.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -576,6 +577,9 @@ pub async fn product_attribute_value_set(configuration: &configuration::Configur
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -613,7 +617,7 @@ pub async fn product_attribute_value_set(configuration: &configuration::Configur
 }
 
 /// Removes attribute value for a product.
-pub async fn product_attribute_value_unset(configuration: &configuration::Configuration, product_id: &str, attribute_id: &str, store_id: Option<&str>, include_default: Option<bool>, reindex: Option<bool>, clear_cache: Option<bool>) -> Result<models::ProductAttributeValueUnset200Response, Error<ProductAttributeValueUnsetError>> {
+pub async fn product_attribute_value_unset(configuration: &configuration::Configuration, product_id: &str, attribute_id: &str, store_id: Option<&str>, include_default: Option<bool>, reindex: Option<bool>, clear_cache: Option<bool>, idempotency_key: Option<&str>) -> Result<models::ProductAttributeValueUnset200Response, Error<ProductAttributeValueUnsetError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_attribute_id = attribute_id;
@@ -621,6 +625,7 @@ pub async fn product_attribute_value_unset(configuration: &configuration::Config
     let p_include_default = include_default;
     let p_reindex = reindex;
     let p_clear_cache = clear_cache;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/product.attribute.value.unset.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -638,6 +643,9 @@ pub async fn product_attribute_value_unset(configuration: &configuration::Config
     }
     if let Some(ref param_value) = p_clear_cache {
         req_builder = req_builder.query(&[("clear_cache", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1196,7 +1204,7 @@ pub async fn product_count(configuration: &configuration::Configuration, sku: Op
 }
 
 /// Add currency and/or set default in store
-pub async fn product_currency_add(configuration: &configuration::Configuration, iso3: &str, rate: f64, name: Option<&str>, avail: Option<bool>, symbol_left: Option<&str>, symbol_right: Option<&str>, default: Option<bool>) -> Result<models::ProductCurrencyAdd200Response, Error<ProductCurrencyAddError>> {
+pub async fn product_currency_add(configuration: &configuration::Configuration, iso3: &str, rate: f64, name: Option<&str>, avail: Option<bool>, symbol_left: Option<&str>, symbol_right: Option<&str>, default: Option<bool>, idempotency_key: Option<&str>) -> Result<models::ProductCurrencyAdd200Response, Error<ProductCurrencyAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_iso3 = iso3;
     let p_rate = rate;
@@ -1205,6 +1213,7 @@ pub async fn product_currency_add(configuration: &configuration::Configuration, 
     let p_symbol_left = symbol_left;
     let p_symbol_right = symbol_right;
     let p_default = default;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/product.currency.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -1225,6 +1234,9 @@ pub async fn product_currency_add(configuration: &configuration::Configuration, 
     }
     if let Some(ref param_value) = p_default {
         req_builder = req_builder.query(&[("default", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1586,7 +1598,7 @@ pub async fn product_image_delete(configuration: &configuration::Configuration, 
 }
 
 /// Update details of image
-pub async fn product_image_update(configuration: &configuration::Configuration, product_id: &str, id: &str, variant_ids: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, image_name: Option<&str>, r#type: Option<&str>, label: Option<&str>, position: Option<i32>, hidden: Option<bool>) -> Result<models::ProductImageUpdate200Response, Error<ProductImageUpdateError>> {
+pub async fn product_image_update(configuration: &configuration::Configuration, product_id: &str, id: &str, variant_ids: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, image_name: Option<&str>, r#type: Option<&str>, label: Option<&str>, position: Option<i32>, hidden: Option<bool>, idempotency_key: Option<&str>) -> Result<models::ProductImageUpdate200Response, Error<ProductImageUpdateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_id = id;
@@ -1598,6 +1610,7 @@ pub async fn product_image_update(configuration: &configuration::Configuration, 
     let p_label = label;
     let p_position = position;
     let p_hidden = hidden;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/product.image.update.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
@@ -1627,6 +1640,9 @@ pub async fn product_image_update(configuration: &configuration::Configuration, 
     }
     if let Some(ref param_value) = p_hidden {
         req_builder = req_builder.query(&[("hidden", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -1933,7 +1949,7 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
 }
 
 /// Add manufacturer to store and assign to product
-pub async fn product_manufacturer_add(configuration: &configuration::Configuration, product_id: &str, manufacturer: &str, store_id: Option<&str>, meta_title: Option<&str>, meta_keywords: Option<&str>, meta_description: Option<&str>, search_keywords: Option<&str>, image_url: Option<&str>, seo_url: Option<&str>) -> Result<models::ProductManufacturerAdd200Response, Error<ProductManufacturerAddError>> {
+pub async fn product_manufacturer_add(configuration: &configuration::Configuration, product_id: &str, manufacturer: &str, store_id: Option<&str>, meta_title: Option<&str>, meta_keywords: Option<&str>, meta_description: Option<&str>, search_keywords: Option<&str>, image_url: Option<&str>, seo_url: Option<&str>, idempotency_key: Option<&str>) -> Result<models::ProductManufacturerAdd200Response, Error<ProductManufacturerAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_manufacturer = manufacturer;
@@ -1944,6 +1960,7 @@ pub async fn product_manufacturer_add(configuration: &configuration::Configurati
     let p_search_keywords = search_keywords;
     let p_image_url = image_url;
     let p_seo_url = seo_url;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/product.manufacturer.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -1970,6 +1987,9 @@ pub async fn product_manufacturer_add(configuration: &configuration::Configurati
     }
     if let Some(ref param_value) = p_seo_url {
         req_builder = req_builder.query(&[("seo_url", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -2051,7 +2071,7 @@ pub async fn product_option_add(configuration: &configuration::Configuration, pr
 }
 
 /// Assign option from product.
-pub async fn product_option_assign(configuration: &configuration::Configuration, product_id: &str, option_id: &str, required: Option<bool>, sort_order: Option<i32>, option_values: Option<&str>, clear_cache: Option<bool>) -> Result<models::ProductOptionAssign200Response, Error<ProductOptionAssignError>> {
+pub async fn product_option_assign(configuration: &configuration::Configuration, product_id: &str, option_id: &str, required: Option<bool>, sort_order: Option<i32>, option_values: Option<&str>, clear_cache: Option<bool>, idempotency_key: Option<&str>) -> Result<models::ProductOptionAssign200Response, Error<ProductOptionAssignError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_option_id = option_id;
@@ -2059,6 +2079,7 @@ pub async fn product_option_assign(configuration: &configuration::Configuration,
     let p_sort_order = sort_order;
     let p_option_values = option_values;
     let p_clear_cache = clear_cache;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/product.option.assign.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -2076,6 +2097,9 @@ pub async fn product_option_assign(configuration: &configuration::Configuration,
     }
     if let Some(ref param_value) = p_clear_cache {
         req_builder = req_builder.query(&[("clear_cache", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -2237,7 +2261,7 @@ pub async fn product_option_list(configuration: &configuration::Configuration, s
 }
 
 /// Add product option item from option.
-pub async fn product_option_value_add(configuration: &configuration::Configuration, product_id: &str, option_id: &str, option_value: Option<&str>, sort_order: Option<i32>, display_value: Option<&str>, is_default: Option<bool>, clear_cache: Option<bool>) -> Result<models::ProductOptionValueAdd200Response, Error<ProductOptionValueAddError>> {
+pub async fn product_option_value_add(configuration: &configuration::Configuration, product_id: &str, option_id: &str, option_value: Option<&str>, sort_order: Option<i32>, display_value: Option<&str>, is_default: Option<bool>, clear_cache: Option<bool>, idempotency_key: Option<&str>) -> Result<models::ProductOptionValueAdd200Response, Error<ProductOptionValueAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_option_id = option_id;
@@ -2246,6 +2270,7 @@ pub async fn product_option_value_add(configuration: &configuration::Configurati
     let p_display_value = display_value;
     let p_is_default = is_default;
     let p_clear_cache = clear_cache;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/product.option.value.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -2266,6 +2291,9 @@ pub async fn product_option_value_add(configuration: &configuration::Configurati
     }
     if let Some(ref param_value) = p_clear_cache {
         req_builder = req_builder.query(&[("clear_cache", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -2303,11 +2331,12 @@ pub async fn product_option_value_add(configuration: &configuration::Configurati
 }
 
 /// Assign product option item from product.
-pub async fn product_option_value_assign(configuration: &configuration::Configuration, product_option_id: i32, option_value_id: &str, clear_cache: Option<bool>) -> Result<models::ProductOptionValueAssign200Response, Error<ProductOptionValueAssignError>> {
+pub async fn product_option_value_assign(configuration: &configuration::Configuration, product_option_id: i32, option_value_id: &str, clear_cache: Option<bool>, idempotency_key: Option<&str>) -> Result<models::ProductOptionValueAssign200Response, Error<ProductOptionValueAssignError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_option_id = product_option_id;
     let p_option_value_id = option_value_id;
     let p_clear_cache = clear_cache;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/product.option.value.assign.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -2316,6 +2345,9 @@ pub async fn product_option_value_assign(configuration: &configuration::Configur
     req_builder = req_builder.query(&[("option_value_id", &p_option_value_id.to_string())]);
     if let Some(ref param_value) = p_clear_cache {
         req_builder = req_builder.query(&[("clear_cache", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -2405,7 +2437,7 @@ pub async fn product_option_value_delete(configuration: &configuration::Configur
 }
 
 /// Update product option item from option.
-pub async fn product_option_value_update(configuration: &configuration::Configuration, product_id: &str, option_id: &str, option_value_id: &str, option_value: Option<&str>, price: Option<f64>, quantity: Option<f64>, display_value: Option<&str>, clear_cache: Option<bool>) -> Result<models::AccountConfigUpdate200Response, Error<ProductOptionValueUpdateError>> {
+pub async fn product_option_value_update(configuration: &configuration::Configuration, product_id: &str, option_id: &str, option_value_id: &str, option_value: Option<&str>, price: Option<f64>, quantity: Option<f64>, display_value: Option<&str>, clear_cache: Option<bool>, idempotency_key: Option<&str>) -> Result<models::AccountConfigUpdate200Response, Error<ProductOptionValueUpdateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_option_id = option_id;
@@ -2415,6 +2447,7 @@ pub async fn product_option_value_update(configuration: &configuration::Configur
     let p_quantity = quantity;
     let p_display_value = display_value;
     let p_clear_cache = clear_cache;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/product.option.value.update.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
@@ -2436,6 +2469,9 @@ pub async fn product_option_value_update(configuration: &configuration::Configur
     }
     if let Some(ref param_value) = p_clear_cache {
         req_builder = req_builder.query(&[("clear_cache", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -2717,16 +2753,20 @@ pub async fn product_review_list(configuration: &configuration::Configuration, p
 }
 
 /// Assign product to store
-pub async fn product_store_assign(configuration: &configuration::Configuration, product_id: &str, store_id: &str) -> Result<models::AccountConfigUpdate200Response, Error<ProductStoreAssignError>> {
+pub async fn product_store_assign(configuration: &configuration::Configuration, product_id: &str, store_id: &str, idempotency_key: Option<&str>) -> Result<models::AccountConfigUpdate200Response, Error<ProductStoreAssignError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_store_id = store_id;
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/product.store.assign.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     req_builder = req_builder.query(&[("product_id", &p_product_id.to_string())]);
     req_builder = req_builder.query(&[("store_id", &p_store_id.to_string())]);
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }

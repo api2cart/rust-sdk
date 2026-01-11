@@ -43,6 +43,9 @@ pub struct OrderRefundAdd {
     /// Indicates whether refund type is online
     #[serde(rename = "is_online", skip_serializing_if = "Option::is_none")]
     pub is_online: Option<bool>,
+    /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
+    #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
+    pub idempotency_key: Option<String>,
 }
 
 impl OrderRefundAdd {
@@ -58,6 +61,7 @@ impl OrderRefundAdd {
             send_notifications: None,
             date: None,
             is_online: None,
+            idempotency_key: None,
         }
     }
 }

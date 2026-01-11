@@ -160,7 +160,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_delete
 
-> models::CustomerDelete200Response customer_delete(id)
+> models::CustomerDelete200Response customer_delete(id, store_id)
 customer.delete
 
 Delete customer from store.
@@ -171,6 +171,7 @@ Delete customer from store.
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Identifies customer specified by the id | [required] |
+**store_id** | Option<**String**> | Store Id |  |
 
 ### Return type
 
@@ -224,7 +225,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_group_add
 
-> models::CustomerGroupAdd200Response customer_group_add(name, store_id, stores_ids)
+> models::CustomerGroupAdd200Response customer_group_add(name, store_id, stores_ids, idempotency_key)
 customer.group.add
 
 Create customer group.
@@ -237,6 +238,7 @@ Name | Type | Description  | Required | Notes
 **name** | **String** | Customer group name | [required] |
 **store_id** | Option<**String**> | Store Id |  |
 **stores_ids** | Option<**String**> | Assign customer group to the stores that is specified by comma-separated stores' id |  |
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
