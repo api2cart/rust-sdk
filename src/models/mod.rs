@@ -144,6 +144,8 @@ pub mod cart_methods_200_response;
 pub use self::cart_methods_200_response::CartMethods200Response;
 pub mod cart_methods_200_response_result;
 pub use self::cart_methods_200_response_result::CartMethods200ResponseResult;
+pub mod cart_pickup_location;
+pub use self::cart_pickup_location::CartPickupLocation;
 pub mod cart_plugin_list_200_response;
 pub use self::cart_plugin_list_200_response::CartPluginList200Response;
 pub mod cart_plugin_list_200_response_result;

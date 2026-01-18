@@ -676,7 +676,7 @@ pub async fn category_image_delete(configuration: &configuration::Configuration,
 }
 
 /// Get category info about category ID*** or specify other category ID.
-pub async fn category_info(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>, lang_id: Option<&str>, schema_type: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::CategoryInfo200Response, Error<CategoryInfoError>> {
+pub async fn category_info(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>, lang_id: Option<&str>, schema_type: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::CategoryInfo200Response, Error<CategoryInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_store_id = store_id;
@@ -687,6 +687,7 @@ pub async fn category_info(configuration: &configuration::Configuration, id: &st
     let p_exclude = exclude;
     let p_report_request_id = report_request_id;
     let p_disable_report_cache = disable_report_cache;
+    let p_use_latest_api_version = use_latest_api_version;
 
     let uri_str = format!("{}/category.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -715,6 +716,9 @@ pub async fn category_info(configuration: &configuration::Configuration, id: &st
     }
     if let Some(ref param_value) = p_disable_report_cache {
         req_builder = req_builder.query(&[("disable_report_cache", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_use_latest_api_version {
+        req_builder = req_builder.query(&[("use_latest_api_version", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -752,7 +756,7 @@ pub async fn category_info(configuration: &configuration::Configuration, id: &st
 }
 
 /// Get list of categories from store.
-pub async fn category_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, parent_id: Option<&str>, avail: Option<bool>, product_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>, disable_cache: Option<bool>) -> Result<models::ModelResponseCategoryList, Error<CategoryListError>> {
+pub async fn category_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, parent_id: Option<&str>, avail: Option<bool>, product_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>, disable_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ModelResponseCategoryList, Error<CategoryListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -774,6 +778,7 @@ pub async fn category_list(configuration: &configuration::Configuration, start: 
     let p_report_request_id = report_request_id;
     let p_disable_report_cache = disable_report_cache;
     let p_disable_cache = disable_cache;
+    let p_use_latest_api_version = use_latest_api_version;
 
     let uri_str = format!("{}/category.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -837,6 +842,9 @@ pub async fn category_list(configuration: &configuration::Configuration, start: 
     }
     if let Some(ref param_value) = p_disable_cache {
         req_builder = req_builder.query(&[("disable_cache", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_use_latest_api_version {
+        req_builder = req_builder.query(&[("use_latest_api_version", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

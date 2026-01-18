@@ -337,7 +337,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_info
 
-> models::CategoryInfo200Response category_info(id, store_id, lang_id, schema_type, response_fields, params, exclude, report_request_id, disable_report_cache)
+> models::CategoryInfo200Response category_info(id, store_id, lang_id, schema_type, response_fields, params, exclude, report_request_id, disable_report_cache, use_latest_api_version)
 category.info
 
 Get category info about category ID*** or specify other category ID.
@@ -356,6 +356,7 @@ Name | Type | Description  | Required | Notes
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **report_request_id** | Option<**String**> | Report request id |  |
 **disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
+**use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
 
 ### Return type
 
@@ -375,7 +376,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_list
 
-> models::ModelResponseCategoryList category_list(start, count, page_cursor, store_id, lang_id, parent_id, avail, product_type, created_from, created_to, modified_from, modified_to, find_value, find_where, response_fields, params, exclude, report_request_id, disable_report_cache, disable_cache)
+> models::ModelResponseCategoryList category_list(start, count, page_cursor, store_id, lang_id, parent_id, avail, product_type, created_from, created_to, modified_from, modified_to, find_value, find_where, response_fields, params, exclude, report_request_id, disable_report_cache, disable_cache, use_latest_api_version)
 category.list
 
 Get list of categories from store.
@@ -405,6 +406,7 @@ Name | Type | Description  | Required | Notes
 **report_request_id** | Option<**String**> | Report request id |  |
 **disable_report_cache** | Option<**bool**> | Disable report cache for current request |  |[default to false]
 **disable_cache** | Option<**bool**> | Disable cache for current request |  |[default to false]
+**use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
 
 ### Return type
 

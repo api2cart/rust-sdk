@@ -49,6 +49,8 @@ pub struct CartStoreInfo {
     pub default_warehouse_id: Option<Option<String>>,
     #[serde(rename = "channels", skip_serializing_if = "Option::is_none")]
     pub channels: Option<Vec<models::CartChannel>>,
+    #[serde(rename = "pickup_locations", skip_serializing_if = "Option::is_none")]
+    pub pickup_locations: Option<Vec<models::CartPickupLocation>>,
     #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub additional_fields: Option<Option<serde_json::Value>>,
     #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -76,6 +78,7 @@ impl CartStoreInfo {
             store_owner_info: None,
             default_warehouse_id: None,
             channels: None,
+            pickup_locations: None,
             additional_fields: None,
             custom_fields: None,
         }

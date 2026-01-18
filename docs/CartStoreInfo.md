@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **store_owner_info** | Option<[**models::Info**](Info.md)> |  | [optional]
 **default_warehouse_id** | Option<**String**> |  | [optional]
 **channels** | Option<[**Vec<models::CartChannel>**](Cart_Channel.md)> |  | [optional]
+**pickup_locations** | Option<[**Vec<models::CartPickupLocation>**](Cart_PickupLocation.md)> |  | [optional]
 **additional_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]
 **custom_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]
 
