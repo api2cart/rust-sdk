@@ -28,6 +28,12 @@ pub struct AccountCartAdd {
     /// Set this parameter if bridge is already uploaded to store
     #[serde(rename = "store_key", skip_serializing_if = "Option::is_none")]
     pub store_key: Option<String>,
+    /// Defines alternative text that has to be attached to the picture
+    #[serde(rename = "label", skip_serializing_if = "Option::is_none")]
+    pub label: Option<String>,
+    /// Defines a custom label for the store in the app
+    #[serde(rename = "custom_label", skip_serializing_if = "Option::is_none")]
+    pub custom_label: Option<String>,
     /// Specify if api2cart should validate cart version
     #[serde(rename = "validate_version", skip_serializing_if = "Option::is_none")]
     pub validate_version: Option<bool>,
@@ -439,6 +445,21 @@ pub struct AccountCartAdd {
     /// Zid refresh token
     #[serde(rename = "zid_refresh_token", skip_serializing_if = "Option::is_none")]
     pub zid_refresh_token: Option<String>,
+    /// Jumpseller OAuth2 Client ID
+    #[serde(rename = "jumpseller_client_id", skip_serializing_if = "Option::is_none")]
+    pub jumpseller_client_id: Option<String>,
+    /// Jumpseller OAuth2 Client Secret
+    #[serde(rename = "jumpseller_client_secret", skip_serializing_if = "Option::is_none")]
+    pub jumpseller_client_secret: Option<String>,
+    /// Jumpseller OAuth2 refresh token
+    #[serde(rename = "jumpseller_refresh_token", skip_serializing_if = "Option::is_none")]
+    pub jumpseller_refresh_token: Option<String>,
+    /// Jumpseller API login
+    #[serde(rename = "jumpseller_login", skip_serializing_if = "Option::is_none")]
+    pub jumpseller_login: Option<String>,
+    /// Jumpseller API auth token
+    #[serde(rename = "jumpseller_authtoken", skip_serializing_if = "Option::is_none")]
+    pub jumpseller_authtoken: Option<String>,
     /// Flipkart Client ID
     #[serde(rename = "flipkart_client_id", skip_serializing_if = "Option::is_none")]
     pub flipkart_client_id: Option<String>,
@@ -551,6 +572,8 @@ impl AccountCartAdd {
             bridge_url: None,
             store_root: None,
             store_key: None,
+            label: None,
+            custom_label: None,
             validate_version: None,
             verify: None,
             db_tables_prefix: None,
@@ -688,6 +711,11 @@ impl AccountCartAdd {
             zid_access_token: None,
             zid_authorization: None,
             zid_refresh_token: None,
+            jumpseller_client_id: None,
+            jumpseller_client_secret: None,
+            jumpseller_refresh_token: None,
+            jumpseller_login: None,
+            jumpseller_authtoken: None,
             flipkart_client_id: None,
             flipkart_client_secret: None,
             allegro_client_id: None,

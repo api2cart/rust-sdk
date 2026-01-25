@@ -21,6 +21,10 @@ pub struct AccountCartList200ResponseResultCartsInner {
     pub store_key: Option<String>,
     #[serde(rename = "cart_id", skip_serializing_if = "Option::is_none")]
     pub cart_id: Option<String>,
+    #[serde(rename = "custom_label", skip_serializing_if = "Option::is_none")]
+    pub custom_label: Option<String>,
+    #[serde(rename = "bridge_version", skip_serializing_if = "Option::is_none")]
+    pub bridge_version: Option<String>,
     #[serde(rename = "total_calls", skip_serializing_if = "Option::is_none")]
     pub total_calls: Option<String>,
 }
@@ -32,6 +36,8 @@ impl AccountCartList200ResponseResultCartsInner {
             url: None,
             store_key: None,
             cart_id: None,
+            custom_label: None,
+            bridge_version: None,
             total_calls: None,
         }
     }
