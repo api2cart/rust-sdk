@@ -14,7 +14,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CartCouponCount200ResponseResult {
     #[serde(rename = "coupons_count", skip_serializing_if = "Option::is_none")]
-    pub coupons_count: Option<String>,
+    pub coupons_count: Option<i32>,
 }
 
 impl CartCouponCount200ResponseResult {

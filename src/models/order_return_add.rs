@@ -28,6 +28,9 @@ pub struct OrderReturnAdd {
     /// Defines return request reason
     #[serde(rename = "return_reason_id")]
     pub return_reason_id: String,
+    /// Defines return request action
+    #[serde(rename = "return_action", skip_serializing_if = "Option::is_none")]
+    pub return_action: Option<String>,
     /// Defines return request reason
     #[serde(rename = "return_reason", skip_serializing_if = "Option::is_none")]
     pub return_reason: Option<String>,
@@ -61,6 +64,7 @@ impl OrderReturnAdd {
             return_status_id,
             return_action_id,
             return_reason_id,
+            return_action: None,
             return_reason: None,
             item_restock: None,
             staff_note: None,

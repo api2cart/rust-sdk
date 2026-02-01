@@ -40,6 +40,12 @@ pub struct OrderReturnUpdate {
     /// Defines return reject reason
     #[serde(rename = "reject_reason", skip_serializing_if = "Option::is_none")]
     pub reject_reason: Option<String>,
+    /// Defines return request action
+    #[serde(rename = "return_action", skip_serializing_if = "Option::is_none")]
+    pub return_action: Option<String>,
+    /// Defines return request reason
+    #[serde(rename = "return_reason", skip_serializing_if = "Option::is_none")]
+    pub return_reason: Option<String>,
     /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
     #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
     pub idempotency_key: Option<String>,
@@ -59,6 +65,8 @@ impl OrderReturnUpdate {
             comment: None,
             send_notifications: None,
             reject_reason: None,
+            return_action: None,
+            return_reason: None,
             idempotency_key: None,
             order_products,
         }
