@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **name** | Option<**String**> | Defines product's name that has to be updated | [optional]
 **description** | Option<**String**> | Defines new product's description | [optional]
 **short_description** | Option<**String**> | Defines short description | [optional]
+**prices_inc_tax** | Option<**bool**> | Indicates whether prices include tax. | [optional][default to false]
 **price** | Option<**f64**> | Defines new product's price | [optional]
 **old_price** | Option<**f64**> | Defines product's old price | [optional]
 **special_price** | Option<**f64**> | Defines new product's special price | [optional]

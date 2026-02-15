@@ -97,6 +97,9 @@ pub struct ProductVariantUpdate {
     /// Defines the decrement changes in product quantity
     #[serde(rename = "reduce_quantity", skip_serializing_if = "Option::is_none")]
     pub reduce_quantity: Option<f64>,
+    /// Indicates whether prices include tax.
+    #[serde(rename = "prices_inc_tax", skip_serializing_if = "Option::is_none")]
+    pub prices_inc_tax: Option<bool>,
     /// Defines new product's variant price
     #[serde(rename = "price", skip_serializing_if = "Option::is_none")]
     pub price: Option<f64>,
@@ -223,6 +226,7 @@ impl ProductVariantUpdate {
             quantity: None,
             increase_quantity: None,
             reduce_quantity: None,
+            prices_inc_tax: None,
             price: None,
             special_price: None,
             retail_price: None,

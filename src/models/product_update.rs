@@ -31,6 +31,9 @@ pub struct ProductUpdate {
     /// Defines short description
     #[serde(rename = "short_description", skip_serializing_if = "Option::is_none")]
     pub short_description: Option<String>,
+    /// Indicates whether prices include tax.
+    #[serde(rename = "prices_inc_tax", skip_serializing_if = "Option::is_none")]
+    pub prices_inc_tax: Option<bool>,
     /// Defines new product's price
     #[serde(rename = "price", skip_serializing_if = "Option::is_none")]
     pub price: Option<f64>,
@@ -303,6 +306,7 @@ impl ProductUpdate {
             name: None,
             description: None,
             short_description: None,
+            prices_inc_tax: None,
             price: None,
             old_price: None,
             special_price: None,

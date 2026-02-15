@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **quantity** | Option<**f64**> | Defines new products' variants quantity | [optional]
 **increase_quantity** | Option<**f64**> | Defines the incremental changes in product quantity | [optional][default to 0]
 **reduce_quantity** | Option<**f64**> | Defines the decrement changes in product quantity | [optional][default to 0]
+**prices_inc_tax** | Option<**bool**> | Indicates whether prices include tax. | [optional][default to false]
 **price** | Option<**f64**> | Defines new product's variant price | [optional]
 **special_price** | Option<**f64**> | Defines new product's variant special price | [optional]
 **retail_price** | Option<**f64**> | Defines new product's retail price | [optional]

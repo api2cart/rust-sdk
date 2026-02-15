@@ -52,7 +52,7 @@ Name | Type | Description | Notes
 **total_price** | Option<**f64**> | Defines order's total price | [optional]
 **total_paid** | Option<**f64**> | Defines total paid amount for the order | [optional]
 **total_weight** | Option<**i32**> | Defines the sum of all line item weights in grams for the order | [optional]
-**prices_inc_tax** | Option<**bool**> | Indicates whether prices and subtotal includes tax. | [optional][default to false]
+**prices_inc_tax** | Option<**bool**> | Indicates whether prices and subtotal include tax. | [optional][default to false]
 **shipping_price** | Option<**f64**> | Specifies order's shipping price | [optional][default to 0]
 **shipping_tax** | Option<**f64**> | Specifies order's shipping price tax | [optional]
 **discount** | Option<**f64**> | Specifies order's discount | [optional]

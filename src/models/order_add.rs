@@ -157,7 +157,7 @@ pub struct OrderAdd {
     /// Defines the sum of all line item weights in grams for the order
     #[serde(rename = "total_weight", skip_serializing_if = "Option::is_none")]
     pub total_weight: Option<i32>,
-    /// Indicates whether prices and subtotal includes tax.
+    /// Indicates whether prices and subtotal include tax.
     #[serde(rename = "prices_inc_tax", skip_serializing_if = "Option::is_none")]
     pub prices_inc_tax: Option<bool>,
     /// Specifies order's shipping price

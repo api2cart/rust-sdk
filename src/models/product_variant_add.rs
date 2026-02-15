@@ -85,6 +85,9 @@ pub struct ProductVariantAdd {
     /// Defines new product's unit price
     #[serde(rename = "unit_price", skip_serializing_if = "Option::is_none")]
     pub unit_price: Option<f64>,
+    /// Indicates whether prices include tax.
+    #[serde(rename = "prices_inc_tax", skip_serializing_if = "Option::is_none")]
+    pub prices_inc_tax: Option<bool>,
     /// Defines product variant's quantity that has to be added
     #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<f64>,
@@ -219,6 +222,7 @@ impl ProductVariantAdd {
             tier_prices: None,
             measure_unit: None,
             unit_price: None,
+            prices_inc_tax: None,
             quantity: None,
             warehouse_id: None,
             in_stock: None,
