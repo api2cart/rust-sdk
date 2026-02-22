@@ -556,7 +556,7 @@ pub async fn category_find(configuration: &configuration::Configuration, find_va
 }
 
 /// Add image to category
-pub async fn category_image_add(configuration: &configuration::Configuration, category_id: &str, image_name: &str, url: &str, r#type: &str, store_id: Option<&str>, label: Option<&str>, mime: Option<&str>, position: Option<i32>, idempotency_key: Option<&str>) -> Result<models::CategoryImageAdd200Response, Error<CategoryImageAddError>> {
+pub async fn category_image_add(configuration: &configuration::Configuration, category_id: &str, image_name: &str, url: &str, r#type: &str, store_id: Option<&str>, label: Option<&str>, mime: Option<&str>, position: Option<i32>, apply_to_translations: Option<bool>, idempotency_key: Option<&str>) -> Result<models::CategoryImageAdd200Response, Error<CategoryImageAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_category_id = category_id;
     let p_image_name = image_name;
@@ -566,6 +566,7 @@ pub async fn category_image_add(configuration: &configuration::Configuration, ca
     let p_label = label;
     let p_mime = mime;
     let p_position = position;
+    let p_apply_to_translations = apply_to_translations;
     let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/category.image.add.json", configuration.base_path);
@@ -586,6 +587,9 @@ pub async fn category_image_add(configuration: &configuration::Configuration, ca
     }
     if let Some(ref param_value) = p_position {
         req_builder = req_builder.query(&[("position", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_apply_to_translations {
+        req_builder = req_builder.query(&[("apply_to_translations", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_idempotency_key {
         req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
@@ -626,11 +630,12 @@ pub async fn category_image_add(configuration: &configuration::Configuration, ca
 }
 
 /// Delete image
-pub async fn category_image_delete(configuration: &configuration::Configuration, category_id: &str, image_id: &str, store_id: Option<&str>) -> Result<models::AttributeDelete200Response, Error<CategoryImageDeleteError>> {
+pub async fn category_image_delete(configuration: &configuration::Configuration, category_id: &str, image_id: &str, store_id: Option<&str>, apply_to_translations: Option<bool>) -> Result<models::AttributeDelete200Response, Error<CategoryImageDeleteError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_category_id = category_id;
     let p_image_id = image_id;
     let p_store_id = store_id;
+    let p_apply_to_translations = apply_to_translations;
 
     let uri_str = format!("{}/category.image.delete.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
@@ -639,6 +644,9 @@ pub async fn category_image_delete(configuration: &configuration::Configuration,
     req_builder = req_builder.query(&[("image_id", &p_image_id.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_apply_to_translations {
+        req_builder = req_builder.query(&[("apply_to_translations", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

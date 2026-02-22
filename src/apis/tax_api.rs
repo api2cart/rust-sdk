@@ -95,9 +95,10 @@ pub async fn tax_class_info(configuration: &configuration::Configuration, tax_cl
 }
 
 /// Get list of tax classes from your store.
-pub async fn tax_class_list(configuration: &configuration::Configuration, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseTaxClassList, Error<TaxClassListError>> {
+pub async fn tax_class_list(configuration: &configuration::Configuration, count: Option<i32>, start: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseTaxClassList, Error<TaxClassListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_count = count;
+    let p_start = start;
     let p_page_cursor = page_cursor;
     let p_store_id = store_id;
     let p_find_value = find_value;
@@ -113,6 +114,9 @@ pub async fn tax_class_list(configuration: &configuration::Configuration, count:
 
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_start {
+        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_page_cursor {
         req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);

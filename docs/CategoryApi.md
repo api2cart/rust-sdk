@@ -267,7 +267,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_image_add
 
-> models::CategoryImageAdd200Response category_image_add(category_id, image_name, url, r#type, store_id, label, mime, position, idempotency_key)
+> models::CategoryImageAdd200Response category_image_add(category_id, image_name, url, r#type, store_id, label, mime, position, apply_to_translations, idempotency_key)
 category.image.add
 
 Add image to category
@@ -285,6 +285,7 @@ Name | Type | Description  | Required | Notes
 **label** | Option<**String**> | Defines alternative text that has to be attached to the picture |  |
 **mime** | Option<**String**> | Mime type of image http://en.wikipedia.org/wiki/Internet_media_type. |  |
 **position** | Option<**i32**> | Defines image’s position in the list |  |[default to 0]
+**apply_to_translations** | Option<**bool**> | Defines whether to add image to all category translations |  |[default to true]
 **idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
@@ -305,7 +306,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_image_delete
 
-> models::AttributeDelete200Response category_image_delete(category_id, image_id, store_id)
+> models::AttributeDelete200Response category_image_delete(category_id, image_id, store_id, apply_to_translations)
 category.image.delete
 
 Delete image
@@ -318,6 +319,7 @@ Name | Type | Description  | Required | Notes
 **category_id** | **String** | Defines category id where the image should be deleted | [required] |
 **image_id** | **String** | Define image id | [required] |
 **store_id** | Option<**String**> | Store Id |  |
+**apply_to_translations** | Option<**bool**> | Defines whether to delete image from all category translations |  |[default to true]
 
 ### Return type
 

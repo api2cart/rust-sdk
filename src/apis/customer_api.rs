@@ -189,9 +189,10 @@ pub async fn customer_address_add(configuration: &configuration::Configuration, 
 }
 
 /// Get attributes for specific customer
-pub async fn customer_attribute_list(configuration: &configuration::Configuration, customer_id: &str, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCustomerAttributeList, Error<CustomerAttributeListError>> {
+pub async fn customer_attribute_list(configuration: &configuration::Configuration, customer_id: &str, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCustomerAttributeList, Error<CustomerAttributeListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_customer_id = customer_id;
+    let p_start = start;
     let p_count = count;
     let p_page_cursor = page_cursor;
     let p_store_id = store_id;
@@ -203,6 +204,9 @@ pub async fn customer_attribute_list(configuration: &configuration::Configuratio
     let uri_str = format!("{}/customer.attribute.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_start {
+        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
     }

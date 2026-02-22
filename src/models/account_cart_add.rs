@@ -802,6 +802,8 @@ pub enum CartId {
     Hybris,
     #[serde(rename = "JooCart")]
     JooCart,
+    #[serde(rename = "Jumpseller")]
+    Jumpseller,
     #[serde(rename = "Lazada")]
     Lazada,
     #[serde(rename = "LightSpeed")]

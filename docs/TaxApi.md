@@ -46,7 +46,7 @@ Name | Type | Description  | Required | Notes
 
 ## tax_class_list
 
-> models::ModelResponseTaxClassList tax_class_list(count, page_cursor, store_id, find_value, find_where, created_to, created_from, modified_to, modified_from, response_fields)
+> models::ModelResponseTaxClassList tax_class_list(count, start, page_cursor, store_id, find_value, find_where, created_to, created_from, modified_to, modified_from, response_fields)
 tax.class.list
 
 Get list of tax classes from your store.
@@ -57,6 +57,7 @@ Get list of tax classes from your store.
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **store_id** | Option<**String**> | Store Id |  |
 **find_value** | Option<**String**> | Entity search that is specified by some value |  |

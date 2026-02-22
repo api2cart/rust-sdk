@@ -58,6 +58,9 @@ pub struct CustomerUpdate {
     /// Defines customer's status
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
+    /// Defines customer's unique password
+    #[serde(rename = "password", skip_serializing_if = "Option::is_none")]
+    pub password: Option<String>,
     /// Store Id
     #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
     pub store_id: Option<String>,
@@ -86,6 +89,7 @@ impl CustomerUpdate {
             gender: None,
             note: None,
             status: None,
+            password: None,
             store_id: None,
             idempotency_key: None,
             address: None,

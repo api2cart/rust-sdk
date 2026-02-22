@@ -81,7 +81,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_attribute_list
 
-> models::ModelResponseCustomerAttributeList customer_attribute_list(customer_id, count, page_cursor, store_id, lang_id, response_fields, params, exclude)
+> models::ModelResponseCustomerAttributeList customer_attribute_list(customer_id, start, count, page_cursor, store_id, lang_id, response_fields, params, exclude)
 customer.attribute.list
 
 Get attributes for specific customer
@@ -92,6 +92,7 @@ Get attributes for specific customer
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **customer_id** | **String** | Retrieves orders specified by customer id | [required] |
+**start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **store_id** | Option<**String**> | Store Id |  |
