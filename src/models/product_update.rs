@@ -283,6 +283,9 @@ pub struct ProductUpdate {
     pub shop_section_id: Option<i32>,
     #[serde(rename = "personalization_details", skip_serializing_if = "Option::is_none")]
     pub personalization_details: Option<Box<models::ProductAddPersonalizationDetails>>,
+    /// Defines personalization questions for the listing as an array of question objects. Each question object supports the following fields: question_id (integer, nullable), question_text (string, 1-45 chars), instructions (string, nullable), question_type (string), required (boolean), max_allowed_characters (integer, nullable), max_allowed_files (integer, nullable), options (array, nullable). Cannot be used together with <strong>personalization_details</strong>.
+    #[serde(rename = "personalization_questions", skip_serializing_if = "Option::is_none")]
+    pub personalization_questions: Option<Vec<models::ProductAddPersonalizationQuestionsInner>>,
     /// External product link
     #[serde(rename = "external_product_link", skip_serializing_if = "Option::is_none")]
     pub external_product_link: Option<String>,
@@ -391,6 +394,7 @@ impl ProductUpdate {
             specifics: None,
             shop_section_id: None,
             personalization_details: None,
+            personalization_questions: None,
             external_product_link: None,
             marketplace_item_properties: None,
             min_order_quantity: None,

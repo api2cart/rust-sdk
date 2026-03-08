@@ -126,6 +126,7 @@ Name | Type | Description | Notes
 **shop_section_id** | Option<**i32**> | Add Shop Section Id | [optional]
 **return_policy_id** | Option<**i32**> | Add Return Policy Id | [optional]
 **personalization_details** | Option<[**models::ProductAddPersonalizationDetails**](ProductAdd_personalization_details.md)> |  | [optional]
+**personalization_questions** | Option<[**Vec<models::ProductAddPersonalizationQuestionsInner>**](ProductAdd_personalization_questions_inner.md)> | Defines personalization questions for the listing as an array of question objects. Each question object supports the following fields: question_id (integer, nullable), question_text (string, 1-45 chars), instructions (string, nullable), question_type (string), required (boolean), max_allowed_characters (integer, nullable), max_allowed_files (integer, nullable), options (array, nullable). Cannot be used together with <strong>personalization_details</strong>. | [optional]
 **idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
