@@ -19,6 +19,8 @@ pub struct WebhookEvents200ResponseResultEventsInner {
     pub entity: Option<String>,
     #[serde(rename = "action", skip_serializing_if = "Option::is_none")]
     pub action: Option<String>,
+    #[serde(rename = "filterable_fields", skip_serializing_if = "Option::is_none")]
+    pub filterable_fields: Option<serde_json::Value>,
 }
 
 impl WebhookEvents200ResponseResultEventsInner {
@@ -27,6 +29,7 @@ impl WebhookEvents200ResponseResultEventsInner {
             webhook_name: None,
             entity: None,
             action: None,
+            filterable_fields: None,
         }
     }
 }

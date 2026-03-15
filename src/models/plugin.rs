@@ -15,6 +15,8 @@ use serde::{Deserialize, Serialize};
 pub struct Plugin {
     #[serde(rename = "name", skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
+    #[serde(rename = "code", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub code: Option<Option<String>>,
     #[serde(rename = "active", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub active: Option<Option<bool>>,
     #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -27,6 +29,7 @@ impl Plugin {
     pub fn new() -> Plugin {
         Plugin {
             name: None,
+            code: None,
             active: None,
             additional_fields: None,
             custom_fields: None,

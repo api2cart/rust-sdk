@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **updated_at** | Option<**String**> |  | [optional]
 **entity** | Option<**String**> |  | [optional]
 **action** | Option<**String**> |  | [optional]
+**filtering_conditions** | Option<[**serde_json::Value**](.md)> |  | [optional]
 **additional_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]
 **custom_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]
 

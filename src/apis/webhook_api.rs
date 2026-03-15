@@ -113,48 +113,13 @@ pub async fn webhook_count(configuration: &configuration::Configuration, entity:
 }
 
 /// Create webhook on the store and subscribe to it.
-pub async fn webhook_create(configuration: &configuration::Configuration, entity: &str, action: &str, callback: Option<&str>, label: Option<&str>, fields: Option<&str>, response_fields: Option<&str>, active: Option<bool>, lang_id: Option<&str>, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::BasketLiveShippingServiceCreate200Response, Error<WebhookCreateError>> {
+pub async fn webhook_create(configuration: &configuration::Configuration, webhook_create: models::WebhookCreate) -> Result<models::BasketLiveShippingServiceCreate200Response, Error<WebhookCreateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_entity = entity;
-    let p_action = action;
-    let p_callback = callback;
-    let p_label = label;
-    let p_fields = fields;
-    let p_response_fields = response_fields;
-    let p_active = active;
-    let p_lang_id = lang_id;
-    let p_store_id = store_id;
-    let p_idempotency_key = idempotency_key;
+    let p_webhook_create = webhook_create;
 
     let uri_str = format!("{}/webhook.create.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
-    req_builder = req_builder.query(&[("entity", &p_entity.to_string())]);
-    req_builder = req_builder.query(&[("action", &p_action.to_string())]);
-    if let Some(ref param_value) = p_callback {
-        req_builder = req_builder.query(&[("callback", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_label {
-        req_builder = req_builder.query(&[("label", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_fields {
-        req_builder = req_builder.query(&[("fields", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_active {
-        req_builder = req_builder.query(&[("active", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_lang_id {
-        req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_idempotency_key {
-        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
-    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -174,6 +139,7 @@ pub async fn webhook_create(configuration: &configuration::Configuration, entity
         };
         req_builder = req_builder.header("x-api-key", value);
     };
+    req_builder = req_builder.json(&p_webhook_create);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -346,42 +312,13 @@ pub async fn webhook_list(configuration: &configuration::Configuration, start: O
 }
 
 /// Update Webhooks parameters.
-pub async fn webhook_update(configuration: &configuration::Configuration, id: &str, callback: Option<&str>, label: Option<&str>, fields: Option<&str>, response_fields: Option<&str>, active: Option<bool>, lang_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::ProductImageUpdate200Response, Error<WebhookUpdateError>> {
+pub async fn webhook_update(configuration: &configuration::Configuration, webhook_update: models::WebhookUpdate) -> Result<models::ProductImageUpdate200Response, Error<WebhookUpdateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_id = id;
-    let p_callback = callback;
-    let p_label = label;
-    let p_fields = fields;
-    let p_response_fields = response_fields;
-    let p_active = active;
-    let p_lang_id = lang_id;
-    let p_idempotency_key = idempotency_key;
+    let p_webhook_update = webhook_update;
 
     let uri_str = format!("{}/webhook.update.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
-    req_builder = req_builder.query(&[("id", &p_id.to_string())]);
-    if let Some(ref param_value) = p_callback {
-        req_builder = req_builder.query(&[("callback", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_label {
-        req_builder = req_builder.query(&[("label", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_fields {
-        req_builder = req_builder.query(&[("fields", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_response_fields {
-        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_active {
-        req_builder = req_builder.query(&[("active", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_lang_id {
-        req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
-    }
-    if let Some(ref param_value) = p_idempotency_key {
-        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
-    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -401,6 +338,7 @@ pub async fn webhook_update(configuration: &configuration::Configuration, id: &s
         };
         req_builder = req_builder.header("x-api-key", value);
     };
+    req_builder = req_builder.json(&p_webhook_update);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;

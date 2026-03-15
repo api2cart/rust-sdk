@@ -135,7 +135,7 @@ Name | Type | Description  | Required | Notes
 
 ## order_count
 
-> models::OrderCount200Response order_count(order_ids, ids, customer_id, store_id, customer_email, order_status, order_status_ids, ebay_order_status, financial_status, financial_status_ids, fulfillment_channel, fulfillment_status, shipping_method, delivery_method, tags, ship_node_type, created_from, created_to, modified_from, modified_to)
+> models::OrderCount200Response order_count(order_ids, ids, customer_id, store_id, customer_email, order_status, order_status_ids, ebay_order_status, financial_status, financial_status_ids, fulfillment_channel, fulfillment_status, shipping_method, delivery_method, tags, ship_node_type, created_from, created_to, modified_from, modified_to, use_latest_api_version)
 order.count
 
 Count orders in store
@@ -165,6 +165,7 @@ Name | Type | Description  | Required | Notes
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
+**use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
 
 ### Return type
 

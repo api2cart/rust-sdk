@@ -47,7 +47,7 @@ Name | Type | Description  | Required | Notes
 
 ## webhook_create
 
-> models::BasketLiveShippingServiceCreate200Response webhook_create(entity, action, callback, label, fields, response_fields, active, lang_id, store_id, idempotency_key)
+> models::BasketLiveShippingServiceCreate200Response webhook_create(webhook_create)
 webhook.create
 
 Create webhook on the store and subscribe to it.
@@ -57,16 +57,7 @@ Create webhook on the store and subscribe to it.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**entity** | **String** | Specify the entity that you want to enable webhooks for (e.g product, order, customer, category) | [required] |
-**action** | **String** | Specify what action (event) will trigger the webhook (e.g add, delete, or update) | [required] |
-**callback** | Option<**String**> | Callback url that returns shipping rates. It should be able to accept POST requests with json data. |  |
-**label** | Option<**String**> | The name you give to the webhook |  |
-**fields** | Option<**String**> | Fields the webhook should send |  |[default to force_all]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**active** | Option<**bool**> | Webhook status |  |[default to true]
-**lang_id** | Option<**String**> | Language id |  |
-**store_id** | Option<**String**> | Defines store id where the webhook should be assigned |  |
-**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
+**webhook_create** | [**WebhookCreate**](WebhookCreate.md) |  | [required] |
 
 ### Return type
 
@@ -78,7 +69,7 @@ Name | Type | Description  | Required | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -179,7 +170,7 @@ Name | Type | Description  | Required | Notes
 
 ## webhook_update
 
-> models::ProductImageUpdate200Response webhook_update(id, callback, label, fields, response_fields, active, lang_id, idempotency_key)
+> models::ProductImageUpdate200Response webhook_update(webhook_update)
 webhook.update
 
 Update Webhooks parameters.
@@ -189,14 +180,7 @@ Update Webhooks parameters.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
-**id** | **String** | Webhook id | [required] |
-**callback** | Option<**String**> | Callback url that returns shipping rates. It should be able to accept POST requests with json data. |  |
-**label** | Option<**String**> | The name you give to the webhook |  |
-**fields** | Option<**String**> | Fields the webhook should send |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**active** | Option<**bool**> | Webhook status |  |
-**lang_id** | Option<**String**> | Language id |  |
-**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
+**webhook_update** | [**WebhookUpdate**](WebhookUpdate.md) |  | [required] |
 
 ### Return type
 
@@ -208,7 +192,7 @@ Name | Type | Description  | Required | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

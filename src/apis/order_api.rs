@@ -364,7 +364,7 @@ pub async fn order_calculate(configuration: &configuration::Configuration, order
 }
 
 /// Count orders in store
-pub async fn order_count(configuration: &configuration::Configuration, order_ids: Option<&str>, ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_channel: Option<&str>, fulfillment_status: Option<&str>, shipping_method: Option<&str>, delivery_method: Option<&str>, tags: Option<&str>, ship_node_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>) -> Result<models::OrderCount200Response, Error<OrderCountError>> {
+pub async fn order_count(configuration: &configuration::Configuration, order_ids: Option<&str>, ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_channel: Option<&str>, fulfillment_status: Option<&str>, shipping_method: Option<&str>, delivery_method: Option<&str>, tags: Option<&str>, ship_node_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, use_latest_api_version: Option<bool>) -> Result<models::OrderCount200Response, Error<OrderCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_order_ids = order_ids;
     let p_ids = ids;
@@ -386,6 +386,7 @@ pub async fn order_count(configuration: &configuration::Configuration, order_ids
     let p_created_to = created_to;
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
+    let p_use_latest_api_version = use_latest_api_version;
 
     let uri_str = format!("{}/order.count.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -455,6 +456,9 @@ pub async fn order_count(configuration: &configuration::Configuration, order_ids
     }
     if let Some(ref param_value) = p_modified_to {
         req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_use_latest_api_version {
+        req_builder = req_builder.query(&[("use_latest_api_version", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());

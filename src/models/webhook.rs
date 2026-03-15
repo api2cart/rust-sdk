@@ -37,6 +37,8 @@ pub struct Webhook {
     pub entity: Option<Option<String>>,
     #[serde(rename = "action", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub action: Option<Option<String>>,
+    #[serde(rename = "filtering_conditions", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub filtering_conditions: Option<Option<serde_json::Value>>,
     #[serde(rename = "additional_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub additional_fields: Option<Option<serde_json::Value>>,
     #[serde(rename = "custom_fields", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -58,6 +60,7 @@ impl Webhook {
             updated_at: None,
             entity: None,
             action: None,
+            filtering_conditions: None,
             additional_fields: None,
             custom_fields: None,
         }

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | Option<**String**> |  | [optional]
+**code** | Option<**String**> |  | [optional]
 **active** | Option<**bool**> |  | [optional]
 **additional_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]
 **custom_fields** | Option<[**serde_json::Value**](.md)> |  | [optional]
