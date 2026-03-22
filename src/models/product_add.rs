@@ -375,6 +375,12 @@ pub struct ProductAdd {
     /// Defines personalization questions for the listing as an array of question objects. Each question object supports the following fields: question_id (integer, nullable), question_text (string, 1-45 chars), instructions (string, nullable), question_type (string), required (boolean), max_allowed_characters (integer, nullable), max_allowed_files (integer, nullable), options (array, nullable). Cannot be used together with <strong>personalization_details</strong>.
     #[serde(rename = "personalization_questions", skip_serializing_if = "Option::is_none")]
     pub personalization_questions: Option<Vec<models::ProductAddPersonalizationQuestionsInner>>,
+    /// A comma-separated list of manufacturer IDs. Retrieve the IDs from the cart.info method.
+    #[serde(rename = "manufacturer_ids", skip_serializing_if = "Option::is_none")]
+    pub manufacturer_ids: Option<String>,
+    /// A comma-separated list of responsible person IDs. Retrieve the IDs from the cart.info method.
+    #[serde(rename = "responsible_person_ids", skip_serializing_if = "Option::is_none")]
+    pub responsible_person_ids: Option<String>,
     /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
     #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
     pub idempotency_key: Option<String>,
@@ -506,6 +512,8 @@ impl ProductAdd {
             return_policy_id: None,
             personalization_details: None,
             personalization_questions: None,
+            manufacturer_ids: None,
+            responsible_person_ids: None,
             idempotency_key: None,
         }
     }

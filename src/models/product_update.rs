@@ -295,6 +295,12 @@ pub struct ProductUpdate {
     /// The minimum quantity an order must contain, to be eligible to purchase this product.
     #[serde(rename = "min_order_quantity", skip_serializing_if = "Option::is_none")]
     pub min_order_quantity: Option<f64>,
+    /// A comma-separated list of manufacturer IDs. Retrieve the IDs from the cart.info method.
+    #[serde(rename = "manufacturer_ids", skip_serializing_if = "Option::is_none")]
+    pub manufacturer_ids: Option<String>,
+    /// A comma-separated list of responsible person IDs. Retrieve the IDs from the cart.info method.
+    #[serde(rename = "responsible_person_ids", skip_serializing_if = "Option::is_none")]
+    pub responsible_person_ids: Option<String>,
     /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
     #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
     pub idempotency_key: Option<String>,
@@ -398,6 +404,8 @@ impl ProductUpdate {
             external_product_link: None,
             marketplace_item_properties: None,
             min_order_quantity: None,
+            manufacturer_ids: None,
+            responsible_person_ids: None,
             idempotency_key: None,
         }
     }

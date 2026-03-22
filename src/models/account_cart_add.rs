@@ -151,6 +151,9 @@ pub struct AccountCartAdd {
     /// Bricklink Access Token Secret
     #[serde(rename = "bricklink_token_secret", skip_serializing_if = "Option::is_none")]
     pub bricklink_token_secret: Option<String>,
+    /// Access token authorizing the app to access resources on behalf of a user
+    #[serde(rename = "nopcommerce_token", skip_serializing_if = "Option::is_none")]
+    pub nopcommerce_token: Option<String>,
     /// Demandware client id
     #[serde(rename = "demandware_client_id", skip_serializing_if = "Option::is_none")]
     pub demandware_client_id: Option<String>,
@@ -613,6 +616,7 @@ impl AccountCartAdd {
             bricklink_consumer_secret: None,
             bricklink_token: None,
             bricklink_token_secret: None,
+            nopcommerce_token: None,
             demandware_client_id: None,
             demandware_api_password: None,
             demandware_user_name: None,
