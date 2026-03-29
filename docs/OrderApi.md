@@ -32,7 +32,7 @@ Method | HTTP request | Description
 
 ## order_abandoned_list
 
-> models::ModelResponseOrderAbandonedList order_abandoned_list(start, count, page_cursor, customer_id, customer_email, store_id, created_from, created_to, modified_from, modified_to, skip_empty_email, response_fields, params, exclude)
+> models::ModelResponseOrderAbandonedList order_abandoned_list(start, count, page_cursor, customer_id, customer_email, store_id, created_from, created_to, modified_from, modified_to, skip_empty_email, rounding_precision, response_fields, params, exclude)
 order.abandoned.list
 
 Get list of orders that were left by customers before completing the order.
@@ -53,6 +53,7 @@ Name | Type | Description  | Required | Notes
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
 **skip_empty_email** | Option<**bool**> | Filter empty emails |  |[default to false]
+**rounding_precision** | Option<**i32**> | <p>Specifies the rounding precision for fractional numeric values (such as prices, taxes, and weights).</p> <p>Supported values range from <b>1</b> to <b>6</b>.</p> <p>The default rounding precision may vary depending on the platform. You can retrieve the default value using the <strong>cart.info</strong> method in the <code>default_rounding_precision</code> field. </p><p>Values are rounded to the nearest number at the specified precision. Fractions of .5 or higher are rounded up, while fractions lower than .5 are rounded down.</p> |  |
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to customer,totals,items]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |

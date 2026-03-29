@@ -178,7 +178,7 @@ pub enum OrderUpdateError {
 
 
 /// Get list of orders that were left by customers before completing the order.
-pub async fn order_abandoned_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, customer_id: Option<&str>, customer_email: Option<&str>, store_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, skip_empty_email: Option<bool>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseOrderAbandonedList, Error<OrderAbandonedListError>> {
+pub async fn order_abandoned_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, customer_id: Option<&str>, customer_email: Option<&str>, store_id: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, skip_empty_email: Option<bool>, rounding_precision: Option<i32>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseOrderAbandonedList, Error<OrderAbandonedListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -191,6 +191,7 @@ pub async fn order_abandoned_list(configuration: &configuration::Configuration, 
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
     let p_skip_empty_email = skip_empty_email;
+    let p_rounding_precision = rounding_precision;
     let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
@@ -230,6 +231,9 @@ pub async fn order_abandoned_list(configuration: &configuration::Configuration, 
     }
     if let Some(ref param_value) = p_skip_empty_email {
         req_builder = req_builder.query(&[("skip_empty_email", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_rounding_precision {
+        req_builder = req_builder.query(&[("rounding_precision", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);

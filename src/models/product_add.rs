@@ -112,6 +112,9 @@ pub struct ProductAdd {
     /// Indicates whether prices include tax.
     #[serde(rename = "prices_inc_tax", skip_serializing_if = "Option::is_none")]
     pub prices_inc_tax: Option<bool>,
+    /// Defines new product's retail price
+    #[serde(rename = "retail_price", skip_serializing_if = "Option::is_none")]
+    pub retail_price: Option<f64>,
     /// Defines product's quantity that has to be added
     #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<f64>,
@@ -422,6 +425,7 @@ impl ProductAdd {
             measure_unit: None,
             unit_price: None,
             prices_inc_tax: None,
+            retail_price: None,
             quantity: None,
             in_stock: None,
             manage_stock: None,
