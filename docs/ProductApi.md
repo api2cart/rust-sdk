@@ -235,7 +235,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_brand_list
 
-> models::ModelResponseProductBrandList product_brand_list(start, count, page_cursor, brand_ids, category_id, parent_id, store_id, lang_id, find_where, find_value, created_from, created_to, modified_from, modified_to, response_fields, params, exclude)
+> models::ModelResponseProductBrandList product_brand_list(start, count, page_cursor, brand_ids, category_id, parent_id, store_id, lang_id, find_where, find_value, created_from, created_to, modified_from, modified_to, avail, response_fields, params, exclude)
 product.brand.list
 
 Get list of brands from your store.
@@ -259,6 +259,7 @@ Name | Type | Description  | Required | Notes
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
+**avail** | Option<**bool**> | Defines category's visibility status |  |[default to true]
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
 **params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,short_description,active,url]
 **exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
@@ -404,7 +405,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_count
 
-> models::ProductCount200Response product_count(sku, product_ids, since_id, categories_ids, category_id, store_id, lang_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, brand_name, manufacturer_id, product_attributes, status, r#type, visible, find_value, find_where, report_request_id, return_global, disable_report_cache, use_latest_api_version)
+> models::ProductCount200Response product_count(sku, product_ids, since_id, categories_ids, category_id, store_id, vendor_id, lang_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, brand_name, manufacturer_id, product_attributes, status, r#type, visible, find_value, find_where, report_request_id, return_global, disable_report_cache, use_latest_api_version)
 product.count
 
 Count products in store.
@@ -420,6 +421,7 @@ Name | Type | Description  | Required | Notes
 **categories_ids** | Option<**String**> | Defines product add that is specified by comma-separated categories id |  |
 **category_id** | Option<**String**> | Counts products specified by category id |  |
 **store_id** | Option<**String**> | Counts products specified by store id |  |
+**vendor_id** | Option<**String**> | Counts products specified by vendor id |  |
 **lang_id** | Option<**String**> | Counts products specified by language id |  |
 **avail_view** | Option<**bool**> | Specifies the set of visible/invisible products |  |
 **avail_sale** | Option<**bool**> | Specifies the set of available/not available products for sale |  |
@@ -730,7 +732,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_info
 
-> models::ProductInfo200Response product_info(id, store_id, lang_id, currency_id, response_fields, params, exclude, report_request_id, disable_report_cache, use_latest_api_version)
+> models::ProductInfo200Response product_info(id, store_id, vendor_id, lang_id, currency_id, response_fields, params, exclude, report_request_id, disable_report_cache, use_latest_api_version)
 product.info
 
 Get information about a specific product by its ID. In the case of a multistore configuration, use the store_id filter to get a response in the context of a specific store.
@@ -742,6 +744,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Retrieves product's info specified by product id | [required] |
 **store_id** | Option<**String**> | Retrieves product info specified by store id |  |
+**vendor_id** | Option<**String**> | Vendor Id |  |
 **lang_id** | Option<**String**> | Retrieves product info specified by language id |  |
 **currency_id** | Option<**String**> | Currency Id |  |
 **response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
@@ -769,7 +772,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_list
 
-> models::ModelResponseProductList product_list(start, count, page_cursor, product_ids, since_id, categories_ids, category_id, store_id, lang_id, currency_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, sku, brand_name, product_attributes, manufacturer_id, status, r#type, visible, find_value, find_where, return_global, params, response_fields, exclude, sort_by, sort_direction, report_request_id, disable_cache, disable_report_cache, use_latest_api_version, product_type)
+> models::ModelResponseProductList product_list(start, count, page_cursor, product_ids, since_id, categories_ids, category_id, store_id, vendor_id, lang_id, currency_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, sku, brand_name, product_attributes, manufacturer_id, status, r#type, visible, find_value, find_where, return_global, params, response_fields, exclude, sort_by, sort_direction, report_request_id, disable_cache, disable_report_cache, use_latest_api_version, product_type)
 product.list
 
 Get list of products from your store. Returns 10 products by default.
@@ -787,6 +790,7 @@ Name | Type | Description  | Required | Notes
 **categories_ids** | Option<**String**> | Retrieves products specified by categories ids |  |
 **category_id** | Option<**String**> | Retrieves products specified by category id |  |
 **store_id** | Option<**String**> | Retrieves products specified by store id |  |
+**vendor_id** | Option<**String**> | Retrieves products specified by vendor id |  |
 **lang_id** | Option<**String**> | Retrieves products specified by language id |  |
 **currency_id** | Option<**String**> | Currency Id |  |
 **avail_view** | Option<**bool**> | Specifies the set of visible/invisible products |  |

@@ -368,7 +368,7 @@ pub async fn order_calculate(configuration: &configuration::Configuration, order
 }
 
 /// Count orders in store
-pub async fn order_count(configuration: &configuration::Configuration, order_ids: Option<&str>, ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_channel: Option<&str>, fulfillment_status: Option<&str>, shipping_method: Option<&str>, delivery_method: Option<&str>, tags: Option<&str>, ship_node_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, use_latest_api_version: Option<bool>) -> Result<models::OrderCount200Response, Error<OrderCountError>> {
+pub async fn order_count(configuration: &configuration::Configuration, order_ids: Option<&str>, ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_channel: Option<&str>, fulfillment_status: Option<&str>, shipping_method: Option<&str>, delivery_method: Option<&str>, tags: Option<&str>, ship_node_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, use_latest_api_version: Option<bool>, vendor_id: Option<&str>) -> Result<models::OrderCount200Response, Error<OrderCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_order_ids = order_ids;
     let p_ids = ids;
@@ -391,6 +391,7 @@ pub async fn order_count(configuration: &configuration::Configuration, order_ids
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
     let p_use_latest_api_version = use_latest_api_version;
+    let p_vendor_id = vendor_id;
 
     let uri_str = format!("{}/order.count.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -463,6 +464,9 @@ pub async fn order_count(configuration: &configuration::Configuration, order_ids
     }
     if let Some(ref param_value) = p_use_latest_api_version {
         req_builder = req_builder.query(&[("use_latest_api_version", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_vendor_id {
+        req_builder = req_builder.query(&[("vendor_id", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
@@ -669,7 +673,7 @@ pub async fn order_info(configuration: &configuration::Configuration, id: Option
 }
 
 /// Get list of orders from store.
-pub async fn order_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, order_ids: Option<&str>, since_id: Option<&str>, store_id: Option<&str>, customer_id: Option<&str>, customer_email: Option<&str>, basket_id: Option<&str>, currency_id: Option<&str>, phone: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_status: Option<&str>, return_status: Option<&str>, fulfillment_channel: Option<&str>, shipping_method: Option<&str>, skip_order_ids: Option<&str>, is_deleted: Option<bool>, shipping_country_iso3: Option<&str>, delivery_method: Option<&str>, ship_node_type: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, tags: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, enable_cache: Option<bool>, use_latest_api_version: Option<bool>, rounding_precision: Option<i32>, allow_user_defined_order_statuses: Option<bool>) -> Result<models::ModelResponseOrderList, Error<OrderListError>> {
+pub async fn order_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, ids: Option<&str>, order_ids: Option<&str>, since_id: Option<&str>, store_id: Option<&str>, vendor_id: Option<&str>, customer_id: Option<&str>, customer_email: Option<&str>, basket_id: Option<&str>, currency_id: Option<&str>, phone: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_status: Option<&str>, return_status: Option<&str>, fulfillment_channel: Option<&str>, shipping_method: Option<&str>, skip_order_ids: Option<&str>, is_deleted: Option<bool>, shipping_country_iso3: Option<&str>, delivery_method: Option<&str>, ship_node_type: Option<&str>, created_to: Option<&str>, created_from: Option<&str>, modified_to: Option<&str>, modified_from: Option<&str>, tags: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, enable_cache: Option<bool>, use_latest_api_version: Option<bool>, rounding_precision: Option<i32>, allow_user_defined_order_statuses: Option<bool>) -> Result<models::ModelResponseOrderList, Error<OrderListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -678,6 +682,7 @@ pub async fn order_list(configuration: &configuration::Configuration, start: Opt
     let p_order_ids = order_ids;
     let p_since_id = since_id;
     let p_store_id = store_id;
+    let p_vendor_id = vendor_id;
     let p_customer_id = customer_id;
     let p_customer_email = customer_email;
     let p_basket_id = basket_id;
@@ -735,6 +740,9 @@ pub async fn order_list(configuration: &configuration::Configuration, start: Opt
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_vendor_id {
+        req_builder = req_builder.query(&[("vendor_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_customer_id {
         req_builder = req_builder.query(&[("customer_id", &param_value.to_string())]);

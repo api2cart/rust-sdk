@@ -136,7 +136,7 @@ Name | Type | Description  | Required | Notes
 
 ## order_count
 
-> models::OrderCount200Response order_count(order_ids, ids, customer_id, store_id, customer_email, order_status, order_status_ids, ebay_order_status, financial_status, financial_status_ids, fulfillment_channel, fulfillment_status, shipping_method, delivery_method, tags, ship_node_type, created_from, created_to, modified_from, modified_to, use_latest_api_version)
+> models::OrderCount200Response order_count(order_ids, ids, customer_id, store_id, customer_email, order_status, order_status_ids, ebay_order_status, financial_status, financial_status_ids, fulfillment_channel, fulfillment_status, shipping_method, delivery_method, tags, ship_node_type, created_from, created_to, modified_from, modified_to, use_latest_api_version, vendor_id)
 order.count
 
 Count orders in store
@@ -167,6 +167,7 @@ Name | Type | Description  | Required | Notes
 **modified_from** | Option<**String**> | Retrieve entities from their modification date |  |
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
 **use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
+**vendor_id** | Option<**String**> | Counts orders specified by vendor id |  |
 
 ### Return type
 
@@ -282,7 +283,7 @@ Name | Type | Description  | Required | Notes
 
 ## order_list
 
-> models::ModelResponseOrderList order_list(start, count, page_cursor, ids, order_ids, since_id, store_id, customer_id, customer_email, basket_id, currency_id, phone, order_status, order_status_ids, ebay_order_status, financial_status, financial_status_ids, fulfillment_status, return_status, fulfillment_channel, shipping_method, skip_order_ids, is_deleted, shipping_country_iso3, delivery_method, ship_node_type, created_to, created_from, modified_to, modified_from, tags, sort_by, sort_direction, params, response_fields, exclude, enable_cache, use_latest_api_version, rounding_precision, allow_user_defined_order_statuses)
+> models::ModelResponseOrderList order_list(start, count, page_cursor, ids, order_ids, since_id, store_id, vendor_id, customer_id, customer_email, basket_id, currency_id, phone, order_status, order_status_ids, ebay_order_status, financial_status, financial_status_ids, fulfillment_status, return_status, fulfillment_channel, shipping_method, skip_order_ids, is_deleted, shipping_country_iso3, delivery_method, ship_node_type, created_to, created_from, modified_to, modified_from, tags, sort_by, sort_direction, params, response_fields, exclude, enable_cache, use_latest_api_version, rounding_precision, allow_user_defined_order_statuses)
 order.list
 
 Get list of orders from store.
@@ -299,6 +300,7 @@ Name | Type | Description  | Required | Notes
 **order_ids** | Option<**String**> | Retrieves orders specified by order ids |  |
 **since_id** | Option<**String**> | Retrieve entities starting from the specified id. |  |
 **store_id** | Option<**String**> | Store Id |  |
+**vendor_id** | Option<**String**> | Retrieves orders specified by vendor id |  |
 **customer_id** | Option<**String**> | Retrieves orders specified by customer id |  |
 **customer_email** | Option<**String**> | Retrieves orders specified by customer email |  |
 **basket_id** | Option<**String**> | Retrieves order’s info specified by basket id. |  |

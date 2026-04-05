@@ -683,7 +683,7 @@ pub async fn product_attribute_value_unset(configuration: &configuration::Config
 }
 
 /// Get list of brands from your store.
-pub async fn product_brand_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, brand_ids: Option<&str>, category_id: Option<&str>, parent_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, find_where: Option<&str>, find_value: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseProductBrandList, Error<ProductBrandListError>> {
+pub async fn product_brand_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, brand_ids: Option<&str>, category_id: Option<&str>, parent_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, find_where: Option<&str>, find_value: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, avail: Option<bool>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseProductBrandList, Error<ProductBrandListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -699,6 +699,7 @@ pub async fn product_brand_list(configuration: &configuration::Configuration, st
     let p_created_to = created_to;
     let p_modified_from = modified_from;
     let p_modified_to = modified_to;
+    let p_avail = avail;
     let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
@@ -747,6 +748,9 @@ pub async fn product_brand_list(configuration: &configuration::Configuration, st
     }
     if let Some(ref param_value) = p_modified_to {
         req_builder = req_builder.query(&[("modified_to", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_avail {
+        req_builder = req_builder.query(&[("avail", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
@@ -1059,7 +1063,7 @@ pub async fn product_child_item_list(configuration: &configuration::Configuratio
 }
 
 /// Count products in store.
-pub async fn product_count(configuration: &configuration::Configuration, sku: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, brand_name: Option<&str>, manufacturer_id: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, return_global: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ProductCount200Response, Error<ProductCountError>> {
+pub async fn product_count(configuration: &configuration::Configuration, sku: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, vendor_id: Option<&str>, lang_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, brand_name: Option<&str>, manufacturer_id: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, return_global: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ProductCount200Response, Error<ProductCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_sku = sku;
     let p_product_ids = product_ids;
@@ -1067,6 +1071,7 @@ pub async fn product_count(configuration: &configuration::Configuration, sku: Op
     let p_categories_ids = categories_ids;
     let p_category_id = category_id;
     let p_store_id = store_id;
+    let p_vendor_id = vendor_id;
     let p_lang_id = lang_id;
     let p_avail_view = avail_view;
     let p_avail_sale = avail_sale;
@@ -1107,6 +1112,9 @@ pub async fn product_count(configuration: &configuration::Configuration, sku: Op
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_vendor_id {
+        req_builder = req_builder.query(&[("vendor_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
@@ -1680,10 +1688,11 @@ pub async fn product_image_update(configuration: &configuration::Configuration, 
 }
 
 /// Get information about a specific product by its ID. In the case of a multistore configuration, use the store_id filter to get a response in the context of a specific store.
-pub async fn product_info(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>, lang_id: Option<&str>, currency_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ProductInfo200Response, Error<ProductInfoError>> {
+pub async fn product_info(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>, vendor_id: Option<&str>, lang_id: Option<&str>, currency_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ProductInfo200Response, Error<ProductInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_store_id = store_id;
+    let p_vendor_id = vendor_id;
     let p_lang_id = lang_id;
     let p_currency_id = currency_id;
     let p_response_fields = response_fields;
@@ -1699,6 +1708,9 @@ pub async fn product_info(configuration: &configuration::Configuration, id: &str
     req_builder = req_builder.query(&[("id", &p_id.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_vendor_id {
+        req_builder = req_builder.query(&[("vendor_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
@@ -1760,7 +1772,7 @@ pub async fn product_info(configuration: &configuration::Configuration, id: &str
 }
 
 /// Get list of products from your store. Returns 10 products by default.
-pub async fn product_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, currency_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sku: Option<&str>, brand_name: Option<&str>, product_attributes: Option<Vec<String>>, manufacturer_id: Option<&str>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, return_global: Option<bool>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, report_request_id: Option<&str>, disable_cache: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>, product_type: Option<&str>) -> Result<models::ModelResponseProductList, Error<ProductListError>> {
+pub async fn product_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, vendor_id: Option<&str>, lang_id: Option<&str>, currency_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sku: Option<&str>, brand_name: Option<&str>, product_attributes: Option<Vec<String>>, manufacturer_id: Option<&str>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, return_global: Option<bool>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, report_request_id: Option<&str>, disable_cache: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>, product_type: Option<&str>) -> Result<models::ModelResponseProductList, Error<ProductListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -1770,6 +1782,7 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
     let p_categories_ids = categories_ids;
     let p_category_id = category_id;
     let p_store_id = store_id;
+    let p_vendor_id = vendor_id;
     let p_lang_id = lang_id;
     let p_currency_id = currency_id;
     let p_avail_view = avail_view;
@@ -1825,6 +1838,9 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
     }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_vendor_id {
+        req_builder = req_builder.query(&[("vendor_id", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_lang_id {
         req_builder = req_builder.query(&[("lang_id", &param_value.to_string())]);
