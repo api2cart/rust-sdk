@@ -331,6 +331,9 @@ pub struct AccountCartAdd {
     /// Miva signature
     #[serde(rename = "miva_signature", skip_serializing_if = "Option::is_none")]
     pub miva_signature: Option<String>,
+    /// Mirakl API Key
+    #[serde(rename = "mirakl_api_key", skip_serializing_if = "Option::is_none")]
+    pub mirakl_api_key: Option<String>,
     /// Tiendanube User ID
     #[serde(rename = "tiendanube_user_id", skip_serializing_if = "Option::is_none")]
     pub tiendanube_user_id: Option<i32>,
@@ -676,6 +679,7 @@ impl AccountCartAdd {
             shopware_api_secret: None,
             miva_access_token: None,
             miva_signature: None,
+            mirakl_api_key: None,
             tiendanube_user_id: None,
             tiendanube_access_token: None,
             tiendanube_client_secret: None,
@@ -840,8 +844,6 @@ pub enum CartId {
     Prestashop,
     #[serde(rename = "PrestashopApi")]
     PrestashopApi,
-    #[serde(rename = "SSPremium")]
-    SsPremium,
     #[serde(rename = "Salla")]
     Salla,
     #[serde(rename = "SCAPI")]
@@ -882,8 +884,6 @@ pub enum CartId {
     WPecommerce,
     #[serde(rename = "Walmart")]
     Walmart,
-    #[serde(rename = "WebAsyst")]
-    WebAsyst,
     #[serde(rename = "Wix")]
     Wix,
     #[serde(rename = "Woocommerce")]

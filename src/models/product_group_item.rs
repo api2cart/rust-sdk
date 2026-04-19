@@ -18,7 +18,7 @@ pub struct ProductGroupItem {
     #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
     pub product_id: Option<String>,
     #[serde(rename = "default_qty_in_pack", skip_serializing_if = "Option::is_none")]
-    pub default_qty_in_pack: Option<String>,
+    pub default_qty_in_pack: Option<f64>,
     #[serde(rename = "is_qty_in_pack_fixed", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub is_qty_in_pack_fixed: Option<Option<bool>>,
     #[serde(rename = "price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]

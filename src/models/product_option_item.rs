@@ -22,9 +22,9 @@ pub struct ProductOptionItem {
     #[serde(rename = "sort_order", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub sort_order: Option<Option<i32>>,
     #[serde(rename = "price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub price: Option<Option<String>>,
+    pub price: Option<Option<f64>>,
     #[serde(rename = "weight", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
-    pub weight: Option<Option<String>>,
+    pub weight: Option<Option<f64>>,
     #[serde(rename = "quantity", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<Option<i32>>,
     #[serde(rename = "type_price", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
