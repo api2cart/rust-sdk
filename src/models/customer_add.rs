@@ -79,6 +79,15 @@ pub struct CustomerAdd {
     /// Specifies ISO code or name of country
     #[serde(rename = "country", skip_serializing_if = "Option::is_none")]
     pub country: Option<String>,
+    /// Currency Id
+    #[serde(rename = "currency_id", skip_serializing_if = "Option::is_none")]
+    pub currency_id: Option<String>,
+    /// Marks a customer as tax-exempt (B2B/wholesale).
+    #[serde(rename = "is_tax_exempt", skip_serializing_if = "Option::is_none")]
+    pub is_tax_exempt: Option<bool>,
+    /// Vendor Id
+    #[serde(rename = "vendor_id", skip_serializing_if = "Option::is_none")]
+    pub vendor_id: Option<String>,
     /// Store Id
     #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
     pub store_id: Option<String>,
@@ -114,6 +123,9 @@ impl CustomerAdd {
             phone: None,
             note: None,
             country: None,
+            currency_id: None,
+            is_tax_exempt: None,
+            vendor_id: None,
             store_id: None,
             idempotency_key: None,
             address: None,
