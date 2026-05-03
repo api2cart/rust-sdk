@@ -838,7 +838,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_manufacturer_add
 
-> models::ProductManufacturerAdd200Response product_manufacturer_add(product_id, manufacturer, store_id, meta_title, meta_keywords, meta_description, search_keywords, image_url, seo_url, idempotency_key)
+> models::ProductManufacturerAdd200Response product_manufacturer_add(product_id, manufacturer, store_id, description, meta_title, meta_keywords, meta_description, search_keywords, image_url, seo_url, idempotency_key)
 product.manufacturer.add
 
 Add manufacturer to store and assign to product
@@ -851,6 +851,7 @@ Name | Type | Description  | Required | Notes
 **product_id** | **String** | Defines products specified by product id | [required] |
 **manufacturer** | **String** | Defines product’s manufacturer's name | [required] |
 **store_id** | Option<**String**> | Store Id |  |
+**description** | Option<**String**> | Defines manufacturer's description |  |
 **meta_title** | Option<**String**> | Defines unique meta title for each entity |  |
 **meta_keywords** | Option<**String**> | Defines unique meta keywords for each entity |  |
 **meta_description** | Option<**String**> | Defines unique meta description of a entity |  |

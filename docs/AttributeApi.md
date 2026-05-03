@@ -315,7 +315,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_list
 
-> models::ModelResponseAttributeList attribute_list(start, count, attribute_ids, attribute_set_id, store_id, lang_id, r#type, visible, required, system, response_fields, params, exclude)
+> models::ModelResponseAttributeList attribute_list(start, count, page_cursor, attribute_ids, attribute_set_id, store_id, lang_id, r#type, visible, required, system, response_fields, params, exclude)
 attribute.list
 
 Get a list of global attributes.
@@ -327,6 +327,7 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
+**page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **attribute_ids** | Option<**String**> | Filter attributes by ids |  |
 **attribute_set_id** | Option<**String**> | Filter items by attribute set id |  |
 **store_id** | Option<**String**> | Store Id |  |
@@ -448,7 +449,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_update
 
-> models::AttributeUpdate200Response attribute_update(id, name, store_id, lang_id, idempotency_key)
+> models::AttributeUpdate200Response attribute_update(id, name, visible, position, store_id, lang_id, idempotency_key)
 attribute.update
 
 Update attribute data
@@ -459,7 +460,9 @@ Update attribute data
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Entity id | [required] |
-**name** | **String** | Defines new attributes's name | [required] |
+**name** | Option<**String**> | Defines new attributes's name |  |
+**visible** | Option<**bool**> | Set visibility status |  |
+**position** | Option<**i32**> | Attribute`s position |  |[default to 0]
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
 **idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |

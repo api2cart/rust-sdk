@@ -64,10 +64,22 @@ pub struct CustomerUpdate {
     /// Currency Id
     #[serde(rename = "currency_id", skip_serializing_if = "Option::is_none")]
     pub currency_id: Option<String>,
+    /// Defines customer's company
+    #[serde(rename = "company", skip_serializing_if = "Option::is_none")]
+    pub company: Option<String>,
+    /// Specifies ISO code or name of country
+    #[serde(rename = "country", skip_serializing_if = "Option::is_none")]
+    pub country: Option<String>,
+    /// Defines customer's fax
+    #[serde(rename = "fax", skip_serializing_if = "Option::is_none")]
+    pub fax: Option<String>,
+    /// Add Tax Id
+    #[serde(rename = "tax_id", skip_serializing_if = "Option::is_none")]
+    pub tax_id: Option<String>,
     /// Marks a customer as tax-exempt (B2B/wholesale).
     #[serde(rename = "is_tax_exempt", skip_serializing_if = "Option::is_none")]
     pub is_tax_exempt: Option<bool>,
-    /// Vendor Id
+    /// Updates vendor id of the customer
     #[serde(rename = "vendor_id", skip_serializing_if = "Option::is_none")]
     pub vendor_id: Option<String>,
     /// Store Id
@@ -100,6 +112,10 @@ impl CustomerUpdate {
             status: None,
             password: None,
             currency_id: None,
+            company: None,
+            country: None,
+            fax: None,
+            tax_id: None,
             is_tax_exempt: None,
             vendor_id: None,
             store_id: None,

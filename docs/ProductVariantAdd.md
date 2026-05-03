@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **product_id** | Option<**String**> | Defines product's id where the variant has to be added | [optional]
-**attributes** | Option<[**Vec<models::ProductVariantAddAttributesInner>**](ProductVariantAdd_attributes_inner.md)> | Defines variant's attributes list | [optional]
+**attributes** | Option<[**Vec<models::ProductVariantAddAttributesInner>**](ProductVariantAdd_attributes_inner.md)> | Defines variant's attributes list with optional per-option price and weight modifiers | [optional]
 **name** | Option<**String**> | Defines variant's name that has to be added | [optional]
 **model** | **String** | Specifies variant's model that has to be added | 
 **description** | Option<**String**> | Specifies variant's description | [optional]

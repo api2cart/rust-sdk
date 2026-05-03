@@ -681,10 +681,11 @@ pub async fn attribute_info(configuration: &configuration::Configuration, id: &s
 }
 
 /// Get a list of global attributes.
-pub async fn attribute_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, attribute_ids: Option<&str>, attribute_set_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, r#type: Option<&str>, visible: Option<bool>, required: Option<bool>, system: Option<bool>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseAttributeList, Error<AttributeListError>> {
+pub async fn attribute_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, attribute_ids: Option<&str>, attribute_set_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, r#type: Option<&str>, visible: Option<bool>, required: Option<bool>, system: Option<bool>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseAttributeList, Error<AttributeListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
+    let p_page_cursor = page_cursor;
     let p_attribute_ids = attribute_ids;
     let p_attribute_set_id = attribute_set_id;
     let p_store_id = store_id;
@@ -705,6 +706,9 @@ pub async fn attribute_list(configuration: &configuration::Configuration, start:
     }
     if let Some(ref param_value) = p_count {
         req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_attribute_ids {
         req_builder = req_builder.query(&[("attribute_ids", &param_value.to_string())]);
@@ -916,10 +920,12 @@ pub async fn attribute_unassign_set(configuration: &configuration::Configuration
 }
 
 /// Update attribute data
-pub async fn attribute_update(configuration: &configuration::Configuration, id: &str, name: &str, store_id: Option<&str>, lang_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AttributeUpdate200Response, Error<AttributeUpdateError>> {
+pub async fn attribute_update(configuration: &configuration::Configuration, id: &str, name: Option<&str>, visible: Option<bool>, position: Option<i32>, store_id: Option<&str>, lang_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AttributeUpdate200Response, Error<AttributeUpdateError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
     let p_name = name;
+    let p_visible = visible;
+    let p_position = position;
     let p_store_id = store_id;
     let p_lang_id = lang_id;
     let p_idempotency_key = idempotency_key;
@@ -928,7 +934,15 @@ pub async fn attribute_update(configuration: &configuration::Configuration, id: 
     let mut req_builder = configuration.client.request(reqwest::Method::PUT, &uri_str);
 
     req_builder = req_builder.query(&[("id", &p_id.to_string())]);
-    req_builder = req_builder.query(&[("name", &p_name.to_string())]);
+    if let Some(ref param_value) = p_name {
+        req_builder = req_builder.query(&[("name", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_visible {
+        req_builder = req_builder.query(&[("visible", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_position {
+        req_builder = req_builder.query(&[("position", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
     }

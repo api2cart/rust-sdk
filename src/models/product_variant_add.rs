@@ -16,7 +16,7 @@ pub struct ProductVariantAdd {
     /// Defines product's id where the variant has to be added
     #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
     pub product_id: Option<String>,
-    /// Defines variant's attributes list
+    /// Defines variant's attributes list with optional per-option price and weight modifiers
     #[serde(rename = "attributes", skip_serializing_if = "Option::is_none")]
     pub attributes: Option<Vec<models::ProductVariantAddAttributesInner>>,
     /// Defines variant's name that has to be added

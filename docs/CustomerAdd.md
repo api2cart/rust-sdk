@@ -28,7 +28,7 @@ Name | Type | Description | Notes
 **country** | Option<**String**> | Specifies ISO code or name of country | [optional]
 **currency_id** | Option<**String**> | Currency Id | [optional]
 **is_tax_exempt** | Option<**bool**> | Marks a customer as tax-exempt (B2B/wholesale). | [optional]
-**vendor_id** | Option<**String**> | Vendor Id | [optional]
+**vendor_id** | Option<**String**> | Assigns vendor id to the customer | [optional]
 **store_id** | Option<**String**> | Store Id | [optional]
 **idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> | [optional]
 **address** | Option<[**Vec<models::CustomerAddAddressInner>**](CustomerAdd_address_inner.md)> |  | [optional]

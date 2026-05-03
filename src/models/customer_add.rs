@@ -85,7 +85,7 @@ pub struct CustomerAdd {
     /// Marks a customer as tax-exempt (B2B/wholesale).
     #[serde(rename = "is_tax_exempt", skip_serializing_if = "Option::is_none")]
     pub is_tax_exempt: Option<bool>,
-    /// Vendor Id
+    /// Assigns vendor id to the customer
     #[serde(rename = "vendor_id", skip_serializing_if = "Option::is_none")]
     pub vendor_id: Option<String>,
     /// Store Id

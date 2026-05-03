@@ -1965,11 +1965,12 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
 }
 
 /// Add manufacturer to store and assign to product
-pub async fn product_manufacturer_add(configuration: &configuration::Configuration, product_id: &str, manufacturer: &str, store_id: Option<&str>, meta_title: Option<&str>, meta_keywords: Option<&str>, meta_description: Option<&str>, search_keywords: Option<&str>, image_url: Option<&str>, seo_url: Option<&str>, idempotency_key: Option<&str>) -> Result<models::ProductManufacturerAdd200Response, Error<ProductManufacturerAddError>> {
+pub async fn product_manufacturer_add(configuration: &configuration::Configuration, product_id: &str, manufacturer: &str, store_id: Option<&str>, description: Option<&str>, meta_title: Option<&str>, meta_keywords: Option<&str>, meta_description: Option<&str>, search_keywords: Option<&str>, image_url: Option<&str>, seo_url: Option<&str>, idempotency_key: Option<&str>) -> Result<models::ProductManufacturerAdd200Response, Error<ProductManufacturerAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_product_id = product_id;
     let p_manufacturer = manufacturer;
     let p_store_id = store_id;
+    let p_description = description;
     let p_meta_title = meta_title;
     let p_meta_keywords = meta_keywords;
     let p_meta_description = meta_description;
@@ -1985,6 +1986,9 @@ pub async fn product_manufacturer_add(configuration: &configuration::Configurati
     req_builder = req_builder.query(&[("manufacturer", &p_manufacturer.to_string())]);
     if let Some(ref param_value) = p_store_id {
         req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_description {
+        req_builder = req_builder.query(&[("description", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_meta_title {
         req_builder = req_builder.query(&[("meta_title", &param_value.to_string())]);

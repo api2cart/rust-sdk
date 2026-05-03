@@ -61,6 +61,9 @@ pub struct CustomerUpdateAddressInner {
     /// Specifies customer's gender
     #[serde(rename = "address_book_gender", skip_serializing_if = "Option::is_none")]
     pub address_book_gender: Option<String>,
+    /// Specifies customer's region
+    #[serde(rename = "address_book_region", skip_serializing_if = "Option::is_none")]
+    pub address_book_region: Option<String>,
     /// Specifies customer's alias in the address book
     #[serde(rename = "address_book_alias", skip_serializing_if = "Option::is_none")]
     pub address_book_alias: Option<String>,
@@ -91,6 +94,7 @@ impl CustomerUpdateAddressInner {
             address_book_tax_id: None,
             address_book_identification_number: None,
             address_book_gender: None,
+            address_book_region: None,
             address_book_alias: None,
             address_book_type: None,
             address_book_default: None,

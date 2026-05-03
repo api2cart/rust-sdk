@@ -139,6 +139,12 @@ pub struct ProductUpdate {
     /// Specify the quantity threshold below which the product is considered low in stock
     #[serde(rename = "low_stock_threshold", skip_serializing_if = "Option::is_none")]
     pub low_stock_threshold: Option<f64>,
+    /// The minimum quantity an order must contain, to be eligible to purchase this product.
+    #[serde(rename = "min_order_quantity", skip_serializing_if = "Option::is_none")]
+    pub min_order_quantity: Option<f64>,
+    /// The maximum quantity an order can contain when purchasing the product.
+    #[serde(rename = "max_order_quantity", skip_serializing_if = "Option::is_none")]
+    pub max_order_quantity: Option<f64>,
     /// This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
     #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
     pub warehouse_id: Option<String>,
@@ -190,6 +196,9 @@ pub struct ProductUpdate {
     /// Defines product's manufacturer by manufacturer_id
     #[serde(rename = "manufacturer_id", skip_serializing_if = "Option::is_none")]
     pub manufacturer_id: Option<String>,
+    /// Vendor Id
+    #[serde(rename = "vendor_id", skip_serializing_if = "Option::is_none")]
+    pub vendor_id: Option<String>,
     /// Defines product add that is specified by comma-separated categories id
     #[serde(rename = "categories_ids", skip_serializing_if = "Option::is_none")]
     pub categories_ids: Option<String>,
@@ -292,9 +301,6 @@ pub struct ProductUpdate {
     /// String containing the JSON representation of the supplied data
     #[serde(rename = "marketplace_item_properties", skip_serializing_if = "Option::is_none")]
     pub marketplace_item_properties: Option<String>,
-    /// The minimum quantity an order must contain, to be eligible to purchase this product.
-    #[serde(rename = "min_order_quantity", skip_serializing_if = "Option::is_none")]
-    pub min_order_quantity: Option<f64>,
     /// A comma-separated list of manufacturer IDs. Retrieve the IDs from the cart.info method.
     #[serde(rename = "manufacturer_ids", skip_serializing_if = "Option::is_none")]
     pub manufacturer_ids: Option<String>,
@@ -351,6 +357,8 @@ impl ProductUpdate {
             increase_quantity: None,
             reduce_quantity: None,
             low_stock_threshold: None,
+            min_order_quantity: None,
+            max_order_quantity: None,
             warehouse_id: None,
             weight: None,
             weight_unit: None,
@@ -368,6 +376,7 @@ impl ProductUpdate {
             barcode: None,
             manufacturer: None,
             manufacturer_id: None,
+            vendor_id: None,
             categories_ids: None,
             related_products_ids: None,
             up_sell_products_ids: None,
@@ -403,7 +412,6 @@ impl ProductUpdate {
             personalization_questions: None,
             external_product_link: None,
             marketplace_item_properties: None,
-            min_order_quantity: None,
             manufacturer_ids: None,
             responsible_person_ids: None,
             idempotency_key: None,
