@@ -127,6 +127,20 @@ pub enum OrderShipmentDeleteError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`order_shipment_event_add`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum OrderShipmentEventAddError {
+    UnknownValue(serde_json::Value),
+}
+
+/// struct for typed errors of method [`order_shipment_event_list`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum OrderShipmentEventListError {
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`order_shipment_info`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -1244,6 +1258,118 @@ pub async fn order_shipment_delete(configuration: &configuration::Configuration,
     } else {
         let content = resp.text().await?;
         let entity: Option<OrderShipmentDeleteError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Add a tracking event to the shipment.
+pub async fn order_shipment_event_add(configuration: &configuration::Configuration, order_shipment_event_add: models::OrderShipmentEventAdd) -> Result<models::AttributeAdd200Response, Error<OrderShipmentEventAddError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_order_shipment_event_add = order_shipment_event_add;
+
+    let uri_str = format!("{}/order.shipment.event.add.json", configuration.base_path);
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref apikey) = configuration.api_key {
+        let key = apikey.key.clone();
+        let value = match apikey.prefix {
+            Some(ref prefix) => format!("{} {}", prefix, key),
+            None => key,
+        };
+        req_builder = req_builder.header("x-store-key", value);
+    };
+    if let Some(ref apikey) = configuration.api_key {
+        let key = apikey.key.clone();
+        let value = match apikey.prefix {
+            Some(ref prefix) => format!("{} {}", prefix, key),
+            None => key,
+        };
+        req_builder = req_builder.header("x-api-key", value);
+    };
+    req_builder = req_builder.json(&p_order_shipment_event_add);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req).await?;
+
+    let status = resp.status();
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text().await?;
+        serde_json::from_str(&content).map_err(Error::from)
+    } else {
+        let content = resp.text().await?;
+        let entity: Option<OrderShipmentEventAddError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Get list of shipment tracking events.
+pub async fn order_shipment_event_list(configuration: &configuration::Configuration, shipment_id: &str, order_id: Option<&str>, store_id: Option<&str>, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, response_fields: Option<&str>) -> Result<models::ModelResponseOrderShipmentEventList, Error<OrderShipmentEventListError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_shipment_id = shipment_id;
+    let p_order_id = order_id;
+    let p_store_id = store_id;
+    let p_start = start;
+    let p_count = count;
+    let p_page_cursor = page_cursor;
+    let p_response_fields = response_fields;
+
+    let uri_str = format!("{}/order.shipment.event.list.json", configuration.base_path);
+    let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
+
+    req_builder = req_builder.query(&[("shipment_id", &p_shipment_id.to_string())]);
+    if let Some(ref param_value) = p_order_id {
+        req_builder = req_builder.query(&[("order_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_start {
+        req_builder = req_builder.query(&[("start", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_count {
+        req_builder = req_builder.query(&[("count", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_page_cursor {
+        req_builder = req_builder.query(&[("page_cursor", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_response_fields {
+        req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
+    }
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref apikey) = configuration.api_key {
+        let key = apikey.key.clone();
+        let value = match apikey.prefix {
+            Some(ref prefix) => format!("{} {}", prefix, key),
+            None => key,
+        };
+        req_builder = req_builder.header("x-store-key", value);
+    };
+    if let Some(ref apikey) = configuration.api_key {
+        let key = apikey.key.clone();
+        let value = match apikey.prefix {
+            Some(ref prefix) => format!("{} {}", prefix, key),
+            None => key,
+        };
+        req_builder = req_builder.header("x-api-key", value);
+    };
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req).await?;
+
+    let status = resp.status();
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text().await?;
+        serde_json::from_str(&content).map_err(Error::from)
+    } else {
+        let content = resp.text().await?;
+        let entity: Option<OrderShipmentEventListError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

@@ -180,6 +180,7 @@ docs/ModelResponseMarketplaceProductFind.md
 docs/ModelResponseOrderAbandonedList.md
 docs/ModelResponseOrderList.md
 docs/ModelResponseOrderPreestimateShippingList.md
+docs/ModelResponseOrderShipmentEventList.md
 docs/ModelResponseOrderShipmentList.md
 docs/ModelResponseOrderStatusList.md
 docs/ModelResponseOrderTransactionList.md
@@ -250,6 +251,7 @@ docs/OrderShipmentAddItemsInner.md
 docs/OrderShipmentAddTrackingNumbersInner.md
 docs/OrderShipmentDelete200Response.md
 docs/OrderShipmentDelete200ResponseResult.md
+docs/OrderShipmentEventAdd.md
 docs/OrderShipmentInfo200Response.md
 docs/OrderShipmentTrackingAdd.md
 docs/OrderShipmentTrackingAdd200Response.md
@@ -399,6 +401,7 @@ docs/ResponseMarketplaceProductFindResult.md
 docs/ResponseOrderAbandonedListResult.md
 docs/ResponseOrderListResult.md
 docs/ResponseOrderPreestimateShippingListResult.md
+docs/ResponseOrderShipmentEventListResult.md
 docs/ResponseOrderShipmentListResult.md
 docs/ResponseOrderStatusListResult.md
 docs/ResponseOrderTransactionListResult.md
@@ -430,6 +433,7 @@ docs/ReturnStatusList200Response.md
 docs/ReturnStatusList200ResponseResult.md
 docs/Script.md
 docs/Shipment.md
+docs/ShipmentEvent.md
 docs/ShipmentItem.md
 docs/ShipmentTrackingNumber.md
 docs/SpecialPrice.md
@@ -646,6 +650,7 @@ src/models/model_response_marketplace_product_find.rs
 src/models/model_response_order_abandoned_list.rs
 src/models/model_response_order_list.rs
 src/models/model_response_order_preestimate_shipping_list.rs
+src/models/model_response_order_shipment_event_list.rs
 src/models/model_response_order_shipment_list.rs
 src/models/model_response_order_status_list.rs
 src/models/model_response_order_transaction_list.rs
@@ -716,6 +721,7 @@ src/models/order_shipment_add_items_inner.rs
 src/models/order_shipment_add_tracking_numbers_inner.rs
 src/models/order_shipment_delete_200_response.rs
 src/models/order_shipment_delete_200_response_result.rs
+src/models/order_shipment_event_add.rs
 src/models/order_shipment_info_200_response.rs
 src/models/order_shipment_tracking_add.rs
 src/models/order_shipment_tracking_add_200_response.rs
@@ -864,6 +870,7 @@ src/models/response_marketplace_product_find_result.rs
 src/models/response_order_abandoned_list_result.rs
 src/models/response_order_list_result.rs
 src/models/response_order_preestimate_shipping_list_result.rs
+src/models/response_order_shipment_event_list_result.rs
 src/models/response_order_shipment_list_result.rs
 src/models/response_order_status_list_result.rs
 src/models/response_order_transaction_list_result.rs
@@ -893,6 +900,7 @@ src/models/return_status_list_200_response.rs
 src/models/return_status_list_200_response_result.rs
 src/models/script.rs
 src/models/shipment.rs
+src/models/shipment_event.rs
 src/models/shipment_item.rs
 src/models/shipment_tracking_number.rs
 src/models/special_price.rs
