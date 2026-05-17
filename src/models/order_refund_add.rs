@@ -40,6 +40,9 @@ pub struct OrderRefundAdd {
     /// Specifies an order creation date in format Y-m-d H:i:s
     #[serde(rename = "date", skip_serializing_if = "Option::is_none")]
     pub date: Option<String>,
+    /// Store Id
+    #[serde(rename = "store_id", skip_serializing_if = "Option::is_none")]
+    pub store_id: Option<String>,
     /// Indicates whether refund type is online
     #[serde(rename = "is_online", skip_serializing_if = "Option::is_none")]
     pub is_online: Option<bool>,
@@ -60,6 +63,7 @@ impl OrderRefundAdd {
             item_restock: None,
             send_notifications: None,
             date: None,
+            store_id: None,
             is_online: None,
             idempotency_key: None,
         }

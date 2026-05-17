@@ -13,6 +13,7 @@ Name | Type | Description | Notes
 **item_restock** | Option<**bool**> | Boolean, whether or not to add the line items back to the store inventory. | [optional][default to false]
 **send_notifications** | Option<**bool**> | Send notifications to customer after refund was created | [optional][default to false]
 **date** | Option<**String**> | Specifies an order creation date in format Y-m-d H:i:s | [optional]
+**store_id** | Option<**String**> | Store Id | [optional]
 **is_online** | Option<**bool**> | Indicates whether refund type is online | [optional][default to false]
 **idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> | [optional]
 
