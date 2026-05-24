@@ -71,6 +71,7 @@ Name | Type | Description | Notes
 **external_source** | Option<**String**> | Identifying the system used to generate the order | [optional]
 **inventory_behaviour** | Option<**String**> | The behaviour to use when updating inventory.<hr><div style=\"font-style:normal\">Values description:<div style=\"margin-left: 2%; padding-top: 2%\"><div style=\"font-size:85%\"><b>bypass</b> = Do not claim inventory </br></br><b>decrement_ignoring_policy</b> = Ignore the product's </br> inventory policy and claim amounts</br></br><b>decrement_obeying_policy</b> =  Obey the product's </br> inventory policy.</br></br></div></div></div> | [optional][default to bypass]
 **create_invoice** | Option<**bool**> | Defines whether the invoice is created automatically along with the order | [optional][default to false]
+**invoice_admin_comment** | Option<**String**> | Specifies admin's order invoice comment | [optional]
 **note_attributes** | Option<[**Vec<models::OrderAddNoteAttributesInner>**](OrderAdd_note_attributes_inner.md)> | Defines note attributes | [optional]
 **clear_cache** | Option<**bool**> | Is cache clear required | [optional][default to true]
 **origin** | Option<**String**> | The source of the order | [optional]

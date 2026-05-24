@@ -214,6 +214,9 @@ pub struct OrderAdd {
     /// Defines whether the invoice is created automatically along with the order
     #[serde(rename = "create_invoice", skip_serializing_if = "Option::is_none")]
     pub create_invoice: Option<bool>,
+    /// Specifies admin's order invoice comment
+    #[serde(rename = "invoice_admin_comment", skip_serializing_if = "Option::is_none")]
+    pub invoice_admin_comment: Option<String>,
     /// Defines note attributes
     #[serde(rename = "note_attributes", skip_serializing_if = "Option::is_none")]
     pub note_attributes: Option<Vec<models::OrderAddNoteAttributesInner>>,
@@ -303,6 +306,7 @@ impl OrderAdd {
             external_source: None,
             inventory_behaviour: None,
             create_invoice: None,
+            invoice_admin_comment: None,
             note_attributes: None,
             clear_cache: None,
             origin: None,

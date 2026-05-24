@@ -16,6 +16,9 @@ pub struct OrderCalculate {
     /// Defines the customer specified by email for whom the order needs to be calculated
     #[serde(rename = "customer_email")]
     pub customer_email: String,
+    /// Currency code of order
+    #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
+    pub currency: Option<String>,
     /// Currency Id
     #[serde(rename = "currency_id", skip_serializing_if = "Option::is_none")]
     pub currency_id: Option<String>,
@@ -102,6 +105,7 @@ impl OrderCalculate {
     pub fn new(customer_email: String, shipp_first_name: String, shipp_last_name: String, shipp_address_1: String, shipp_city: String, shipp_postcode: String, shipp_country: String, order_item: Vec<models::OrderCalculateOrderItemInner>) -> OrderCalculate {
         OrderCalculate {
             customer_email,
+            currency: None,
             currency_id: None,
             store_id: None,
             coupons: None,

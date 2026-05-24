@@ -19,8 +19,6 @@ pub struct ProductVariantAddAttributesInner {
     pub attribute_value: Option<String>,
     #[serde(rename = "attribute_price", skip_serializing_if = "Option::is_none")]
     pub attribute_price: Option<f64>,
-    #[serde(rename = "attribute_weight", skip_serializing_if = "Option::is_none")]
-    pub attribute_weight: Option<f64>,
 }
 
 impl ProductVariantAddAttributesInner {
@@ -29,7 +27,6 @@ impl ProductVariantAddAttributesInner {
             attribute_name: None,
             attribute_value: None,
             attribute_price: None,
-            attribute_weight: None,
         }
     }
 }

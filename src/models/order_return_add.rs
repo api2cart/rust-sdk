@@ -43,12 +43,24 @@ pub struct OrderReturnAdd {
     /// Specifies return comment
     #[serde(rename = "comment", skip_serializing_if = "Option::is_none")]
     pub comment: Option<String>,
+    /// Customer-visible message attached to the return request.
+    #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
+    pub message: Option<String>,
     /// Send notifications to customer after order was created
     #[serde(rename = "send_notifications", skip_serializing_if = "Option::is_none")]
     pub send_notifications: Option<bool>,
     /// Defines return reject reason
     #[serde(rename = "reject_reason", skip_serializing_if = "Option::is_none")]
     pub reject_reason: Option<String>,
+    /// Indicates whether refund type is online
+    #[serde(rename = "is_online", skip_serializing_if = "Option::is_none")]
+    pub is_online: Option<bool>,
+    /// Specifies refund's fee price
+    #[serde(rename = "fee_price", skip_serializing_if = "Option::is_none")]
+    pub fee_price: Option<f64>,
+    /// Specifies order's shipping price
+    #[serde(rename = "shipping_price", skip_serializing_if = "Option::is_none")]
+    pub shipping_price: Option<f64>,
     /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
     #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
     pub idempotency_key: Option<String>,
@@ -69,8 +81,12 @@ impl OrderReturnAdd {
             item_restock: None,
             staff_note: None,
             comment: None,
+            message: None,
             send_notifications: None,
             reject_reason: None,
+            is_online: None,
+            fee_price: None,
+            shipping_price: None,
             idempotency_key: None,
             order_products,
         }

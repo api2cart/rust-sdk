@@ -828,6 +828,8 @@ pub enum CartId {
     Miva,
     #[serde(rename = "Neto")]
     Neto,
+    #[serde(rename = "Nopcommerce")]
+    Nopcommerce,
     #[serde(rename = "Opencart14")]
     Opencart14,
     #[serde(rename = "Oscmax2")]
