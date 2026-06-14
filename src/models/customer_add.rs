@@ -55,6 +55,9 @@ pub struct CustomerAdd {
     /// Defines whether the newsletter subscription is available for the user
     #[serde(rename = "news_letter_subscription", skip_serializing_if = "Option::is_none")]
     pub news_letter_subscription: Option<bool>,
+    /// Defines whether the customer agreed to receive offers from partners
+    #[serde(rename = "partner_offers_subscription", skip_serializing_if = "Option::is_none")]
+    pub partner_offers_subscription: Option<bool>,
     /// Defines consents to notifications
     #[serde(rename = "consents", skip_serializing_if = "Option::is_none")]
     pub consents: Option<Vec<models::CustomerAddConsentsInner>>,
@@ -115,6 +118,7 @@ impl CustomerAdd {
             last_login: None,
             birth_day: None,
             news_letter_subscription: None,
+            partner_offers_subscription: None,
             consents: None,
             gender: None,
             website: None,

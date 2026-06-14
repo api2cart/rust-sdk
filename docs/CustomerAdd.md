@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **last_login** | Option<**String**> | Defines customer's last login time | [optional]
 **birth_day** | Option<**String**> | Defines customer's birthday | [optional]
 **news_letter_subscription** | Option<**bool**> | Defines whether the newsletter subscription is available for the user | [optional]
+**partner_offers_subscription** | Option<**bool**> | Defines whether the customer agreed to receive offers from partners | [optional]
 **consents** | Option<[**Vec<models::CustomerAddConsentsInner>**](CustomerAdd_consents_inner.md)> | Defines consents to notifications | [optional]
 **gender** | Option<**String**> | Defines customer's gender | [optional]
 **website** | Option<**String**> | Link to customer website | [optional]

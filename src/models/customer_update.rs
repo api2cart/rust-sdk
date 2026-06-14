@@ -43,6 +43,9 @@ pub struct CustomerUpdate {
     /// Defines whether the newsletter subscription is available for the user
     #[serde(rename = "news_letter_subscription", skip_serializing_if = "Option::is_none")]
     pub news_letter_subscription: Option<bool>,
+    /// Defines whether the customer agreed to receive offers from partners
+    #[serde(rename = "partner_offers_subscription", skip_serializing_if = "Option::is_none")]
+    pub partner_offers_subscription: Option<bool>,
     /// Defines consents to notifications
     #[serde(rename = "consents", skip_serializing_if = "Option::is_none")]
     pub consents: Option<Vec<models::CustomerAddConsentsInner>>,
@@ -67,6 +70,9 @@ pub struct CustomerUpdate {
     /// Defines customer's company
     #[serde(rename = "company", skip_serializing_if = "Option::is_none")]
     pub company: Option<String>,
+    /// Link to customer website
+    #[serde(rename = "website", skip_serializing_if = "Option::is_none")]
+    pub website: Option<String>,
     /// Specifies ISO code or name of country
     #[serde(rename = "country", skip_serializing_if = "Option::is_none")]
     pub country: Option<String>,
@@ -105,6 +111,7 @@ impl CustomerUpdate {
             last_name: None,
             birth_day: None,
             news_letter_subscription: None,
+            partner_offers_subscription: None,
             consents: None,
             tags: None,
             gender: None,
@@ -113,6 +120,7 @@ impl CustomerUpdate {
             password: None,
             currency_id: None,
             company: None,
+            website: None,
             country: None,
             fax: None,
             tax_id: None,
