@@ -178,7 +178,7 @@ pub enum CartValidateError {
 
 
 /// Get count of cart catalog price rules discounts.
-pub async fn cart_catalog_price_rules_count(configuration: &configuration::Configuration, ) -> Result<models::CartCatalogPriceRulesCount200Response, Error<CartCatalogPriceRulesCountError>> {
+pub async fn cart_catalog_price_rules_count(configuration: &configuration::Configuration, ) -> Result<models::ModelResponseCartCatalogPriceRulesCount, Error<CartCatalogPriceRulesCountError>> {
 
     let uri_str = format!("{}/cart.catalog_price_rules.count.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -405,7 +405,7 @@ pub async fn cart_coupon_condition_add(configuration: &configuration::Configurat
 }
 
 /// This method allows you to get the number of coupons. On some platforms, you can filter the coupons by the date they were active.
-pub async fn cart_coupon_count(configuration: &configuration::Configuration, store_id: Option<&str>, avail: Option<bool>, date_start_from: Option<&str>, date_start_to: Option<&str>, date_end_from: Option<&str>, date_end_to: Option<&str>) -> Result<models::CartCouponCount200Response, Error<CartCouponCountError>> {
+pub async fn cart_coupon_count(configuration: &configuration::Configuration, store_id: Option<&str>, avail: Option<bool>, date_start_from: Option<&str>, date_start_to: Option<&str>, date_end_from: Option<&str>, date_end_to: Option<&str>) -> Result<models::ModelResponseCartCouponCount, Error<CartCouponCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_store_id = store_id;
     let p_avail = avail;
@@ -667,25 +667,41 @@ pub async fn cart_delete(configuration: &configuration::Configuration, delete_br
 }
 
 /// Use this method to create a gift card for a specified amount.
-pub async fn cart_giftcard_add(configuration: &configuration::Configuration, amount: f64, code: Option<&str>, owner_email: Option<&str>, recipient_email: Option<&str>, recipient_name: Option<&str>, owner_name: Option<&str>, idempotency_key: Option<&str>) -> Result<models::CartGiftcardAdd200Response, Error<CartGiftcardAddError>> {
+pub async fn cart_giftcard_add(configuration: &configuration::Configuration, amount: f64, currency: Option<&str>, store_id: Option<&str>, code: Option<&str>, name: Option<&str>, owner_email: Option<&str>, owner_name: Option<&str>, recipient_email: Option<&str>, recipient_name: Option<&str>, message: Option<&str>, idempotency_key: Option<&str>) -> Result<models::CartGiftcardAdd200Response, Error<CartGiftcardAddError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_amount = amount;
+    let p_currency = currency;
+    let p_store_id = store_id;
     let p_code = code;
+    let p_name = name;
     let p_owner_email = owner_email;
+    let p_owner_name = owner_name;
     let p_recipient_email = recipient_email;
     let p_recipient_name = recipient_name;
-    let p_owner_name = owner_name;
+    let p_message = message;
     let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/cart.giftcard.add.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
     req_builder = req_builder.query(&[("amount", &p_amount.to_string())]);
+    if let Some(ref param_value) = p_currency {
+        req_builder = req_builder.query(&[("currency", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_code {
         req_builder = req_builder.query(&[("code", &param_value.to_string())]);
     }
+    if let Some(ref param_value) = p_name {
+        req_builder = req_builder.query(&[("name", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_owner_email {
         req_builder = req_builder.query(&[("owner_email", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_owner_name {
+        req_builder = req_builder.query(&[("owner_name", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_recipient_email {
         req_builder = req_builder.query(&[("recipient_email", &param_value.to_string())]);
@@ -693,8 +709,8 @@ pub async fn cart_giftcard_add(configuration: &configuration::Configuration, amo
     if let Some(ref param_value) = p_recipient_name {
         req_builder = req_builder.query(&[("recipient_name", &param_value.to_string())]);
     }
-    if let Some(ref param_value) = p_owner_name {
-        req_builder = req_builder.query(&[("owner_name", &param_value.to_string())]);
+    if let Some(ref param_value) = p_message {
+        req_builder = req_builder.query(&[("message", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_idempotency_key {
         req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
@@ -735,7 +751,7 @@ pub async fn cart_giftcard_add(configuration: &configuration::Configuration, amo
 }
 
 /// Get gift cards count.
-pub async fn cart_giftcard_count(configuration: &configuration::Configuration, store_id: Option<&str>) -> Result<models::CartGiftcardCount200Response, Error<CartGiftcardCountError>> {
+pub async fn cart_giftcard_count(configuration: &configuration::Configuration, store_id: Option<&str>) -> Result<models::ModelResponseCartGiftcardCount, Error<CartGiftcardCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_store_id = store_id;
 
@@ -781,14 +797,18 @@ pub async fn cart_giftcard_count(configuration: &configuration::Configuration, s
 }
 
 /// Delete giftcard
-pub async fn cart_giftcard_delete(configuration: &configuration::Configuration, id: &str) -> Result<models::AttributeDelete200Response, Error<CartGiftcardDeleteError>> {
+pub async fn cart_giftcard_delete(configuration: &configuration::Configuration, id: &str, store_id: Option<&str>) -> Result<models::AttributeDelete200Response, Error<CartGiftcardDeleteError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_id = id;
+    let p_store_id = store_id;
 
     let uri_str = format!("{}/cart.giftcard.delete.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::DELETE, &uri_str);
 
     req_builder = req_builder.query(&[("id", &p_id.to_string())]);
+    if let Some(ref param_value) = p_store_id {
+        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -825,8 +845,9 @@ pub async fn cart_giftcard_delete(configuration: &configuration::Configuration, 
 }
 
 /// Get gift cards list.
-pub async fn cart_giftcard_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartGiftCardList, Error<CartGiftcardListError>> {
+pub async fn cart_giftcard_list(configuration: &configuration::Configuration, ids: Option<&str>, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, store_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartGiftCardList, Error<CartGiftcardListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
+    let p_ids = ids;
     let p_start = start;
     let p_count = count;
     let p_page_cursor = page_cursor;
@@ -838,6 +859,9 @@ pub async fn cart_giftcard_list(configuration: &configuration::Configuration, st
     let uri_str = format!("{}/cart.giftcard.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_ids {
+        req_builder = req_builder.query(&[("ids", &param_value.to_string())]);
+    }
     if let Some(ref param_value) = p_start {
         req_builder = req_builder.query(&[("start", &param_value.to_string())]);
     }
@@ -952,7 +976,7 @@ pub async fn cart_info(configuration: &configuration::Configuration, store_id: O
     }
 }
 
-/// Using this method, you can get a list of metadata for various entities (products, options, customers, orders). Usually this is data created by third-party plugins.
+/// Using this method, you can get a list of metadata for various entities. Entities supported may differ across platforms. To get the list of supported entities, pass an invalid value in the <code>entity</code> parameter. The response will contain the list of entities supported by the specific platform. Usually this is data created by third-party plugins.
 pub async fn cart_meta_data_list(configuration: &configuration::Configuration, entity_id: &str, count: Option<i32>, page_cursor: Option<&str>, entity: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, key: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::ModelResponseCartMetaDataList, Error<CartMetaDataListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_entity_id = entity_id;
@@ -1032,7 +1056,7 @@ pub async fn cart_meta_data_list(configuration: &configuration::Configuration, e
     }
 }
 
-/// Set meta data for a specific entity
+/// Set metadata for a specific entity. Entities supported may differ across platforms. To get the list of supported entities, pass an invalid value in the <code>entity</code> parameter. The response will contain the list of entities supported by the specific platform. Usually this is data created by third-party plugins.
 pub async fn cart_meta_data_set(configuration: &configuration::Configuration, entity_id: &str, key: &str, value: &str, namespace: &str, entity: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::AttributeAdd200Response, Error<CartMetaDataSetError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_entity_id = entity_id;
@@ -1155,7 +1179,7 @@ pub async fn cart_meta_data_unset(configuration: &configuration::Configuration, 
 }
 
 /// Returns a list of supported API methods.
-pub async fn cart_methods(configuration: &configuration::Configuration, ) -> Result<models::CartMethods200Response, Error<CartMethodsError>> {
+pub async fn cart_methods(configuration: &configuration::Configuration, ) -> Result<models::ModelResponseCartMethods, Error<CartMethodsError>> {
 
     let uri_str = format!("{}/cart.methods.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);

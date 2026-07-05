@@ -382,7 +382,7 @@ pub async fn order_calculate(configuration: &configuration::Configuration, order
 }
 
 /// Count orders in store
-pub async fn order_count(configuration: &configuration::Configuration, order_ids: Option<&str>, ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_channel: Option<&str>, fulfillment_status: Option<&str>, shipping_method: Option<&str>, delivery_method: Option<&str>, tags: Option<&str>, ship_node_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, use_latest_api_version: Option<bool>, vendor_id: Option<&str>) -> Result<models::OrderCount200Response, Error<OrderCountError>> {
+pub async fn order_count(configuration: &configuration::Configuration, order_ids: Option<&str>, ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, customer_email: Option<&str>, order_status: Option<&str>, order_status_ids: Option<Vec<String>>, ebay_order_status: Option<&str>, financial_status: Option<&str>, financial_status_ids: Option<Vec<String>>, fulfillment_channel: Option<&str>, fulfillment_status: Option<&str>, shipping_method: Option<&str>, delivery_method: Option<&str>, tags: Option<&str>, ship_node_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, use_latest_api_version: Option<bool>, vendor_id: Option<&str>) -> Result<models::ModelResponseOrderCount, Error<OrderCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_order_ids = order_ids;
     let p_ids = ids;
@@ -518,7 +518,7 @@ pub async fn order_count(configuration: &configuration::Configuration, order_ids
 }
 
 /// Retrieve list of financial statuses
-pub async fn order_financial_status_list(configuration: &configuration::Configuration, ) -> Result<models::OrderFinancialStatusList200Response, Error<OrderFinancialStatusListError>> {
+pub async fn order_financial_status_list(configuration: &configuration::Configuration, ) -> Result<models::ModelResponseOrderFinancialStatusList, Error<OrderFinancialStatusListError>> {
 
     let uri_str = format!("{}/order.financial_status.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -559,7 +559,7 @@ pub async fn order_financial_status_list(configuration: &configuration::Configur
 }
 
 /// Retrieve list of fulfillment statuses
-pub async fn order_fulfillment_status_list(configuration: &configuration::Configuration, action: Option<&str>) -> Result<models::OrderFulfillmentStatusList200Response, Error<OrderFulfillmentStatusListError>> {
+pub async fn order_fulfillment_status_list(configuration: &configuration::Configuration, action: Option<&str>) -> Result<models::ModelResponseOrderFulfillmentStatusList, Error<OrderFulfillmentStatusListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_action = action;
 

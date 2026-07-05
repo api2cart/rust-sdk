@@ -176,7 +176,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_count
 
-> models::AttributeCount200Response attribute_count(r#type, attribute_set_id, store_id, lang_id, visible, required, system)
+> models::ModelResponseAttributeCount attribute_count(r#type, attribute_set_id, store_id, lang_id, visible, required, system)
 attribute.count
 
 Get attributes count
@@ -196,7 +196,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::AttributeCount200Response**](AttributeCount_200_response.md)
+[**models::ModelResponseAttributeCount**](Model_Response_Attribute_Count.md)
 
 ### Authorization
 
@@ -358,7 +358,7 @@ Name | Type | Description  | Required | Notes
 
 ## attribute_type_list
 
-> models::AttributeTypeList200Response attribute_type_list()
+> models::ModelResponseAttributeTypeList attribute_type_list()
 attribute.type.list
 
 Get list of supported attributes types
@@ -369,7 +369,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**models::AttributeTypeList200Response**](AttributeTypeList_200_response.md)
+[**models::ModelResponseAttributeTypeList**](Model_Response_Attribute_Type_List.md)
 
 ### Authorization
 

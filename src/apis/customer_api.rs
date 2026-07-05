@@ -265,7 +265,7 @@ pub async fn customer_attribute_list(configuration: &configuration::Configuratio
 }
 
 /// Get number of customers from store.
-pub async fn customer_count(configuration: &configuration::Configuration, ids: Option<&str>, since_id: Option<&str>, customer_list_id: Option<&str>, group_id: Option<&str>, store_id: Option<&str>, avail: Option<bool>, include_guests: Option<bool>, find_value: Option<&str>, find_where: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>) -> Result<models::CustomerCount200Response, Error<CustomerCountError>> {
+pub async fn customer_count(configuration: &configuration::Configuration, ids: Option<&str>, since_id: Option<&str>, customer_list_id: Option<&str>, group_id: Option<&str>, store_id: Option<&str>, avail: Option<bool>, include_guests: Option<bool>, find_value: Option<&str>, find_where: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>) -> Result<models::ModelResponseCustomerCount, Error<CustomerCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_ids = ids;
     let p_since_id = since_id;
@@ -407,7 +407,7 @@ pub async fn customer_delete(configuration: &configuration::Configuration, id: &
 }
 
 /// Find customers in store.
-pub async fn customer_find(configuration: &configuration::Configuration, find_value: &str, find_where: Option<&str>, find_params: Option<&str>, store_id: Option<&str>, include_guests: Option<bool>) -> Result<models::CustomerFind200Response, Error<CustomerFindError>> {
+pub async fn customer_find(configuration: &configuration::Configuration, find_value: &str, find_where: Option<&str>, find_params: Option<&str>, store_id: Option<&str>, include_guests: Option<bool>) -> Result<models::ModelResponseCustomerFind, Error<CustomerFindError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_find_value = find_value;
     let p_find_where = find_where;

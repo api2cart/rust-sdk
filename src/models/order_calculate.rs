@@ -16,7 +16,7 @@ pub struct OrderCalculate {
     /// Defines the customer specified by email for whom the order needs to be calculated
     #[serde(rename = "customer_email")]
     pub customer_email: String,
-    /// Currency code of order
+    /// Defines currency code
     #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
     pub currency: Option<String>,
     /// Currency Id

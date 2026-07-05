@@ -59,7 +59,7 @@ pub enum ReturnStatusListError {
 
 
 /// Retrieve list of return actions
-pub async fn return_action_list(configuration: &configuration::Configuration, ) -> Result<models::ReturnActionList200Response, Error<ReturnActionListError>> {
+pub async fn return_action_list(configuration: &configuration::Configuration, ) -> Result<models::ModelResponseReturnActionList, Error<ReturnActionListError>> {
 
     let uri_str = format!("{}/return.action.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -100,7 +100,7 @@ pub async fn return_action_list(configuration: &configuration::Configuration, ) 
 }
 
 /// Count returns in store
-pub async fn return_count(configuration: &configuration::Configuration, order_ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, status: Option<&str>, return_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::ReturnCount200Response, Error<ReturnCountError>> {
+pub async fn return_count(configuration: &configuration::Configuration, order_ids: Option<&str>, customer_id: Option<&str>, store_id: Option<&str>, status: Option<&str>, return_type: Option<&str>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::ModelResponseReturnCount, Error<ReturnCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_order_ids = order_ids;
     let p_customer_id = customer_id;
@@ -364,7 +364,7 @@ pub async fn return_list(configuration: &configuration::Configuration, start: Op
 }
 
 /// Retrieve list of return reasons
-pub async fn return_reason_list(configuration: &configuration::Configuration, store_id: Option<&str>) -> Result<models::ReturnReasonList200Response, Error<ReturnReasonListError>> {
+pub async fn return_reason_list(configuration: &configuration::Configuration, store_id: Option<&str>) -> Result<models::ModelResponseReturnReasonList, Error<ReturnReasonListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_store_id = store_id;
 
@@ -410,7 +410,7 @@ pub async fn return_reason_list(configuration: &configuration::Configuration, st
 }
 
 /// Retrieve list of statuses
-pub async fn return_status_list(configuration: &configuration::Configuration, ) -> Result<models::ReturnStatusList200Response, Error<ReturnStatusListError>> {
+pub async fn return_status_list(configuration: &configuration::Configuration, ) -> Result<models::ModelResponseReturnStatusList, Error<ReturnStatusListError>> {
 
     let uri_str = format!("{}/return.status.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);

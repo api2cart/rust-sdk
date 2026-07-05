@@ -138,7 +138,7 @@ Name | Type | Description  | Required | Notes
 
 ## order_count
 
-> models::OrderCount200Response order_count(order_ids, ids, customer_id, store_id, customer_email, order_status, order_status_ids, ebay_order_status, financial_status, financial_status_ids, fulfillment_channel, fulfillment_status, shipping_method, delivery_method, tags, ship_node_type, created_from, created_to, modified_from, modified_to, use_latest_api_version, vendor_id)
+> models::ModelResponseOrderCount order_count(order_ids, ids, customer_id, store_id, customer_email, order_status, order_status_ids, ebay_order_status, financial_status, financial_status_ids, fulfillment_channel, fulfillment_status, shipping_method, delivery_method, tags, ship_node_type, created_from, created_to, modified_from, modified_to, use_latest_api_version, vendor_id)
 order.count
 
 Count orders in store
@@ -173,7 +173,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::OrderCount200Response**](OrderCount_200_response.md)
+[**models::ModelResponseOrderCount**](Model_Response_Order_Count.md)
 
 ### Authorization
 
@@ -189,7 +189,7 @@ Name | Type | Description  | Required | Notes
 
 ## order_financial_status_list
 
-> models::OrderFinancialStatusList200Response order_financial_status_list()
+> models::ModelResponseOrderFinancialStatusList order_financial_status_list()
 order.financial_status.list
 
 Retrieve list of financial statuses
@@ -200,7 +200,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**models::OrderFinancialStatusList200Response**](OrderFinancialStatusList_200_response.md)
+[**models::ModelResponseOrderFinancialStatusList**](Model_Response_Order_FinancialStatus_List.md)
 
 ### Authorization
 
@@ -216,7 +216,7 @@ This endpoint does not need any parameter.
 
 ## order_fulfillment_status_list
 
-> models::OrderFulfillmentStatusList200Response order_fulfillment_status_list(action)
+> models::ModelResponseOrderFulfillmentStatusList order_fulfillment_status_list(action)
 order.fulfillment_status.list
 
 Retrieve list of fulfillment statuses
@@ -230,7 +230,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::OrderFulfillmentStatusList200Response**](OrderFulfillmentStatusList_200_response.md)
+[**models::ModelResponseOrderFulfillmentStatusList**](Model_Response_Order_FulfillmentStatus_List.md)
 
 ### Authorization
 

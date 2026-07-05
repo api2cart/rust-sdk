@@ -32,7 +32,7 @@ Method | HTTP request | Description
 
 ## cart_catalog_price_rules_count
 
-> models::CartCatalogPriceRulesCount200Response cart_catalog_price_rules_count()
+> models::ModelResponseCartCatalogPriceRulesCount cart_catalog_price_rules_count()
 cart.catalog_price_rules.count
 
 Get count of cart catalog price rules discounts.
@@ -43,7 +43,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**models::CartCatalogPriceRulesCount200Response**](CartCatalogPriceRulesCount_200_response.md)
+[**models::ModelResponseCartCatalogPriceRulesCount**](Model_Response_Cart_CatalogPriceRules_Count.md)
 
 ### Authorization
 
@@ -164,7 +164,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_coupon_count
 
-> models::CartCouponCount200Response cart_coupon_count(store_id, avail, date_start_from, date_start_to, date_end_from, date_end_to)
+> models::ModelResponseCartCouponCount cart_coupon_count(store_id, avail, date_start_from, date_start_to, date_end_from, date_end_to)
 cart.coupon.count
 
 This method allows you to get the number of coupons. On some platforms, you can filter the coupons by the date they were active.
@@ -183,7 +183,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CartCouponCount200Response**](CartCouponCount_200_response.md)
+[**models::ModelResponseCartCouponCount**](Model_Response_Cart_Coupon_Count.md)
 
 ### Authorization
 
@@ -304,7 +304,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_giftcard_add
 
-> models::CartGiftcardAdd200Response cart_giftcard_add(amount, code, owner_email, recipient_email, recipient_name, owner_name, idempotency_key)
+> models::CartGiftcardAdd200Response cart_giftcard_add(amount, currency, store_id, code, name, owner_email, owner_name, recipient_email, recipient_name, message, idempotency_key)
 cart.giftcard.add
 
 Use this method to create a gift card for a specified amount.
@@ -315,11 +315,15 @@ Use this method to create a gift card for a specified amount.
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **amount** | **f64** | Defines the gift card amount value. | [required] |
+**currency** | Option<**String**> | Defines currency code |  |
+**store_id** | Option<**String**> | Store Id |  |
 **code** | Option<**String**> | Gift card code |  |
+**name** | Option<**String**> | Entity name |  |
 **owner_email** | Option<**String**> | Gift card owner email |  |
+**owner_name** | Option<**String**> | Gift card owner name |  |
 **recipient_email** | Option<**String**> | Gift card recipient email |  |
 **recipient_name** | Option<**String**> | Gift card recipient name |  |
-**owner_name** | Option<**String**> | Gift card owner name |  |
+**message** | Option<**String**> | Free-form message attached to the entity. |  |
 **idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
@@ -340,7 +344,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_giftcard_count
 
-> models::CartGiftcardCount200Response cart_giftcard_count(store_id)
+> models::ModelResponseCartGiftcardCount cart_giftcard_count(store_id)
 cart.giftcard.count
 
 Get gift cards count.
@@ -354,7 +358,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CartGiftcardCount200Response**](CartGiftcardCount_200_response.md)
+[**models::ModelResponseCartGiftcardCount**](Model_Response_Cart_Giftcard_Count.md)
 
 ### Authorization
 
@@ -370,7 +374,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_giftcard_delete
 
-> models::AttributeDelete200Response cart_giftcard_delete(id)
+> models::AttributeDelete200Response cart_giftcard_delete(id, store_id)
 cart.giftcard.delete
 
 Delete giftcard
@@ -381,6 +385,7 @@ Delete giftcard
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Entity id | [required] |
+**store_id** | Option<**String**> | Store Id |  |
 
 ### Return type
 
@@ -400,7 +405,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_giftcard_list
 
-> models::ModelResponseCartGiftCardList cart_giftcard_list(start, count, page_cursor, store_id, response_fields, params, exclude)
+> models::ModelResponseCartGiftCardList cart_giftcard_list(ids, start, count, page_cursor, store_id, response_fields, params, exclude)
 cart.giftcard.list
 
 Get gift cards list.
@@ -410,6 +415,7 @@ Get gift cards list.
 
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
+**ids** | Option<**String**> | Retrieves gift cards specified by ids |  |
 **start** | Option<**i32**> | This parameter sets the number from which you want to get entities |  |[default to 0]
 **count** | Option<**i32**> | This parameter sets the entity amount that has to be retrieved. Max allowed count=250 |  |[default to 10]
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
@@ -472,7 +478,7 @@ Name | Type | Description  | Required | Notes
 > models::ModelResponseCartMetaDataList cart_meta_data_list(entity_id, count, page_cursor, entity, store_id, lang_id, key, response_fields, params, exclude)
 cart.meta_data.list
 
-Using this method, you can get a list of metadata for various entities (products, options, customers, orders). Usually this is data created by third-party plugins.
+Using this method, you can get a list of metadata for various entities. Entities supported may differ across platforms. To get the list of supported entities, pass an invalid value in the <code>entity</code> parameter. The response will contain the list of entities supported by the specific platform. Usually this is data created by third-party plugins.
 
 ### Parameters
 
@@ -511,7 +517,7 @@ Name | Type | Description  | Required | Notes
 > models::AttributeAdd200Response cart_meta_data_set(entity_id, key, value, namespace, entity, store_id, lang_id, idempotency_key)
 cart.meta_data.set
 
-Set meta data for a specific entity
+Set metadata for a specific entity. Entities supported may differ across platforms. To get the list of supported entities, pass an invalid value in the <code>entity</code> parameter. The response will contain the list of entities supported by the specific platform. Usually this is data created by third-party plugins.
 
 ### Parameters
 
@@ -579,7 +585,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_methods
 
-> models::CartMethods200Response cart_methods()
+> models::ModelResponseCartMethods cart_methods()
 cart.methods
 
 Returns a list of supported API methods.
@@ -590,7 +596,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**models::CartMethods200Response**](CartMethods_200_response.md)
+[**models::ModelResponseCartMethods**](Model_Response_Cart_Methods.md)
 
 ### Authorization
 

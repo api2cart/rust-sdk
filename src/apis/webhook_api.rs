@@ -59,7 +59,7 @@ pub enum WebhookUpdateError {
 
 
 /// Count registered webhooks on the store.
-pub async fn webhook_count(configuration: &configuration::Configuration, entity: Option<&str>, action: Option<&str>, active: Option<bool>) -> Result<models::WebhookCount200Response, Error<WebhookCountError>> {
+pub async fn webhook_count(configuration: &configuration::Configuration, entity: Option<&str>, action: Option<&str>, active: Option<bool>) -> Result<models::ModelResponseWebhookCount, Error<WebhookCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_entity = entity;
     let p_action = action;
@@ -201,7 +201,7 @@ pub async fn webhook_delete(configuration: &configuration::Configuration, id: &s
 }
 
 /// List all Webhooks that are available on this store.
-pub async fn webhook_events(configuration: &configuration::Configuration, ) -> Result<models::WebhookEvents200Response, Error<WebhookEventsError>> {
+pub async fn webhook_events(configuration: &configuration::Configuration, ) -> Result<models::ModelResponseWebhookEvents, Error<WebhookEventsError>> {
 
     let uri_str = format!("{}/webhook.events.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);

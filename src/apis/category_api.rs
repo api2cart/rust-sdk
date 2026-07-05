@@ -256,7 +256,7 @@ pub async fn category_add_batch(configuration: &configuration::Configuration, ca
 }
 
 /// Assign category to product
-pub async fn category_assign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::CategoryAssign200Response, Error<CategoryAssignError>> {
+pub async fn category_assign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::ModelResponseCategoryAssign, Error<CategoryAssignError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_category_id = category_id;
     let p_product_id = product_id;
@@ -310,7 +310,7 @@ pub async fn category_assign(configuration: &configuration::Configuration, categ
 }
 
 /// Count categories in store.
-pub async fn category_count(configuration: &configuration::Configuration, parent_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, avail: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, product_type: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::CategoryCount200Response, Error<CategoryCountError>> {
+pub async fn category_count(configuration: &configuration::Configuration, parent_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, avail: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, product_type: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, disable_report_cache: Option<bool>) -> Result<models::ModelResponseCategoryCount, Error<CategoryCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_parent_id = parent_id;
     let p_store_id = store_id;
@@ -496,7 +496,7 @@ pub async fn category_delete_batch(configuration: &configuration::Configuration,
 }
 
 /// Search category in store. \"Laptop\" is specified here by default.
-pub async fn category_find(configuration: &configuration::Configuration, find_value: &str, find_where: Option<&str>, find_params: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>) -> Result<models::CategoryFind200Response, Error<CategoryFindError>> {
+pub async fn category_find(configuration: &configuration::Configuration, find_value: &str, find_where: Option<&str>, find_params: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>) -> Result<models::ModelResponseCategoryFind, Error<CategoryFindError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_find_value = find_value;
     let p_find_where = find_where;
@@ -890,7 +890,7 @@ pub async fn category_list(configuration: &configuration::Configuration, start: 
 }
 
 /// Unassign category to product
-pub async fn category_unassign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::CategoryAssign200Response, Error<CategoryUnassignError>> {
+pub async fn category_unassign(configuration: &configuration::Configuration, category_id: &str, product_id: &str, store_id: Option<&str>, idempotency_key: Option<&str>) -> Result<models::ModelResponseCategoryUnassign, Error<CategoryUnassignError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_category_id = category_id;
     let p_product_id = product_id;

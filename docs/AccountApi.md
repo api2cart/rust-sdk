@@ -320,7 +320,7 @@ Name | Type | Description  | Required | Notes
 
 ## account_supported_platforms
 
-> models::AccountSupportedPlatforms200Response account_supported_platforms()
+> models::ModelResponseAccountSupportedPlatforms account_supported_platforms()
 account.supported_platforms
 
 Use this method to retrieve a list of supported platforms and the sets of parameters required for connecting to each of them. Note: some platforms may have multiple connection methods so that the response will contain multiple sets of parameters.
@@ -331,7 +331,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**models::AccountSupportedPlatforms200Response**](AccountSupportedPlatforms_200_response.md)
+[**models::ModelResponseAccountSupportedPlatforms**](Model_Response_Account_SupportedPlatforms.md)
 
 ### Authorization
 

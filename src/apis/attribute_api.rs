@@ -425,7 +425,7 @@ pub async fn attribute_attributeset_list(configuration: &configuration::Configur
 }
 
 /// Get attributes count
-pub async fn attribute_count(configuration: &configuration::Configuration, r#type: Option<&str>, attribute_set_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, visible: Option<bool>, required: Option<bool>, system: Option<bool>) -> Result<models::AttributeCount200Response, Error<AttributeCountError>> {
+pub async fn attribute_count(configuration: &configuration::Configuration, r#type: Option<&str>, attribute_set_id: Option<&str>, store_id: Option<&str>, lang_id: Option<&str>, visible: Option<bool>, required: Option<bool>, system: Option<bool>) -> Result<models::ModelResponseAttributeCount, Error<AttributeCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_type = r#type;
     let p_attribute_set_id = attribute_set_id;
@@ -779,7 +779,7 @@ pub async fn attribute_list(configuration: &configuration::Configuration, start:
 }
 
 /// Get list of supported attributes types
-pub async fn attribute_type_list(configuration: &configuration::Configuration, ) -> Result<models::AttributeTypeList200Response, Error<AttributeTypeListError>> {
+pub async fn attribute_type_list(configuration: &configuration::Configuration, ) -> Result<models::ModelResponseAttributeTypeList, Error<AttributeTypeListError>> {
 
     let uri_str = format!("{}/attribute.type.list.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);

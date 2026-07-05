@@ -797,7 +797,7 @@ pub async fn product_brand_list(configuration: &configuration::Configuration, st
 }
 
 /// Search product child item (bundled item or configurable product variant) in store catalog.
-pub async fn product_child_item_find(configuration: &configuration::Configuration, find_value: Option<&str>, find_where: Option<&str>, find_params: Option<&str>, store_id: Option<&str>) -> Result<models::ProductChildItemFind200Response, Error<ProductChildItemFindError>> {
+pub async fn product_child_item_find(configuration: &configuration::Configuration, find_value: Option<&str>, find_where: Option<&str>, find_params: Option<&str>, store_id: Option<&str>) -> Result<models::ModelResponseProductChildItemFind, Error<ProductChildItemFindError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_find_value = find_value;
     let p_find_where = find_where;
@@ -1063,7 +1063,7 @@ pub async fn product_child_item_list(configuration: &configuration::Configuratio
 }
 
 /// Count products in store.
-pub async fn product_count(configuration: &configuration::Configuration, sku: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, vendor_id: Option<&str>, lang_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, brand_name: Option<&str>, manufacturer_id: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, return_global: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ProductCount200Response, Error<ProductCountError>> {
+pub async fn product_count(configuration: &configuration::Configuration, sku: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, vendor_id: Option<&str>, lang_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, brand_name: Option<&str>, manufacturer_id: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, return_global: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ModelResponseProductCount, Error<ProductCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_sku = sku;
     let p_product_ids = product_ids;
@@ -1448,7 +1448,7 @@ pub async fn product_delete_batch(configuration: &configuration::Configuration, 
 }
 
 /// Search product in store catalog. \"Apple\" is specified here by default.
-pub async fn product_find(configuration: &configuration::Configuration, find_value: &str, find_where: Option<&str>, find_params: Option<&str>, find_what: Option<&str>, lang_id: Option<&str>, store_id: Option<&str>) -> Result<models::ProductFind200Response, Error<ProductFindError>> {
+pub async fn product_find(configuration: &configuration::Configuration, find_value: &str, find_where: Option<&str>, find_params: Option<&str>, find_what: Option<&str>, lang_id: Option<&str>, store_id: Option<&str>) -> Result<models::ModelResponseProductFind, Error<ProductFindError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_find_value = find_value;
     let p_find_where = find_where;

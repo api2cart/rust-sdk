@@ -282,7 +282,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_child_item_find
 
-> models::ProductChildItemFind200Response product_child_item_find(find_value, find_where, find_params, store_id)
+> models::ModelResponseProductChildItemFind product_child_item_find(find_value, find_where, find_params, store_id)
 product.child_item.find
 
 Search product child item (bundled item or configurable product variant) in store catalog.
@@ -299,7 +299,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::ProductChildItemFind200Response**](ProductChildItemFind_200_response.md)
+[**models::ModelResponseProductChildItemFind**](Model_Response_Product_ChildItem_Find.md)
 
 ### Authorization
 
@@ -405,7 +405,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_count
 
-> models::ProductCount200Response product_count(sku, product_ids, since_id, categories_ids, category_id, store_id, vendor_id, lang_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, brand_name, manufacturer_id, product_attributes, status, r#type, visible, find_value, find_where, report_request_id, return_global, disable_report_cache, use_latest_api_version)
+> models::ModelResponseProductCount product_count(sku, product_ids, since_id, categories_ids, category_id, store_id, vendor_id, lang_id, avail_view, avail_sale, created_from, created_to, modified_from, modified_to, brand_name, manufacturer_id, product_attributes, status, r#type, visible, find_value, find_where, report_request_id, return_global, disable_report_cache, use_latest_api_version)
 product.count
 
 Count products in store.
@@ -444,7 +444,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::ProductCount200Response**](ProductCount_200_response.md)
+[**models::ModelResponseProductCount**](Model_Response_Product_Count.md)
 
 ### Authorization
 
@@ -595,7 +595,7 @@ Name | Type | Description  | Required | Notes
 
 ## product_find
 
-> models::ProductFind200Response product_find(find_value, find_where, find_params, find_what, lang_id, store_id)
+> models::ModelResponseProductFind product_find(find_value, find_where, find_params, find_what, lang_id, store_id)
 product.find
 
 Search product in store catalog. \"Apple\" is specified here by default.
@@ -614,7 +614,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::ProductFind200Response**](ProductFind_200_response.md)
+[**models::ModelResponseProductFind**](Model_Response_Product_Find.md)
 
 ### Authorization
 

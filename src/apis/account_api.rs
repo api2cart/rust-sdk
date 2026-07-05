@@ -957,7 +957,7 @@ pub async fn account_failed_webhooks(configuration: &configuration::Configuratio
 }
 
 /// Use this method to retrieve a list of supported platforms and the sets of parameters required for connecting to each of them. Note: some platforms may have multiple connection methods so that the response will contain multiple sets of parameters.
-pub async fn account_supported_platforms(configuration: &configuration::Configuration, ) -> Result<models::AccountSupportedPlatforms200Response, Error<AccountSupportedPlatformsError>> {
+pub async fn account_supported_platforms(configuration: &configuration::Configuration, ) -> Result<models::ModelResponseAccountSupportedPlatforms, Error<AccountSupportedPlatformsError>> {
 
     let uri_str = format!("{}/account.supported_platforms.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);

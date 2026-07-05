@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## return_action_list
 
-> models::ReturnActionList200Response return_action_list()
+> models::ModelResponseReturnActionList return_action_list()
 return.action.list
 
 Retrieve list of return actions
@@ -26,7 +26,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**models::ReturnActionList200Response**](ReturnActionList_200_response.md)
+[**models::ModelResponseReturnActionList**](Model_Response_Return_Action_List.md)
 
 ### Authorization
 
@@ -42,7 +42,7 @@ This endpoint does not need any parameter.
 
 ## return_count
 
-> models::ReturnCount200Response return_count(order_ids, customer_id, store_id, status, return_type, created_from, created_to, modified_from, modified_to, report_request_id, disable_report_cache)
+> models::ModelResponseReturnCount return_count(order_ids, customer_id, store_id, status, return_type, created_from, created_to, modified_from, modified_to, report_request_id, disable_report_cache)
 return.count
 
 Count returns in store
@@ -66,7 +66,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::ReturnCount200Response**](ReturnCount_200_response.md)
+[**models::ModelResponseReturnCount**](Model_Response_Return_Count.md)
 
 ### Authorization
 
@@ -164,7 +164,7 @@ Name | Type | Description  | Required | Notes
 
 ## return_reason_list
 
-> models::ReturnReasonList200Response return_reason_list(store_id)
+> models::ModelResponseReturnReasonList return_reason_list(store_id)
 return.reason.list
 
 Retrieve list of return reasons
@@ -178,7 +178,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::ReturnReasonList200Response**](ReturnReasonList_200_response.md)
+[**models::ModelResponseReturnReasonList**](Model_Response_Return_Reason_List.md)
 
 ### Authorization
 
@@ -194,7 +194,7 @@ Name | Type | Description  | Required | Notes
 
 ## return_status_list
 
-> models::ReturnStatusList200Response return_status_list()
+> models::ModelResponseReturnStatusList return_status_list()
 return.status.list
 
 Retrieve list of statuses
@@ -205,7 +205,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**models::ReturnStatusList200Response**](ReturnStatusList_200_response.md)
+[**models::ModelResponseReturnStatusList**](Model_Response_Return_Status_List.md)
 
 ### Authorization
 

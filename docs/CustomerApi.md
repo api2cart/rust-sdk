@@ -119,7 +119,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_count
 
-> models::CustomerCount200Response customer_count(ids, since_id, customer_list_id, group_id, store_id, avail, include_guests, find_value, find_where, created_from, created_to, modified_from, modified_to)
+> models::ModelResponseCustomerCount customer_count(ids, since_id, customer_list_id, group_id, store_id, avail, include_guests, find_value, find_where, created_from, created_to, modified_from, modified_to)
 customer.count
 
 Get number of customers from store.
@@ -145,7 +145,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CustomerCount200Response**](CustomerCount_200_response.md)
+[**models::ModelResponseCustomerCount**](Model_Response_Customer_Count.md)
 
 ### Authorization
 
@@ -192,7 +192,7 @@ Name | Type | Description  | Required | Notes
 
 ## customer_find
 
-> models::CustomerFind200Response customer_find(find_value, find_where, find_params, store_id, include_guests)
+> models::ModelResponseCustomerFind customer_find(find_value, find_where, find_params, store_id, include_guests)
 customer.find
 
 Find customers in store.
@@ -210,7 +210,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CustomerFind200Response**](CustomerFind_200_response.md)
+[**models::ModelResponseCustomerFind**](Model_Response_Customer_Find.md)
 
 ### Authorization
 

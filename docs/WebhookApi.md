@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## webhook_count
 
-> models::WebhookCount200Response webhook_count(entity, action, active)
+> models::ModelResponseWebhookCount webhook_count(entity, action, active)
 webhook.count
 
 Count registered webhooks on the store.
@@ -31,7 +31,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::WebhookCount200Response**](WebhookCount_200_response.md)
+[**models::ModelResponseWebhookCount**](Model_Response_Webhook_Count.md)
 
 ### Authorization
 
@@ -107,7 +107,7 @@ Name | Type | Description  | Required | Notes
 
 ## webhook_events
 
-> models::WebhookEvents200Response webhook_events()
+> models::ModelResponseWebhookEvents webhook_events()
 webhook.events
 
 List all Webhooks that are available on this store.
@@ -118,7 +118,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**models::WebhookEvents200Response**](WebhookEvents_200_response.md)
+[**models::ModelResponseWebhookEvents**](Model_Response_Webhook_Events.md)
 
 ### Authorization
 

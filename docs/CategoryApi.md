@@ -97,7 +97,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_assign
 
-> models::CategoryAssign200Response category_assign(category_id, product_id, store_id, idempotency_key)
+> models::ModelResponseCategoryAssign category_assign(category_id, product_id, store_id, idempotency_key)
 category.assign
 
 Assign category to product
@@ -114,7 +114,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CategoryAssign200Response**](CategoryAssign_200_response.md)
+[**models::ModelResponseCategoryAssign**](Model_Response_Category_Assign.md)
 
 ### Authorization
 
@@ -130,7 +130,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_count
 
-> models::CategoryCount200Response category_count(parent_id, store_id, lang_id, avail, created_from, created_to, modified_from, modified_to, product_type, find_value, find_where, report_request_id, disable_report_cache)
+> models::ModelResponseCategoryCount category_count(parent_id, store_id, lang_id, avail, created_from, created_to, modified_from, modified_to, product_type, find_value, find_where, report_request_id, disable_report_cache)
 category.count
 
 Count categories in store.
@@ -156,7 +156,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CategoryCount200Response**](CategoryCount_200_response.md)
+[**models::ModelResponseCategoryCount**](Model_Response_Category_Count.md)
 
 ### Authorization
 
@@ -233,7 +233,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_find
 
-> models::CategoryFind200Response category_find(find_value, find_where, find_params, store_id, lang_id)
+> models::ModelResponseCategoryFind category_find(find_value, find_where, find_params, store_id, lang_id)
 category.find
 
 Search category in store. \"Laptop\" is specified here by default.
@@ -251,7 +251,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CategoryFind200Response**](CategoryFind_200_response.md)
+[**models::ModelResponseCategoryFind**](Model_Response_Category_Find.md)
 
 ### Authorization
 
@@ -428,7 +428,7 @@ Name | Type | Description  | Required | Notes
 
 ## category_unassign
 
-> models::CategoryAssign200Response category_unassign(category_id, product_id, store_id, idempotency_key)
+> models::ModelResponseCategoryUnassign category_unassign(category_id, product_id, store_id, idempotency_key)
 category.unassign
 
 Unassign category to product
@@ -445,7 +445,7 @@ Name | Type | Description  | Required | Notes
 
 ### Return type
 
-[**models::CategoryAssign200Response**](CategoryAssign_200_response.md)
+[**models::ModelResponseCategoryUnassign**](Model_Response_Category_Unassign.md)
 
 ### Authorization
 
