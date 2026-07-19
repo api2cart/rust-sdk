@@ -20,6 +20,14 @@ docs/AccountFailedWebhooks200ResponseResultWebhookInner.md
 docs/AccountSupportedPlatform.md
 docs/AccountSupportedPlatformParams.md
 docs/AccountSupportedPlatformParamsRequiredInnerInner.md
+docs/AnalyticsApi.md
+docs/AnalyticsCustomer.md
+docs/AnalyticsCustomerMetric.md
+docs/AnalyticsInterval.md
+docs/AnalyticsMetric.md
+docs/AnalyticsPeriod.md
+docs/AnalyticsProduct.md
+docs/AnalyticsProductMetric.md
 docs/AttributeAdd200Response.md
 docs/AttributeAdd200ResponseResult.md
 docs/AttributeApi.md
@@ -369,6 +377,9 @@ docs/ProductVariantUpdateBatch.md
 docs/ProductVariantUpdateBatchPayloadInner.md
 docs/ProductVariantUpdateOptionsInner.md
 docs/ResponseAccountSupportedPlatformsResult.md
+docs/ResponseAnalyticsCustomerReportResult.md
+docs/ResponseAnalyticsProductReportResult.md
+docs/ResponseAnalyticsReportResult.md
 docs/ResponseAttributeAttributesetListResult.md
 docs/ResponseAttributeCountResult.md
 docs/ResponseAttributeGroupListResult.md
@@ -464,6 +475,7 @@ docs/WebhookList200ResponseResult.md
 docs/WebhookUpdate.md
 git_push.sh
 src/apis/account_api.rs
+src/apis/analytics_api.rs
 src/apis/attribute_api.rs
 src/apis/basket_api.rs
 src/apis/batch_api.rs
@@ -497,6 +509,13 @@ src/models/account_failed_webhooks_200_response_result_webhook_inner.rs
 src/models/account_supported_platform.rs
 src/models/account_supported_platform_params.rs
 src/models/account_supported_platform_params_required_inner_inner.rs
+src/models/analytics_customer.rs
+src/models/analytics_customer_metric.rs
+src/models/analytics_interval.rs
+src/models/analytics_metric.rs
+src/models/analytics_period.rs
+src/models/analytics_product.rs
+src/models/analytics_product_metric.rs
 src/models/attribute_add_200_response.rs
 src/models/attribute_add_200_response_result.rs
 src/models/attribute_assign_group_200_response.rs
@@ -838,6 +857,9 @@ src/models/product_variant_update_batch.rs
 src/models/product_variant_update_batch_payload_inner.rs
 src/models/product_variant_update_options_inner.rs
 src/models/response_account_supported_platforms_result.rs
+src/models/response_analytics_customer_report_result.rs
+src/models/response_analytics_product_report_result.rs
+src/models/response_analytics_report_result.rs
 src/models/response_attribute_attributeset_list_result.rs
 src/models/response_attribute_count_result.rs
 src/models/response_attribute_group_list_result.rs
