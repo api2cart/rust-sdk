@@ -46,21 +46,69 @@ pub struct OrderShipmentAdd {
     /// This parameter is used for adjust stock.
     #[serde(rename = "adjust_stock", skip_serializing_if = "Option::is_none")]
     pub adjust_stock: Option<bool>,
-    /// If the value is 'true' and order exist in our cache, we will use order.info from cache to prepare shipment items.
-    #[serde(rename = "enable_cache", skip_serializing_if = "Option::is_none")]
-    pub enable_cache: Option<bool>,
     /// Disable or enable check process status. Please note that the response will be slower due to additional requests to the store.
     #[serde(rename = "check_process_status", skip_serializing_if = "Option::is_none")]
     pub check_process_status: Option<bool>,
     /// Defines name of the company which provides shipment tracking
     #[serde(rename = "tracking_provider", skip_serializing_if = "Option::is_none")]
     pub tracking_provider: Option<String>,
-    /// Use the latest platform API version
-    #[serde(rename = "use_latest_api_version", skip_serializing_if = "Option::is_none")]
-    pub use_latest_api_version: Option<bool>,
     /// Specifies admin's order comment
     #[serde(rename = "admin_comment", skip_serializing_if = "Option::is_none")]
     pub admin_comment: Option<String>,
+    /// Mail class for the shipment (e.g., priority, express).
+    #[serde(rename = "mail_class", skip_serializing_if = "Option::is_none")]
+    pub mail_class: Option<String>,
+    /// Ship date.
+    #[serde(rename = "ship_date", skip_serializing_if = "Option::is_none")]
+    pub ship_date: Option<String>,
+    /// Weight
+    #[serde(rename = "weight", skip_serializing_if = "Option::is_none")]
+    pub weight: Option<f64>,
+    /// Weight Unit
+    #[serde(rename = "weight_unit", skip_serializing_if = "Option::is_none")]
+    pub weight_unit: Option<String>,
+    /// Defines product's length
+    #[serde(rename = "length", skip_serializing_if = "Option::is_none")]
+    pub length: Option<f64>,
+    /// Defines product's width
+    #[serde(rename = "width", skip_serializing_if = "Option::is_none")]
+    pub width: Option<f64>,
+    /// Defines product's height
+    #[serde(rename = "height", skip_serializing_if = "Option::is_none")]
+    pub height: Option<f64>,
+    /// Weight Unit
+    #[serde(rename = "dimensions_unit", skip_serializing_if = "Option::is_none")]
+    pub dimensions_unit: Option<String>,
+    /// Cost of the shipping label.
+    #[serde(rename = "shipping_label_cost", skip_serializing_if = "Option::is_none")]
+    pub shipping_label_cost: Option<f64>,
+    /// Currency code for the shipping label cost (3-letter ISO code).
+    #[serde(rename = "shipping_label_currency", skip_serializing_if = "Option::is_none")]
+    pub shipping_label_currency: Option<String>,
+    /// Revenue eligibility flag.
+    #[serde(rename = "revenue_eligibility", skip_serializing_if = "Option::is_none")]
+    pub revenue_eligibility: Option<bool>,
+    /// Country code the shipment is sent from (2-letter ISO code).
+    #[serde(rename = "ship_from_country", skip_serializing_if = "Option::is_none")]
+    pub ship_from_country: Option<String>,
+    /// Country code the shipment is sent to (2-letter ISO code).
+    #[serde(rename = "ship_to_country", skip_serializing_if = "Option::is_none")]
+    pub ship_to_country: Option<String>,
+    /// International commercial term for the shipment (e.g., DAP, DDP).
+    #[serde(rename = "incoterm", skip_serializing_if = "Option::is_none")]
+    pub incoterm: Option<String>,
+    /// Duty amount for international shipment.
+    #[serde(rename = "duty_amount", skip_serializing_if = "Option::is_none")]
+    pub duty_amount: Option<f64>,
+    /// Currency code for the duty amount (3-letter ISO code).
+    #[serde(rename = "duty_currency", skip_serializing_if = "Option::is_none")]
+    pub duty_currency: Option<String>,
+    /// If the value is 'true' and order exist in our cache, we will use order.info from cache to prepare shipment items.
+    #[serde(rename = "enable_cache", skip_serializing_if = "Option::is_none")]
+    pub enable_cache: Option<bool>,
+    /// Use the latest platform API version
+    #[serde(rename = "use_latest_api_version", skip_serializing_if = "Option::is_none")]
+    pub use_latest_api_version: Option<bool>,
     /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
     #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
     pub idempotency_key: Option<String>,
@@ -80,11 +128,27 @@ impl OrderShipmentAdd {
             is_shipped: None,
             send_notifications: None,
             adjust_stock: None,
-            enable_cache: None,
             check_process_status: None,
             tracking_provider: None,
-            use_latest_api_version: None,
             admin_comment: None,
+            mail_class: None,
+            ship_date: None,
+            weight: None,
+            weight_unit: None,
+            length: None,
+            width: None,
+            height: None,
+            dimensions_unit: None,
+            shipping_label_cost: None,
+            shipping_label_currency: None,
+            revenue_eligibility: None,
+            ship_from_country: None,
+            ship_to_country: None,
+            incoterm: None,
+            duty_amount: None,
+            duty_currency: None,
+            enable_cache: None,
+            use_latest_api_version: None,
             idempotency_key: None,
         }
     }

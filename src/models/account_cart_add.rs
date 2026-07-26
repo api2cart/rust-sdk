@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AccountCartAdd {
-    /// Store’s identifier which you can get from cart_list method
+    /// Integration identifier
     #[serde(rename = "cart_id")]
     pub cart_id: CartId,
     /// A web address of a store that you would like to connect to API2Cart
@@ -25,7 +25,7 @@ pub struct AccountCartAdd {
     /// Absolute path to the store root directory (used with \"bridge_url\" parameter)
     #[serde(rename = "store_root", skip_serializing_if = "Option::is_none")]
     pub store_root: Option<String>,
-    /// Set this parameter if bridge is already uploaded to store
+    /// If a bridge connector is already installed on the store, you MUST pass here the store key it generated during installation, to connect via the bridge-based integration. Omit it only when connecting via an API-based integration, which uses API credentials instead.
     #[serde(rename = "store_key", skip_serializing_if = "Option::is_none")]
     pub store_key: Option<String>,
     /// Defines alternative text that has to be attached to the picture
@@ -765,7 +765,7 @@ impl AccountCartAdd {
         }
     }
 }
-/// Store’s identifier which you can get from cart_list method
+/// Integration identifier
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum CartId {
     #[serde(rename = "3DCart")]

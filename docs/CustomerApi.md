@@ -97,9 +97,9 @@ Name | Type | Description  | Required | Notes
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
+**response_fields** | Option<**String**> | Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. |  |
+**params** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
+**exclude** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -275,9 +275,9 @@ Name | Type | Description  | Required | Notes
 **group_ids** | Option<**String**> | Groups that will be assigned to a customer |  |
 **store_id** | Option<**String**> | Store Id |  |
 **lang_id** | Option<**String**> | Language id |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,additional_fields]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
+**response_fields** | Option<**String**> | Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. |  |
+**params** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,name,additional_fields]
+**exclude** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 **disable_cache** | Option<**bool**> | Disable cache for current request |  |[default to false]
 
 ### Return type
@@ -310,9 +310,9 @@ Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **id** | **String** | Retrieves customer's info specified by customer id | [required] |
 **store_id** | Option<**String**> | Retrieves customer info specified by store id |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,email,first_name,last_name]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
+**response_fields** | Option<**String**> | Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. |  |
+**params** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,email,first_name,last_name]
+**exclude** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -360,9 +360,9 @@ Name | Type | Description  | Required | Notes
 **modified_to** | Option<**String**> | Retrieve entities to their modification date |  |
 **sort_by** | Option<**String**> | Set field to sort by |  |[default to created_time]
 **sort_direction** | Option<**String**> | Set sorting direction |  |[default to asc]
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,email,first_name,last_name]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
+**response_fields** | Option<**String**> | Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. |  |
+**params** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,email,first_name,last_name]
+**exclude** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -428,7 +428,7 @@ Name | Type | Description  | Required | Notes
 **page_cursor** | Option<**String**> | Used to retrieve entities via cursor-based pagination (it can't be used with any other filtering parameter) |  |
 **id** | Option<**String**> | Entity id |  |
 **store_id** | Option<**String**> | Store Id |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to {return_code,return_message,pagination,result}]
+**response_fields** | Option<**String**> | Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. |  |[default to {return_code,return_message,pagination,result}]
 
 ### Return type
 

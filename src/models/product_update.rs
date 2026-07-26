@@ -85,7 +85,7 @@ pub struct ProductUpdate {
     /// Set visibility status
     #[serde(rename = "visible", skip_serializing_if = "Option::is_none")]
     pub visible: Option<String>,
-    /// Set stock status
+    /// Set stock status. Effective only when manage_stock is false — when stock is managed, the status is derived from quantity automatically and this parameter is ignored.
     #[serde(rename = "in_stock", skip_serializing_if = "Option::is_none")]
     pub in_stock: Option<bool>,
     /// Defines category's visibility status
@@ -118,22 +118,22 @@ pub struct ProductUpdate {
     /// Language id
     #[serde(rename = "lang_id", skip_serializing_if = "Option::is_none")]
     pub lang_id: Option<String>,
-    /// Defines new product's quantity
+    /// Defines new product's quantity. Effective only when manage_stock is true — otherwise the value is ignored. To enable stock tracking and set a quantity in one call, pass manage_stock=true together with quantity.
     #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<f64>,
     /// This parameter allows to reserve/unreserve product quantity.
     #[serde(rename = "reserve_quantity", skip_serializing_if = "Option::is_none")]
     pub reserve_quantity: Option<f64>,
-    /// Defines inventory tracking for product
+    /// Defines inventory tracking for product. When true, quantity sets the stock level and the stock status is derived from it; when false, quantity is ignored and in_stock sets the status directly.
     #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
     pub manage_stock: Option<bool>,
     /// Set backorder status
     #[serde(rename = "backorder_status", skip_serializing_if = "Option::is_none")]
     pub backorder_status: Option<String>,
-    /// Defines the incremental changes in product quantity
+    /// Defines the incremental changes in product quantity. Effective only when manage_stock is true — otherwise the value is ignored.
     #[serde(rename = "increase_quantity", skip_serializing_if = "Option::is_none")]
     pub increase_quantity: Option<f64>,
-    /// Defines the decrement changes in product quantity
+    /// Defines the decrement changes in product quantity. Effective only when manage_stock is true — otherwise the value is ignored.
     #[serde(rename = "reduce_quantity", skip_serializing_if = "Option::is_none")]
     pub reduce_quantity: Option<f64>,
     /// Specify the quantity threshold below which the product is considered low in stock

@@ -28,7 +28,7 @@ Name | Type | Description  | Required | Notes
 **created_to** | Option<**String**> | Retrieve entities to their creation date |  |
 **processed_from** | Option<**String**> | Retrieve entities according to their processing datetime |  |
 **processed_to** | Option<**String**> | Retrieve entities according to their processing datetime |  |
-**response_fields** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to {return_code,return_message,pagination,result}]
+**response_fields** | Option<**String**> | Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. |  |[default to {return_code,return_message,pagination,result}]
 
 ### Return type
 

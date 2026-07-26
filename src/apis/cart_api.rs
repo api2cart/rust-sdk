@@ -919,9 +919,8 @@ pub async fn cart_giftcard_list(configuration: &configuration::Configuration, id
 }
 
 /// This method allows you to get various information about the store, including a list of stores (in the case of a multistore configuration), a list of supported languages, currencies, carriers, warehouses, and many other information. This information contains data that is relatively stable and rarely changes, so API2Cart can cache certain data to reduce the load on the store and speed up the execution of the request. We also recommend that you cache the response of this method on your side to save requests. If you need to clear the cache for a specific store, then use the cart.validate method.
-pub async fn cart_info(configuration: &configuration::Configuration, store_id: Option<&str>, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::CartInfo200Response, Error<CartInfoError>> {
+pub async fn cart_info(configuration: &configuration::Configuration, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::CartInfo200Response, Error<CartInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_store_id = store_id;
     let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
@@ -929,9 +928,6 @@ pub async fn cart_info(configuration: &configuration::Configuration, store_id: O
     let uri_str = format!("{}/cart.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
-    if let Some(ref param_value) = p_store_id {
-        req_builder = req_builder.query(&[("store_id", &param_value.to_string())]);
-    }
     if let Some(ref param_value) = p_response_fields {
         req_builder = req_builder.query(&[("response_fields", &param_value.to_string())]);
     }

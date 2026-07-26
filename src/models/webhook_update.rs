@@ -16,7 +16,7 @@ pub struct WebhookUpdate {
     /// Webhook id
     #[serde(rename = "id")]
     pub id: String,
-    /// Callback url that returns shipping rates. It should be able to accept POST requests with json data.
+    /// Callback where the webhook should send the POST request when the event occurs
     #[serde(rename = "callback", skip_serializing_if = "Option::is_none")]
     pub callback: Option<String>,
     /// The name you give to the webhook
@@ -25,7 +25,7 @@ pub struct WebhookUpdate {
     /// Fields the webhook should send
     #[serde(rename = "fields", skip_serializing_if = "Option::is_none")]
     pub fields: Option<String>,
-    /// Set this parameter in order to choose which entity fields you want to retrieve
+    /// Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields.
     #[serde(rename = "response_fields", skip_serializing_if = "Option::is_none")]
     pub response_fields: Option<String>,
     /// Webhook status

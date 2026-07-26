@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **shipp_postcode** | Option<**String**> | Specifies shipping postcode | [optional]
 **shipp_state** | Option<**String**> | Specifies shipping state code | [optional]
 **shipp_country** | **String** | Specifies shipping country code | 
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve | [optional][default to force_all]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all | [optional]
+**params** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve | [optional][default to force_all]
+**exclude** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all | [optional]
 **idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> | [optional]
 **order_item** | [**Vec<models::OrderPreestimateShippingListOrderItemInner>**](OrderPreestimateShippingList_order_item_inner.md) |  | 
 

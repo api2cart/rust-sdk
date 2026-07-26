@@ -76,10 +76,10 @@ pub struct ProductVariantUpdate {
     /// Defines whether the product is virtual
     #[serde(rename = "is_virtual", skip_serializing_if = "Option::is_none")]
     pub is_virtual: Option<bool>,
-    /// Defines inventory tracking for product variant
+    /// Defines inventory tracking for product variant. When true, quantity sets the stock level and the stock status is derived from it; when false, quantity is ignored and in_stock sets the status directly.
     #[serde(rename = "manage_stock", skip_serializing_if = "Option::is_none")]
     pub manage_stock: Option<bool>,
-    /// Set stock status
+    /// Set stock status. Effective only when manage_stock is false — when stock is managed, the status is derived from quantity automatically and this parameter is ignored.
     #[serde(rename = "in_stock", skip_serializing_if = "Option::is_none")]
     pub in_stock: Option<bool>,
     /// This parameter is used for selecting a warehouse where you need to set/modify a product quantity.
@@ -88,13 +88,13 @@ pub struct ProductVariantUpdate {
     /// This parameter allows to reserve/unreserve product variants quantity.
     #[serde(rename = "reserve_quantity", skip_serializing_if = "Option::is_none")]
     pub reserve_quantity: Option<f64>,
-    /// Defines new products' variants quantity
+    /// Defines new products' variants quantity. Effective only when manage_stock is true — otherwise the value is ignored. To enable stock tracking and set a quantity in one call, pass manage_stock=true together with quantity.
     #[serde(rename = "quantity", skip_serializing_if = "Option::is_none")]
     pub quantity: Option<f64>,
-    /// Defines the incremental changes in product quantity
+    /// Defines the incremental changes in product quantity. Effective only when manage_stock is true — otherwise the value is ignored.
     #[serde(rename = "increase_quantity", skip_serializing_if = "Option::is_none")]
     pub increase_quantity: Option<f64>,
-    /// Defines the decrement changes in product quantity
+    /// Defines the decrement changes in product quantity. Effective only when manage_stock is true — otherwise the value is ignored.
     #[serde(rename = "reduce_quantity", skip_serializing_if = "Option::is_none")]
     pub reduce_quantity: Option<f64>,
     /// Indicates whether prices include tax.

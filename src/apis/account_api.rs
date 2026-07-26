@@ -957,11 +957,16 @@ pub async fn account_failed_webhooks(configuration: &configuration::Configuratio
 }
 
 /// Use this method to retrieve a list of supported platforms and the sets of parameters required for connecting to each of them. Note: some platforms may have multiple connection methods so that the response will contain multiple sets of parameters.
-pub async fn account_supported_platforms(configuration: &configuration::Configuration, ) -> Result<models::ModelResponseAccountSupportedPlatforms, Error<AccountSupportedPlatformsError>> {
+pub async fn account_supported_platforms(configuration: &configuration::Configuration, cart_id: Option<&str>) -> Result<models::ModelResponseAccountSupportedPlatforms, Error<AccountSupportedPlatformsError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_cart_id = cart_id;
 
     let uri_str = format!("{}/account.supported_platforms.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
 
+    if let Some(ref param_value) = p_cart_id {
+        req_builder = req_builder.query(&[("cart_id", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }

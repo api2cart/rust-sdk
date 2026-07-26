@@ -55,12 +55,12 @@ This method lets you get a list of online stores connected to your API2Cart acco
 Name | Type | Description  | Required | Notes
 ------------- | ------------- | ------------- | ------------- | -------------
 **store_url** | Option<**String**> | A web address of a store |  |
-**store_key** | Option<**String**> | Find store by store key |  |
-**request_from_date** | Option<**String**> | Retrieve entities from their creation date |  |
-**request_to_date** | Option<**String**> | Retrieve entities to their creation date |  |
+**store_key** | Option<**String**> | Optional filter: return only the connected store whose store key matches this value. A store key is the unique 32-character identifier of a connected store, returned as store_key here and by account.cart.add. |  |
+**request_from_date** | Option<**String**> | Start date of the period for counting API requests made to each connection. Set together with request_to_date to include each store's total_calls (number of API requests in that period) in the response. |  |
+**request_to_date** | Option<**String**> | End date of the period for counting API requests made to each connection. Set together with request_from_date to include each store's total_calls (number of API requests in that period) in the response. |  |
 **custom_label** | Option<**String**> | Defines a custom label for the store in the app |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
-**exclude** | Option<**String**> | Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
+**params** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve |  |[default to force_all]
+**exclude** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
 
 ### Return type
 
@@ -320,14 +320,17 @@ Name | Type | Description  | Required | Notes
 
 ## account_supported_platforms
 
-> models::ModelResponseAccountSupportedPlatforms account_supported_platforms()
+> models::ModelResponseAccountSupportedPlatforms account_supported_platforms(cart_id)
 account.supported_platforms
 
 Use this method to retrieve a list of supported platforms and the sets of parameters required for connecting to each of them. Note: some platforms may have multiple connection methods so that the response will contain multiple sets of parameters.
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**cart_id** | Option<**String**> | Filter by integration identifier (e.g. 'Shopify'). If omitted, the method returns all integrations. |  |
 
 ### Return type
 

@@ -150,7 +150,7 @@ Name | Type | Description  | Required | Notes
 **action** | Option<**String**> | The action you want to filter webhooks by (e.g. add, update, or delete) |  |
 **active** | Option<**bool**> | The webhook status you want to filter webhooks by |  |
 **ids** | Option<**String**> | List of сomma-separated webhook ids |  |
-**params** | Option<**String**> | Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,entity,action,callback]
+**params** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve |  |[default to id,entity,action,callback]
 
 ### Return type
 
