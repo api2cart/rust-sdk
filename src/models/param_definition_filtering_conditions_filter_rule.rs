@@ -19,6 +19,8 @@ pub struct ParamDefinitionFilteringConditionsFilterRule {
     pub operator: Option<String>,
     #[serde(rename = "value", skip_serializing_if = "Option::is_none")]
     pub value: Option<Box<models::ParamDefinitionFilteringConditionsFilterRuleValue>>,
+    #[serde(rename = "match_items", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub match_items: Option<Option<String>>,
 }
 
 impl ParamDefinitionFilteringConditionsFilterRule {
@@ -27,6 +29,7 @@ impl ParamDefinitionFilteringConditionsFilterRule {
             field: None,
             operator: None,
             value: None,
+            match_items: None,
         }
     }
 }

@@ -205,6 +205,12 @@ pub struct AccountCartAdd {
     /// Walmart region
     #[serde(rename = "walmart_region", skip_serializing_if = "Option::is_none")]
     pub walmart_region: Option<String>,
+    /// Walmart refresh token received by a Solution Provider application through the Walmart App Store authorization. When it is set, walmart_client_id and walmart_client_secret are the credentials of that application, not of the seller. Must be used together with walmart_seller_id and is supported only for walmart_region = 'us'
+    #[serde(rename = "walmart_refresh_token", skip_serializing_if = "Option::is_none")]
+    pub walmart_refresh_token: Option<String>,
+    /// Walmart seller id the refresh token was issued for, sent as the WM_PARTNER.ID header. Must be used together with walmart_refresh_token and is supported only for walmart_region = 'us'
+    #[serde(rename = "walmart_seller_id", skip_serializing_if = "Option::is_none")]
+    pub walmart_seller_id: Option<String>,
     /// Access token authorizing the app to access resources on behalf of a user
     #[serde(rename = "ecwid_acess_token", skip_serializing_if = "Option::is_none")]
     pub ecwid_acess_token: Option<String>,
@@ -640,6 +646,8 @@ impl AccountCartAdd {
             walmart_environment: None,
             walmart_channel_type: None,
             walmart_region: None,
+            walmart_refresh_token: None,
+            walmart_seller_id: None,
             ecwid_acess_token: None,
             ecwid_store_id: None,
             lazada_app_id: None,
@@ -792,8 +800,6 @@ pub enum CartId {
     CommerceHq,
     #[serde(rename = "Creloaded")]
     Creloaded,
-    #[serde(rename = "Cscart")]
-    Cscart,
     #[serde(rename = "Cubecart")]
     Cubecart,
     #[serde(rename = "Demandware")]
