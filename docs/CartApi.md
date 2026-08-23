@@ -442,7 +442,7 @@ Name | Type | Description  | Required | Notes
 
 ## cart_info
 
-> models::CartInfo200Response cart_info(response_fields, params, exclude)
+> models::CartInfo200Response cart_info(response_fields, params, exclude, use_latest_api_version)
 cart.info
 
 This method allows you to get various information about the store, including a list of stores (in the case of a multistore configuration), a list of supported languages, currencies, carriers, warehouses, and many other information. This information contains data that is relatively stable and rarely changes, so API2Cart can cache certain data to reduce the load on the store and speed up the execution of the request. We also recommend that you cache the response of this method on your side to save requests. If you need to clear the cache for a specific store, then use the cart.validate method.
@@ -455,6 +455,7 @@ Name | Type | Description  | Required | Notes
 **response_fields** | Option<**String**> | Set this parameter to choose which entity fields to retrieve. Use comma-separated field names in curly braces, nested to match the response structure, e.g. {result{product{id,name}}}. The wildcard * returns every field at a level: {*} gives the whole response, {result{product{*}}} all product fields. |  |
 **params** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to retrieve |  |[default to store_name,store_url,db_prefix]
 **exclude** | Option<**String**> | Important! Parameter deprecated, use response_fields instead. Set this parameter in order to choose which entity fields you want to ignore. Works only if parameter `params` equal force_all |  |
+**use_latest_api_version** | Option<**bool**> | Use the latest platform API version |  |[default to false]
 
 ### Return type
 

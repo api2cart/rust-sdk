@@ -919,11 +919,12 @@ pub async fn cart_giftcard_list(configuration: &configuration::Configuration, id
 }
 
 /// This method allows you to get various information about the store, including a list of stores (in the case of a multistore configuration), a list of supported languages, currencies, carriers, warehouses, and many other information. This information contains data that is relatively stable and rarely changes, so API2Cart can cache certain data to reduce the load on the store and speed up the execution of the request. We also recommend that you cache the response of this method on your side to save requests. If you need to clear the cache for a specific store, then use the cart.validate method.
-pub async fn cart_info(configuration: &configuration::Configuration, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>) -> Result<models::CartInfo200Response, Error<CartInfoError>> {
+pub async fn cart_info(configuration: &configuration::Configuration, response_fields: Option<&str>, params: Option<&str>, exclude: Option<&str>, use_latest_api_version: Option<bool>) -> Result<models::CartInfo200Response, Error<CartInfoError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_response_fields = response_fields;
     let p_params = params;
     let p_exclude = exclude;
+    let p_use_latest_api_version = use_latest_api_version;
 
     let uri_str = format!("{}/cart.info.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -936,6 +937,9 @@ pub async fn cart_info(configuration: &configuration::Configuration, response_fi
     }
     if let Some(ref param_value) = p_exclude {
         req_builder = req_builder.query(&[("exclude", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_use_latest_api_version {
+        req_builder = req_builder.query(&[("use_latest_api_version", &param_value.to_string())]);
     }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
