@@ -38,11 +38,16 @@ pub enum BridgeUpdateError {
 
 
 /// Delete bridge from the store.
-pub async fn bridge_delete(configuration: &configuration::Configuration, ) -> Result<models::AttributeValueDelete200Response, Error<BridgeDeleteError>> {
+pub async fn bridge_delete(configuration: &configuration::Configuration, idempotency_key: Option<&str>) -> Result<models::AttributeValueDelete200Response, Error<BridgeDeleteError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/bridge.delete.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }
@@ -124,11 +129,16 @@ pub async fn bridge_download(configuration: &configuration::Configuration, white
 }
 
 /// Update bridge in the store.
-pub async fn bridge_update(configuration: &configuration::Configuration, ) -> Result<models::AttributeUpdate200Response, Error<BridgeUpdateError>> {
+pub async fn bridge_update(configuration: &configuration::Configuration, idempotency_key: Option<&str>) -> Result<models::AttributeUpdate200Response, Error<BridgeUpdateError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_idempotency_key = idempotency_key;
 
     let uri_str = format!("{}/bridge.update.json", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
 
+    if let Some(ref param_value) = p_idempotency_key {
+        req_builder = req_builder.query(&[("idempotency_key", &param_value.to_string())]);
+    }
     if let Some(ref user_agent) = configuration.user_agent {
         req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
     }

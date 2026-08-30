@@ -12,14 +12,17 @@ Method | HTTP request | Description
 
 ## bridge_delete
 
-> models::AttributeValueDelete200Response bridge_delete()
+> models::AttributeValueDelete200Response bridge_delete(idempotency_key)
 bridge.delete
 
 Delete bridge from the store.
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
@@ -69,14 +72,17 @@ Name | Type | Description  | Required | Notes
 
 ## bridge_update
 
-> models::AttributeUpdate200Response bridge_update()
+> models::AttributeUpdate200Response bridge_update(idempotency_key)
 bridge.update
 
 Update bridge in the store.
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Required | Notes
+------------- | ------------- | ------------- | ------------- | -------------
+**idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> |  |
 
 ### Return type
 
