@@ -76,6 +76,9 @@ Name | Type | Description | Notes
 **clear_cache** | Option<**bool**> | Is cache clear required | [optional][default to true]
 **origin** | Option<**String**> | The source of the order | [optional]
 **fee_price** | Option<**f64**> | Specifies refund's fee price | [optional]
+**shipp_national_address** | Option<**String**> | Specifies short national address code of a shipping address | [optional]
+**shipp_building_number** | Option<**String**> | Specifies building number of a shipping address | [optional]
+**shipp_additional_number** | Option<**String**> | Specifies additional number of a shipping address | [optional]
 **idempotency_key** | Option<**String**> | A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong> | [optional]
 **order_item** | [**Vec<models::OrderAddOrderItemInner>**](OrderAdd_order_item_inner.md) |  | 
 

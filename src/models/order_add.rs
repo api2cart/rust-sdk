@@ -229,6 +229,15 @@ pub struct OrderAdd {
     /// Specifies refund's fee price
     #[serde(rename = "fee_price", skip_serializing_if = "Option::is_none")]
     pub fee_price: Option<f64>,
+    /// Specifies short national address code of a shipping address
+    #[serde(rename = "shipp_national_address", skip_serializing_if = "Option::is_none")]
+    pub shipp_national_address: Option<String>,
+    /// Specifies building number of a shipping address
+    #[serde(rename = "shipp_building_number", skip_serializing_if = "Option::is_none")]
+    pub shipp_building_number: Option<String>,
+    /// Specifies additional number of a shipping address
+    #[serde(rename = "shipp_additional_number", skip_serializing_if = "Option::is_none")]
+    pub shipp_additional_number: Option<String>,
     /// A unique identifier associated with a specific request. Repeated requests with the same <strong>idempotency_key</strong> return a cached response without re-executing the business logic. <strong>Please note that the cache lifetime is 15 minutes.</strong>
     #[serde(rename = "idempotency_key", skip_serializing_if = "Option::is_none")]
     pub idempotency_key: Option<String>,
@@ -311,6 +320,9 @@ impl OrderAdd {
             clear_cache: None,
             origin: None,
             fee_price: None,
+            shipp_national_address: None,
+            shipp_building_number: None,
+            shipp_additional_number: None,
             idempotency_key: None,
             order_item,
         }
