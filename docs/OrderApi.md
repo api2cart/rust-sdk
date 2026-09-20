@@ -894,7 +894,7 @@ Name | Type | Description  | Required | Notes
 **invoice_admin_comment** | Option<**String**> | Specifies admin's order invoice comment |  |
 **date_modified** | Option<**String**> | Specifies order's  modification date |  |
 **date_finished** | Option<**String**> | Specifies order's  finished date |  |
-**send_notifications** | Option<**bool**> | Send notifications to customer after order was created |  |[default to false]
+**send_notifications** | Option<**bool**> | Send notifications to customer after order status was changed |  |[default to false]
 **create_invoice** | Option<**bool**> | Determines whether an invoice should be created if it has not already been created |  |
 **origin** | Option<**String**> | The source of the order |  |
 **tags** | Option<**String**> | Order tags |  |
