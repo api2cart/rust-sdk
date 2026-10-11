@@ -1063,7 +1063,7 @@ pub async fn product_child_item_list(configuration: &configuration::Configuratio
 }
 
 /// Count products in store.
-pub async fn product_count(configuration: &configuration::Configuration, sku: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, vendor_id: Option<&str>, lang_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, brand_name: Option<&str>, manufacturer_id: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, return_global: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ModelResponseProductCount, Error<ProductCountError>> {
+pub async fn product_count(configuration: &configuration::Configuration, sku: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, vendor_id: Option<&str>, lang_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, is_partial_or_full_out_of_stock: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, brand_name: Option<&str>, manufacturer_id: Option<&str>, product_attributes: Option<Vec<String>>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, report_request_id: Option<&str>, return_global: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>) -> Result<models::ModelResponseProductCount, Error<ProductCountError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_sku = sku;
     let p_product_ids = product_ids;
@@ -1075,6 +1075,7 @@ pub async fn product_count(configuration: &configuration::Configuration, sku: Op
     let p_lang_id = lang_id;
     let p_avail_view = avail_view;
     let p_avail_sale = avail_sale;
+    let p_is_partial_or_full_out_of_stock = is_partial_or_full_out_of_stock;
     let p_created_from = created_from;
     let p_created_to = created_to;
     let p_modified_from = modified_from;
@@ -1124,6 +1125,9 @@ pub async fn product_count(configuration: &configuration::Configuration, sku: Op
     }
     if let Some(ref param_value) = p_avail_sale {
         req_builder = req_builder.query(&[("avail_sale", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_is_partial_or_full_out_of_stock {
+        req_builder = req_builder.query(&[("is_partial_or_full_out_of_stock", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
@@ -1772,7 +1776,7 @@ pub async fn product_info(configuration: &configuration::Configuration, id: &str
 }
 
 /// Get list of products from your store. Returns 10 products by default.
-pub async fn product_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, vendor_id: Option<&str>, lang_id: Option<&str>, currency_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sku: Option<&str>, brand_name: Option<&str>, product_attributes: Option<Vec<String>>, manufacturer_id: Option<&str>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, return_global: Option<bool>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, report_request_id: Option<&str>, disable_cache: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>, product_type: Option<&str>) -> Result<models::ModelResponseProductList, Error<ProductListError>> {
+pub async fn product_list(configuration: &configuration::Configuration, start: Option<i32>, count: Option<i32>, page_cursor: Option<&str>, product_ids: Option<&str>, since_id: Option<&str>, categories_ids: Option<&str>, category_id: Option<&str>, store_id: Option<&str>, vendor_id: Option<&str>, lang_id: Option<&str>, currency_id: Option<&str>, avail_view: Option<bool>, avail_sale: Option<bool>, is_partial_or_full_out_of_stock: Option<bool>, created_from: Option<&str>, created_to: Option<&str>, modified_from: Option<&str>, modified_to: Option<&str>, sku: Option<&str>, brand_name: Option<&str>, product_attributes: Option<Vec<String>>, manufacturer_id: Option<&str>, status: Option<&str>, r#type: Option<&str>, visible: Option<&str>, find_value: Option<&str>, find_where: Option<&str>, return_global: Option<bool>, params: Option<&str>, response_fields: Option<&str>, exclude: Option<&str>, sort_by: Option<&str>, sort_direction: Option<&str>, report_request_id: Option<&str>, disable_cache: Option<bool>, disable_report_cache: Option<bool>, use_latest_api_version: Option<bool>, product_type: Option<&str>) -> Result<models::ModelResponseProductList, Error<ProductListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_start = start;
     let p_count = count;
@@ -1787,6 +1791,7 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
     let p_currency_id = currency_id;
     let p_avail_view = avail_view;
     let p_avail_sale = avail_sale;
+    let p_is_partial_or_full_out_of_stock = is_partial_or_full_out_of_stock;
     let p_created_from = created_from;
     let p_created_to = created_to;
     let p_modified_from = modified_from;
@@ -1853,6 +1858,9 @@ pub async fn product_list(configuration: &configuration::Configuration, start: O
     }
     if let Some(ref param_value) = p_avail_sale {
         req_builder = req_builder.query(&[("avail_sale", &param_value.to_string())]);
+    }
+    if let Some(ref param_value) = p_is_partial_or_full_out_of_stock {
+        req_builder = req_builder.query(&[("is_partial_or_full_out_of_stock", &param_value.to_string())]);
     }
     if let Some(ref param_value) = p_created_from {
         req_builder = req_builder.query(&[("created_from", &param_value.to_string())]);
