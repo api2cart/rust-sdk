@@ -94,7 +94,7 @@ pub struct ProductVariantUpdate {
     /// Defines the incremental changes in product quantity. Effective only when manage_stock is true — otherwise the value is ignored.
     #[serde(rename = "increase_quantity", skip_serializing_if = "Option::is_none")]
     pub increase_quantity: Option<f64>,
-    /// Defines the decrement changes in product quantity. Effective only when manage_stock is true — otherwise the value is ignored.
+    /// Defines the decrement changes in product quantity. Effective only when manage_stock is true.
     #[serde(rename = "reduce_quantity", skip_serializing_if = "Option::is_none")]
     pub reduce_quantity: Option<f64>,
     /// Indicates whether prices include tax.

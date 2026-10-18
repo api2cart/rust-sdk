@@ -31,7 +31,7 @@ Name | Type | Description | Notes
 **reserve_quantity** | Option<**f64**> | This parameter allows to reserve/unreserve product variants quantity. | [optional]
 **quantity** | Option<**f64**> | Defines new products' variants quantity. Effective only when manage_stock is true — otherwise the value is ignored. To enable stock tracking and set a quantity in one call, pass manage_stock=true together with quantity. | [optional]
 **increase_quantity** | Option<**f64**> | Defines the incremental changes in product quantity. Effective only when manage_stock is true — otherwise the value is ignored. | [optional][default to 0]
-**reduce_quantity** | Option<**f64**> | Defines the decrement changes in product quantity. Effective only when manage_stock is true — otherwise the value is ignored. | [optional][default to 0]
+**reduce_quantity** | Option<**f64**> | Defines the decrement changes in product quantity. Effective only when manage_stock is true. | [optional][default to 0]
 **prices_inc_tax** | Option<**bool**> | Indicates whether prices include tax. | [optional][default to false]
 **price** | Option<**f64**> | Defines new product's variant price | [optional]
 **special_price** | Option<**f64**> | Defines new product's variant special price | [optional]
