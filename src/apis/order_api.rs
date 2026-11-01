@@ -64,6 +64,13 @@ pub enum OrderInfoError {
     UnknownValue(serde_json::Value),
 }
 
+/// struct for typed errors of method [`order_invoice_add`]
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(untagged)]
+pub enum OrderInvoiceAddError {
+    UnknownValue(serde_json::Value),
+}
+
 /// struct for typed errors of method [`order_list`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -682,6 +689,50 @@ pub async fn order_info(configuration: &configuration::Configuration, id: Option
     } else {
         let content = resp.text().await?;
         let entity: Option<OrderInfoError> = serde_json::from_str(&content).ok();
+        Err(Error::ResponseError(ResponseContent { status, content, entity }))
+    }
+}
+
+/// Upload a PDF invoice or credit note of the order to the store. The store checks the document after the upload, so a successful response means it was received, not accepted. Use the returned id to find the result of the check in the store.
+pub async fn order_invoice_add(configuration: &configuration::Configuration, order_invoice_add: models::OrderInvoiceAdd) -> Result<models::AttributeAdd200Response, Error<OrderInvoiceAddError>> {
+    // add a prefix to parameters to efficiently prevent name collisions
+    let p_order_invoice_add = order_invoice_add;
+
+    let uri_str = format!("{}/order.invoice.add.json", configuration.base_path);
+    let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
+
+    if let Some(ref user_agent) = configuration.user_agent {
+        req_builder = req_builder.header(reqwest::header::USER_AGENT, user_agent.clone());
+    }
+    if let Some(ref apikey) = configuration.api_key {
+        let key = apikey.key.clone();
+        let value = match apikey.prefix {
+            Some(ref prefix) => format!("{} {}", prefix, key),
+            None => key,
+        };
+        req_builder = req_builder.header("x-store-key", value);
+    };
+    if let Some(ref apikey) = configuration.api_key {
+        let key = apikey.key.clone();
+        let value = match apikey.prefix {
+            Some(ref prefix) => format!("{} {}", prefix, key),
+            None => key,
+        };
+        req_builder = req_builder.header("x-api-key", value);
+    };
+    req_builder = req_builder.json(&p_order_invoice_add);
+
+    let req = req_builder.build()?;
+    let resp = configuration.client.execute(req).await?;
+
+    let status = resp.status();
+
+    if !status.is_client_error() && !status.is_server_error() {
+        let content = resp.text().await?;
+        serde_json::from_str(&content).map_err(Error::from)
+    } else {
+        let content = resp.text().await?;
+        let entity: Option<OrderInvoiceAddError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

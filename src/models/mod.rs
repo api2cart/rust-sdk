@@ -420,6 +420,8 @@ pub mod order_calculate_tax;
 pub use self::order_calculate_tax::OrderCalculateTax;
 pub mod order_info_200_response;
 pub use self::order_info_200_response::OrderInfo200Response;
+pub mod order_invoice_add;
+pub use self::order_invoice_add::OrderInvoiceAdd;
 pub mod order_item;
 pub use self::order_item::OrderItem;
 pub mod order_item_option;
